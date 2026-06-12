@@ -25,7 +25,7 @@ const videoData = [
       "Romance"
     ],
     "previewImages": 19,
-    "thumbnail": "https://lh3.googleusercontent.com/d/1tM3nfBBL0xskAWdqhe2GfFx0TTKQHL-Z",
+    "thumbnail": "https://cdn.javmiku.com/wp-content/uploads/2026/05/mida634pl.jpg",
     "poster": "https://lh3.googleusercontent.com/d/1suzBmHzrRHd9lvlzzAyZlcQZQL7lFe8p",
     "previews": [
       "https://lh3.googleusercontent.com/d/1YfX5M91iqQ0lprVMO5-UTsh9GvZYRSv8=s0",

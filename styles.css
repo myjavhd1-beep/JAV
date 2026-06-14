@@ -343,7 +343,7 @@ header {
 
 .album-cover {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 2/3;
     object-fit: cover;
     background-color: var(--secondary);
 }
@@ -955,7 +955,7 @@ header {
 
 /* ================= ALBUM MODAL ================= */
 .album-modal-content {
-    padding: 16px 20px 20px;
+    padding: 10px 10px 10px;
     overflow-y: auto;
     flex: 1;
 }
@@ -1412,6 +1412,136 @@ header {
     .nav-image-btn {
         width: 35px;
         height: 35px;
+    }
+}
+
+
+
+
+
+
+/* Album Images Grid Layout Options */
+.album-images-grid {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 8px;
+}
+
+.album-images-grid.cols-1 {
+    grid-template-columns: 1fr;
+}
+
+.album-images-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.album-images-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.album-image {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.album-image:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}
+
+.album-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Column Controls for Album Images */
+.album-col-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+}
+
+.album-col-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary);
+    color: var(--text-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.album-col-btn:hover {
+    background-color: var(--secondary-dark);
+}
+
+.album-col-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Picture Modal Info Section */
+.picture-info-section {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--secondary);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.picture-actress-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-family: 'Rubik', sans-serif;
+}
+
+.picture-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.picture-tag {
+    padding: 0.3rem 0.8rem;
+    background-color: var(--secondary);
+    color: var(--primary-dark);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .album-images-grid.cols-2{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .album-images-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .album-col-controls {
+        justify-content: center;
+    }
+    
+    .album-col-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
     }
 }
 

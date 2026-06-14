@@ -8,7 +8,7 @@ let selectedFilters = {
     actress: [],
     tags: [],
     studios: [],
-    label: [], // Changed from tokens to label
+    label: [],
     series: [],
     version: [],
     group: []
@@ -37,6 +37,10 @@ let modalEventListenersAttached = false;
 // Album image gallery state
 let currentAlbumImages = [];
 let currentImageIndex = 0;
+let currentPictureDataForModal = null;
+
+// Album images column count
+let currentAlbumCols = 1;
 
 // Actress grid column count
 let currentActressCols = 3;
@@ -126,11 +130,17 @@ const filterTabs = document.querySelectorAll('.filter-tab');
 const filterSections = document.querySelectorAll('.filter-section');
 const selectedFiltersContainer = document.getElementById('selectedFilters');
 
+// Helper function to scroll to top smoothly
+function smoothScrollToTop(element) {
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 // Initialize the app
 function init() {
     console.log('Initializing app...');
     
-    // Load saved theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         if (savedTheme === 'dark') {
@@ -142,7 +152,6 @@ function init() {
         toggleTheme();
     }
     
-    // Set default sort to "shuffle"
     document.querySelectorAll('.sort-option').forEach(option => {
         option.classList.remove('active');
         if (option.dataset.sort === 'shuffle') {
@@ -150,32 +159,24 @@ function init() {
         }
     });
     
-    // Load initial content
     loadFilterData();
     loadVideos();
     loadAlbums();
     loadPictures();
-    
-    // Set up event listeners
     setupEventListeners();
-    
-    // Update pagination displays
     updatePagination();
     
     console.log('App initialized');
 }
 
-// Set up all event listeners
 function setupEventListeners() {
     console.log('Setting up event listeners...');
     
-    // Theme toggle
     if (themeToggle) {
         themeToggle.removeEventListener('click', toggleTheme);
         themeToggle.addEventListener('click', toggleTheme);
     }
     
-    // Search
     if (searchInput) {
         searchInput.removeEventListener('input', handleSearch);
         searchInput.removeEventListener('keypress', handleSearchKeyPress);
@@ -183,7 +184,6 @@ function setupEventListeners() {
         searchInput.addEventListener('keypress', handleSearchKeyPress);
     }
     
-    // Sort menu
     if (sortBtn) {
         sortBtn.removeEventListener('click', toggleSortMenu);
         sortBtn.addEventListener('click', toggleSortMenu);
@@ -194,13 +194,11 @@ function setupEventListeners() {
         option.addEventListener('click', handleSortChange);
     });
     
-    // Tabs
     tabs.forEach(tab => {
         tab.removeEventListener('click', handleTabChange);
         tab.addEventListener('click', handleTabChange);
     });
     
-    // Modals
     if (filtersBtn) {
         filtersBtn.removeEventListener('click', openFilterModal);
         filtersBtn.addEventListener('click', openFilterModal);
@@ -226,7 +224,6 @@ function setupEventListeners() {
         closeImageModal.addEventListener('click', closeImageModalHandler);
     }
     
-    // Image navigation buttons
     if (prevImageBtn) {
         prevImageBtn.removeEventListener('click', prevImageHandler);
         prevImageBtn.addEventListener('click', prevImageHandler);
@@ -237,7 +234,6 @@ function setupEventListeners() {
         nextImageBtn.addEventListener('click', nextImageHandler);
     }
     
-    // Close modals when clicking outside
     [videoModal, filterModal, albumModal, imageModal].forEach(modal => {
         if (modal) {
             modal.removeEventListener('click', modalOutsideClick);
@@ -245,17 +241,14 @@ function setupEventListeners() {
         }
     });
     
-    // Close sort menu when clicking outside
     document.removeEventListener('click', documentClickHandler);
     document.addEventListener('click', documentClickHandler);
     
-    // Description toggle
     if (toggleDesc) {
         toggleDesc.removeEventListener('click', toggleDescription);
         toggleDesc.addEventListener('click', toggleDescription);
     }
     
-    // Video controls
     if (previewBtn) {
         previewBtn.removeEventListener('click', openPreviewPage);
         previewBtn.addEventListener('click', openPreviewPage);
@@ -271,13 +264,11 @@ function setupEventListeners() {
         videoBtn.addEventListener('click', videoClickHandler);
     }
     
-    // Preview page back button
     if (previewBackBtn) {
         previewBackBtn.removeEventListener('click', closePreviewPage);
         previewBackBtn.addEventListener('click', closePreviewPage);
     }
     
-    // Carousel navigation
     if (alsoStarredPrev) {
         alsoStarredPrev.removeEventListener('click', alsoStarredPrevHandler);
         alsoStarredPrev.addEventListener('click', alsoStarredPrevHandler);
@@ -298,7 +289,6 @@ function setupEventListeners() {
         youMayLikeNext.addEventListener('click', youMayLikeNextHandler);
     }
     
-    // Pagination
     if (videosPrevBtn) {
         videosPrevBtn.removeEventListener('click', videosPrevHandler);
         videosPrevBtn.addEventListener('click', videosPrevHandler);
@@ -329,58 +319,48 @@ function setupEventListeners() {
         picturesNextBtn.addEventListener('click', picturesNextHandler);
     }
     
-    // Filter tabs
     filterTabs.forEach(tab => {
         tab.removeEventListener('click', handleFilterTabChange);
         tab.addEventListener('click', handleFilterTabChange);
     });
     
-    // Filter search
     document.querySelectorAll('.filter-search-input').forEach(input => {
         input.removeEventListener('input', handleFilterSearch);
         input.addEventListener('input', handleFilterSearch);
     });
     
-    // Option items
     document.querySelectorAll('.option-item').forEach(item => {
         item.removeEventListener('click', handleOptionSelect);
         item.addEventListener('click', handleOptionSelect);
     });
     
-    // Column control buttons for actress
     document.querySelectorAll('.col-btn').forEach(btn => {
         btn.removeEventListener('click', handleColumnChange);
         btn.addEventListener('click', handleColumnChange);
     });
     
-    // Touch support for carousels
     setupCarouselTouch();
     
-    // Prevent poster click from resetting video player
     if (modalPoster) {
         modalPoster.removeEventListener('click', posterClickHandler);
         modalPoster.addEventListener('click', posterClickHandler);
     }
     
-    // Also prevent thumbnail container click from resetting if video is playing
     if (videoThumbnailContainer) {
         videoThumbnailContainer.removeEventListener('click', thumbnailContainerClickHandler);
         videoThumbnailContainer.addEventListener('click', thumbnailContainerClickHandler);
     }
 }
 
-// Handle column change for actress grid
 function handleColumnChange(e) {
     const cols = parseInt(e.currentTarget.dataset.cols);
     currentActressCols = cols;
     
-    // Update button states
     document.querySelectorAll('.col-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     e.currentTarget.classList.add('active');
     
-    // Update grid class
     const actressGrid = document.getElementById('actressGrid');
     if (actressGrid) {
         actressGrid.classList.remove('cols-1', 'cols-2', 'cols-3');
@@ -388,7 +368,23 @@ function handleColumnChange(e) {
     }
 }
 
-// Handle image navigation in album modal
+// Handle album images column change
+function handleAlbumColChange(e) {
+    const cols = parseInt(e.currentTarget.dataset.cols);
+    currentAlbumCols = cols;
+    
+    document.querySelectorAll('.album-col-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    e.currentTarget.classList.add('active');
+    
+    const albumImagesGrid = document.getElementById('albumImagesGrid');
+    if (albumImagesGrid) {
+        albumImagesGrid.classList.remove('cols-1', 'cols-2', 'cols-3');
+        albumImagesGrid.classList.add(`cols-${cols}`);
+    }
+}
+
 function prevImageHandler() {
     if (currentAlbumImages.length === 0) return;
     currentImageIndex = (currentImageIndex - 1 + currentAlbumImages.length) % currentAlbumImages.length;
@@ -404,10 +400,41 @@ function nextImageHandler() {
 function updateFullscreenImage() {
     if (fullscreenImage && currentAlbumImages[currentImageIndex]) {
         fullscreenImage.src = currentAlbumImages[currentImageIndex];
+        
+        // Update picture info if it's a picture from pictures tab
+        if (currentPictureDataForModal && currentAlbumImages.length === 1) {
+            updatePictureModalInfo(currentPictureDataForModal);
+        }
     }
 }
 
-// Event handler functions
+// Update picture modal info
+function updatePictureModalInfo(picture) {
+    const existingInfo = document.querySelector('.picture-info-section');
+    if (existingInfo) {
+        existingInfo.remove();
+    }
+    
+    const infoSection = document.createElement('div');
+    infoSection.className = 'picture-info-section';
+    infoSection.innerHTML = `
+        <div class="picture-actress-name">
+            <i class="fas fa-user"></i> ${picture.actress}
+        </div>
+        <div class="picture-tags">
+            ${picture.tags.map(tag => `<span class="picture-tag">#${tag}</span>`).join('')}
+        </div>
+    `;
+    
+    const modalContainer = document.querySelector('#imageModal .modal-container');
+    if (modalContainer) {
+        const imageDiv = modalContainer.querySelector('div[style*="display: flex; justify-content: center;"]');
+        if (imageDiv && !modalContainer.querySelector('.picture-info-section')) {
+            imageDiv.parentNode.insertBefore(infoSection, imageDiv.nextSibling);
+        }
+    }
+}
+
 function handleSearchKeyPress(e) {
     if (e.key === 'Enter') performSearch();
 }
@@ -428,6 +455,9 @@ function closeImageModalHandler() {
     closeModal(imageModal);
     currentAlbumImages = [];
     currentImageIndex = 0;
+    currentPictureDataForModal = null;
+    const existingInfo = document.querySelector('.picture-info-section');
+    if (existingInfo) existingInfo.remove();
 }
 
 function modalOutsideClick(e) {
@@ -442,10 +472,20 @@ function documentClickHandler(e) {
 
 function trailerClickHandler() {
     playVideo('trailer');
+    setTimeout(() => {
+        if (videoThumbnailContainer) {
+            smoothScrollToTop(videoThumbnailContainer);
+        }
+    }, 100);
 }
 
 function videoClickHandler() {
     playVideo('full');
+    setTimeout(() => {
+        if (videoThumbnailContainer) {
+            smoothScrollToTop(videoThumbnailContainer);
+        }
+    }, 100);
 }
 
 function alsoStarredPrevHandler() {
@@ -498,7 +538,6 @@ function thumbnailContainerClickHandler(e) {
     }
 }
 
-// Toggle between light and dark themes
 function toggleTheme() {
     const body = document.body;
     
@@ -1075,7 +1114,7 @@ function changePage(contentType, direction) {
     
     const section = document.getElementById(`${contentType}Section`);
     if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        smoothScrollToTop(section);
     }
 }
 
@@ -1930,17 +1969,46 @@ function openAlbumModal(album) {
     }
     
     if (albumImagesContainer) {
+        // Clear container and add column controls
         albumImagesContainer.innerHTML = '';
+        
+        // Add column control buttons
+        const colControls = document.createElement('div');
+        colControls.className = 'album-col-controls';
+        colControls.innerHTML = `
+            <button class="album-col-btn ${currentAlbumCols === 1 ? 'active' : ''}" data-cols="1">1 Col</button>
+            <button class="album-col-btn ${currentAlbumCols === 2 ? 'active' : ''}" data-cols="2">2 Cols</button>
+            <button class="album-col-btn ${currentAlbumCols === 3 ? 'active' : ''}" data-cols="3">3 Cols</button>
+        `;
+        albumImagesContainer.appendChild(colControls);
+        
+        // Add images grid container
+        const imagesGrid = document.createElement('div');
+        imagesGrid.id = 'albumImagesGrid';
+        imagesGrid.className = `album-images-grid cols-${currentAlbumCols}`;
+        albumImagesContainer.appendChild(imagesGrid);
+        
+        // Add cover image to grid
+        const coverDiv = document.createElement('div');
+        coverDiv.className = 'album-image';
+        coverDiv.innerHTML = `<img src="${album.cover}" alt="Cover Image" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800/8b5cf6/ffffff?text=Cover'">`;
+        coverDiv.addEventListener('click', () => {
+            currentAlbumImages = [album.cover, ...(album.albumImages || [])];
+            currentImageIndex = 0;
+            if (fullscreenImage) {
+                fullscreenImage.src = currentAlbumImages[currentImageIndex];
+            }
+            openModal(imageModal);
+        });
+        imagesGrid.appendChild(coverDiv);
+        
+        // Add album images
         if (album.albumImages && album.albumImages.length > 0) {
             album.albumImages.forEach((image, index) => {
-                const albumImage = document.createElement('div');
-                albumImage.className = 'album-image';
-                
-                albumImage.innerHTML = `
-                    <img src="${image}" alt="Album Image ${index + 1}" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x338/8b5cf6/ffffff?text=Album+Image'">
-                `;
-                
-                albumImage.addEventListener('click', () => {
+                const albumImageDiv = document.createElement('div');
+                albumImageDiv.className = 'album-image';
+                albumImageDiv.innerHTML = `<img src="${image}" alt="Album Image ${index + 1}" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x338/8b5cf6/ffffff?text=Album+Image'">`;
+                albumImageDiv.addEventListener('click', () => {
                     currentAlbumImages = [album.cover, ...album.albumImages];
                     currentImageIndex = index + 1;
                     if (fullscreenImage) {
@@ -1948,10 +2016,15 @@ function openAlbumModal(album) {
                     }
                     openModal(imageModal);
                 });
-                
-                albumImagesContainer.appendChild(albumImage);
+                imagesGrid.appendChild(albumImageDiv);
             });
         }
+        
+        // Add event listeners to column buttons
+        document.querySelectorAll('.album-col-btn').forEach(btn => {
+            btn.removeEventListener('click', handleAlbumColChange);
+            btn.addEventListener('click', handleAlbumColChange);
+        });
     }
     
     openModal(albumModal);
@@ -1962,9 +2035,34 @@ function openImageModal(picture) {
     
     currentAlbumImages = [picture.image];
     currentImageIndex = 0;
+    currentPictureDataForModal = picture;
     
     fullscreenImage.src = picture.image || 'https://via.placeholder.com/800x1000/a78bfa/ffffff?text=No+Image';
     fullscreenImage.alt = 'Fullscreen Image';
+    
+    // Remove existing info section
+    const existingInfo = document.querySelector('.picture-info-section');
+    if (existingInfo) existingInfo.remove();
+    
+    // Add picture info
+    const infoSection = document.createElement('div');
+    infoSection.className = 'picture-info-section';
+    infoSection.innerHTML = `
+        <div class="picture-actress-name">
+            <i class="fas fa-user"></i> ${picture.actress}
+        </div>
+        <div class="picture-tags">
+            ${picture.tags.map(tag => `<span class="picture-tag">#${tag}</span>`).join('')}
+        </div>
+    `;
+    
+    const modalContainer = document.querySelector('#imageModal .modal-container');
+    if (modalContainer) {
+        const imageDiv = modalContainer.querySelector('div[style*="display: flex; justify-content: center;"]');
+        if (imageDiv) {
+            imageDiv.parentNode.insertBefore(infoSection, imageDiv.nextSibling);
+        }
+    }
     
     openModal(imageModal);
 }

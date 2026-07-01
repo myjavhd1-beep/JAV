@@ -740,6 +740,16 @@ header {
     font-weight: 700;
     font-size: 20px;
     color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.code:hover {
+    background: rgba(124, 58, 237, 0.1);
+    transform: scale(1.05);
 }
 
 /* ================= VIDEO CONTROLS ================= */
@@ -1150,7 +1160,7 @@ header {
 }
 
 .option-item {
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 8px;
     background-color: var(--secondary);
     border: 2px solid transparent;
@@ -1172,51 +1182,85 @@ header {
 }
 
 .filter-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    padding: 10px 8px 12px;
+    border-radius: 8px;
+    background: var(--card-bg, #fff);
+    border: 2px solid transparent;
+    gap: 6px;
 }
 
 .filter-item.selected {
-    position: relative;
-}
-
-.filter-item.selected::after {
-    content: '✓';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    background-color: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.filter-image {
-    width: 100%;
-    aspect-ratio: var(--ratio);
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    transition: border-color 0.2s ease;
-    background-color: var(--secondary);
-}
-
-.filter-item.selected .filter-image {
     border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.1);
 }
 
-.filter-name {
-    
-    font-size: 0.9rem;
+.filter-item .filter-image {
+    width: 100%;
+    aspect-ratio: var(--ratio, 1/1);
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.filter-item .filter-name {
+    font-size: 13px;
+    font-weight: 600;
     text-align: center;
     color: var(--text-primary);
-    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* JAVguru Button on Filter Items */
+.javguru-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 2px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 28px;
+    letter-spacing: 0.3px;
+}
+
+.javguru-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+
+.javguru-btn i {
+    font-size: 10px;
+}
+
+/* Dark mode styles for filter items */
+.dark-mode .filter-item {
+    background: var(--card-bg-dark, #2d2d44);
+}
+
+.dark-mode .filter-item .filter-name {
+    color: #e0e0e0;
+}
+
+.dark-mode .filter-item.selected {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
 }
 
 .selected-filters {
@@ -1320,13 +1364,6 @@ header {
     font-weight: 500;
 }
 
-
-
-
-
-
-
-
 /* Column Controls for Actress Filter */
 .column-controls {
     display: flex;
@@ -1413,12 +1450,21 @@ header {
         width: 35px;
         height: 35px;
     }
+    
+    .javguru-btn {
+        font-size: 9px;
+        padding: 4px 10px;
+        min-height: 24px;
+    }
+    
+    .filter-item {
+        padding: 3px 1px 4px;
+    }
+    
+    .filter-item .filter-name {
+        font-size: 11px;
+    }
 }
-
-
-
-
-
 
 /* Album Images Grid Layout Options */
 .album-images-grid {
@@ -1526,8 +1572,191 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Responsive adjustments */
+/* ================= ACTRESS PROFILE CARDS ================= */
+/* Full Width, 1 Column, Horizontal Layout */
+.actress-profile-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 30px;
+    grid-column: 1 / -1; /* Spans full width in any grid */
+}
+
+.actress-profile-card-container {
+    width: 100%;
+}
+
+.actress-profile-card {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    min-height: 320px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.dark-mode .actress-profile-card {
+    background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.actress-profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Info - 50% left side */
+.actress-profile-card-info {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 28px 32px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.actress-profile-card-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.actress-profile-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.actress-profile-card-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 10px;
+}
+
+.actress-profile-card-detail .detail-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.actress-profile-card-detail .detail-value {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.actress-profile-card-info .javguru-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 12px;
+    align-self: center;
+    width: 100%;
+    max-width: 240px;
+}
+
+.actress-profile-card-info .javguru-profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Image - 50% right side with 2:3 aspect ratio */
+.actress-profile-card-image {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.actress-profile-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ensure the wrapper spans full width in any container */
+.videos-grid .actress-profile-cards-wrapper,
+.albums-grid .actress-profile-cards-wrapper,
+.pictures-grid .actress-profile-cards-wrapper {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+/* Responsive - Mobile */
 @media (max-width: 768px) {
+    .actress-profile-card {
+        flex-direction: column-reverse;
+        min-height: auto;
+        border-radius: 12px;
+    }
+    
+    .actress-profile-card-image {
+        flex: 0 0 auto;
+        max-width: 100%;
+        aspect-ratio: 3/4;      
+        width: 100%;
+        min-height: auto;
+    }
+    
+    .actress-profile-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .actress-profile-card-info {
+        flex: 0 0 auto;
+        max-width: 100%;
+        padding: 20px 24px;
+    }
+    
+    .actress-profile-card-name {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    
+    .actress-profile-card-detail .detail-label,
+    .actress-profile-card-detail .detail-value {
+        font-size: 12px;
+    }
+    
+    .actress-profile-card-info .javguru-profile-btn {
+        font-size: 13px;
+        padding: 8px 20px;
+        max-width: 100%;
+    }
+    
     .album-images-grid.cols-2{
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1545,10 +1774,30 @@ html {
     }
 }
 
-
-
-
-
+@media (max-width: 480px) {
+    .actress-profile-card-info {
+        padding: 16px 18px;
+    }
+    
+    .actress-profile-card-name {
+        font-size: 19px;
+        margin-bottom: 8px;
+    }
+    
+    .actress-profile-card-detail {
+        padding: 3px 0;
+    }
+    
+    .actress-profile-card-detail .detail-label,
+    .actress-profile-card-detail .detail-value {
+        font-size: 11px;
+    }   
+    
+    .actress-profile-card-info .javguru-profile-btn {
+        font-size: 12px;
+        padding: 7px 16px;
+    }
+}
 
 /* Responsive Design */
 @media (min-width: 768px) {

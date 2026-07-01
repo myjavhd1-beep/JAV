@@ -3,7 +3,7 @@ const albumData = [
     { 
         id: 1, 
         title: "The Fruit of Temptation Vol.1", 
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 18, 
         release: "2025-03-13",
         tags: ["Traditional", "Kimono", "Elegant", "Cultural", "Japan"],
@@ -33,7 +33,7 @@ const albumData = [
     { 
         id: 2, 
         title: "The Fruit of Temptation Vol.2",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 24, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -69,7 +69,7 @@ const albumData = [
     { 
         id: 3, 
         title: "The Fruit of Temptation Vol.3",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 22, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -103,7 +103,7 @@ const albumData = [
        { 
         id: 4, 
         title: "The Fruit of Temptation Vol.4",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 16, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -131,7 +131,7 @@ const albumData = [
     { 
         id: 5, 
         title: "The Fruit of Temptation Vol.5",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 14, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -157,7 +157,7 @@ const albumData = [
     { 
         id: 6, 
         title: "The Fruit of Temptation Vol.6",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 9, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -178,7 +178,7 @@ const albumData = [
     { 
         id: 7, 
         title: "The Fruit of Temptation Vol.7",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 20, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],
@@ -210,7 +210,7 @@ const albumData = [
     { 
         id: 8, 
         title: "The Fruit of Temptation Vol.8",  
-        actress: "Minamo",
+        actress: "MINAMO",
         pages: 25, 
         release: "2025-03-13",
         tags: ["Summer", "Beach", "Swimsuit", "Sunset", "Ocean"],

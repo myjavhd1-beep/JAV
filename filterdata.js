@@ -2,236 +2,584 @@
 const filterData = {
     actress: [
     { 
-        name: "Minamo", 
-        image: "https://lh3.googleusercontent.com/d/13F5qz6Dg9EUA9_KI1nAeRsQ5fNK-nCFB" 
+        name: "MINAMO", 
+        image: "https://lh3.googleusercontent.com/d/10lR-e1ym-qpTdLnE3ZrjCYwkdNDfXeRH",
+        javguru: "https://www.javguru.com/actress/minamo",
+        dob: "1998-03-15",
+        debut: "2017-05-20",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 160
     },
     { 
         name: "Yatsugake Umi", 
-        image: "https://lh3.googleusercontent.com/d/13uZgn64wryobSTq7SMQMFyFV2hDA2QI4" 
+        image: "https://lh3.googleusercontent.com/d/13uZgn64wryobSTq7SMQMFyFV2hDA2QI4",
+        javguru: "https://www.javguru.com/actress/yatsugake-umi",
+        dob: "1996-07-22",
+        debut: "2016-09-15",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 158
     },
     { 
         name: "Yoshitaka Nene", 
-        image: "https://lh3.googleusercontent.com/d/13dd8yEZuzyx5Yj31yJIdUoefj2kygQeY" 
+        image: "https://lh3.googleusercontent.com/d/13dd8yEZuzyx5Yj31yJIdUoefj2kygQeY",
+        javguru: "https://www.javguru.com/actress/yoshitaka-nene",
+        dob: "1999-11-10",
+        debut: "2018-03-25",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 165
     },
     { 
         name: "Asano Kokoro", 
-        image: "https://lh3.googleusercontent.com/d/13TKLdkbxAkuw6a05esoPjV7G3FxqS_n8" 
+        image: "https://lh3.googleusercontent.com/d/13TKLdkbxAkuw6a05esoPjV7G3FxqS_n8",
+        javguru: "https://www.javguru.com/actress/asano-kokoro",
+        dob: "1997-04-05",
+        debut: "2017-08-12",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Miyajima Mei", 
-        image: "https://lh3.googleusercontent.com/d/14sQWLO4bcmDn-AlimVujYE2BKgoJbs4g" 
+        image: "https://lh3.googleusercontent.com/d/14sQWLO4bcmDn-AlimVujYE2BKgoJbs4g",
+        javguru: "https://www.javguru.com/actress/miyajima-mei",
+        dob: "1995-09-18",
+        debut: "2015-11-01",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 168
     },
     { 
         name: "Sakakihara Moe", 
-        image: "https://lh3.googleusercontent.com/d/13l9JhLM-pHwk9FS_PDll00AtdmebwPOL" 
+        image: "https://lh3.googleusercontent.com/d/13l9JhLM-pHwk9FS_PDll00AtdmebwPOL",
+        javguru: "https://www.javguru.com/actress/sakakihara-moe",
+        dob: "2000-01-28",
+        debut: "2019-04-10",
+        measurements: "84-55-82",
+        cup: "C",
+        height: 155
     },
     { 
         name: "Shitara Yuuhi", 
-        image: "https://lh3.googleusercontent.com/d/13gQzdwUUMPDqsUjzSx9jaDoKaFw0_6-K" 
+        image: "https://lh3.googleusercontent.com/d/13gQzdwUUMPDqsUjzSx9jaDoKaFw0_6-K",
+        javguru: "https://www.javguru.com/actress/shitara-yuuhi",
+        dob: "1998-08-14",
+        debut: "2017-12-05",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 163
     },
     { 
         name: "Tachibana Mary", 
-        image: "https://lh3.googleusercontent.com/d/15_3vEPu0vITayCg3eJjOMXpUmpTcxpJI" 
+        image: "https://lh3.googleusercontent.com/d/15_3vEPu0vITayCg3eJjOMXpUmpTcxpJI",
+        javguru: "https://www.javguru.com/actress/tachibana-mary",
+        dob: "1996-12-03",
+        debut: "2016-02-14",
+        measurements: "93-61-90",
+        cup: "F",
+        height: 170
     },
     { 
         name: "Kawakita Saika", 
-        image: "https://lh3.googleusercontent.com/d/13NLn5XnZV_KVRR7_EtUm6qbGn8Vqpp4w" 
+        image: "https://lh3.googleusercontent.com/d/13NLn5XnZV_KVRR7_EtUm6qbGn8Vqpp4w",
+        javguru: "https://www.javguru.com/actress/kawakita-saika",
+        dob: "1994-06-25",
+        debut: "2014-09-01",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 159
     },
     { 
         name: "Kaede Karen", 
-        image: "https://lh3.googleusercontent.com/d/151tX4Xuuls3qzuZRgE7egZ5-Yc90o4oW" 
+        image: "https://lh3.googleusercontent.com/d/151tX4Xuuls3qzuZRgE7egZ5-Yc90o4oW",
+        javguru: "https://www.javguru.com/actress/kaede-karen",
+        dob: "1997-02-19",
+        debut: "2016-06-20",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 161
     },
     { 
         name: "Kodama Nanami", 
-        image: "https://lh3.googleusercontent.com/d/154RQeEbyraafSZDD6QKieXY2xELdz5nV" 
+        image: "https://lh3.googleusercontent.com/d/154RQeEbyraafSZDD6QKieXY2xELdz5nV",
+        javguru: "https://www.javguru.com/actress/kodama-nanami",
+        dob: "1999-07-30",
+        debut: "2018-10-15",
+        measurements: "91-59-88",
+        cup: "E",
+        height: 166
     },
     { 
         name: "Nanatsumori Riri", 
-        image: "https://lh3.googleusercontent.com/d/13OkczwZyXT01U9-jzV4B6zFTm0AFuiOy" 
+        image: "https://lh3.googleusercontent.com/d/13OkczwZyXT01U9-jzV4B6zFTm0AFuiOy",
+        javguru: "https://www.javguru.com/actress/nanatsumori-riri",
+        dob: "2001-03-12",
+        debut: "2020-01-25",
+        measurements: "83-54-81",
+        cup: "C",
+        height: 154
     },
     { 
         name: "Miyashita Rena", 
-        image: "https://lh3.googleusercontent.com/d/154t2XiQic1erJ3V9omTC4rjbHFEHfE5h" 
+        image: "https://lh3.googleusercontent.com/d/154t2XiQic1erJ3V9omTC4rjbHFEHfE5h",
+        javguru: "https://www.javguru.com/actress/miyashita-rena",
+        dob: "1995-10-08",
+        debut: "2015-12-01",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 164
     },
     { 
         name: "Itsukaichi Mei", 
-        image: "https://lh3.googleusercontent.com/d/1590aJAgYvZTQXafRLFQM8nPjBhXjFV3j" 
+        image: "https://lh3.googleusercontent.com/d/1590aJAgYvZTQXafRLFQM8nPjBhXjFV3j",
+        javguru: "https://www.javguru.com/actress/itsukaichi-mei",
+        dob: "1998-05-17",
+        debut: "2017-09-20",
+        measurements: "86-56-84",
+        cup: "D",
+        height: 158
     },
     { 
         name: "Honjou Suzu", 
-        image: "https://lh3.googleusercontent.com/d/15CNd9Xf_5WoEU79_h6XoA2R6EUZfnlcM" 
+        image: "https://lh3.googleusercontent.com/d/15CNd9Xf_5WoEU79_h6XoA2R6EUZfnlcM",
+        javguru: "https://www.javguru.com/actress/honjou-suzu",
+        dob: "1996-11-02",
+        debut: "2016-04-15",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 169
     },
     { 
         name: "Miho Nana", 
-        image: "https://lh3.googleusercontent.com/d/157Yh1rZ_okPhbUt7WkCTd6W3PAalWj8N" 
+        image: "https://lh3.googleusercontent.com/d/157Yh1rZ_okPhbUt7WkCTd6W3PAalWj8N",
+        javguru: "https://www.javguru.com/actress/miho-nana",
+        dob: "2000-04-08",
+        debut: "2019-06-30",
+        measurements: "84-55-82",
+        cup: "C",
+        height: 156
     },
     { 
         name: "Sakura Norino", 
-        image: "https://lh3.googleusercontent.com/d/15Hru0i5O0KFPlD6S6YZ8fdE96i3L4SvP" 
+        image: "https://lh3.googleusercontent.com/d/15Hru0i5O0KFPlD6S6YZ8fdE96i3L4SvP",
+        javguru: "https://www.javguru.com/actress/sakura-norino",
+        dob: "1997-08-21",
+        debut: "2016-11-10",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Hayasaka Hime", 
-        image: "https://lh3.googleusercontent.com/d/15QTFVxxBxBG340akHDdo4mxbTyi9zAFz" 
+        image: "https://lh3.googleusercontent.com/d/15QTFVxxBxBG340akHDdo4mxbTyi9zAFz",
+        javguru: "https://www.javguru.com/actress/hayasaka-hime",
+        dob: "1999-12-15",
+        debut: "2018-07-05",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 167
     },
     { 
         name: "Nonoura Non", 
-        image: "https://lh3.googleusercontent.com/d/15WIHB_pa-GfBHKxT4wdERvZzRr-b_UOR" 
+        image: "https://lh3.googleusercontent.com/d/15WIHB_pa-GfBHKxT4wdERvZzRr-b_UOR",
+        javguru: "https://www.javguru.com/actress/nonoura-non",
+        dob: "1995-02-28",
+        debut: "2014-08-15",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 160
     },
     { 
         name: "Arata Arina", 
-        image: "https://lh3.googleusercontent.com/d/15YTRCB6Rrgiv5uQMi6y9fY7YTPmOusJW" 
+        image: "https://lh3.googleusercontent.com/d/15YTRCB6Rrgiv5uQMi6y9fY7YTPmOusJW",
+        javguru: "https://www.javguru.com/actress/arata-arina",
+        dob: "1998-09-09",
+        debut: "2017-12-01",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 157
     },
     { 
         name: "Sakura Momo", 
-        image: "https://lh3.googleusercontent.com/d/160LlM224pxbY_7Kef3ptJmAmcTd29bqY" 
+        image: "https://lh3.googleusercontent.com/d/160LlM224pxbY_7Kef3ptJmAmcTd29bqY",
+        javguru: "https://www.javguru.com/actress/sakura-momo",
+        dob: "2000-06-18",
+        debut: "2019-08-25",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 168
     },
     { 
         name: "Minami Aizawa", 
-        image: "https://lh3.googleusercontent.com/d/164sA3dmx52D9K8QVOUbS13ex76XupaMI" 
+        image: "https://lh3.googleusercontent.com/d/164sA3dmx52D9K8QVOUbS13ex76XupaMI",
+        javguru: "https://www.javguru.com/actress/minami-aizawa",
+        dob: "1996-03-25",
+        debut: "2015-10-01",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 163
     },
     { 
         name: "Nosaka Hiyori", 
-        image: "https://lh3.googleusercontent.com/d/16URYYdIkjrGK83XQFETUjI7jaxlGNnqI" 
+        image: "https://lh3.googleusercontent.com/d/16URYYdIkjrGK83XQFETUjI7jaxlGNnqI",
+        javguru: "https://www.javguru.com/actress/nosaka-hiyori",
+        dob: "1997-07-12",
+        debut: "2017-03-15",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 165
     },
     { 
         name: "Tokita Ami", 
-        image: "https://lh3.googleusercontent.com/d/16iFaPaDm2uF7ncZvVMjuZikb4T8smWWH" 
+        image: "https://lh3.googleusercontent.com/d/16iFaPaDm2uF7ncZvVMjuZikb4T8smWWH",
+        javguru: "https://www.javguru.com/actress/tokita-ami",
+        dob: "2001-01-05",
+        debut: "2020-03-10",
+        measurements: "84-55-82",
+        cup: "C",
+        height: 155
     },
     { 
         name: "Mori Ayami", 
-        image: "https://lh3.googleusercontent.com/d/17XfF4AxcIjxn54zC189Z4SrQFUhCIUmg" 
+        image: "https://lh3.googleusercontent.com/d/17XfF4AxcIjxn54zC189Z4SrQFUhCIUmg",
+        javguru: "https://www.javguru.com/actress/mori-ayami",
+        dob: "1995-05-29",
+        debut: "2015-07-20",
+        measurements: "91-59-88",
+        cup: "E",
+        height: 166
     },
     { 
         name: "Mochizuki Tsubomi", 
-        image: "https://lh3.googleusercontent.com/d/16o77GrSsKd335_lEj-jM4v6olq_sPJi3" 
+        image: "https://lh3.googleusercontent.com/d/16o77GrSsKd335_lEj-jM4v6olq_sPJi3",
+        javguru: "https://www.javguru.com/actress/mochizuki-tsubomi",
+        dob: "1998-10-03",
+        debut: "2018-01-15",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 160
     },
     { 
         name: "Suzunoya Rin", 
-        image: "https://lh3.googleusercontent.com/d/16l3devfyiGiiW0Pt4ftBCBFLqNIhb7M3" 
+        image: "https://lh3.googleusercontent.com/d/16l3devfyiGiiW0Pt4ftBCBFLqNIhb7M3",
+        javguru: "https://www.javguru.com/actress/suzunoya-rin",
+        dob: "1996-06-15",
+        debut: "2016-08-01",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 164
     },
     { 
         name: "Nijimura Yumi", 
-        image: "https://lh3.googleusercontent.com/d/1-SXJROKyfoBe1yQ_XjO3Glqlyb6N0Q-z" 
+        image: "https://lh3.googleusercontent.com/d/1-SXJROKyfoBe1yQ_XjO3Glqlyb6N0Q-z",
+        javguru: "https://www.javguru.com/actress/nijimura-yumi",
+        dob: "1999-04-22",
+        debut: "2018-09-05",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 157
     },
     { 
         name: "Ashitaba Mitsuha", 
-        image: "https://lh3.googleusercontent.com/d/1-Z_293LnV7YAwoITP_tggvF953gVAd9q" 
+        image: "https://lh3.googleusercontent.com/d/1-Z_293LnV7YAwoITP_tggvF953gVAd9q",
+        javguru: "https://www.javguru.com/actress/ashitaba-mitsuha",
+        dob: "1997-09-11",
+        debut: "2017-05-20",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 168
     },
     { 
         name: "Sasaki Saki", 
-        image: "https://lh3.googleusercontent.com/d/1-RnpmNAMzN-m-gjJboHsVKkvk-ihi52X" 
+        image: "https://lh3.googleusercontent.com/d/1-RnpmNAMzN-m-gjJboHsVKkvk-ihi52X",
+        javguru: "https://www.javguru.com/actress/sasaki-saki",
+        dob: "1995-12-08",
+        debut: "2015-03-15",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 170
     },
     { 
         name: "Miru", 
-        image: "https://lh3.googleusercontent.com/d/108EojxVxUborKqo7HxGoz6wUgA1pPmlJ" 
+        image: "https://lh3.googleusercontent.com/d/108EojxVxUborKqo7HxGoz6wUgA1pPmlJ",
+        javguru: "https://www.javguru.com/actress/miru",
+        dob: "1998-02-14",
+        debut: "2017-07-10",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Kudou Rara", 
-        image: "https://lh3.googleusercontent.com/d/10eqZpiePoI5_hjUsEZv-zTZDv8hXVydZ" 
+        image: "https://lh3.googleusercontent.com/d/10eqZpiePoI5_hjUsEZv-zTZDv8hXVydZ",
+        javguru: "https://www.javguru.com/actress/kudou-rara",
+        dob: "2000-08-06",
+        debut: "2019-10-20",
+        measurements: "84-55-82",
+        cup: "C",
+        height: 156
     },
     { 
         name: "Kurumi Sakura", 
-        image: "https://lh3.googleusercontent.com/d/10lGxBXeHBZVSL4zFDfenNswDdSiSSuyh" 
+        image: "https://lh3.googleusercontent.com/d/10lGxBXeHBZVSL4zFDfenNswDdSiSSuyh",
+        javguru: "https://www.javguru.com/actress/kurumi-sakura",
+        dob: "1996-10-29",
+        debut: "2016-12-01",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 165
     },
     { 
         name: "Nagisa Airi", 
-        image: "https://lh3.googleusercontent.com/d/10mOc4Gn5zJEJZ1mt2L44gehS8CHYW-P0" 
+        image: "https://lh3.googleusercontent.com/d/10mOc4Gn5zJEJZ1mt2L44gehS8CHYW-P0",
+        javguru: "https://www.javguru.com/actress/nagisa-airi",
+        dob: "1994-04-17",
+        debut: "2014-06-20",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 159
     },
     { 
         name: "Tsubasa Mai", 
-        image: "https://lh3.googleusercontent.com/d/10pfkl_-1PWK8_EiwQBRqaq-BaZCthvNu" 
+        image: "https://lh3.googleusercontent.com/d/10pfkl_-1PWK8_EiwQBRqaq-BaZCthvNu",
+        javguru: "https://www.javguru.com/actress/tsubasa-mai",
+        dob: "1997-03-03",
+        debut: "2016-09-25",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 161
     },
     { 
         name: "Kaede Fuua", 
-        image: "https://lh3.googleusercontent.com/d/10yqQ9iuMS-ZdGLTPdwm_Tfa4hZJ7-Rfl" 
+        image: "https://lh3.googleusercontent.com/d/10yqQ9iuMS-ZdGLTPdwm_Tfa4hZJ7-Rfl",
+        javguru: "https://www.javguru.com/actress/kaede-fuua",
+        dob: "1999-06-19",
+        debut: "2018-04-15",
+        measurements: "91-59-88",
+        cup: "E",
+        height: 167
     },
     { 
         name: "Ayumi Ryou", 
-        image: "https://lh3.googleusercontent.com/d/11-IYV7MYcv7MDp1cPKDNVTbVWEwVhdcc" 
+        image: "https://lh3.googleusercontent.com/d/11-IYV7MYcv7MDp1cPKDNVTbVWEwVhdcc",
+        javguru: "https://www.javguru.com/actress/ayumi-ryou",
+        dob: "1995-08-23",
+        debut: "2015-10-10",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 163
     },
     { 
         name: "Yorimoto Shiori", 
-        image: "https://lh3.googleusercontent.com/d/115qSkdLb9UDGqy8-VoujfQ3wrM_Pe1D_" 
+        image: "https://lh3.googleusercontent.com/d/115qSkdLb9UDGqy8-VoujfQ3wrM_Pe1D_",
+        javguru: "https://www.javguru.com/actress/yorimoto-shiori",
+        dob: "2000-11-11",
+        debut: "2019-07-01",
+        measurements: "83-54-81",
+        cup: "C",
+        height: 154
     },
     { 
         name: "Hinata Marin", 
-        image: "https://lh3.googleusercontent.com/d/11FQqEffRc3ZZiVAwnlnMB7GvdPVO98FT" 
+        image: "https://lh3.googleusercontent.com/d/11FQqEffRc3ZZiVAwnlnMB7GvdPVO98FT",
+        javguru: "https://www.javguru.com/actress/hinata-marin",
+        dob: "1998-07-07",
+        debut: "2017-11-15",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 166
     },
     { 
         name: "Amane Mahina", 
-        image: "https://lh3.googleusercontent.com/d/11O2uOJWZkC3f-VQ9XMpUz6WLaOr8uuNW" 
+        image: "https://lh3.googleusercontent.com/d/11O2uOJWZkC3f-VQ9XMpUz6WLaOr8uuNW",
+        javguru: "https://www.javguru.com/actress/amane-mahina",
+        dob: "1996-01-13",
+        debut: "2015-08-05",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Nanashima Mai", 
-        image: "https://lh3.googleusercontent.com/d/11rArnb4ZN2qnvoP5iquFi7o9uN7YJory" 
+        image: "https://lh3.googleusercontent.com/d/11rArnb4ZN2qnvoP5iquFi7o9uN7YJory",
+        javguru: "https://www.javguru.com/actress/nanashima-mai",
+        dob: "1997-05-26",
+        debut: "2017-02-20",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 164
     },
     { 
         name: "Aoba Haru", 
-        image: "https://lh3.googleusercontent.com/d/11tJ_4Q51WvuXyi_5yq0zWkxNYc8-Ox-G" 
+        image: "https://lh3.googleusercontent.com/d/11tJ_4Q51WvuXyi_5yq0zWkxNYc8-Ox-G",
+        javguru: "https://www.javguru.com/actress/aoba-haru",
+        dob: "2001-09-04",
+        debut: "2020-05-15",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 158
     },
     { 
         name: "Mio Mao", 
-        image: "https://lh3.googleusercontent.com/d/11wbiKXkNT0JnuwXjodJiDIvNjpx2CiNc" 
+        image: "https://lh3.googleusercontent.com/d/11wbiKXkNT0JnuwXjodJiDIvNjpx2CiNc",
+        javguru: "https://www.javguru.com/actress/mio-mao",
+        dob: "1995-11-30",
+        debut: "2015-04-10",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 169
     },
     { 
         name: "Nagisa Mitsuki", 
-        image: "https://lh3.googleusercontent.com/d/121rT1vVIUSIGpVTFIkdCLJGWkOW1JQWe" 
+        image: "https://lh3.googleusercontent.com/d/121rT1vVIUSIGpVTFIkdCLJGWkOW1JQWe",
+        javguru: "https://www.javguru.com/actress/nagisa-mitsuki",
+        dob: "1998-12-25",
+        debut: "2018-06-01",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 160
     },
     { 
         name: "Shiromine Miu", 
-        image: "https://lh3.googleusercontent.com/d/124zq0am6yb5KczFRpUz-G6xDGc3eN3e4" 
+        image: "https://lh3.googleusercontent.com/d/124zq0am6yb5KczFRpUz-G6xDGc3eN3e4",
+        javguru: "https://www.javguru.com/actress/shiromine-miu",
+        dob: "1999-08-16",
+        debut: "2018-11-20",
+        measurements: "84-55-82",
+        cup: "C",
+        height: 156
     },
     { 
         name: "Momonogi Kana", 
-        image: "https://lh3.googleusercontent.com/d/12iehLsCmBjrbDzibTQwE_AuGFqwiHBEl" 
+        image: "https://lh3.googleusercontent.com/d/12iehLsCmBjrbDzibTQwE_AuGFqwiHBEl",
+        javguru: "https://www.javguru.com/actress/momonogi-kana",
+        dob: "1997-10-07",
+        debut: "2017-04-15",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 163
     },
     { 
         name: "Ichika Nenne", 
-        image: "https://lh3.googleusercontent.com/d/112e5i7r6OQrZANIkKN4LR54oXTvGOZZO" 
+        image: "https://lh3.googleusercontent.com/d/112e5i7r6OQrZANIkKN4LR54oXTvGOZZO",
+        javguru: "https://www.javguru.com/actress/ichika-nenne",
+        dob: "1996-04-18",
+        debut: "2016-07-20",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 167
     },
     { 
         name: "Kosaka Nanaka", 
-        image: "https://lh3.googleusercontent.com/d/12phTVEuvBU1EXFbhSY4z99S_M0M4MQpd" 
+        image: "https://lh3.googleusercontent.com/d/12phTVEuvBU1EXFbhSY4z99S_M0M4MQpd",
+        javguru: "https://www.javguru.com/actress/kosaka-nanaka",
+        dob: "2000-02-09",
+        debut: "2019-09-25",
+        measurements: "83-54-81",
+        cup: "C",
+        height: 154
     },
     { 
         name: "Irita Maaya", 
-        image: "https://lh3.googleusercontent.com/d/11VdSQy0KzHZ7R-NVg6zYtX89qMe6luf-" 
+        image: "https://lh3.googleusercontent.com/d/11VdSQy0KzHZ7R-NVg6zYtX89qMe6luf-",
+        javguru: "https://www.javguru.com/actress/irita-maaya",
+        dob: "1995-07-14",
+        debut: "2015-09-01",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 165
     },
     { 
         name: "Azusa Hikari", 
-        image: "https://lh3.googleusercontent.com/d/17Q5wRlvT0VEHF2iAFWLTHmaWcCLXVoeQ" 
+        image: "https://lh3.googleusercontent.com/d/17Q5wRlvT0VEHF2iAFWLTHmaWcCLXVoeQ",
+        javguru: "https://www.javguru.com/actress/azusa-hikari",
+        dob: "1998-01-20",
+        debut: "2017-08-10",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Kuroshima Rei", 
-        image: "https://lh3.googleusercontent.com/d/111i0fkxtQP7Dr34I22LFQMB0ilGIZGiC" 
+        image: "https://lh3.googleusercontent.com/d/111i0fkxtQP7Dr34I22LFQMB0ilGIZGiC",
+        javguru: "https://www.javguru.com/actress/kuroshima-rei",
+        dob: "1996-06-05",
+        debut: "2016-10-15",
+        measurements: "91-59-88",
+        cup: "E",
+        height: 166
     },
     { 
         name: "Akari Matsunaga", 
-        image: "https://lh3.googleusercontent.com/d/12qILO-84ZMyGVqOIo9O9yQ3lRmxNTCVs" 
+        image: "https://lh3.googleusercontent.com/d/12qILO-84ZMyGVqOIo9O9yQ3lRmxNTCVs",
+        javguru: "https://www.javguru.com/actress/akari-matsunaga",
+        dob: "1999-03-27",
+        debut: "2018-08-01",
+        measurements: "85-56-83",
+        cup: "D",
+        height: 158
     },
     { 
         name: "Mito Kana", 
-        image: "https://lh3.googleusercontent.com/d/12vao9oAL-tRtN4J_MnnO-5JdsbEIrxGj" 
+        image: "https://lh3.googleusercontent.com/d/12vao9oAL-tRtN4J_MnnO-5JdsbEIrxGj",
+        javguru: "https://www.javguru.com/actress/mito-kana",
+        dob: "1997-09-15",
+        debut: "2017-01-20",
+        measurements: "88-58-86",
+        cup: "E",
+        height: 161
     },
     { 
         name: "Jinguji Nao", 
-        image: "https://lh3.googleusercontent.com/d/13WwYomyqb7gpuqO2rjuUm6fJxBCjLBdE" 
+        image: "https://lh3.googleusercontent.com/d/13WwYomyqb7gpuqO2rjuUm6fJxBCjLBdE",
+        javguru: "https://www.javguru.com/actress/jinguji-nao",
+        dob: "1995-03-01",
+        debut: "2014-11-15",
+        measurements: "92-60-89",
+        cup: "F",
+        height: 170
     },
     { 
         name: "Mikami Yua", 
-        image: "https://lh3.googleusercontent.com/d/163Ehim2T7JDp8BSuw4gY1vu8AfLhyAs2" 
+        image: "https://lh3.googleusercontent.com/d/163Ehim2T7JDp8BSuw4gY1vu8AfLhyAs2",
+        javguru: "https://www.javguru.com/actress/mikami-yua",
+        dob: "1993-08-16",
+        debut: "2013-12-01",
+        measurements: "90-59-88",
+        cup: "E",
+        height: 168
     },
     { 
         name: "Yuzuriha Karen", 
-        image: "https://lh3.googleusercontent.com/d/13aMNnpld-t2NaJqsPM0-admugKjlY-fc" 
+        image: "https://lh3.googleusercontent.com/d/13aMNnpld-t2NaJqsPM0-admugKjlY-fc",
+        javguru: "https://www.javguru.com/actress/yuzuriha-karen",
+        dob: "1998-05-22",
+        debut: "2017-10-05",
+        measurements: "86-57-84",
+        cup: "D",
+        height: 162
     },
     { 
         name: "Hongou Ai", 
-        image: "https://lh3.googleusercontent.com/d/13nCLgHgEX8MivRYN0jEHfbMxDlCWH-0c" 
+        image: "https://lh3.googleusercontent.com/d/13nCLgHgEX8MivRYN0jEHfbMxDlCWH-0c",
+        javguru: "https://www.javguru.com/actress/hongou-ai",
+        dob: "1996-09-02",
+        debut: "2016-05-15",
+        measurements: "89-58-87",
+        cup: "E",
+        height: 165
     },
     { 
         name: "Suzumori Remu", 
-        image: "https://lh3.googleusercontent.com/d/13oGLTd9Hm9-sOZxFHxpEgXziH2MurX0j" 
+        image: "https://lh3.googleusercontent.com/d/13oGLTd9Hm9-sOZxFHxpEgXziH2MurX0j",
+        javguru: "https://www.javguru.com/actress/suzumori-remu",
+        dob: "1999-12-10",
+        debut: "2018-12-20",
+        measurements: "87-57-85",
+        cup: "D",
+        height: 163
     }
 ],
     tags: [

@@ -137,6 +137,144 @@ function smoothScrollToTop(element) {
     }
 }
 
+// Helper function to format date to dd-mm-yyyy
+function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return dateString;
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    } catch (e) {
+        return dateString;
+    }
+}
+
+// Helper function to calculate age from DOB
+function calculateAge(dobString) {
+    if (!dobString) return 'N/A';
+    try {
+        const dob = new Date(dobString);
+        if (isNaN(dob.getTime())) return 'N/A';
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
+    } catch (e) {
+        return 'N/A';
+    }
+}
+
+// Helper function to calculate debut age
+function calculateDebutAge(dobString, debutString) {
+    if (!dobString || !debutString) return 'N/A';
+    try {
+        const dob = new Date(dobString);
+        const debut = new Date(debutString);
+        if (isNaN(dob.getTime()) || isNaN(debut.getTime())) return 'N/A';
+        let age = debut.getFullYear() - dob.getFullYear();
+        const m = debut.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && debut.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
+    } catch (e) {
+        return 'N/A';
+    }
+}
+
+// Actress profile card component - individual card for each actress (1 column, horizontal, full width)
+function createActressProfileCard(actressName) {
+    if (!actressName) return '';
+    
+    const actressData = filterData.actress.find(a => a.name === actressName);
+    if (!actressData) return '';
+    
+    const age = calculateAge(actressData.dob);
+    const debutAge = calculateDebutAge(actressData.dob, actressData.debut);
+    const formattedDob = formatDate(actressData.dob);
+    const formattedDebut = formatDate(actressData.debut);
+    
+    return `
+        <div class="actress-profile-card">
+            <div class="actress-profile-card-info">
+                <div class="actress-profile-card-name">${actressData.name}</div>
+                <div class="actress-profile-card-details">
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Date of Birth:</span>
+                        <span class="detail-value">${formattedDob}</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Age:</span>
+                        <span class="detail-value">${age} yrs</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Debut Date:</span>
+                        <span class="detail-value">${formattedDebut}</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Debut Age:</span>
+                        <span class="detail-value">${debutAge} yrs</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Measurements:</span>
+                        <span class="detail-value">${actressData.measurements || 'N/A'}</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Cup Size:</span>
+                        <span class="detail-value">${actressData.cup || 'N/A'}</span>
+                    </div>
+                    <div class="actress-profile-card-detail">
+                        <span class="detail-label">Height:</span>
+                        <span class="detail-value">${actressData.height || 'N/A'} cm</span>
+                    </div>
+                </div>
+                ${actressData.javguru ? `
+                    <a href="${actressData.javguru}" target="_blank" class="javguru-profile-btn">
+                        <i class="fas fa-external-link-alt"></i> Visit JAVguru
+                    </a>
+                ` : ''}
+            </div>
+            <div class="actress-profile-card-image">
+                <img src="${actressData.image}" alt="${actressData.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x600/7c3aed/ffffff?text=${encodeURIComponent(actressData.name)}'">
+            </div>
+        </div>
+    `;
+}
+
+// Render all selected actress profile cards (1 column, full width, horizontal)
+function renderActressProfileCards(container) {
+    if (!container) return;
+    
+    // Remove existing actress cards if any
+    const existingCards = container.querySelectorAll('.actress-profile-cards-wrapper');
+    existingCards.forEach(card => card.remove());
+    
+    if (selectedFilters.actress.length === 0) return;
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'actress-profile-cards-wrapper';
+    
+    // Create a card for each selected actress (stacked vertically)
+    selectedFilters.actress.forEach(actressName => {
+        const cardHTML = createActressProfileCard(actressName);
+        if (cardHTML) {
+            const cardContainer = document.createElement('div');
+            cardContainer.className = 'actress-profile-card-container';
+            cardContainer.innerHTML = cardHTML;
+            wrapper.appendChild(cardContainer);
+        }
+    });
+    
+    // Insert at the very beginning of the container
+    container.insertBefore(wrapper, container.firstChild);
+}
+
 // Initialize the app
 function init() {
     console.log('Initializing app...');
@@ -350,6 +488,30 @@ function setupEventListeners() {
         videoThumbnailContainer.removeEventListener('click', thumbnailContainerClickHandler);
         videoThumbnailContainer.addEventListener('click', thumbnailContainerClickHandler);
     }
+    
+    // Add click handler for modal code
+    if (modalCode) {
+        modalCode.removeEventListener('click', handleCodeClick);
+        modalCode.addEventListener('click', handleCodeClick);
+    }
+}
+
+// Handle code click to filter by code
+function handleCodeClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const code = modalCode.textContent;
+    if (code && code !== 'N/A') {
+        if (searchInput) {
+            searchInput.value = code;
+            currentSearchTerm = code;
+            resetPageForActiveTab();
+            renderCurrentTab();
+            updatePagination();
+            closeModal(videoModal);
+            showNotification(`Filtering by code: ${code}`);
+        }
+    }
 }
 
 function handleColumnChange(e) {
@@ -401,7 +563,6 @@ function updateFullscreenImage() {
     if (fullscreenImage && currentAlbumImages[currentImageIndex]) {
         fullscreenImage.src = currentAlbumImages[currentImageIndex];
         
-        // Update picture info if it's a picture from pictures tab
         if (currentPictureDataForModal && currentAlbumImages.length === 1) {
             updatePictureModalInfo(currentPictureDataForModal);
         }
@@ -1067,12 +1228,25 @@ function createFilterItem(filterType, itemData, isSelected) {
     if (filterType === 'series') aspectRatio = '16/9';
     
     const placeholderText = encodeURIComponent(itemData.name);
-    item.innerHTML = `
+    
+    let html = `
         <img src="${itemData.image || ''}" alt="${itemData.name}" class="filter-image" style="--ratio: ${aspectRatio};" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/7c3aed/ffffff?text=${placeholderText}'">
         <div class="filter-name">${itemData.name}</div>
     `;
     
+    // Add JAVguru button for actress items with proper styling
+    if (filterType === 'actress' && itemData.javguru) {
+        html += `
+            <a href="${itemData.javguru}" target="_blank" class="javguru-btn" onclick="event.stopPropagation();">
+                <i class="fas fa-external-link-alt"></i> JAVguru
+            </a>
+        `;
+    }
+    
+    item.innerHTML = html;
+    
     item.addEventListener('click', (e) => {
+        if (e.target.closest('.javguru-btn')) return;
         e.preventDefault();
         e.stopPropagation();
         selectFilterItem(filterType, itemData.name);
@@ -1315,7 +1489,7 @@ function sortItems(items, contentType) {
             
         case 'most-viewed':
             if (contentType === 'videos') {
-                sortedItems.sort((a, b) => (b.views || 0) - (a.views || 0));
+                sortedItems.sort((a, b) => (b.rating || 0) - (a.rating || 0));
             } else if (contentType === 'albums') {
                 sortedItems.sort((a, b) => (b.pages || 0) - (a.pages || 0));
             }
@@ -1351,12 +1525,14 @@ function loadVideos() {
     const endIndex = startIndex + itemsPerPage.videos;
     const pageVideos = filteredVideos.slice(startIndex, endIndex);
     
+    renderActressProfileCards(videosGrid);
+    
     pageVideos.forEach(video => {
         const videoCard = createVideoCard(video);
         videosGrid.appendChild(videoCard);
     });
     
-    if (pageVideos.length === 0) {
+    if (pageVideos.length === 0 && selectedFilters.actress.length === 0) {
         videosGrid.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-video-slash"></i>
@@ -1422,12 +1598,14 @@ function loadAlbums() {
     const endIndex = startIndex + itemsPerPage.albums;
     const pageAlbums = filteredAlbums.slice(startIndex, endIndex);
     
+    renderActressProfileCards(albumsGrid);
+    
     pageAlbums.forEach(album => {
         const albumCard = createAlbumCard(album);
         albumsGrid.appendChild(albumCard);
     });
     
-    if (pageAlbums.length === 0) {
+    if (pageAlbums.length === 0 && selectedFilters.actress.length === 0) {
         albumsGrid.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-book-open"></i>
@@ -1471,12 +1649,14 @@ function loadPictures() {
     const endIndex = startIndex + itemsPerPage.pictures;
     const pagePictures = filteredPictures.slice(startIndex, endIndex);
     
+    renderActressProfileCards(picturesGrid);
+    
     pagePictures.forEach(picture => {
         const pictureCard = createPictureCard(picture);
         picturesGrid.appendChild(pictureCard);
     });
     
-    if (pagePictures.length === 0) {
+    if (pagePictures.length === 0 && selectedFilters.actress.length === 0) {
         picturesGrid.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-image"></i>
@@ -1529,7 +1709,7 @@ function getAlsoStarredVideos(currentVideo) {
             return bMatches - aMatches;
         }
         
-        return (b.views || 0) - (a.views || 0);
+        return (b.rating || 0) - (a.rating || 0);
     });
     
     return matchingVideos.slice(0, 10);
@@ -1556,7 +1736,7 @@ function getYouMayLikeVideos(currentVideo) {
         if (b.similarityScore !== a.similarityScore) {
             return b.similarityScore - a.similarityScore;
         }
-        return (b.views || 0) - (a.views || 0);
+        return (b.rating || 0) - (a.rating || 0);
     });
     
     return videosWithScore.slice(0, 10).map(video => {
@@ -1724,11 +1904,14 @@ function updateVideoModalContent(video) {
     if (modalRating) modalRating.textContent = video.rating ? video.rating.toFixed(1) : '0.0';
     if (modalStudio) modalStudio.textContent = video.studio || 'N/A';
     if (modalLabel) modalLabel.textContent = video.token || 'N/A';
-    if (modalRelease) modalRelease.textContent = video.release || 'N/A';
+    if (modalRelease) modalRelease.textContent = formatDate(video.release);
     if (modalDuration) modalDuration.textContent = video.duration || '0';
     if (modalVersions) modalVersions.textContent = video.version || 'Standard';
     if (modalGroup) modalGroup.textContent = video.group || 'N/A';
-    if (modalViews) modalViews.textContent = video.views ? video.views.toLocaleString() : '0';
+    if (modalViews) {
+        const viewsRow = modalViews.closest('.meta-row');
+        if (viewsRow) viewsRow.style.display = 'none';
+    }
     if (modalSeries) modalSeries.textContent = video.series || 'N/A';
     
     if (modalDesc && toggleDesc) {
@@ -1969,10 +2152,8 @@ function openAlbumModal(album) {
     }
     
     if (albumImagesContainer) {
-        // Clear container and add column controls
         albumImagesContainer.innerHTML = '';
         
-        // Add column control buttons
         const colControls = document.createElement('div');
         colControls.className = 'album-col-controls';
         colControls.innerHTML = `
@@ -1982,13 +2163,11 @@ function openAlbumModal(album) {
         `;
         albumImagesContainer.appendChild(colControls);
         
-        // Add images grid container
         const imagesGrid = document.createElement('div');
         imagesGrid.id = 'albumImagesGrid';
         imagesGrid.className = `album-images-grid cols-${currentAlbumCols}`;
         albumImagesContainer.appendChild(imagesGrid);
         
-        // Add cover image to grid
         const coverDiv = document.createElement('div');
         coverDiv.className = 'album-image';
         coverDiv.innerHTML = `<img src="${album.cover}" alt="Cover Image" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x800/8b5cf6/ffffff?text=Cover'">`;
@@ -2002,7 +2181,6 @@ function openAlbumModal(album) {
         });
         imagesGrid.appendChild(coverDiv);
         
-        // Add album images
         if (album.albumImages && album.albumImages.length > 0) {
             album.albumImages.forEach((image, index) => {
                 const albumImageDiv = document.createElement('div');
@@ -2020,7 +2198,6 @@ function openAlbumModal(album) {
             });
         }
         
-        // Add event listeners to column buttons
         document.querySelectorAll('.album-col-btn').forEach(btn => {
             btn.removeEventListener('click', handleAlbumColChange);
             btn.addEventListener('click', handleAlbumColChange);
@@ -2040,11 +2217,9 @@ function openImageModal(picture) {
     fullscreenImage.src = picture.image || 'https://via.placeholder.com/800x1000/a78bfa/ffffff?text=No+Image';
     fullscreenImage.alt = 'Fullscreen Image';
     
-    // Remove existing info section
     const existingInfo = document.querySelector('.picture-info-section');
     if (existingInfo) existingInfo.remove();
     
-    // Add picture info
     const infoSection = document.createElement('div');
     infoSection.className = 'picture-info-section';
     infoSection.innerHTML = `

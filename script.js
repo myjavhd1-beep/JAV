@@ -45,6 +45,9 @@ let currentAlbumCols = 1;
 // Actress grid column count
 let currentActressCols = 3;
 
+// Store randomly selected images for actresses
+let actressImageCache = {};
+
 // DOM Elements
 const themeToggle = document.getElementById('themeToggle');
 const filtersBtn = document.getElementById('filtersBtn');
@@ -130,6 +133,37 @@ const filterTabs = document.querySelectorAll('.filter-tab');
 const filterSections = document.querySelectorAll('.filter-section');
 const selectedFiltersContainer = document.getElementById('selectedFilters');
 
+// Helper function to get a random image from an actress's images array
+function getRandomActressImage(actressData) {
+    if (!actressData) return '';
+    
+    // If the actress has an 'images' array and it's not empty
+    if (actressData.images && actressData.images.length > 0) {
+        // Check if we already have a cached image for this actress
+        if (actressImageCache[actressData.name]) {
+            return actressImageCache[actressData.name];
+        }
+        // Select a random image
+        const randomIndex = Math.floor(Math.random() * actressData.images.length);
+        const selectedImage = actressData.images[randomIndex];
+        // Cache the selected image
+        actressImageCache[actressData.name] = selectedImage;
+        return selectedImage;
+    }
+    
+    // Fallback to the old 'image' property for backward compatibility
+    if (actressData.image) {
+        return actressData.image;
+    }
+    
+    return '';
+}
+
+// Clear the actress image cache (useful for shuffling or refresh)
+function clearActressImageCache() {
+    actressImageCache = {};
+}
+
 // Helper function to scroll to top smoothly
 function smoothScrollToTop(element) {
     if (element) {
@@ -199,6 +233,7 @@ function createActressProfileCard(actressName) {
     const debutAge = calculateDebutAge(actressData.dob, actressData.debut);
     const formattedDob = formatDate(actressData.dob);
     const formattedDebut = formatDate(actressData.debut);
+    const imageUrl = getRandomActressImage(actressData);
     
     return `
         <div class="actress-profile-card">
@@ -241,7 +276,7 @@ function createActressProfileCard(actressName) {
                 ` : ''}
             </div>
             <div class="actress-profile-card-image">
-                <img src="${actressData.image}" alt="${actressData.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x600/7c3aed/ffffff?text=${encodeURIComponent(actressData.name)}'">
+                <img src="${imageUrl}" alt="${actressData.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x600/7c3aed/ffffff?text=${encodeURIComponent(actressData.name)}'">
             </div>
         </div>
     `;
@@ -528,6 +563,10 @@ function handleColumnChange(e) {
         actressGrid.classList.remove('cols-1', 'cols-2', 'cols-3');
         actressGrid.classList.add(`cols-${cols}`);
     }
+    
+    // Clear cache and re-render filter items with new random images
+    clearActressImageCache();
+    renderAllFilterItems();
 }
 
 // Handle album images column change
@@ -765,6 +804,8 @@ function handleSortChange(e) {
     currentSort = sortValue;
     if (sortMenu) sortMenu.classList.remove('active');
     
+    // Clear cache on sort change (especially for shuffle)
+    clearActressImageCache();
     resetPageForActiveTab();
     renderCurrentTab();
     updatePagination();
@@ -968,6 +1009,12 @@ function handleFilterTabChange(e) {
     });
     const targetSection = document.getElementById(`${tabId}Filter`);
     if (targetSection) targetSection.classList.add('active');
+    
+    // Clear cache and re-render when switching to actress tab
+    if (tabId === 'actress') {
+        clearActressImageCache();
+        renderFilterItems('actress', false);
+    }
 }
 
 function handleFilterSearch(e) {
@@ -1199,6 +1246,8 @@ function renderFilterItems(filterType, shouldShuffle = false) {
     
     if (shouldShuffle) {
         filterItems = shuffleArray(filterItems);
+        // Clear cache when shuffling for new random images
+        clearActressImageCache();
     }
     
     selectedItems.forEach(value => {
@@ -1229,8 +1278,17 @@ function createFilterItem(filterType, itemData, isSelected) {
     
     const placeholderText = encodeURIComponent(itemData.name);
     
+    // Get the image URL (supports multiple images)
+    let imageUrl = '';
+    if (filterType === 'actress') {
+        // Use the random image function for actresses
+        imageUrl = getRandomActressImage(itemData);
+    } else {
+        imageUrl = itemData.image || '';
+    }
+    
     let html = `
-        <img src="${itemData.image || ''}" alt="${itemData.name}" class="filter-image" style="--ratio: ${aspectRatio};" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/7c3aed/ffffff?text=${placeholderText}'">
+        <img src="${imageUrl || ''}" alt="${itemData.name}" class="filter-image" style="--ratio: ${aspectRatio};" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/7c3aed/ffffff?text=${placeholderText}'">
         <div class="filter-name">${itemData.name}</div>
     `;
     
@@ -1256,6 +1314,9 @@ function createFilterItem(filterType, itemData, isSelected) {
 }
 
 function loadFilterData(shouldShuffle = false) {
+    // Clear cache on initial load
+    clearActressImageCache();
+    
     Object.keys(filterData).forEach(filterType => {
         if (filterType === 'tokens') {
             renderFilterItems('label', shouldShuffle);
@@ -1268,6 +1329,8 @@ function loadFilterData(shouldShuffle = false) {
 }
 
 function openFilterModal() {
+    // Clear cache and re-render filter items when opening modal
+    clearActressImageCache();
     renderAllFilterItems();
     openModal(filterModal);
 }
@@ -1453,6 +1516,8 @@ function sortItems(items, contentType) {
     
     switch(currentSort) {
         case 'shuffle':
+            // Clear cache on shuffle
+            clearActressImageCache();
             return shuffleArray(sortedItems);
             
         case 'latest':
@@ -1956,7 +2021,7 @@ function updateModalActresses(video) {
         
         actressNames.forEach(actressName => {
             const actressData = filterData.actress ? filterData.actress.find(a => a.name === actressName) : null;
-            const actressImg = actressData ? actressData.image : '';
+            const actressImg = actressData ? getRandomActressImage(actressData) : '';
             
             const actressElement = document.createElement('div');
             actressElement.className = 'actress';
@@ -2110,7 +2175,7 @@ function openAlbumModal(album) {
             
             actressNames.forEach(actressName => {
                 const actressData = filterData.actress ? filterData.actress.find(a => a.name === actressName) : null;
-                const actressImg = actressData ? actressData.image : '';
+                const actressImg = actressData ? getRandomActressImage(actressData) : '';
                 
                 const actressElement = document.createElement('div');
                 actressElement.className = 'actress';

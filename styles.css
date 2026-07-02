@@ -1577,6 +1577,7 @@ html {
 .actress-profile-cards-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
     width: 100%;
     margin-bottom: 30px;
@@ -1584,7 +1585,8 @@ html {
 }
 
 .actress-profile-card-container {
-    width: 100%;
+    width: 75%;
+    margin: 0 auto; 
 }
 
 .actress-profile-card {

@@ -2,7 +2,7 @@
 const filterData = {
     actress: [
     { 
-        name: "Minamo", 
+        name: "MINAMO", 
         images: [
             "https://lh3.googleusercontent.com/d/174ScSbVOs8af2eycyr77_5rH1-81fgdk",
     "https://lh3.googleusercontent.com/d/14GMcv-sbtfwPhpdIJEa9GXyGeglDqNmf",

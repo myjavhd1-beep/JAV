@@ -24,6 +24,11 @@ const itemsPerPage = {
     pictures: 30
 };
 
+// Store sorted data for pagination to prevent reshuffling on page change
+let cachedSortedVideos = [];
+let cachedSortedAlbums = [];
+let cachedSortedPictures = [];
+
 // Current video for suggestion carousels
 let currentVideoForSuggestions = null;
 
@@ -116,12 +121,15 @@ const youMayLikeNext = document.getElementById('youMayLikeNext');
 const videosPrevBtn = document.getElementById('videosPrevBtn');
 const videosNextBtn = document.getElementById('videosNextBtn');
 const videosPageNumber = document.getElementById('videosPageNumber');
+const videosTotalPages = document.getElementById('videosTotalPages');
 const albumsPrevBtn = document.getElementById('albumsPrevBtn');
 const albumsNextBtn = document.getElementById('albumsNextBtn');
 const albumsPageNumber = document.getElementById('albumsPageNumber');
+const albumsTotalPages = document.getElementById('albumsTotalPages');
 const picturesPrevBtn = document.getElementById('picturesPrevBtn');
 const picturesNextBtn = document.getElementById('picturesNextBtn');
 const picturesPageNumber = document.getElementById('picturesPageNumber');
+const picturesTotalPages = document.getElementById('picturesTotalPages');
 
 // Album modal elements
 const albumModalTitle = document.getElementById('albumModalTitle');
@@ -857,6 +865,12 @@ function handleSortChange(e) {
     // Clear cache on sort change (especially for shuffle)
     clearActressImageCache();
     resetPageForActiveTab();
+    
+    // Clear cached sorted data when sort changes
+    cachedSortedVideos = [];
+    cachedSortedAlbums = [];
+    cachedSortedPictures = [];
+    
     renderCurrentTab();
     updatePagination();
 }
@@ -883,6 +897,11 @@ function handleTabChange(e) {
     
     activeTab = tabId;
     
+    // Clear cached data when switching tabs to ensure fresh data
+    cachedSortedVideos = [];
+    cachedSortedAlbums = [];
+    cachedSortedPictures = [];
+    
     updatePagination();
     renderCurrentTab();
 }
@@ -892,6 +911,10 @@ function handleSearch() {
     
     if (!currentSearchTerm) {
         resetPageForActiveTab();
+        // Clear cached data when search is cleared
+        cachedSortedVideos = [];
+        cachedSortedAlbums = [];
+        cachedSortedPictures = [];
         renderCurrentTab();
         updatePagination();
     }
@@ -900,6 +923,10 @@ function handleSearch() {
 function performSearch() {
     if (currentSearchTerm) {
         resetPageForActiveTab();
+        // Clear cached data when performing new search
+        cachedSortedVideos = [];
+        cachedSortedAlbums = [];
+        cachedSortedPictures = [];
         renderCurrentTab();
         updatePagination();
         showNotification(`Search results for "${currentSearchTerm}"`);
@@ -1143,6 +1170,10 @@ function updateFilterItemUI(filterType, value) {
 
 function applyFilterChanges() {
     resetPageForActiveTab();
+    // Clear cached data when filters change
+    cachedSortedVideos = [];
+    cachedSortedAlbums = [];
+    cachedSortedPictures = [];
     updateActiveFilters();
     renderSelectedFilters();
     renderCurrentTab();
@@ -1414,15 +1445,19 @@ function updatePagination() {
     if (currentAlbumPage > totalAlbumPages) currentAlbumPage = totalAlbumPages;
     if (currentPicturePage > totalPicturePages) currentPicturePage = totalPicturePages;
     
+    // Update page numbers and total pages
     if (videosPageNumber) videosPageNumber.textContent = currentVideoPage;
+    if (videosTotalPages) videosTotalPages.textContent = totalVideoPages;
     if (videosPrevBtn) videosPrevBtn.disabled = currentVideoPage <= 1;
     if (videosNextBtn) videosNextBtn.disabled = currentVideoPage >= totalVideoPages;
     
     if (albumsPageNumber) albumsPageNumber.textContent = currentAlbumPage;
+    if (albumsTotalPages) albumsTotalPages.textContent = totalAlbumPages;
     if (albumsPrevBtn) albumsPrevBtn.disabled = currentAlbumPage <= 1;
     if (albumsNextBtn) albumsNextBtn.disabled = currentAlbumPage >= totalAlbumPages;
     
     if (picturesPageNumber) picturesPageNumber.textContent = currentPicturePage;
+    if (picturesTotalPages) picturesTotalPages.textContent = totalPicturePages;
     if (picturesPrevBtn) picturesPrevBtn.disabled = currentPicturePage <= 1;
     if (picturesNextBtn) picturesNextBtn.disabled = currentPicturePage >= totalPicturePages;
 }
@@ -1614,6 +1649,31 @@ function sortItems(items, contentType) {
     return sortedItems;
 }
 
+function getSortedData(contentType) {
+    switch(contentType) {
+        case 'videos':
+            if (cachedSortedVideos.length === 0) {
+                const filtered = getFilteredVideos();
+                cachedSortedVideos = sortItems(filtered, 'videos');
+            }
+            return cachedSortedVideos;
+        case 'albums':
+            if (cachedSortedAlbums.length === 0) {
+                const filtered = getFilteredAlbums();
+                cachedSortedAlbums = sortItems(filtered, 'albums');
+            }
+            return cachedSortedAlbums;
+        case 'pictures':
+            if (cachedSortedPictures.length === 0) {
+                const filtered = getFilteredPictures();
+                cachedSortedPictures = sortItems(filtered, 'pictures');
+            }
+            return cachedSortedPictures;
+        default:
+            return [];
+    }
+}
+
 function renderCurrentTab() {
     switch(activeTab) {
         case 'videos':
@@ -1633,12 +1693,12 @@ function loadVideos() {
     
     videosGrid.innerHTML = '';
     
-    let filteredVideos = getFilteredVideos();
-    filteredVideos = sortItems(filteredVideos, 'videos');
+    // Use cached sorted data to prevent reshuffling on page change
+    const sortedVideos = getSortedData('videos');
     
     const startIndex = (currentVideoPage - 1) * itemsPerPage.videos;
     const endIndex = startIndex + itemsPerPage.videos;
-    const pageVideos = filteredVideos.slice(startIndex, endIndex);
+    const pageVideos = sortedVideos.slice(startIndex, endIndex);
     
     renderActressProfileCards(videosGrid);
     
@@ -1706,12 +1766,12 @@ function loadAlbums() {
     
     albumsGrid.innerHTML = '';
     
-    let filteredAlbums = getFilteredAlbums();
-    filteredAlbums = sortItems(filteredAlbums, 'albums');
+    // Use cached sorted data to prevent reshuffling on page change
+    const sortedAlbums = getSortedData('albums');
     
     const startIndex = (currentAlbumPage - 1) * itemsPerPage.albums;
     const endIndex = startIndex + itemsPerPage.albums;
-    const pageAlbums = filteredAlbums.slice(startIndex, endIndex);
+    const pageAlbums = sortedAlbums.slice(startIndex, endIndex);
     
     renderActressProfileCards(albumsGrid);
     
@@ -1757,12 +1817,12 @@ function loadPictures() {
     
     picturesGrid.innerHTML = '';
     
-    let filteredPictures = getFilteredPictures();
-    filteredPictures = sortItems(filteredPictures, 'pictures');
+    // Use cached sorted data to prevent reshuffling on page change
+    const sortedPictures = getSortedData('pictures');
     
     const startIndex = (currentPicturePage - 1) * itemsPerPage.pictures;
     const endIndex = startIndex + itemsPerPage.pictures;
-    const pagePictures = filteredPictures.slice(startIndex, endIndex);
+    const pagePictures = sortedPictures.slice(startIndex, endIndex);
     
     renderActressProfileCards(picturesGrid);
     

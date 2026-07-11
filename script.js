@@ -48,6 +48,9 @@ let currentActressCols = 3;
 // Store randomly selected images for actresses
 let actressImageCache = {};
 
+// Track which images have been shown for each actress in modals
+let actressModalImageTracker = {};
+
 // DOM Elements
 const themeToggle = document.getElementById('themeToggle');
 const filtersBtn = document.getElementById('filtersBtn');
@@ -159,9 +162,56 @@ function getRandomActressImage(actressData) {
     return '';
 }
 
+// Get a random image for modal display (different from cache)
+function getRandomModalActressImage(actressData) {
+    if (!actressData) return '';
+    
+    // If the actress has an 'images' array and it's not empty
+    if (actressData.images && actressData.images.length > 0) {
+        // Initialize tracker for this actress if it doesn't exist
+        if (!actressModalImageTracker[actressData.name]) {
+            actressModalImageTracker[actressData.name] = [];
+        }
+        
+        // Get available images that haven't been shown yet
+        const availableImages = actressData.images.filter(img => 
+            !actressModalImageTracker[actressData.name].includes(img)
+        );
+        
+        // If all images have been shown, reset the tracker
+        if (availableImages.length === 0) {
+            actressModalImageTracker[actressData.name] = [];
+            // Use all images again
+            const randomIndex = Math.floor(Math.random() * actressData.images.length);
+            const selectedImage = actressData.images[randomIndex];
+            actressModalImageTracker[actressData.name].push(selectedImage);
+            return selectedImage;
+        }
+        
+        // Select a random image from available ones
+        const randomIndex = Math.floor(Math.random() * availableImages.length);
+        const selectedImage = availableImages[randomIndex];
+        actressModalImageTracker[actressData.name].push(selectedImage);
+        return selectedImage;
+    }
+    
+    // Fallback to the old 'image' property for backward compatibility
+    if (actressData.image) {
+        return actressData.image;
+    }
+    
+    return '';
+}
+
 // Clear the actress image cache (useful for shuffling or refresh)
 function clearActressImageCache() {
     actressImageCache = {};
+}
+
+// Reset modal image tracker when closing modals
+function resetModalImageTracker() {
+    // Don't clear completely, just let it rotate through images
+    // The tracker will automatically reset when all images have been shown
 }
 
 // Helper function to scroll to top smoothly
@@ -1763,7 +1813,17 @@ function getAlsoStarredVideos(currentVideo) {
         return videoActresses.some(actress => currentActresses.includes(actress));
     });
     
-    matchingVideos.sort((a, b) => {
+    // Remove duplicates based on video ID before sorting
+    const uniqueVideos = [];
+    const seenIds = new Set();
+    for (const video of matchingVideos) {
+        if (!seenIds.has(video.id)) {
+            seenIds.add(video.id);
+            uniqueVideos.push(video);
+        }
+    }
+    
+    uniqueVideos.sort((a, b) => {
         const aActresses = a.actress ? a.actress.split(',').map(act => act.trim()) : [];
         const bActresses = b.actress ? b.actress.split(',').map(act => act.trim()) : [];
         
@@ -1777,7 +1837,7 @@ function getAlsoStarredVideos(currentVideo) {
         return (b.rating || 0) - (a.rating || 0);
     });
     
-    return matchingVideos.slice(0, 10);
+    return uniqueVideos.slice(0, 10);
 }
 
 function getYouMayLikeVideos(currentVideo) {
@@ -1797,14 +1857,24 @@ function getYouMayLikeVideos(currentVideo) {
         };
     });
     
-    videosWithScore.sort((a, b) => {
+    // Remove duplicates based on video ID before sorting
+    const uniqueVideos = [];
+    const seenIds = new Set();
+    for (const video of videosWithScore) {
+        if (!seenIds.has(video.id)) {
+            seenIds.add(video.id);
+            uniqueVideos.push(video);
+        }
+    }
+    
+    uniqueVideos.sort((a, b) => {
         if (b.similarityScore !== a.similarityScore) {
             return b.similarityScore - a.similarityScore;
         }
         return (b.rating || 0) - (a.rating || 0);
     });
     
-    return videosWithScore.slice(0, 10).map(video => {
+    return uniqueVideos.slice(0, 10).map(video => {
         const { similarityScore, ...videoData } = video;
         return videoData;
     });
@@ -1882,11 +1952,18 @@ function loadSuggestionCarousels(video) {
     const alsoStarredVideos = getAlsoStarredVideos(video);
     const youMayLikeVideos = getYouMayLikeVideos(video);
     
+    // Create a combined set of unique video IDs that have been shown
+    const shownVideoIds = new Set();
+    
     if (alsoStarredCarousel) {
         if (alsoStarredVideos.length > 0) {
             alsoStarredVideos.forEach(suggestedVideo => {
-                const carouselItem = createCarouselItem(suggestedVideo, 'poster');
-                alsoStarredCarousel.appendChild(carouselItem);
+                // Only add if not already shown
+                if (!shownVideoIds.has(suggestedVideo.id)) {
+                    const carouselItem = createCarouselItem(suggestedVideo, 'poster');
+                    alsoStarredCarousel.appendChild(carouselItem);
+                    shownVideoIds.add(suggestedVideo.id);
+                }
             });
         } else {
             alsoStarredCarousel.innerHTML = `
@@ -1900,8 +1977,12 @@ function loadSuggestionCarousels(video) {
     if (youMayLikeCarousel) {
         if (youMayLikeVideos.length > 0) {
             youMayLikeVideos.forEach(suggestedVideo => {
-                const carouselItem = createCarouselItem(suggestedVideo, 'thumbnail');
-                youMayLikeCarousel.appendChild(carouselItem);
+                // Only add if not already shown in either carousel
+                if (!shownVideoIds.has(suggestedVideo.id)) {
+                    const carouselItem = createCarouselItem(suggestedVideo, 'thumbnail');
+                    youMayLikeCarousel.appendChild(carouselItem);
+                    shownVideoIds.add(suggestedVideo.id);
+                }
             });
         } else {
             youMayLikeCarousel.innerHTML = `
@@ -2021,7 +2102,8 @@ function updateModalActresses(video) {
         
         actressNames.forEach(actressName => {
             const actressData = filterData.actress ? filterData.actress.find(a => a.name === actressName) : null;
-            const actressImg = actressData ? getRandomActressImage(actressData) : '';
+            // Use the modal-specific random image function
+            const actressImg = actressData ? getRandomModalActressImage(actressData) : '';
             
             const actressElement = document.createElement('div');
             actressElement.className = 'actress';
@@ -2175,7 +2257,8 @@ function openAlbumModal(album) {
             
             actressNames.forEach(actressName => {
                 const actressData = filterData.actress ? filterData.actress.find(a => a.name === actressName) : null;
-                const actressImg = actressData ? getRandomActressImage(actressData) : '';
+                // Use the modal-specific random image function
+                const actressImg = actressData ? getRandomModalActressImage(actressData) : '';
                 
                 const actressElement = document.createElement('div');
                 actressElement.className = 'actress';

@@ -13,8 +13,8 @@ const videoData = [
     "series": "",
     "version": "Decensored",
     "token": "START",
-    "trailerUrl": "",
-    "videoUrl": "",
+    "trailerUrl": "https://javtrailers.com/video/1start00591",
+    "videoUrl": "https://javhd.today/in/embed/348946/",
     "description": "In this energetic and playful release, the vibrant MINAMO shines as a seductive gyaru who fully embraces her role with infectious enthusiasm and confidence. Adorned in a striking blonde look, she captivates across four distinct scenarios that place her in everyday yet thrilling settings like a train, hospital, office, and classroom. MINAMO's performance is lively and engaging, as she uses her charm and affirming words to draw her partners in, creating an atmosphere of mutual excitement and fun. Her natural chemistry and bold personality make each situation feel dynamic and immersive, highlighting her ability to command attention while remaining approachable and alluring.\nThe overall mood is light-hearted and teasing, with a strong emphasis on empowerment and pleasure from the female perspective. Viewers will appreciate the high production quality, creative scenario transitions, and MINAMO's expressive acting that brings authenticity to the gyaru persona. The storyline revolves around her taking the initiative in each encounter, offering complete affirmation and leading the way with confidence that enhances the connection.\nSexual activities are presented through a variety of passionate interactions centered on cowgirl positions where MINAMO demonstrates her energy and control. These include seductive teasing, oral pleasures, and intense riding sequences that build to satisfying climaxes. The focus remains on the enjoyable back-and-forth dynamic, her physical expressiveness, and the playful tone that keeps the entire video entertaining. MINAMO's slender yet curvaceous figure is showcased beautifully throughout, adding visual appeal to the already compelling narrative. This title stands out for its variety, positive vibe, and MINAMO's dedicated performance that fans are sure to enjoy.",
     "tags": [
       "Big tits",
@@ -24,12 +24,29 @@ const videoData = [
       "POV",
       "Slender"
     ],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
+    "previewImages": 16,
+    "thumbnail": "https://lh3.googleusercontent.com/d/1Q6Uk8dz2ENFMgJ219CV3i_noi0fKp_QI=s0",
+    "poster": "https://lh3.googleusercontent.com/d/1jPm6Smk2dudwQ-ZAXFt_BsF_T8U5QVb0=s0",
+    "previews": [
+      "https://lh3.googleusercontent.com/d/1RYA7t7Z9rFprXJcizbMkIrGkIiRIvBZ4=s0",
+      "https://lh3.googleusercontent.com/d/1rmPWztse8pLEtCk1Ev-GdIi6SQ3YZIcg=s0",
+      "https://lh3.googleusercontent.com/d/1amz1n21PEgKuwbeluKd2oEzNZ3NcsDKN=s0",
+      "https://lh3.googleusercontent.com/d/1d9O962-fboPXQ-0IeoEfSMEq1qnCwQCK=s0",
+      "https://lh3.googleusercontent.com/d/1iKAG6E8MBR5WVkFukfKiXokjB1slXGJF=s0",
+      "https://lh3.googleusercontent.com/d/1b0mnoYTpvfCEJbn5OyBiZ5XDMwloUC70=s0",
+      "https://lh3.googleusercontent.com/d/1ijoS1LcesgamI03xp8ykDSCu6VboPqWs=s0",
+      "https://lh3.googleusercontent.com/d/1o07H1BUKiX4_Yz3PocEJM7sGztRUGalj=s0",
+      "https://lh3.googleusercontent.com/d/1IPaRLGdlnyCPyI89gJtsA2XewUy4--yt=s0",
+      "https://lh3.googleusercontent.com/d/1wrFXXY4tAMyExXaQ-6d-f8wh2e2Ot6q6=s0",
+      "https://lh3.googleusercontent.com/d/1lAHRysuxBXEkXvRGU57AdN-XQlQHxewI=s0",
+      "https://lh3.googleusercontent.com/d/16EzAgPUmcFT5B3nsxM0O_dcMmRPqgdbC=s0",
+      "https://lh3.googleusercontent.com/d/1ZUIJzsn08LqivJLcyx-L6EawighLd1XH=s0",
+      "https://lh3.googleusercontent.com/d/1_VlIS-gquWoWRvRlzObYSL5qhcDn49E_=s0",
+      "https://lh3.googleusercontent.com/d/10ais_HN72ZIqTsbdZzGm-hAR5LwRgNmY=s0",
+      "https://lh3.googleusercontent.com/d/1eedn2IM57TjSg_buHp43lHvE_aqNDKgV=s0"
+    ],
     "uid": "START-591-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
     "id": 2,
@@ -45,8 +62,8 @@ const videoData = [
     "series": "",
     "version": "Subtitled",
     "token": "START",
-    "trailerUrl": "",
-    "videoUrl": "",
+    "trailerUrl": "https://javtrailers.com/video/1start00591",
+    "videoUrl": "https://javenglish.cc/video/start-591-eng-sub-a-flirty-gal-praises-and-teases-while-riding-on-top-and-making-you-finish-in-multiple-irresistible-situations/",
     "description": "In this energetic and playful release, the vibrant MINAMO shines as a seductive gyaru who fully embraces her role with infectious enthusiasm and confidence. Adorned in a striking blonde look, she captivates across four distinct scenarios that place her in everyday yet thrilling settings like a train, hospital, office, and classroom. MINAMO's performance is lively and engaging, as she uses her charm and affirming words to draw her partners in, creating an atmosphere of mutual excitement and fun. Her natural chemistry and bold personality make each situation feel dynamic and immersive, highlighting her ability to command attention while remaining approachable and alluring.\nThe overall mood is light-hearted and teasing, with a strong emphasis on empowerment and pleasure from the female perspective. Viewers will appreciate the high production quality, creative scenario transitions, and MINAMO's expressive acting that brings authenticity to the gyaru persona. The storyline revolves around her taking the initiative in each encounter, offering complete affirmation and leading the way with confidence that enhances the connection.\nSexual activities are presented through a variety of passionate interactions centered on cowgirl positions where MINAMO demonstrates her energy and control. These include seductive teasing, oral pleasures, and intense riding sequences that build to satisfying climaxes. The focus remains on the enjoyable back-and-forth dynamic, her physical expressiveness, and the playful tone that keeps the entire video entertaining. MINAMO's slender yet curvaceous figure is showcased beautifully throughout, adding visual appeal to the already compelling narrative. This title stands out for its variety, positive vibe, and MINAMO's dedicated performance that fans are sure to enjoy.",
     "tags": [
       "Big tits",
@@ -56,12 +73,29 @@ const videoData = [
       "POV",
       "Slender"
     ],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
+    "previewImages": 16,
+    "thumbnail": "https://lh3.googleusercontent.com/d/1Q6Uk8dz2ENFMgJ219CV3i_noi0fKp_QI=s0",
+    "poster": "https://lh3.googleusercontent.com/d/1jPm6Smk2dudwQ-ZAXFt_BsF_T8U5QVb0=s0",
+    "previews": [
+      "https://lh3.googleusercontent.com/d/1RYA7t7Z9rFprXJcizbMkIrGkIiRIvBZ4=s0",
+      "https://lh3.googleusercontent.com/d/1rmPWztse8pLEtCk1Ev-GdIi6SQ3YZIcg=s0",
+      "https://lh3.googleusercontent.com/d/1amz1n21PEgKuwbeluKd2oEzNZ3NcsDKN=s0",
+      "https://lh3.googleusercontent.com/d/1d9O962-fboPXQ-0IeoEfSMEq1qnCwQCK=s0",
+      "https://lh3.googleusercontent.com/d/1iKAG6E8MBR5WVkFukfKiXokjB1slXGJF=s0",
+      "https://lh3.googleusercontent.com/d/1b0mnoYTpvfCEJbn5OyBiZ5XDMwloUC70=s0",
+      "https://lh3.googleusercontent.com/d/1ijoS1LcesgamI03xp8ykDSCu6VboPqWs=s0",
+      "https://lh3.googleusercontent.com/d/1o07H1BUKiX4_Yz3PocEJM7sGztRUGalj=s0",
+      "https://lh3.googleusercontent.com/d/1IPaRLGdlnyCPyI89gJtsA2XewUy4--yt=s0",
+      "https://lh3.googleusercontent.com/d/1wrFXXY4tAMyExXaQ-6d-f8wh2e2Ot6q6=s0",
+      "https://lh3.googleusercontent.com/d/1lAHRysuxBXEkXvRGU57AdN-XQlQHxewI=s0",
+      "https://lh3.googleusercontent.com/d/16EzAgPUmcFT5B3nsxM0O_dcMmRPqgdbC=s0",
+      "https://lh3.googleusercontent.com/d/1ZUIJzsn08LqivJLcyx-L6EawighLd1XH=s0",
+      "https://lh3.googleusercontent.com/d/1_VlIS-gquWoWRvRlzObYSL5qhcDn49E_=s0",
+      "https://lh3.googleusercontent.com/d/10ais_HN72ZIqTsbdZzGm-hAR5LwRgNmY=s0",
+      "https://lh3.googleusercontent.com/d/1eedn2IM57TjSg_buHp43lHvE_aqNDKgV=s0"
+    ],
     "uid": "START-591-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
     "id": 3,
@@ -683,6 +717,326 @@ const videoData = [
   },
   {
     "id": 15,
+    "title": "MINAMO, we're a couple, right?! After three years without sex, officer MINAMO pretends to be married with her male subordinate, leading to an unexpected real encounter. A week-long investigation from officer to woman.",
+    "actress": "MINAMO",
+    "code": "START-425",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.52,
+    "release": "2025-11-04",
+    "duration": 128,
+    "group": "Solo",
+    "series": "",
+    "version": "Decensored",
+    "token": "START",
+    "trailerUrl": "https://javtrailers.com/video/1start00425",
+    "videoUrl": "https://javhd.today/embed/296077/",
+    "description": "In this compelling drama from SOD Create, the dedicated and beautiful MINAMO stars as a committed female investigator who has sacrificed her personal life for work, going three years without any intimate encounters. Tasked with a high-stakes undercover operation, she must pose as a married couple with her younger male subordinate to maintain their cover during a week-long investigation. What begins as a purely professional role-play gradually evolves into genuine emotional and physical attraction that neither can resist. MINAMO brings incredible depth to her character, portraying the internal conflict of a strong professional woman awakening to long-suppressed desires with nuance and authenticity.\nThe storyline masterfully builds tension through their shared living situation as a pretend newlywed pair, where everyday interactions and close quarters spark undeniable chemistry. The atmosphere mixes suspense from the mission with heartfelt moments of vulnerability and growing affection, creating a rich narrative that feels both erotic and emotionally engaging. MINAMO's performance stands out for her expressive acting, transitioning convincingly from strict officer to passionate woman as the fake marriage blurs into reality. Her male co-star complements her perfectly, adding layers of respect and desire that enhance the overall mood.\nViewers will appreciate the high production values, including crisp 4K visuals that highlight MINAMO's stunning figure and elegant presence throughout. The video excels in balancing dramatic storytelling with intimate scenes that feel natural and progressive within the context of their undercover life. Sexual activities depicted include tender kissing that deepens with emotion, sensual caresses exploring each other's bodies, and intense lovemaking in various positions that reflect their building passion. There are moments of oral pleasure and mutual satisfaction leading to powerful climaxes, all portrayed with focus on connection rather than mere mechanics. The week-long progression allows for escalating intensity, culminating in scenes where professional boundaries dissolve completely. This title offers a satisfying mix of plot-driven drama and steamy chemistry, making it an enjoyable watch for fans of role-play stories with strong character development and heartfelt romance. MINAMO delivers one of her most memorable performances, showcasing both her acting range and natural sensuality in this engaging SOD Create production.",
+    "tags": [
+      "Big tits",
+      "Drama",
+      "Female boss",
+      "Investigator",
+      "Passionate",
+      "Married woman"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-425-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 16,
+    "title": "MINAMO, we're a couple, right?! After three years without sex, officer MINAMO pretends to be married with her male subordinate, leading to an unexpected real encounter. A week-long investigation from officer to woman.",
+    "actress": "MINAMO",
+    "code": "START-425",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.52,
+    "release": "2025-11-04",
+    "duration": 128,
+    "group": "Solo",
+    "series": "",
+    "version": "Subtitled",
+    "token": "START",
+    "trailerUrl": "https://javtrailers.com/video/1start00425",
+    "videoUrl": "https://javenglish.cc/video/start-425-eng-sub-hey-minamo-were-a-couple-right-after-three-years-of-no-sex-due-to-her-dedication-to-work-officer-minamo-finds-herself-in-a-steamy-role-play-with-her-male-subordinate-that/",
+    "description": "In this compelling drama from SOD Create, the dedicated and beautiful MINAMO stars as a committed female investigator who has sacrificed her personal life for work, going three years without any intimate encounters. Tasked with a high-stakes undercover operation, she must pose as a married couple with her younger male subordinate to maintain their cover during a week-long investigation. What begins as a purely professional role-play gradually evolves into genuine emotional and physical attraction that neither can resist. MINAMO brings incredible depth to her character, portraying the internal conflict of a strong professional woman awakening to long-suppressed desires with nuance and authenticity.\nThe storyline masterfully builds tension through their shared living situation as a pretend newlywed pair, where everyday interactions and close quarters spark undeniable chemistry. The atmosphere mixes suspense from the mission with heartfelt moments of vulnerability and growing affection, creating a rich narrative that feels both erotic and emotionally engaging. MINAMO's performance stands out for her expressive acting, transitioning convincingly from strict officer to passionate woman as the fake marriage blurs into reality. Her male co-star complements her perfectly, adding layers of respect and desire that enhance the overall mood.\nViewers will appreciate the high production values, including crisp 4K visuals that highlight MINAMO's stunning figure and elegant presence throughout. The video excels in balancing dramatic storytelling with intimate scenes that feel natural and progressive within the context of their undercover life. Sexual activities depicted include tender kissing that deepens with emotion, sensual caresses exploring each other's bodies, and intense lovemaking in various positions that reflect their building passion. There are moments of oral pleasure and mutual satisfaction leading to powerful climaxes, all portrayed with focus on connection rather than mere mechanics. The week-long progression allows for escalating intensity, culminating in scenes where professional boundaries dissolve completely. This title offers a satisfying mix of plot-driven drama and steamy chemistry, making it an enjoyable watch for fans of role-play stories with strong character development and heartfelt romance. MINAMO delivers one of her most memorable performances, showcasing both her acting range and natural sensuality in this engaging SOD Create production.",
+    "tags": [
+      "Big tits",
+      "Drama",
+      "Female boss",
+      "Investigator",
+      "Passionate",
+      "Married woman"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-425-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 17,
+    "title": "During an away trip NTR: a soccer player's beautiful wife secretly gets inseminated by her chubby brother-in-law for one season MINAMO",
+    "actress": "MINAMO",
+    "code": "START-406",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.26,
+    "release": "2025-10-07",
+    "duration": 123,
+    "group": "Solo",
+    "series": "",
+    "version": "Decensored",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this intense NTR drama, the gorgeous MINAMO portrays the elegant and luxurious wife of a professional soccer player who enjoys a high-class lifestyle in their upscale Tokyo apartment while her husband is frequently away for matches. Her world is disrupted when her chubby and unappealing brother-in-law comes to stay, and he quickly senses her hidden frustrations and desires during her husband's absence. What begins as subtle tension gradually escalates into secret encounters that challenge her loyalty and ignite forbidden passions. MINAMO delivers a compelling performance filled with internal conflict, moments of hesitation, and eventual surrender that feels both dramatic and emotionally layered.\nThe storyline explores themes of temptation, secrecy, and the contrast between her polished public life and private yearnings, creating a narrative rich in suspense and relational dynamics. The atmosphere blends everyday domestic settings with rising erotic tension, making the progression feel natural and immersive. Viewers appreciate the strong chemistry between MINAMO and her co-star, which adds depth to the forbidden affair and highlights her versatility as an actress capable of conveying complex emotions alongside physical intensity.\nEnjoyable elements include MINAMO's stunning beauty, expressive acting, and the way the production captures the thrill of risk and indulgence. The video maintains a dramatic tone with high production values typical of SOD Create, focusing on story development before diving into the intimate sequences. Sexual activities encompass passionate kissing, caressing, and various positions that showcase her curvaceous figure and enthusiasm once aroused. Scenes involve oral pleasures, intense coupling with creampie finishes, and moments of mutual exploration that emphasize the contrast between her refined appearance and raw desire. The overall style is engaging for fans of NTR and married woman genres, offering a well-paced mix of plot and passion that keeps the experience captivating from start to finish. MINAMO shines as the central figure in this memorable tale of secret indulgence during her husband's away games.",
+    "tags": [
+      "Married woman",
+      "Cuckold",
+      "Drama",
+      "Creampie",
+      "Big tits",
+      "Passionate"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-406-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 18,
+    "title": "During an away trip NTR: a soccer player's beautiful wife secretly gets inseminated by her chubby brother-in-law for one season MINAMO",
+    "actress": "MINAMO",
+    "code": "START-406",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.26,
+    "release": "2025-10-07",
+    "duration": 123,
+    "group": "Solo",
+    "series": "",
+    "version": "Subtitled",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this intense NTR drama, the gorgeous MINAMO portrays the elegant and luxurious wife of a professional soccer player who enjoys a high-class lifestyle in their upscale Tokyo apartment while her husband is frequently away for matches. Her world is disrupted when her chubby and unappealing brother-in-law comes to stay, and he quickly senses her hidden frustrations and desires during her husband's absence. What begins as subtle tension gradually escalates into secret encounters that challenge her loyalty and ignite forbidden passions. MINAMO delivers a compelling performance filled with internal conflict, moments of hesitation, and eventual surrender that feels both dramatic and emotionally layered.\nThe storyline explores themes of temptation, secrecy, and the contrast between her polished public life and private yearnings, creating a narrative rich in suspense and relational dynamics. The atmosphere blends everyday domestic settings with rising erotic tension, making the progression feel natural and immersive. Viewers appreciate the strong chemistry between MINAMO and her co-star, which adds depth to the forbidden affair and highlights her versatility as an actress capable of conveying complex emotions alongside physical intensity.\nEnjoyable elements include MINAMO's stunning beauty, expressive acting, and the way the production captures the thrill of risk and indulgence. The video maintains a dramatic tone with high production values typical of SOD Create, focusing on story development before diving into the intimate sequences. Sexual activities encompass passionate kissing, caressing, and various positions that showcase her curvaceous figure and enthusiasm once aroused. Scenes involve oral pleasures, intense coupling with creampie finishes, and moments of mutual exploration that emphasize the contrast between her refined appearance and raw desire. The overall style is engaging for fans of NTR and married woman genres, offering a well-paced mix of plot and passion that keeps the experience captivating from start to finish. MINAMO shines as the central figure in this memorable tale of secret indulgence during her husband's away games.",
+    "tags": [
+      "Married woman",
+      "Cuckold",
+      "Drama",
+      "Creampie",
+      "Big tits",
+      "Passionate"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-406-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 19,
+    "title": "I met a chick with big tits on the internet, and she drained me to death. MINAMO",
+    "actress": "MINAMO",
+    "code": "START-383",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.6,
+    "release": "2025-09-02",
+    "duration": 111,
+    "group": "Solo",
+    "series": "",
+    "version": "Decensored",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "The charming and voluptuous MINAMO stars in this engaging story as a busty woman who connects with a young college student through online gaming and chatting. What begins as casual cyber interactions quickly evolves into a passionate real-life romance when the pair decides to meet in person, leading to an intense exploration of their mutual desires. MINAMO's character is portrayed as enthusiastic, affectionate, and highly energetic in her approach to intimacy, creating a dynamic that keeps the narrative lively and captivating throughout.\nThe theme revolves around the thrill of turning virtual connections into physical reality, with plenty of sweet moments mixed with escalating erotic encounters that highlight the excitement of new relationships. The storyline feels relatable and fun, following their progression from shy first meetings to uninhibited sessions filled with chemistry and playfulness. MINAMO delivers a strong performance with her natural expressiveness and confident presence that draws viewers in and makes the interactions feel genuine and exciting.\nEnjoyable elements include the warm romantic atmosphere blended with high-energy scenes, excellent 4K visuals that showcase her stunning figure beautifully, and strong acting that brings emotional depth alongside the physical aspects. The mood is light-hearted yet steamy, emphasizing consent, enthusiasm, and the joy of discovery between partners. Sexual activities in the video feature extensive kissing and foreplay, passionate lovemaking in multiple positions, repeated creampie finishes, and moments where MINAMO takes a dominant draining role that aligns with the title's playful concept. Her big breasts and curvaceous body are highlighted tastefully, adding to the visual appeal without overshadowing the overall story and connection. This production stands out for its balance of narrative charm and intense adult elements, making it a satisfying watch for fans of romance-infused JAV with a popular actress like MINAMO at her most vibrant.",
+    "tags": [
+      "Big tits",
+      "Online romance",
+      "Creampie",
+      "Passionate",
+      "Beautiful girl",
+      "Draining"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-383-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 20,
+    "title": "I met a chick with big tits on the internet, and she drained me to death. MINAMO",
+    "actress": "MINAMO",
+    "code": "START-383",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.6,
+    "release": "2025-09-02",
+    "duration": 111,
+    "group": "Solo",
+    "series": "",
+    "version": "Subtitled",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "The charming and voluptuous MINAMO stars in this engaging story as a busty woman who connects with a young college student through online gaming and chatting. What begins as casual cyber interactions quickly evolves into a passionate real-life romance when the pair decides to meet in person, leading to an intense exploration of their mutual desires. MINAMO's character is portrayed as enthusiastic, affectionate, and highly energetic in her approach to intimacy, creating a dynamic that keeps the narrative lively and captivating throughout.\nThe theme revolves around the thrill of turning virtual connections into physical reality, with plenty of sweet moments mixed with escalating erotic encounters that highlight the excitement of new relationships. The storyline feels relatable and fun, following their progression from shy first meetings to uninhibited sessions filled with chemistry and playfulness. MINAMO delivers a strong performance with her natural expressiveness and confident presence that draws viewers in and makes the interactions feel genuine and exciting.\nEnjoyable elements include the warm romantic atmosphere blended with high-energy scenes, excellent 4K visuals that showcase her stunning figure beautifully, and strong acting that brings emotional depth alongside the physical aspects. The mood is light-hearted yet steamy, emphasizing consent, enthusiasm, and the joy of discovery between partners. Sexual activities in the video feature extensive kissing and foreplay, passionate lovemaking in multiple positions, repeated creampie finishes, and moments where MINAMO takes a dominant draining role that aligns with the title's playful concept. Her big breasts and curvaceous body are highlighted tastefully, adding to the visual appeal without overshadowing the overall story and connection. This production stands out for its balance of narrative charm and intense adult elements, making it a satisfying watch for fans of romance-infused JAV with a popular actress like MINAMO at her most vibrant.",
+    "tags": [
+      "Big tits",
+      "Online romance",
+      "Creampie",
+      "Passionate",
+      "Beautiful girl",
+      "Draining"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-383-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 21,
+    "title": "Genuine sexual desire release declaration SPECIAL: The most intense convulsive intercourse ever, 3 performances Deep vaginal intense climax, excessive arching convulsions, massive fluid release MINAMO",
+    "actress": "MINAMO",
+    "code": "START-361",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.64,
+    "release": "2025-08-05",
+    "duration": 135,
+    "group": "Solo",
+    "series": "",
+    "version": "Decensored",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this powerful special edition of the Genuine Sexual Desire Release series, the captivating MINAMO delivers an unforgettable performance as she fully unleashes her pent-up desires in three distinct and highly charged encounters. With her striking beauty and incredible responsiveness, MINAMO explores the depths of her own pleasure in a documentary-style format that feels raw and authentic. The storyline follows her journey of complete sexual liberation where she engages passionately with her partners, pushing the boundaries of intensity and connection in each segment. Her natural chemistry and unfiltered reactions create an atmosphere thick with anticipation and raw energy that keeps viewers completely engaged throughout.\nThe mood is electric and immersive, blending moments of tender buildup with explosive releases that showcase MINAMO's remarkable ability to lose herself in the experience. The production highlights her graceful movements and expressive face, adding emotional depth to the physical intensity. Viewers will appreciate the high-quality filming that captures every arch, tremor, and moment of ecstasy in stunning detail.\nSexual activities include deep and rhythmic thrusting that leads to powerful vaginal climaxes, accompanied by excessive body convulsions and abundant fluid releases. There are passionate kissing sessions, manual stimulation, and multi-partner scenes that heighten the overall excitement while keeping MINAMO as the undeniable focus. Oral elements and various positions demonstrate her flexibility and enthusiasm, building to repeated waves of overwhelming pleasure. The video maintains a celebratory tone centered on mutual enjoyment and MINAMO's personal satisfaction. This entry stands out for its emphasis on genuine female pleasure and convulsive orgasms, making it a standout in the series. MINAMO's commitment to the role results in one of her most memorable and intense works to date, offering a thrilling experience for those who appreciate passionate and uninhibited performances.",
+    "tags": [
+      "Convulsions",
+      "Threesome",
+      "Documentary",
+      "Passionate",
+      "Squirting",
+      "Intense climax"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-361-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 22,
+    "title": "Genuine sexual desire release declaration SPECIAL: The most intense convulsive intercourse ever, 3 performances Deep vaginal intense climax, excessive arching convulsions, massive fluid release MINAMO",
+    "actress": "MINAMO",
+    "code": "START-361",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.64,
+    "release": "2025-08-05",
+    "duration": 135,
+    "group": "Solo",
+    "series": "",
+    "version": "Subtitled",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this powerful special edition of the Genuine Sexual Desire Release series, the captivating MINAMO delivers an unforgettable performance as she fully unleashes her pent-up desires in three distinct and highly charged encounters. With her striking beauty and incredible responsiveness, MINAMO explores the depths of her own pleasure in a documentary-style format that feels raw and authentic. The storyline follows her journey of complete sexual liberation where she engages passionately with her partners, pushing the boundaries of intensity and connection in each segment. Her natural chemistry and unfiltered reactions create an atmosphere thick with anticipation and raw energy that keeps viewers completely engaged throughout.\nThe mood is electric and immersive, blending moments of tender buildup with explosive releases that showcase MINAMO's remarkable ability to lose herself in the experience. The production highlights her graceful movements and expressive face, adding emotional depth to the physical intensity. Viewers will appreciate the high-quality filming that captures every arch, tremor, and moment of ecstasy in stunning detail.\nSexual activities include deep and rhythmic thrusting that leads to powerful vaginal climaxes, accompanied by excessive body convulsions and abundant fluid releases. There are passionate kissing sessions, manual stimulation, and multi-partner scenes that heighten the overall excitement while keeping MINAMO as the undeniable focus. Oral elements and various positions demonstrate her flexibility and enthusiasm, building to repeated waves of overwhelming pleasure. The video maintains a celebratory tone centered on mutual enjoyment and MINAMO's personal satisfaction. This entry stands out for its emphasis on genuine female pleasure and convulsive orgasms, making it a standout in the series. MINAMO's commitment to the role results in one of her most memorable and intense works to date, offering a thrilling experience for those who appreciate passionate and uninhibited performances.",
+    "tags": [
+      "Convulsions",
+      "Threesome",
+      "Documentary",
+      "Passionate",
+      "Squirting",
+      "Intense climax"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-361-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 23,
+    "title": "The work of a boy-guarding lady Minamo reforms lustful inmates with creampie rehabilitation",
+    "actress": "MINAMO",
+    "code": "START-320",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.66,
+    "release": "2025-06-03",
+    "duration": 130,
+    "group": "Solo",
+    "series": "○○’s Job",
+    "version": "Decensored",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this special edition of the popular job series, the gorgeous MINAMO shines as a dedicated elite female prison guard at a juvenile detention center where young inmates battle intense desires and frustrations from confinement. MINAMO brings her signature elegance and warmth to the role of a compassionate officer who goes above and beyond to help rehabilitate the prisoners through intimate and caring interactions. The storyline follows her daily duties as she provides personalized relief and guidance to help the inmates manage their overwhelming urges in a structured program designed for their well-being. Her stunning beauty and professional demeanor create a captivating atmosphere that blends authority with genuine empathy and sensuality.\nMINAMO delivers a powerful performance full of emotional depth and physical grace that makes every scene feel authentic and engaging. The chemistry between her and the performers is electric, highlighting themes of redemption, care, and human connection in an unconventional setting. The production maintains a dramatic yet uplifting tone with high-quality filming that beautifully showcases MINAMO's flawless figure and expressive acting throughout. Enjoyable elements include the immersive prison environment, the mix of tension and release, and MINAMO's natural ability to convey both strength and vulnerability.\nSexual activities in the video encompass passionate embraces, deep kissing, and various intimate positions where MINAMO takes an active and nurturing role. There are detailed scenes of manual and oral stimulation, intense coupling leading to powerful climaxes, and multiple creampie moments as part of the rehabilitation process. The encounters emphasize mutual satisfaction and emotional bonding rather than mere physicality. Overall this entry stands out for its creative concept, strong storytelling, and MINAMO's outstanding presence making it a memorable addition to the series that fans of roleplay and caring dominant performances will appreciate. The video balances drama, sensuality, and heartfelt moments in a polished SOD Create production.",
+    "tags": [
+      "Uniform",
+      "Creampie",
+      "Prison",
+      "Beautiful girl",
+      "Rehabilitation",
+      "Passionate"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-320-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 24,
+    "title": "The work of a boy-guarding lady Minamo reforms lustful inmates with creampie rehabilitation",
+    "actress": "MINAMO",
+    "code": "START-320",
+    "studio": "SOD Create",
+    "label": "START",
+    "rating": 8.66,
+    "release": "2025-06-03",
+    "duration": 130,
+    "group": "Solo",
+    "series": "○○’s Job",
+    "version": "Subtitled",
+    "token": "START",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this special edition of the popular job series, the gorgeous MINAMO shines as a dedicated elite female prison guard at a juvenile detention center where young inmates battle intense desires and frustrations from confinement. MINAMO brings her signature elegance and warmth to the role of a compassionate officer who goes above and beyond to help rehabilitate the prisoners through intimate and caring interactions. The storyline follows her daily duties as she provides personalized relief and guidance to help the inmates manage their overwhelming urges in a structured program designed for their well-being. Her stunning beauty and professional demeanor create a captivating atmosphere that blends authority with genuine empathy and sensuality.\nMINAMO delivers a powerful performance full of emotional depth and physical grace that makes every scene feel authentic and engaging. The chemistry between her and the performers is electric, highlighting themes of redemption, care, and human connection in an unconventional setting. The production maintains a dramatic yet uplifting tone with high-quality filming that beautifully showcases MINAMO's flawless figure and expressive acting throughout. Enjoyable elements include the immersive prison environment, the mix of tension and release, and MINAMO's natural ability to convey both strength and vulnerability.\nSexual activities in the video encompass passionate embraces, deep kissing, and various intimate positions where MINAMO takes an active and nurturing role. There are detailed scenes of manual and oral stimulation, intense coupling leading to powerful climaxes, and multiple creampie moments as part of the rehabilitation process. The encounters emphasize mutual satisfaction and emotional bonding rather than mere physicality. Overall this entry stands out for its creative concept, strong storytelling, and MINAMO's outstanding presence making it a memorable addition to the series that fans of roleplay and caring dominant performances will appreciate. The video balances drama, sensuality, and heartfelt moments in a polished SOD Create production.",
+    "tags": [
+      "Uniform",
+      "Creampie",
+      "Prison",
+      "Beautiful girl",
+      "Rehabilitation",
+      "Passionate"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "START-320-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 25,
     "title": "Our Sexual Circumstances As The Invisible Guys In Class. Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-362",
@@ -714,7 +1068,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 16,
+    "id": 26,
     "title": "Our Sexual Circumstances As The Invisible Guys In Class. Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-362",
@@ -746,7 +1100,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 17,
+    "id": 27,
     "title": "Cum with Yatsugake Umi's face.",
     "actress": "Yatsugake Umi",
     "code": "ABF-353",
@@ -778,7 +1132,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 18,
+    "id": 28,
     "title": "Cum with Yatsugake Umi's face.",
     "actress": "Yatsugake Umi",
     "code": "ABF-353",
@@ -810,7 +1164,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 19,
+    "id": 29,
     "title": "The perfect woman hopelessly obsessed with me: male-centered unprotected creampie sex.",
     "actress": "Yatsugake Umi",
     "code": "ABF-343",
@@ -842,7 +1196,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 20,
+    "id": 30,
     "title": "The perfect woman hopelessly obsessed with me: male-centered unprotected creampie sex.",
     "actress": "Yatsugake Umi",
     "code": "ABF-343",
@@ -874,7 +1228,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 21,
+    "id": 31,
     "title": "I really love sex... Case 07: Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-333",
@@ -906,7 +1260,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 22,
+    "id": 32,
     "title": "I really love sex... Case 07: Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-333",
@@ -938,7 +1292,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 23,
+    "id": 33,
     "title": "Immoral affair with subordinate's young wife, forbidden creampie getaway. Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-323",
@@ -970,7 +1324,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 24,
+    "id": 34,
     "title": "Immoral affair with subordinate's young wife, forbidden creampie getaway. Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-323",
@@ -1002,7 +1356,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 25,
+    "id": 35,
     "title": "Unreasonable Immoral NTR: Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-312",
@@ -1034,7 +1388,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 26,
+    "id": 36,
     "title": "Unreasonable Immoral NTR: Yatsugake Umi",
     "actress": "Yatsugake Umi",
     "code": "ABF-312",
@@ -1066,7 +1420,199 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 27,
+    "id": 37,
+    "title": "The poster girl who turns around a struggling bathhouse with top-class service: Yatsugake Umi",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-301",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.44,
+    "release": "2025-12-25",
+    "duration": 150,
+    "group": "Solo",
+    "series": "Poster girl",
+    "version": "Decensored",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "Yatsugake Umi stars as the charming poster girl in this engaging Prestige production where she steps in to revitalize a struggling traditional bathhouse through her exceptional hospitality and personal touch. The storyline follows Umi as she arrives at the family-run establishment facing closure and uses her warm personality and dedication to attract customers while providing unforgettable experiences that breathe new life into the business. Her slender elegant figure and radiant smile make her the perfect ambassador for the bathhouse creating an inviting and relaxing atmosphere that draws in patrons seeking more than just a regular soak.\nThe narrative blends light drama with sensual encounters as Umi interacts with various visitors each bringing their own stories and expectations to the rejuvenated venue. Her natural acting shines through as she portrays a caring and enthusiastic hostess whose genuine care for the customers elevates every scene. The mood is comforting and intimate with beautiful cinematography capturing the steamy traditional Japanese bath setting that adds a layer of elegance and sensuality to the overall tone. Chemistry between Umi and her partners feels authentic and passionate contributing to the immersive quality of the video.\nEnjoyable elements include the strong storyline that gives context to the intimate moments making the experience more than just physical. Umi's graceful movements and expressive performance highlight her beauty and talent keeping viewers engaged throughout. Sexual activities in the video encompass tender caresses and deep kissing that build emotional connection followed by various intimate positions showcasing her flexibility and enthusiasm. Scenes involve attentive service style interactions oral pleasures and intense couplings that culminate in satisfying climaxes with creampie finishes. The production maintains a classy tone focusing on mutual pleasure and the joy of connection within the bathhouse theme. This entry in the series stands out for its perfect balance of narrative depth and erotic appeal making it a memorable watch for fans of Yatsugake Umi and sophisticated adult storytelling.",
+    "tags": [
+      "Slender",
+      "Beautiful body",
+      "Service",
+      "Bathhouse",
+      "Passionate",
+      "Creampie"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-301-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 38,
+    "title": "The poster girl who turns around a struggling bathhouse with top-class service: Yatsugake Umi",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-301",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.44,
+    "release": "2025-12-25",
+    "duration": 150,
+    "group": "Solo",
+    "series": "Poster girl",
+    "version": "Subtitled",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "Yatsugake Umi stars as the charming poster girl in this engaging Prestige production where she steps in to revitalize a struggling traditional bathhouse through her exceptional hospitality and personal touch. The storyline follows Umi as she arrives at the family-run establishment facing closure and uses her warm personality and dedication to attract customers while providing unforgettable experiences that breathe new life into the business. Her slender elegant figure and radiant smile make her the perfect ambassador for the bathhouse creating an inviting and relaxing atmosphere that draws in patrons seeking more than just a regular soak.\nThe narrative blends light drama with sensual encounters as Umi interacts with various visitors each bringing their own stories and expectations to the rejuvenated venue. Her natural acting shines through as she portrays a caring and enthusiastic hostess whose genuine care for the customers elevates every scene. The mood is comforting and intimate with beautiful cinematography capturing the steamy traditional Japanese bath setting that adds a layer of elegance and sensuality to the overall tone. Chemistry between Umi and her partners feels authentic and passionate contributing to the immersive quality of the video.\nEnjoyable elements include the strong storyline that gives context to the intimate moments making the experience more than just physical. Umi's graceful movements and expressive performance highlight her beauty and talent keeping viewers engaged throughout. Sexual activities in the video encompass tender caresses and deep kissing that build emotional connection followed by various intimate positions showcasing her flexibility and enthusiasm. Scenes involve attentive service style interactions oral pleasures and intense couplings that culminate in satisfying climaxes with creampie finishes. The production maintains a classy tone focusing on mutual pleasure and the joy of connection within the bathhouse theme. This entry in the series stands out for its perfect balance of narrative depth and erotic appeal making it a memorable watch for fans of Yatsugake Umi and sophisticated adult storytelling.",
+    "tags": [
+      "Slender",
+      "Beautiful body",
+      "Service",
+      "Bathhouse",
+      "Passionate",
+      "Creampie"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-301-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 39,
+    "title": "Excessive creampie at the hot spring inn – Freely enjoying the ultimate tight body – Yatsugake Umi",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-290",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.8,
+    "release": "2025-11-27",
+    "duration": 135,
+    "group": "Solo",
+    "series": "Over-the-Top Creampie Hot Spring Inn",
+    "version": "Decensored",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "Yatsugake Umi stars in this steamy hot spring inn adventure where she embodies the ultimate fantasy of unrestricted pleasure during a relaxing getaway. The elegant and slender beauty finds herself in a serene traditional Japanese ryokan setting that quickly transforms into a playground of intense intimate encounters. Throughout the video Umi's natural charisma and stunning physique draw viewers in as she navigates multiple passionate scenes with her partners allowing complete freedom to explore her tight and responsive body. The storyline follows her arrival at the inn for what seems like a peaceful trip but evolves into an indulgent experience filled with mutual desire and escalating excitement.\nHer chemistry with the performers feels genuine and electric creating an atmosphere of warmth and raw sensuality that permeates every moment. The production captures the relaxing hot spring ambiance beautifully with misty baths and traditional rooms adding to the immersive mood. Umi's graceful movements and expressive reactions highlight her enjoyment making the entire presentation engaging and highly rewatchable.\nHighlights include tender moments of connection that build to more vigorous interactions showcasing her flexibility and enthusiasm. The video features a variety of positions and scenarios including group elements that add dynamic energy while keeping the focus firmly on Umi's captivating presence. Enjoyable elements such as the high production values beautiful lighting and attention to detail enhance the overall experience turning it into a celebration of physical compatibility and pleasure. The tone remains light and celebratory emphasizing consent and shared enjoyment in a luxurious setting. Sexual activities encompass deep passionate kissing caressing oral explorations and intense coupling leading to multiple climactic creampie finishes that underscore the excessive indulgence theme. This entry in the series stands out for its perfect blend of scenic beauty and fervent performances making it a standout for fans of Yatsugake Umi and hot spring themed JAV.",
+    "tags": [
+      "Creampie",
+      "Hot spring",
+      "Tight body",
+      "Threesome",
+      "Passionate",
+      "Slender"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-290-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 40,
+    "title": "Excessive creampie at the hot spring inn – Freely enjoying the ultimate tight body – Yatsugake Umi",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-290",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.8,
+    "release": "2025-11-27",
+    "duration": 135,
+    "group": "Solo",
+    "series": "Over-the-Top Creampie Hot Spring Inn",
+    "version": "Subtitled",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "Yatsugake Umi stars in this steamy hot spring inn adventure where she embodies the ultimate fantasy of unrestricted pleasure during a relaxing getaway. The elegant and slender beauty finds herself in a serene traditional Japanese ryokan setting that quickly transforms into a playground of intense intimate encounters. Throughout the video Umi's natural charisma and stunning physique draw viewers in as she navigates multiple passionate scenes with her partners allowing complete freedom to explore her tight and responsive body. The storyline follows her arrival at the inn for what seems like a peaceful trip but evolves into an indulgent experience filled with mutual desire and escalating excitement.\nHer chemistry with the performers feels genuine and electric creating an atmosphere of warmth and raw sensuality that permeates every moment. The production captures the relaxing hot spring ambiance beautifully with misty baths and traditional rooms adding to the immersive mood. Umi's graceful movements and expressive reactions highlight her enjoyment making the entire presentation engaging and highly rewatchable.\nHighlights include tender moments of connection that build to more vigorous interactions showcasing her flexibility and enthusiasm. The video features a variety of positions and scenarios including group elements that add dynamic energy while keeping the focus firmly on Umi's captivating presence. Enjoyable elements such as the high production values beautiful lighting and attention to detail enhance the overall experience turning it into a celebration of physical compatibility and pleasure. The tone remains light and celebratory emphasizing consent and shared enjoyment in a luxurious setting. Sexual activities encompass deep passionate kissing caressing oral explorations and intense coupling leading to multiple climactic creampie finishes that underscore the excessive indulgence theme. This entry in the series stands out for its perfect blend of scenic beauty and fervent performances making it a standout for fans of Yatsugake Umi and hot spring themed JAV.",
+    "tags": [
+      "Creampie",
+      "Hot spring",
+      "Tight body",
+      "Threesome",
+      "Passionate",
+      "Slender"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-290-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 41,
+    "title": "Yatsugake Umi Reverse-picks Up An Amateur Male!",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-280",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.38,
+    "release": "2025-10-23",
+    "duration": 165,
+    "group": "Solo",
+    "series": "",
+    "version": "Decensored",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this exciting entry from the Picking up an amateur series, the gorgeous Yatsugake Umi showcases her bold and seductive side as she takes the initiative to reverse-pick up amateur men on the streets. With her signature slender frame and captivating beauty, Umi approaches unsuspecting guys with confidence and charm, turning everyday encounters into steamy adventures filled with mutual excitement and discovery. The storyline follows her playful pursuits where she invites these ordinary men into private settings, allowing her natural charisma and skilled techniques to take over and create unforgettable experiences for both parties involved.\nUmi's performance is energetic and engaging, highlighting her ability to dominate the scene while maintaining a fun and teasing atmosphere that keeps the mood light yet intensely passionate. The chemistry between her and the amateur performers feels spontaneous and real, adding an authentic layer that makes the interactions particularly enjoyable to watch. Viewers will appreciate the high production values from Prestige, with smooth camerawork that beautifully captures Umi's elegant movements and expressive reactions throughout the various encounters.\nThe overall tone celebrates female initiative and the thrill of unexpected connections, blending elements of adventure with deep sensuality. Enjoyable aspects include Umi's devilish teasing that builds anticipation, her graceful handling of each situation, and the genuine-looking enthusiasm she displays in every moment. Sexual activities portrayed involve seductive foreplay, passionate kissing, and a variety of intimate positions where Umi demonstrates her expertise in pleasuring her partners. There are scenes of oral stimulation, manual techniques, and vigorous coupling leading to satisfying climaxes, all presented in a tasteful and story-driven manner. This video stands out for its empowering narrative and Umi's magnetic presence, delivering a highly entertaining and visually appealing experience that fans of the series will thoroughly enjoy. Yatsugake Umi once again proves why she is one of the most captivating performers in her dynamic reverse pickup role.",
+    "tags": [
+      "Slender",
+      "Slut",
+      "Reverse pickup",
+      "Shaved",
+      "Passionate",
+      "Amateur"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-280-D",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 42,
+    "title": "Yatsugake Umi Reverse-picks Up An Amateur Male!",
+    "actress": "Yatsugake Umi",
+    "code": "ABF-280",
+    "studio": "Prestige",
+    "label": "ABF",
+    "rating": 8.38,
+    "release": "2025-10-23",
+    "duration": 165,
+    "group": "Solo",
+    "series": "",
+    "version": "Subtitled",
+    "token": "ABF",
+    "trailerUrl": "",
+    "videoUrl": "",
+    "description": "In this exciting entry from the Picking up an amateur series, the gorgeous Yatsugake Umi showcases her bold and seductive side as she takes the initiative to reverse-pick up amateur men on the streets. With her signature slender frame and captivating beauty, Umi approaches unsuspecting guys with confidence and charm, turning everyday encounters into steamy adventures filled with mutual excitement and discovery. The storyline follows her playful pursuits where she invites these ordinary men into private settings, allowing her natural charisma and skilled techniques to take over and create unforgettable experiences for both parties involved.\nUmi's performance is energetic and engaging, highlighting her ability to dominate the scene while maintaining a fun and teasing atmosphere that keeps the mood light yet intensely passionate. The chemistry between her and the amateur performers feels spontaneous and real, adding an authentic layer that makes the interactions particularly enjoyable to watch. Viewers will appreciate the high production values from Prestige, with smooth camerawork that beautifully captures Umi's elegant movements and expressive reactions throughout the various encounters.\nThe overall tone celebrates female initiative and the thrill of unexpected connections, blending elements of adventure with deep sensuality. Enjoyable aspects include Umi's devilish teasing that builds anticipation, her graceful handling of each situation, and the genuine-looking enthusiasm she displays in every moment. Sexual activities portrayed involve seductive foreplay, passionate kissing, and a variety of intimate positions where Umi demonstrates her expertise in pleasuring her partners. There are scenes of oral stimulation, manual techniques, and vigorous coupling leading to satisfying climaxes, all presented in a tasteful and story-driven manner. This video stands out for its empowering narrative and Umi's magnetic presence, delivering a highly entertaining and visually appealing experience that fans of the series will thoroughly enjoy. Yatsugake Umi once again proves why she is one of the most captivating performers in her dynamic reverse pickup role.",
+    "tags": [
+      "Slender",
+      "Slut",
+      "Reverse pickup",
+      "Shaved",
+      "Passionate",
+      "Amateur"
+    ],
+    "previewImages": null,
+    "thumbnail": "",
+    "poster": "",
+    "previews": [],
+    "uid": "ABF-280-S",
+    "Mail-ID": "myjavhd2@gmail.com"
+  },
+  {
+    "id": 43,
     "title": "To revive her late grandfather's flavors... an apprentice endures daily sexual harassment in an all-male world while training at a ramen shop working 16 hours a day at 1175 yen per hour plus overtime",
     "actress": "Yoshitaka Nene",
     "code": "FNS-192",
@@ -1098,7 +1644,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 28,
+    "id": 44,
     "title": "To revive her late grandfather's flavors... an apprentice endures daily sexual harassment in an all-male world while training at a ramen shop working 16 hours a day at 1175 yen per hour plus overtime",
     "actress": "Yoshitaka Nene",
     "code": "FNS-192",
@@ -1130,7 +1676,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 29,
+    "id": 45,
     "title": "Unable to resist my beautiful boss's unwitting big ass tease, I thrust my curved cock into her during overtime, making her arch in ecstasy! Our bodies match perfectly for encore sex - Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-178",
@@ -1162,7 +1708,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 30,
+    "id": 46,
     "title": "Unable to resist my beautiful boss's unwitting big ass tease, I thrust my curved cock into her during overtime, making her arch in ecstasy! Our bodies match perfectly for encore sex - Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-178",
@@ -1194,7 +1740,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 31,
+    "id": 47,
     "title": "Invited my female boss home after the typhoon stranded her... bulging crotch!? She toys with my hypersensitive huge cock poking from the too-small loungewear all night, 50 continuous ejaculations till",
     "actress": "Yoshitaka Nene",
     "code": "FNS-165",
@@ -1226,7 +1772,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 32,
+    "id": 48,
     "title": "Invited my female boss home after the typhoon stranded her... bulging crotch!? She toys with my hypersensitive huge cock poking from the too-small loungewear all night, 50 continuous ejaculations till",
     "actress": "Yoshitaka Nene",
     "code": "FNS-165",
@@ -1258,7 +1804,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 33,
+    "id": 49,
     "title": "Injan Furukawa presents adult entertainment: I want to see Yoshitaka Nene's real masturbation, Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-182",
@@ -1290,7 +1836,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 34,
+    "id": 50,
     "title": "Injan Furukawa presents adult entertainment: I want to see Yoshitaka Nene's real masturbation, Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-182",
@@ -1322,7 +1868,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 35,
+    "id": 51,
     "title": "Yoshitaka Nene’s first massive cum bukkake: 50 shots",
     "actress": "Yoshitaka Nene",
     "code": "FNS-144",
@@ -1354,7 +1900,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 36,
+    "id": 52,
     "title": "Yoshitaka Nene’s first massive cum bukkake: 50 shots",
     "actress": "Yoshitaka Nene",
     "code": "FNS-144",
@@ -1386,7 +1932,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 37,
+    "id": 53,
     "title": "Beautiful perverted parts, obscene parts, FETISH ban special!!! All real dicks, ALL 11 real ejaculations. Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-135",
@@ -1418,7 +1964,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 38,
+    "id": 54,
     "title": "Beautiful perverted parts, obscene parts, FETISH ban special!!! All real dicks, ALL 11 real ejaculations. Yoshitaka Nene",
     "actress": "Yoshitaka Nene",
     "code": "FNS-135",
@@ -1450,7 +1996,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 39,
+    "id": 55,
     "title": "The Beginning: Masaki Juku 28 Hours of Complete Slut Awakening Training Yoshitaka Nene",
     "actress": "Yoshitaka Nene, Niimura Akari",
     "code": "FNS-132",
@@ -1482,7 +2028,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 40,
+    "id": 56,
     "title": "The Beginning: Masaki Juku 28 Hours of Complete Slut Awakening Training Yoshitaka Nene",
     "actress": "Yoshitaka Nene, Niimura Akari",
     "code": "FNS-132",
@@ -1514,7 +2060,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 41,
+    "id": 57,
     "title": "I want to be a human toilet A genuine masochistic girl I met on a secret account Raw sex filming and training diary Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-282",
@@ -1546,7 +2092,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 42,
+    "id": 58,
     "title": "I want to be a human toilet A genuine masochistic girl I met on a secret account Raw sex filming and training diary Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-282",
@@ -1578,7 +2124,7 @@ const videoData = [
     "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 43,
+    "id": 59,
     "title": "Don’t flash a peace sign after getting casually stolen by the yari-saa guys… My dear younger girlfriend was enjoying wild sex with the university playboys. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-237",
@@ -1607,10 +2153,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-237-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 44,
+    "id": 60,
     "title": "Don’t flash a peace sign after getting casually stolen by the yari-saa guys… My dear younger girlfriend was enjoying wild sex with the university playboys. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-237",
@@ -1639,10 +2185,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-237-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 45,
+    "id": 61,
     "title": "I silently accept being secretly filmed by the homeroom teacher I admired. A lonely schoolgirl with low self-esteem loves even her perverted teacher. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-196",
@@ -1671,10 +2217,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-196-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 46,
+    "id": 62,
     "title": "I silently accept being secretly filmed by the homeroom teacher I admired. A lonely schoolgirl with low self-esteem loves even her perverted teacher. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-196",
@@ -1703,10 +2249,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-196-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 47,
+    "id": 63,
     "title": "Easily caught and humiliatingly gangbanged, the sharp-looking but wide-open rookie detective suffers total defeat. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-151",
@@ -1735,10 +2281,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-151-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 48,
+    "id": 64,
     "title": "Easily caught and humiliatingly gangbanged, the sharp-looking but wide-open rookie detective suffers total defeat. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-151",
@@ -1767,10 +2313,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-151-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 49,
+    "id": 65,
     "title": "Alone with a prim literary girl who hides her erotic fantasies… she whispers filthy dirty talk in your ear, forcing a raging erection before ravishing you. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-118",
@@ -1799,10 +2345,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-118-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 50,
+    "id": 66,
     "title": "Alone with a prim literary girl who hides her erotic fantasies… she whispers filthy dirty talk in your ear, forcing a raging erection before ravishing you. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-118",
@@ -1831,10 +2377,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-118-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 51,
+    "id": 67,
     "title": "I’m in my rebellious phase, but now I can’t live without my stepdad’s medicine (a powerful aphrodisiac) and his cock. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-099",
@@ -1863,10 +2409,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-099-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 52,
+    "id": 68,
     "title": "I’m in my rebellious phase, but now I can’t live without my stepdad’s medicine (a powerful aphrodisiac) and his cock. Asano Kokoro",
     "actress": "Asano Kokoro",
     "code": "SNOS-099",
@@ -1895,10 +2441,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-099-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 53,
+    "id": 69,
     "title": "I went to rent an adult video, fell so deeply in love with the girl at the register that my life changed, and we had sex nonstop",
     "actress": "Asano Kokoro",
     "code": "SNOS-029",
@@ -1927,10 +2473,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-029-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 54,
+    "id": 70,
     "title": "I went to rent an adult video, fell so deeply in love with the girl at the register that my life changed, and we had sex nonstop",
     "actress": "Asano Kokoro",
     "code": "SNOS-029",
@@ -1959,10 +2505,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-029-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 55,
+    "id": 71,
     "title": "I want to save the bullied twin sisters and undress them together. Asano Kokoro, Sakakihara Moe",
     "actress": "Asano Kokoro, Sakakibara Moe",
     "code": "SNOS-002",
@@ -1991,10 +2537,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-002-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 56,
+    "id": 72,
     "title": "I want to save the bullied twin sisters and undress them together. Asano Kokoro, Sakakihara Moe",
     "actress": "Asano Kokoro, Sakakibara Moe",
     "code": "SNOS-002",
@@ -2023,10 +2569,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "SNOS-002-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 57,
+    "id": 73,
     "title": "Miyajima Mei, an irresistible woman with a body begging to be devoured, drops her guard while tipsy and exposes her raw lust, drinking and laughing as she mates wildly on pure instinct in this private session",
     "actress": "Miyajima Mei",
     "code": "START-597",
@@ -2038,7 +2584,7 @@ const videoData = [
     "group": "Solo",
     "series": "",
     "version": "Decensored",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "The alluring Miyajima Mei stars in this extended and highly engaging private session where she lets her inhibitions melt away under the influence of alcohol, revealing a side full of raw desire and uninhibited joy. As an irresistible woman with a body that naturally draws attention, Mei starts the evening in a relaxed social setting that quickly turns intimate as drinks flow and her guard drops completely. The storyline captures her transformation from composed beauty to a woman driven purely by instinct, laughing freely and embracing every moment of connection with genuine enthusiasm that feels authentic and captivating.\nHer chemistry with the partners is electric, filled with playful banter and building intensity that makes the atmosphere warm, fun, and highly charged. The production excels in creating a voyeuristic yet tasteful mood that highlights Mei's natural charm, expressive smiles, and stunning physique throughout the long runtime. Viewers will appreciate the detailed storytelling that follows her journey through different levels of tipsiness, showcasing how her confidence and passion grow with each passing scene.\nThe acting is standout, with Mei delivering a performance that feels spontaneous and deeply personal, enhancing the overall immersive experience. Enjoyable elements include the excellent pacing that allows for extended foreplay and exploration, beautiful lighting that accentuates her curves and radiant skin, and a lighthearted tone mixed with intense moments of pleasure. Sexual activities encompass deep kissing, sensual touching, and various positions where Mei's enthusiasm shines as she takes control and responds with wild abandon. There are memorable sequences involving oral pleasures, passionate riding, and powerful climaxes that reflect her full off-duty mode. The video maintains a focus on mutual enjoyment and her liberated expressions of lust, making it a standout entry that celebrates feminine desire in a celebratory and engaging way. Miyajima Mei proves once again why she is one of the most captivating performers, delivering over three hours of compelling and satisfying content in this SOD Create production.",
@@ -2055,10 +2601,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-597-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 58,
+    "id": 74,
     "title": "Miyajima Mei, an irresistible woman with a body begging to be devoured, drops her guard while tipsy and exposes her raw lust, drinking and laughing as she mates wildly on pure instinct in this private session",
     "actress": "Miyajima Mei",
     "code": "START-597",
@@ -2070,7 +2616,7 @@ const videoData = [
     "group": "Solo",
     "series": "",
     "version": "Subtitled",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "The alluring Miyajima Mei stars in this extended and highly engaging private session where she lets her inhibitions melt away under the influence of alcohol, revealing a side full of raw desire and uninhibited joy. As an irresistible woman with a body that naturally draws attention, Mei starts the evening in a relaxed social setting that quickly turns intimate as drinks flow and her guard drops completely. The storyline captures her transformation from composed beauty to a woman driven purely by instinct, laughing freely and embracing every moment of connection with genuine enthusiasm that feels authentic and captivating.\nHer chemistry with the partners is electric, filled with playful banter and building intensity that makes the atmosphere warm, fun, and highly charged. The production excels in creating a voyeuristic yet tasteful mood that highlights Mei's natural charm, expressive smiles, and stunning physique throughout the long runtime. Viewers will appreciate the detailed storytelling that follows her journey through different levels of tipsiness, showcasing how her confidence and passion grow with each passing scene.\nThe acting is standout, with Mei delivering a performance that feels spontaneous and deeply personal, enhancing the overall immersive experience. Enjoyable elements include the excellent pacing that allows for extended foreplay and exploration, beautiful lighting that accentuates her curves and radiant skin, and a lighthearted tone mixed with intense moments of pleasure. Sexual activities encompass deep kissing, sensual touching, and various positions where Mei's enthusiasm shines as she takes control and responds with wild abandon. There are memorable sequences involving oral pleasures, passionate riding, and powerful climaxes that reflect her full off-duty mode. The video maintains a focus on mutual enjoyment and her liberated expressions of lust, making it a standout entry that celebrates feminine desire in a celebratory and engaging way. Miyajima Mei proves once again why she is one of the most captivating performers, delivering over three hours of compelling and satisfying content in this SOD Create production.",
@@ -2087,10 +2633,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-597-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 59,
+    "id": 75,
     "title": "A college slut who never refuses creampies, never gets embarrassed, and never gets attached. The most understanding girl, Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-554",
@@ -2102,7 +2648,7 @@ const videoData = [
     "group": "Solo",
     "series": "",
     "version": "Decensored",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "In this highly engaging release from SOD Create, the charming and energetic Miyajima Mei portrays a carefree college student who embraces her desires with complete openness and enthusiasm. As a young woman more interested in lively social gatherings and spontaneous intimate moments than academic pursuits, Mei becomes the ultimate understanding companion who approaches every encounter with zero hesitation or emotional complications. The narrative follows her through a series of casual yet intensely passionate interactions where her carefree attitude shines, creating an atmosphere of pure fun and mutual satisfaction. Mei's natural charisma and stunning physique make every scene captivating as she confidently navigates various situations with her signature smile and welcoming demeanor.\nThe production features excellent chemistry between Mei and her partners, resulting in a lighthearted yet highly charged mood that feels both realistic and entertaining. Her performance stands out for its authenticity, blending playful teasing with genuine enjoyment that draws viewers in and maintains high energy throughout. The storyline emphasizes themes of freedom, consent, and unapologetic pleasure, presenting a character who knows exactly what she wants and isn't afraid to pursue it.\nHighlights include Mei's beautiful body on full display as she engages in a variety of intimate activities that showcase her flexibility and stamina. The video captures everything from seductive foreplay and sensual touching to more vigorous encounters, all delivered with her characteristic lack of embarrassment. Multiple partners add variety and excitement while keeping the focus squarely on Mei's insatiable appetite for connection. Scenes involve passionate kissing, manual stimulation, oral pleasures, and extended sessions of unprotected intimacy leading to repeated creampie finishes that align perfectly with her no-strings-attached philosophy. The overall style is vibrant and modern, with high-quality filming that enhances the youthful and liberated tone. Miyajima Mei delivers a standout performance that perfectly embodies the fun-loving college girl fantasy, making this title a memorable addition to her impressive catalog.",
@@ -2119,10 +2665,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-554-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 60,
+    "id": 76,
     "title": "A college slut who never refuses creampies, never gets embarrassed, and never gets attached. The most understanding girl, Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-554",
@@ -2134,7 +2680,7 @@ const videoData = [
     "group": "Solo",
     "series": "",
     "version": "Subtitled",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "In this highly engaging release from SOD Create, the charming and energetic Miyajima Mei portrays a carefree college student who embraces her desires with complete openness and enthusiasm. As a young woman more interested in lively social gatherings and spontaneous intimate moments than academic pursuits, Mei becomes the ultimate understanding companion who approaches every encounter with zero hesitation or emotional complications. The narrative follows her through a series of casual yet intensely passionate interactions where her carefree attitude shines, creating an atmosphere of pure fun and mutual satisfaction. Mei's natural charisma and stunning physique make every scene captivating as she confidently navigates various situations with her signature smile and welcoming demeanor.\nThe production features excellent chemistry between Mei and her partners, resulting in a lighthearted yet highly charged mood that feels both realistic and entertaining. Her performance stands out for its authenticity, blending playful teasing with genuine enjoyment that draws viewers in and maintains high energy throughout. The storyline emphasizes themes of freedom, consent, and unapologetic pleasure, presenting a character who knows exactly what she wants and isn't afraid to pursue it.\nHighlights include Mei's beautiful body on full display as she engages in a variety of intimate activities that showcase her flexibility and stamina. The video captures everything from seductive foreplay and sensual touching to more vigorous encounters, all delivered with her characteristic lack of embarrassment. Multiple partners add variety and excitement while keeping the focus squarely on Mei's insatiable appetite for connection. Scenes involve passionate kissing, manual stimulation, oral pleasures, and extended sessions of unprotected intimacy leading to repeated creampie finishes that align perfectly with her no-strings-attached philosophy. The overall style is vibrant and modern, with high-quality filming that enhances the youthful and liberated tone. Miyajima Mei delivers a standout performance that perfectly embodies the fun-loving college girl fantasy, making this title a memorable addition to her impressive catalog.",
@@ -2151,10 +2697,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-554-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 61,
+    "id": 77,
     "title": "Secret week of nonstop super-stamina adulterous sex with son’s nursery teacher at home while wife and kids returned to parents’ home Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-547",
@@ -2166,7 +2712,7 @@ const videoData = [
     "group": "Solo",
     "series": "Nonstop sex for one week at home with a beautiful nursery teacher",
     "version": "Decensored",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "The beautiful and cheerful Miyajima Mei stars as a popular nursery school teacher whose warm personality draws everyone in, leading to an unexpected and intense week-long affair in this engaging drama filled with forbidden desire. When the opportunity arises with the husband whose wife and child are away visiting parents, what starts as a chance encounter quickly escalates into a secret rendezvous at his home where the two explore their mutual attraction without restraint. Mei brings her signature charm and enthusiasm to the role, portraying a woman who balances her professional caring nature with a hidden passionate side that emerges fully in private moments. The storyline unfolds day by day over the week, building tension and intimacy as they indulge in repeated encounters that showcase their growing chemistry and stamina.\nThe atmosphere is charged with excitement and risk, creating a thrilling mood that keeps the narrative compelling throughout. Mei's natural acting shines as she conveys a mix of hesitation at first followed by complete surrender to pleasure, making her performance both relatable and captivating. The production captures the everyday setting of a family home turned into a private love nest, adding realism and heightening the sense of secrecy and thrill. Enjoyable elements include the strong emotional connection between the leads, with tender conversations interspersed among more heated interactions that highlight their compatibility.\nSexual activities are presented in a variety of ways across the extended stay, featuring deep kissing and caressing that build anticipation, followed by intense physical unions in multiple positions. There are scenes of oral pleasures exchanged mutually, manual stimulation, and powerful climaxes that emphasize endurance and satisfaction. The video highlights Mei's graceful movements and expressive reactions, enhancing the overall sensual tone without losing focus on the story of temptation and fulfillment. This entry in the series stands out for its balance of dramatic cheating elements and high-energy intimate sequences, offering fans a satisfying blend of plot and passion. Miyajima Mei delivers another strong showing in this SOD Create title that explores the boundaries of desire in a relatable domestic scenario.",
@@ -2183,10 +2729,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-547-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 62,
+    "id": 78,
     "title": "Secret week of nonstop super-stamina adulterous sex with son’s nursery teacher at home while wife and kids returned to parents’ home Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-547",
@@ -2198,7 +2744,7 @@ const videoData = [
     "group": "Solo",
     "series": "Nonstop sex for one week at home with a beautiful nursery teacher",
     "version": "Subtitled",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "The beautiful and cheerful Miyajima Mei stars as a popular nursery school teacher whose warm personality draws everyone in, leading to an unexpected and intense week-long affair in this engaging drama filled with forbidden desire. When the opportunity arises with the husband whose wife and child are away visiting parents, what starts as a chance encounter quickly escalates into a secret rendezvous at his home where the two explore their mutual attraction without restraint. Mei brings her signature charm and enthusiasm to the role, portraying a woman who balances her professional caring nature with a hidden passionate side that emerges fully in private moments. The storyline unfolds day by day over the week, building tension and intimacy as they indulge in repeated encounters that showcase their growing chemistry and stamina.\nThe atmosphere is charged with excitement and risk, creating a thrilling mood that keeps the narrative compelling throughout. Mei's natural acting shines as she conveys a mix of hesitation at first followed by complete surrender to pleasure, making her performance both relatable and captivating. The production captures the everyday setting of a family home turned into a private love nest, adding realism and heightening the sense of secrecy and thrill. Enjoyable elements include the strong emotional connection between the leads, with tender conversations interspersed among more heated interactions that highlight their compatibility.\nSexual activities are presented in a variety of ways across the extended stay, featuring deep kissing and caressing that build anticipation, followed by intense physical unions in multiple positions. There are scenes of oral pleasures exchanged mutually, manual stimulation, and powerful climaxes that emphasize endurance and satisfaction. The video highlights Mei's graceful movements and expressive reactions, enhancing the overall sensual tone without losing focus on the story of temptation and fulfillment. This entry in the series stands out for its balance of dramatic cheating elements and high-energy intimate sequences, offering fans a satisfying blend of plot and passion. Miyajima Mei delivers another strong showing in this SOD Create title that explores the boundaries of desire in a relatable domestic scenario.",
@@ -2215,10 +2761,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-547-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 63,
+    "id": 79,
     "title": "A newlywed wife in her first year of marriage is resented by a hypersexual creepy old man… confined and creampied Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-529",
@@ -2230,7 +2776,7 @@ const videoData = [
     "group": "Solo",
     "series": "A Newlywed Wife in Her First Year of Marriage Gets Grudge-Fucked by an Ugly Perverted Old Man",
     "version": "Decensored",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "In this intense drama filled entry, the beautiful Miyajima Mei portrays a young newlywed wife in her first year of marriage who finds herself in a terrifying and inescapable situation with a resentful neighbor. Mei brings incredible emotional depth to her role as the devoted wife trying to build a happy life with her husband while facing unwanted advances and escalating threats from the hypersexual creepy old man living nearby. The storyline explores themes of isolation, power imbalance, and forbidden desire as the wife becomes confined and drawn into repeated encounters against her initial will.\nMei's performance stands out with her expressive acting that captures vulnerability, reluctance, and eventual conflicted pleasure, creating strong chemistry even in the tense atmosphere. The mood is dark and dramatic with building suspense that keeps viewers engaged throughout the narrative. High production values from SOD Create enhance the realistic setting of the apartment complex where the events unfold.\nThe video highlights enjoyable elements like strong storytelling, realistic character motivations, and Mei's stunning visuals and graceful movements that add visual appeal. Sexual activities are depicted through passionate and forceful interactions including deep kissing, caressing, oral pleasures, and various intense positions. Multiple creampie scenes emphasize the theme of confinement and repeated insemination. The overall tone blends elements of coercion and reluctant surrender in a cinematic style that focuses on emotional turmoil and physical ecstasy. This title delivers a compelling mix of narrative drama and erotic intensity making it memorable for fans of storyline driven JAV. Miyajima Mei shines as the conflicted newlywed in this powerful production.",
@@ -2247,10 +2793,10 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-529-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 64,
+    "id": 80,
     "title": "A newlywed wife in her first year of marriage is resented by a hypersexual creepy old man… confined and creampied Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-529",
@@ -2262,7 +2808,7 @@ const videoData = [
     "group": "Solo",
     "series": "A Newlywed Wife in Her First Year of Marriage Gets Grudge-Fucked by an Ugly Perverted Old Man",
     "version": "Subtitled",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
     "description": "In this intense drama filled entry, the beautiful Miyajima Mei portrays a young newlywed wife in her first year of marriage who finds herself in a terrifying and inescapable situation with a resentful neighbor. Mei brings incredible emotional depth to her role as the devoted wife trying to build a happy life with her husband while facing unwanted advances and escalating threats from the hypersexual creepy old man living nearby. The storyline explores themes of isolation, power imbalance, and forbidden desire as the wife becomes confined and drawn into repeated encounters against her initial will.\nMei's performance stands out with her expressive acting that captures vulnerability, reluctance, and eventual conflicted pleasure, creating strong chemistry even in the tense atmosphere. The mood is dark and dramatic with building suspense that keeps viewers engaged throughout the narrative. High production values from SOD Create enhance the realistic setting of the apartment complex where the events unfold.\nThe video highlights enjoyable elements like strong storytelling, realistic character motivations, and Mei's stunning visuals and graceful movements that add visual appeal. Sexual activities are depicted through passionate and forceful interactions including deep kissing, caressing, oral pleasures, and various intense positions. Multiple creampie scenes emphasize the theme of confinement and repeated insemination. The overall tone blends elements of coercion and reluctant surrender in a cinematic style that focuses on emotional turmoil and physical ecstasy. This title delivers a compelling mix of narrative drama and erotic intensity making it memorable for fans of storyline driven JAV. Miyajima Mei shines as the conflicted newlywed in this powerful production.",
@@ -2279,156 +2825,80 @@ const videoData = [
     "poster": "",
     "previews": [],
     "uid": "START-529-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 65,
-    "title": "",
-    "actress": "Miyajima Mei",
+    "id": 81,
+    "title": "Miyajima Mei and Shibasaki Haru, the infinite libido ghosts, climax with 9 fans! Unlimited creampies OK day-trip hot spring tour",
+    "actress": "Miyajima Mei, Shibazaki Haru",
     "code": "START-504",
     "studio": "SOD Create",
     "label": "START",
     "rating": 8.1,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
+    "release": "2026-03-05",
+    "duration": 134,
+    "group": "Duo",
     "series": "",
     "version": "Decensored",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
-    "description": "",
-    "tags": [],
+    "description": "This energetic hot spring adventure features the dynamic duo of Miyajima Mei and Shibazaki Haru as they embark on a special day trip with a group of enthusiastic fans in a lively and playful production from SOD Create. The two actresses bring their signature charm and boundless energy to the screen as they explore the relaxing atmosphere of the hot springs while engaging in intimate interactions that celebrate mutual desire and excitement. The storyline follows their journey as highly libidinous women who fully embrace the opportunity to connect with multiple partners in a carefree vacation setting that blends relaxation with intense passion.\nMiyajima Mei's bright and seductive presence pairs perfectly with Shibazaki Haru's equally captivating style creating wonderful chemistry that drives the entire experience. The mood is fun, adventurous, and highly charged with an emphasis on enjoyment and shared pleasure in a luxurious hot spring environment. Viewers will appreciate the natural flow of scenes that move between steamy bath moments and more private encounters showcasing the actresses comfort and enthusiasm.\nThe production highlights their stunning figures and expressive performances which add depth and appeal throughout the extended runtime. Enjoyable elements include the scenic hot spring locations that provide a beautiful backdrop and the sense of spontaneity that makes the interactions feel vibrant and immersive. Sexual activities encompass passionate kissing and caressing building to various forms of intimate play including oral pleasures, manual stimulation, and multiple coupling positions. There are numerous creampie scenes as well as group elements where the actresses engage with several partners creating dynamic and energetic sequences. The overall tone remains light-hearted and celebratory focusing on the joy of physical connection and the thrill of the hot spring getaway. This title delivers a high-energy experience perfect for fans of duo performances with strong group interaction elements and the irresistible appeal of Miyajima Mei and Shibazaki Haru.",
+    "tags": [
+      "Creampie",
+      "Hot spring",
+      "Blowjob",
+      "Group sex",
+      "Big tits",
+      "Passionate"
+    ],
     "previewImages": null,
     "thumbnail": "",
     "poster": "",
     "previews": [],
     "uid": "START-504-D",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 66,
-    "title": "",
-    "actress": "Miyajima Mei",
+    "id": 82,
+    "title": "Miyajima Mei and Shibasaki Haru, the infinite libido ghosts, climax with 9 fans! Unlimited creampies OK day-trip hot spring tour",
+    "actress": "Miyajima Mei, Shibazaki Haru",
     "code": "START-504",
     "studio": "SOD Create",
     "label": "START",
-    "rating": null,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
+    "rating": 8.1,
+    "release": "2026-03-05",
+    "duration": 134,
+    "group": "Duo",
     "series": "",
     "version": "Subtitled",
-    "token": "SNOS",
+    "token": "START",
     "trailerUrl": "",
     "videoUrl": "",
-    "description": "",
-    "tags": [],
+    "description": "This energetic hot spring adventure features the dynamic duo of Miyajima Mei and Shibazaki Haru as they embark on a special day trip with a group of enthusiastic fans in a lively and playful production from SOD Create. The two actresses bring their signature charm and boundless energy to the screen as they explore the relaxing atmosphere of the hot springs while engaging in intimate interactions that celebrate mutual desire and excitement. The storyline follows their journey as highly libidinous women who fully embrace the opportunity to connect with multiple partners in a carefree vacation setting that blends relaxation with intense passion.\nMiyajima Mei's bright and seductive presence pairs perfectly with Shibazaki Haru's equally captivating style creating wonderful chemistry that drives the entire experience. The mood is fun, adventurous, and highly charged with an emphasis on enjoyment and shared pleasure in a luxurious hot spring environment. Viewers will appreciate the natural flow of scenes that move between steamy bath moments and more private encounters showcasing the actresses comfort and enthusiasm.\nThe production highlights their stunning figures and expressive performances which add depth and appeal throughout the extended runtime. Enjoyable elements include the scenic hot spring locations that provide a beautiful backdrop and the sense of spontaneity that makes the interactions feel vibrant and immersive. Sexual activities encompass passionate kissing and caressing building to various forms of intimate play including oral pleasures, manual stimulation, and multiple coupling positions. There are numerous creampie scenes as well as group elements where the actresses engage with several partners creating dynamic and energetic sequences. The overall tone remains light-hearted and celebratory focusing on the joy of physical connection and the thrill of the hot spring getaway. This title delivers a high-energy experience perfect for fans of duo performances with strong group interaction elements and the irresistible appeal of Miyajima Mei and Shibazaki Haru.",
+    "tags": [
+      "Creampie",
+      "Hot spring",
+      "Blowjob",
+      "Group sex",
+      "Big tits",
+      "Passionate"
+    ],
     "previewImages": null,
     "thumbnail": "",
     "poster": "",
     "previews": [],
     "uid": "START-504-S",
-    "Mail-ID": ""
+    "Mail-ID": "myjavhd2@gmail.com"
   },
   {
-    "id": 67,
-    "title": "",
+    "id": 83,
+    "title": "Beautiful flight attendant Mei, famous for her exceptional customer service, gets Drugg*d and soaked in intense sex, relentlessly creampied by men. Miyajima Mei",
     "actress": "Miyajima Mei",
     "code": "START-523",
     "studio": "SOD Create",
     "label": "START",
-    "rating": null,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
-    "series": "",
-    "version": "Decensored",
-    "token": "SNOS",
-    "trailerUrl": "",
-    "videoUrl": "",
-    "description": "",
-    "tags": [],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
-    "uid": "START-523-D",
-    "Mail-ID": ""
-  },
-  {
-    "id": 68,
-    "title": "",
-    "actress": "Miyajima Mei",
-    "code": "START-523",
-    "studio": "SOD Create",
-    "label": "START",
-    "rating": null,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
-    "series": "",
-    "version": "Subtitled",
-    "token": "SNOS",
-    "trailerUrl": "",
-    "videoUrl": "",
-    "description": "",
-    "tags": [],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
-    "uid": "START-523-S",
-    "Mail-ID": ""
-  },
-  {
-    "id": 69,
-    "title": "",
-    "actress": "Miyajima Mei",
-    "code": "START-497",
-    "studio": "SOD Create",
-    "label": "START",
-    "rating": 8.8,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
-    "series": "",
-    "version": "Decensored",
-    "token": "SNOS",
-    "trailerUrl": "",
-    "videoUrl": "",
-    "description": "",
-    "tags": [],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
-    "uid": "START-497-D",
-    "Mail-ID": ""
-  },
-  {
-    "id": 70,
-    "title": "",
-    "actress": "Miyajima Mei",
-    "code": "START-497",
-    "studio": "SOD Create",
-    "label": "START",
-    "rating": null,
-    "release": "",
-    "duration": null,
-    "group": "Solo",
-    "series": "",
-    "version": "Subtitled",
-    "token": "SNOS",
-    "trailerUrl": "",
-    "videoUrl": "",
-    "description": "",
-    "tags": [],
-    "previewImages": null,
-    "thumbnail": "",
-    "poster": "",
-    "previews": [],
-    "uid": "START-497-S",
-    "Mail-ID": ""
-  }
-];
+    "rating": 8.4,
+    "release": "2026-02-17",
+    "duration": 126,
+    "group": 

@@ -1,470 +1,2711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jav Gallery</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+  <title>Jav Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #a78bfa;
+      --primary-dark: #5b21b6;
+      --primary-soft: #ddd6fe;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 10px 40px rgba(0,0,0,0.06);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+    .dark-mode {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: 0 10px 40px rgba(0,0,0,0.3);
+      --primary-soft: #4c1d95;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 100px;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+    h1,h2,h3,h4 { font-family: 'Rubik', sans-serif; font-weight: 600; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:10px; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top:0;
+      z-index:100;
+      background: var(--card);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .logo {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.5rem;
+      font-weight:700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .logo:hover { opacity: 0.8; }
+    .theme-toggle {
+      background: var(--bg);
+      border: none;
+      font-size: 1.2rem;
+      color: var(--text);
+      padding: 0.4rem 0.6rem;
+      border-radius: 50%;
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: background 0.2s;
+    }
+    .theme-toggle:hover { background: var(--border); }
+
+    /* ===== TAB NAV ===== */
+    .tab-nav {
+      display: flex;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 68px;
+      z-index:90;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .tab-btn {
+      flex:1;
+      padding: 1rem 0;
+      font-family: 'Rubik', sans-serif;
+      font-weight:600;
+      background:none;
+      border:none;
+      color: var(--text-secondary);
+      cursor:pointer;
+      border-bottom: 3px solid transparent;
+      transition: 0.2s;
+      font-size:1rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:0.5rem;
+    }
+    .tab-btn i { font-size:1.2rem; }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .tab-content { display:none; padding: 0 1.5rem 2rem; max-width: 1400px; margin:0 auto; }
+    .tab-content.active { display:block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ===== VIDEOS TAB ===== */
+    .action-bar {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .filters-btn, .sort-btn, .view-toggle-btn {
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: 50%;
+      width: 50px;
+      height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--text);
+      font-size:1.2rem;
+      cursor:pointer;
+      flex-shrink:0;
+      transition: 0.2s;
+    }
+    .filters-btn:hover, .sort-btn:hover, .view-toggle-btn:hover { background: var(--primary-soft); border-color:var(--primary); color:var(--primary); }
+    .view-toggle-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .search-container {
+      flex:1;
+      position:relative;
+      min-width: 200px;
+    }
+    .search-input {
+      width:100%;
+      padding: 0.8rem 1rem 0.8rem 3rem;
+      border-radius: 50px;
+      border:1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size:1rem;
+      transition: 0.2s;
+    }
+    .search-input:focus { outline:2px solid var(--primary-light); border-color:transparent; }
+    .search-icon {
+      position:absolute;
+      left:1.2rem;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--text-secondary);
+    }
+    .sort-container { position:relative; }
+    .sort-menu {
+      position:absolute;
+      top:calc(100% + 12px);
+      right:0;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      box-shadow:0 12px 32px rgba(0,0,0,0.12);
+      min-width:200px;
+      display:none;
+      z-index:200;
+      overflow:hidden;
+    }
+    .sort-menu.active { display:block; }
+    .sort-option {
+      padding:0.8rem 1.2rem;
+      background:none;
+      border:none;
+      width:100%;
+      text-align:left;
+      color:var(--text);
+      cursor:pointer;
+      font-size:0.95rem;
+      border-bottom:1px solid var(--border);
+      transition:0.15s;
+    }
+    .sort-option:last-child { border-bottom:none; }
+    .sort-option:hover { background:var(--primary-soft); }
+    .sort-option.active { color:var(--primary); font-weight:600; background:var(--primary-soft); }
+
+    /* Active filters – scrollable row */
+    .active-filters {
+      display:flex;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      gap:0.6rem;
+      padding:0.5rem 0 1rem;
+      min-height: 50px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .active-filters::-webkit-scrollbar { display:none; }
+    .filter-tag {
+      flex-shrink:0;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      padding:0.4rem 1rem;
+      border-radius:30px;
+      font-size:0.85rem;
+      display:flex;
+      align-items:center;
+      gap:0.6rem;
+      font-weight:500;
+      white-space:nowrap;
+    }
+    .filter-tag .remove { cursor:pointer; opacity:0.7; transition:0.2s; }
+    .filter-tag .remove:hover { opacity:1; }
+
+    /* Video count */
+    .video-count {
+      font-size:0.95rem;
+      color:var(--text-secondary);
+      margin-bottom:0.8rem;
+      font-weight:500;
+    }
+
+    /* Actress info cards */
+    .actress-info-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .actress-info-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      flex: 1 1 220px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s;
+    }
+    .actress-info-card:hover { transform: translateY(-3px); }
+    .actress-info-card img {
+      width: 100px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: var(--border);
+      margin-bottom: 0.5rem;
+    }
+    .actress-info-card .info-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .actress-info-card .info-detail {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0.1rem 0;
+    }
+    .actress-info-card .info-detail strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .actress-info-card .javguru-btn {
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      border: none;
+      border-radius: 20px;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.2s;
+    }
+    .actress-info-card .javguru-btn:hover { background: var(--primary-dark); }
+
+    /* Video grid */
+    .videos-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    /* Default: thumbnail mode (3:2) – responsive columns */
+    .videos-grid.thumbnail-mode {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 640px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 1024px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(4,1fr); } }
+    @media (min-width: 1280px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(5,1fr); } }
+
+    /* Poster mode (2:3) – more columns on desktop, 2 columns on mobile */
+    .videos-grid.poster-mode {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 640px) { .videos-grid.poster-mode { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 1024px) { .videos-grid.poster-mode { grid-template-columns: repeat(4,1fr); } }
+    @media (min-width: 1280px) { .videos-grid.poster-mode { grid-template-columns: repeat(5,1fr); } }
+
+    /* For mobile: thumbnail mode → 1 column, poster mode → 2 columns */
+    @media (max-width: 480px) {
+      .videos-grid.thumbnail-mode { grid-template-columns: 1fr; }
+      .videos-grid.poster-mode { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .video-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .video-card:hover { transform: translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+    .video-thumbnail {
+      width:100%;
+      aspect-ratio: 3/2;
+      object-fit:cover;
+      background: var(--border);
+    }
+    .videos-grid.poster-mode .video-thumbnail {
+      aspect-ratio: 2/3;
+    }
+    .video-info { padding:0.6rem 0.8rem 0.8rem; }
+    .video-title {
+      font-weight:500;
+      font-size:0.9rem;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      margin-bottom:0.3rem;
+      line-height:1.2;
+    }
+    .video-meta {
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:0.2rem;
+      font-size:0.7rem;
+      color:var(--text-secondary);
+    }
+    .video-meta-item { display:flex; align-items:center; gap:0.2rem; }
+    .video-meta-item i { color:var(--primary); font-size:0.7rem; }
+
+    /* Pagination */
+    .pagination {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:1.5rem;
+      margin-top:2.5rem;
+    }
+    .page-nav-btn {
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.2s;
+    }
+    .page-nav-btn:hover:not(:disabled) { background:var(--primary-soft); border-color:var(--primary); }
+    .page-nav-btn:disabled { opacity:0.4; cursor:not-allowed; }
+    .page-number { font-weight:600; font-size:1.2rem; min-width:40px; text-align:center; }
+
+    /* Empty state */
+    .empty-state {
+      text-align:center;
+      padding:3rem 0;
+      color:var(--text-secondary);
+    }
+    .empty-state i { font-size:3rem; display:block; margin-bottom:0.8rem; opacity:0.3; }
+
+    /* ===== MODALS ===== */
+    .modal {
+      display:none;
+      position:fixed;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+      z-index:1000;
+      justify-content:center;
+      align-items:center;
+      padding:1rem;
+      overflow-y:auto;
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
+    }
+    .modal.active { display:flex; }
+    .modal-container {
+      background:var(--card);
+      border-radius:var(--radius);
+      max-width:600px;
+      width:100%;
+      max-height:90vh;
+      overflow-y:auto;
+      position:relative;
+      box-shadow:0 24px 64px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      padding:1.2rem 1.5rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      background:var(--card);
+      z-index:10;
+      border-radius:var(--radius) var(--radius) 0 0;
+    }
+    .modal-title { font-size:1.1rem; }
+    .close-modal {
+      background:none;
+      border:none;
+      font-size:1.5rem;
+      color:var(--text-secondary);
+      cursor:pointer;
+      padding:0.3rem;
+      border-radius:50%;
+      width:40px;
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.2s;
+    }
+    .close-modal:hover { background:var(--border); }
+    .modal-content { padding:1.2rem 1.5rem 1.8rem; }
+    .modal-content h1 { font-size:1.3rem; margin-bottom:0.5rem; }
+
+    /* Video thumbnail */
+    .video-thumbnail-container {
+      aspect-ratio:3/2;
+      background:var(--border);
+      border-radius:var(--radius-sm);
+      overflow:hidden;
+      margin-bottom:1rem;
+      position:relative;
+    }
+    .video-thumbnail-container img { width:100%; height:100%; object-fit:cover; }
+    .video-player { display:none; width:100%; height:100%; }
+    .video-player iframe { width:100%; height:100%; border:none; }
+
+    /* Series, Actress, Tags */
+    .label-block { margin:0.8rem 0; }
+    .label-title {
+      font-size:0.75rem;
+      font-weight:600;
+      text-transform:uppercase;
+      color:var(--text-secondary);
+      letter-spacing:0.5px;
+      margin-bottom:0.3rem;
+    }
+    .label-value {
+      color:var(--primary);
+      font-weight:500;
+      cursor:pointer;
+      transition:0.15s;
+    }
+    .label-value:hover { text-decoration:underline; }
+
+    .actress-row {
+      display:flex;
+      gap:0.8rem;
+      overflow-x:auto;
+      padding-bottom:0.3rem;
+      -webkit-overflow-scrolling:touch;
+    }
+    .actress {
+      flex:0 0 28%;
+      text-align:center;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .actress img {
+      width:100%;
+      aspect-ratio:2/3;
+      object-fit:cover;
+      border-radius:10px;
+      background:var(--border);
+      border:2px solid transparent;
+      transition:border-color 0.2s;
+    }
+    .actress:hover img { border-color:var(--primary); }
+    .actress span { display:block; font-size:0.8rem; margin-top:0.2rem; font-weight:500; }
+
+    .tags-grid {
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.6rem;
+    }
+    .tag-item {
+      flex:0 0 20%;
+      text-align:center;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .tag-item img {
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius:10px;
+      background:var(--border);
+      border:2px solid transparent;
+      transition:border-color 0.2s;
+    }
+    .tag-item:hover img { border-color:var(--primary); }
+    .tag-item span { display:block; font-size:0.75rem; margin-top:0.1rem; font-weight:500; }
+
+    .description {
+      font-size:0.95rem;
+      color:var(--text-secondary);
+      display:-webkit-box;
+      -webkit-line-clamp:5;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      line-height:1.6;
+    }
+    .description.expanded { -webkit-line-clamp:unset; }
+    .toggle-desc {
+      color:var(--primary);
+      font-weight:500;
+      cursor:pointer;
+      font-size:0.9rem;
+      margin-top:0.2rem;
+      display:inline-block;
+    }
+
+    /* Details */
+    .details {
+      display:flex;
+      gap:1.5rem;
+      margin-top:1.2rem;
+      flex-wrap:wrap;
+    }
+    .meta { flex:1; min-width:160px; }
+    .meta-row {
+      display:flex;
+      gap:0.4rem;
+      align-items:center;
+      font-size:0.9rem;
+      padding:0.4rem 0;
+      border-bottom:1px solid var(--border);
+    }
+    .meta-row:last-child { border-bottom:none; }
+    .meta-row i { color:var(--primary); width:22px; text-align:center; }
+    .meta-row strong { min-width:80px; font-weight:500; color:var(--text-secondary); }
+    .poster { flex:0 0 45%; text-align:center; }
+    .poster img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:var(--radius-sm); background:var(--border); }
+    .code {
+      font-family:'Rubik',sans-serif;
+      font-weight:700;
+      font-size:1.3rem;
+      color:var(--primary);
+      cursor:pointer;
+      margin-top:0.3rem;
+      padding:0.2rem 0.8rem;
+      border-radius:8px;
+      transition:0.2s;
+      display:inline-block;
+    }
+    .code:hover { background:var(--primary-soft); }
+
+    /* Video controls */
+    .video-controls { display:flex; gap:0.8rem; margin:1.2rem 0; }
+    .video-btn {
+      flex:1;
+      padding:0.8rem;
+      border:none;
+      border-radius:var(--radius-sm);
+      background:linear-gradient(135deg, var(--primary), var(--primary-light));
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:0.5rem;
+      transition:transform 0.2s, box-shadow 0.2s;
+      font-size:0.95rem;
+    }
+    .video-btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(124,58,237,0.3); }
+
+    /* Suggestions */
+    .suggestions-container { margin-top:2rem; }
+    .suggestion-title { font-size:1.1rem; margin-bottom:0.5rem; }
+    .carousel-container {
+      display:flex;
+      align-items:center;
+      position:relative;
+      margin:0 -0.5rem;
+    }
+    .carousel {
+      display:flex;
+      gap:1rem;
+      overflow-x:auto;
+      scroll-behavior:smooth;
+      padding:0.3rem 0.5rem;
+      flex:1;
+      -webkit-overflow-scrolling:touch;
+    }
+    .carousel::-webkit-scrollbar { display:none; }
+    .carousel-nav {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--card);
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:5;
+      box-shadow:var(--shadow);
+      transition:0.2s;
+    }
+    .carousel-nav:hover { background:var(--primary-soft); border-color:var(--primary); }
+    .carousel-nav.prev { left:0; }
+    .carousel-nav.next { right:0; }
+    .carousel-item { flex:0 0 140px; cursor:pointer; }
+    .carousel-item img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:10px; background:var(--border); }
+    .carousel-item .carousel-code { font-size:0.75rem; text-align:center; margin-top:0.2rem; color:var(--primary); font-weight:600; }
+
+    /* ===== FILTER MODAL ===== */
+    .filter-modal .modal-container { max-width:720px; }
+    .filter-tabs {
+      display:flex;
+      overflow-x:auto;
+      gap:0.4rem;
+      padding:0.6rem 1rem;
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+    }
+    .filter-tab {
+      padding:0.5rem 1.2rem;
+      border-radius:30px;
+      background:none;
+      border:1px solid transparent;
+      color:var(--text-secondary);
+      font-weight:500;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:0.2s;
+      font-size:0.9rem;
+    }
+    .filter-tab.active {
+      background:var(--primary-soft);
+      color:var(--primary-dark);
+      border-color:var(--primary);
+      font-weight:600;
+    }
+    .filter-content { padding:1rem 0; }
+    .filter-section { display:none; }
+    .filter-section.active { display:block; animation:fadeIn 0.2s ease; }
+    .filter-section-search {
+      margin-bottom:0.8rem;
+      padding:0 0.2rem;
+    }
+    .filter-section-search input {
+      width:100%;
+      padding:0.5rem 1rem;
+      border:1px solid var(--border);
+      border-radius:30px;
+      background:var(--bg);
+      color:var(--text);
+      font-size:0.9rem;
+      outline:none;
+    }
+    .filter-section-search input:focus { border-color:var(--primary); }
+    .filter-options {
+      display:grid;
+      gap:0.8rem;
+    }
+    /* Column counts per type */
+    .filter-options.cols-3 { grid-template-columns: repeat(3,1fr); }
+    .filter-options.cols-2 { grid-template-columns: repeat(2,1fr); }
+    .filter-options.cols-1 { grid-template-columns: 1fr; }
+    @media (max-width: 480px) {
+      .filter-options.cols-3 { grid-template-columns: repeat(2,1fr); }
+      .filter-options.cols-2 { grid-template-columns: 1fr; }
+      .filter-options.cols-1 { grid-template-columns: 1fr; }
+    }
+
+    /* Nested studio styles */
+    .studio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .studio-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--card);
+    }
+    .studio-header {
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 500;
+      gap: 0.5rem;
+    }
+    .studio-header:hover { background: var(--primary-soft); }
+    .studio-header .studio-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .studio-header .studio-name img {
+      width: 40px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: var(--border);
+    }
+    .studio-header .studio-toggle {
+      margin-left: auto;
+      transition: transform 0.3s;
+    }
+    .studio-header .studio-toggle.open { transform: rotate(90deg); }
+    .studio-header .studio-count {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: 0.3rem;
+    }
+    .studio-labels {
+      display: none;
+      padding: 0.4rem 0.8rem 0.8rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      border-top: 1px solid var(--border);
+    }
+    .studio-labels.open { display: grid; }
+    .label-option {
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    .label-option:hover { border-color: var(--primary); }
+    .label-option.selected {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      font-weight: 500;
+    }
+    .label-option img {
+      width: 30px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: var(--border);
+    }
+
+    /* Regular filter option (non-studio) */
+    .filter-option {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:0.6rem 0.4rem;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0.3rem;
+      color:var(--text);
+      transition:0.2s;
+      text-align:center;
+      position: relative;
+    }
+    .filter-option:hover { border-color:var(--primary); }
+    .filter-option.selected {
+      background:var(--primary-soft);
+      border-color:var(--primary);
+      color:var(--primary-dark);
+      font-weight:500;
+      box-shadow:0 0 0 2px var(--primary-light);
+    }
+    .filter-option img {
+      width:100%;
+      object-fit:cover;
+      border-radius:6px;
+      background:var(--border);
+    }
+    .filter-option .filter-name {
+      font-size:0.8rem;
+      line-height:1.1;
+      word-break: break-word;
+    }
+    .filter-option .count {
+      font-size:0.7rem;
+      color:var(--text-secondary);
+    }
+    /* Aspect ratios for filter images */
+    .filter-option.aspect-2-3 img { aspect-ratio: 2/3; object-fit: cover; }
+    .filter-option.aspect-1-1 img { aspect-ratio: 1/1; object-fit: cover; }
+    .filter-option.aspect-3-2 img { aspect-ratio: 3/2; object-fit: cover; }
+    .filter-option.no-image .filter-name { font-size:0.9rem; }
+
+    /* JAVguru button inside filter option */
+    .filter-option .javguru-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .filter-option .javguru-btn:hover { background: var(--primary-dark); }
+
+    /* ===== ADD DATA – redesigned ===== */
+    .add-data-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .add-data-wrapper .add-data-form { order: 1; }
+    .add-data-wrapper .add-data-list { order: 2; }
+
+    .add-data-nav {
+      display:flex;
+      overflow-x:auto;
+      gap:0.6rem;
+      padding:0.8rem 0 1.2rem;
+      border-bottom:1px solid var(--border);
+      margin-bottom:1.5rem;
+      -webkit-overflow-scrolling:touch;
+    }
+    .add-tab-btn {
+      padding:0.5rem 1.4rem;
+      border-radius:30px;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text-secondary);
+      font-weight:500;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:0.2s;
+      font-size:0.9rem;
+      box-shadow:var(--shadow);
+    }
+    .add-tab-btn.active {
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
+      box-shadow:0 4px 16px rgba(124,58,237,0.25);
+    }
+
+    .add-data-panel { display:none; }
+    .add-data-panel.active { display:block; animation:fadeIn 0.3s ease; }
+
+    /* List */
+    .add-data-list {
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      margin-bottom:1.5rem;
+    }
+    .add-data-list-header {
+      padding:1rem 1.5rem;
+      background:var(--primary-soft);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:0.8rem;
+      border-bottom:1px solid var(--border);
+    }
+    .add-data-list-header h3 {
+      color:var(--primary-dark);
+      font-size:1.1rem;
+    }
+    .add-data-list-search {
+      position:relative;
+      flex:1;
+      min-width:150px;
+      max-width:300px;
+    }
+    .add-data-list-search input {
+      width:100%;
+      padding:0.4rem 1rem 0.4rem 2.2rem;
+      border-radius:30px;
+      border:1px solid var(--border);
+      background:var(--bg);
+      color:var(--text);
+      font-size:0.85rem;
+    }
+    .add-data-list-search i {
+      position:absolute;
+      left:0.8rem;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--text-secondary);
+      font-size:0.8rem;
+    }
+    .add-data-items {
+      max-height: 400px;
+      overflow-y:auto;
+    }
+    .add-data-item {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0.7rem 1.5rem;
+      border-bottom:1px solid var(--border);
+      transition:0.15s;
+    }
+    .add-data-item:last-child { border-bottom:none; }
+    .add-data-item:hover { background:var(--bg); }
+    .add-data-item .name { font-weight:500; font-size:0.9rem; }
+    .add-data-item .actions button {
+      background:none;
+      border:none;
+      color:var(--text-secondary);
+      cursor:pointer;
+      margin-left:0.6rem;
+      padding:0.3rem 0.5rem;
+      border-radius:6px;
+      transition:0.15s;
+      font-size:0.9rem;
+    }
+    .add-data-item .actions .edit-btn:hover { color:var(--primary); background:var(--primary-soft); }
+    .add-data-item .actions .delete-btn:hover { color:#ef4444; background:#fee2e2; }
+
+    /* Form – redesigned with rows and columns */
+    .add-data-form {
+      background:var(--card);
+      padding:1.8rem;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+    }
+    .add-data-form h4 {
+      margin-bottom:1.2rem;
+      color:var(--primary);
+      font-size:1.1rem;
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-row .form-col {
+      flex: 1 1 200px;
+      min-width: 150px;
+    }
+    .form-row .form-col-full {
+      flex: 1 1 100%;
+    }
+    .add-data-form .form-group { margin-bottom:0; width:100%; }
+    .add-data-form label {
+      display:block;
+      font-weight:500;
+      font-size:0.85rem;
+      margin-bottom:0.3rem;
+      color:var(--text-secondary);
+    }
+    .add-data-form input, .add-data-form textarea, .add-data-form .custom-select {
+      width:100%;
+      padding:0.7rem 1rem;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:var(--bg);
+      color:var(--text);
+      font-size:0.95rem;
+      transition:0.2s;
+      font-family:inherit;
+    }
+    .add-data-form input:focus, .add-data-form textarea:focus {
+      outline:2px solid var(--primary-light);
+      border-color:transparent;
+    }
+    .add-data-form .image-urls { display:flex; flex-direction:column; gap:0.5rem; }
+    .add-data-form .image-urls input { margin-bottom:0; }
+    .add-data-form .submit-btn {
+      background:linear-gradient(135deg, var(--primary), var(--primary-light));
+      color:#fff;
+      border:none;
+      padding:0.8rem;
+      border-radius:10px;
+      font-weight:600;
+      width:100%;
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+      font-size:1rem;
+      margin-top:0.5rem;
+    }
+    .add-data-form .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,58,237,0.3); }
+
+    /* Custom select */
+    .custom-select {
+      position:relative;
+      display:inline-block;
+      width:100%;
+    }
+    .custom-select-input {
+      width:100%;
+      padding:0.7rem 1rem;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:var(--bg);
+      color:var(--text);
+      font-size:0.95rem;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      flex-wrap:wrap;
+      min-height:50px;
+    }
+    .custom-select-input img { width:40px; height:60px; object-fit:cover; border-radius:4px; }
+    .custom-select-input .selected-text { flex:1; }
+    .custom-select-dropdown {
+      display:none;
+      position:absolute;
+      top:calc(100% + 4px);
+      left:0;
+      right:0;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:10px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);
+      max-height:220px;
+      overflow-y:auto;
+      z-index:50;
+      padding:0.3rem;
+    }
+    .custom-select-dropdown.show { display:block; }
+    .custom-select-option {
+      display:flex;
+      align-items:center;
+      gap:0.6rem;
+      padding:0.5rem 0.8rem;
+      border-radius:6px;
+      cursor:pointer;
+      transition:0.15s;
+    }
+    .custom-select-option:hover { background:var(--primary-soft); }
+    .custom-select-option img { width:40px; height:60px; object-fit:cover; border-radius:4px; }
+    .custom-select-option .opt-name { flex:1; }
+    .custom-select-option .opt-check { color:var(--primary); }
+    .custom-select-option.selected { background:var(--primary-soft); }
+    .custom-select-search {
+      padding:0.3rem 0.8rem;
+      border-bottom:1px solid var(--border);
+      margin-bottom:0.3rem;
+    }
+    .custom-select-search input {
+      width:100%;
+      padding:0.4rem 0.6rem;
+      border:1px solid var(--border);
+      border-radius:6px;
+      background:var(--bg);
+      color:var(--text);
+      font-size:0.85rem;
+    }
+
+    /* Code autocomplete datalist */
+    .add-data-form input[list]::-webkit-calendar-picker-indicator {
+      opacity:0.6;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      .video-title { font-size:0.8rem; }
+      .video-meta { font-size:0.6rem; grid-template-columns: repeat(2,1fr); }
+      .tag-item { flex:0 0 30%; }
+      .actress { flex:0 0 40%; }
+      .add-data-form { padding:1.2rem; }
+      .add-data-list-header { flex-direction:column; align-items:stretch; }
+      .add-data-list-search { max-width:100%; }
+      .filter-options.cols-3 { grid-template-columns: repeat(2,1fr); }
+      .filter-options.cols-2 { grid-template-columns: 1fr; }
+      .filter-options.cols-1 { grid-template-columns: 1fr; }
+      .form-row .form-col { flex: 1 1 100%; min-width: auto; }
+    }
+    @media (min-width: 768px) {
+      .videos-grid.thumbnail-mode { grid-template-columns: repeat(3,1fr); }
+      .videos-grid.poster-mode { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (min-width: 1024px) {
+      .videos-grid.thumbnail-mode { grid-template-columns: repeat(4,1fr); }
+      .videos-grid.poster-mode { grid-template-columns: repeat(4,1fr); }
+    }
+
+    /* Dark mode overrides */
+    .dark-mode .add-data-item:hover { background:var(--border); }
+    .dark-mode .add-data-form input, .dark-mode .add-data-form textarea { background:var(--bg); }
+    .dark-mode .custom-select-dropdown { background:var(--card); }
+    .dark-mode .custom-select-option:hover { background:var(--primary-soft); }
+    .dark-mode .add-tab-btn.active { box-shadow:0 4px 16px rgba(124,58,237,0.4); }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">Jav Gallery</div>
-        <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-        </button>
-    </header>
 
-    <!-- Search & Action Bar -->
-    <div class="action-bar">
-        <button class="filters-btn" id="filtersBtn">
-            <i class="fas fa-filter"></i>
-        </button>
-        
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search by actress, title, code, tags...">
-        </div>
-        
-        <div class="sort-container">
-            <button class="sort-btn" id="sortBtn">
-                <i class="fas fa-sort-amount-down"></i>
-            </button>
-            <div class="sort-menu" id="sortMenu">
-                <button class="sort-option" data-sort="shuffle">Shuffle (random)</button>
-                <button class="sort-option" data-sort="latest">Latest Release</button>
-                <button class="sort-option" data-sort="oldest">Oldest Release</button>
-                <button class="sort-option" data-sort="top-rated">Top Rated</button>
-                <button class="sort-option active" data-sort="most-viewed">Most Viewed</button>
-            </div>
-        </div>
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="logo">Jav Gallery</div>
+  <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+</header>
+
+<!-- ========== TAB NAV ========== -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="videos"><i class="fas fa-play-circle"></i> Videos</button>
+  <button class="tab-btn" data-tab="add"><i class="fas fa-plus-circle"></i> Add Data</button>
+</nav>
+
+<!-- ========== VIDEOS TAB ========== -->
+<section id="videosTab" class="tab-content active">
+  <div class="action-bar">
+    <button class="filters-btn" id="filtersBtn"><i class="fas fa-filter"></i></button>
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search title, code, actress..." />
     </div>
-
-    <!-- Active Filters Display -->
-    <div class="active-filters" id="activeFilters">
-        <!-- Filters will be added dynamically -->
+    <div class="sort-container">
+      <button class="sort-btn" id="sortBtn"><i class="fas fa-sort-amount-down"></i></button>
+      <div class="sort-menu" id="sortMenu">
+        <button class="sort-option" data-sort="shuffle">Shuffle</button>
+        <button class="sort-option" data-sort="latest">Latest Release</button>
+        <button class="sort-option" data-sort="oldest">Oldest Release</button>
+        <button class="sort-option active" data-sort="top-rated">Top Rated</button>
+      </div>
     </div>
+    <button class="view-toggle-btn" id="viewToggleBtn" title="Toggle poster view"><i class="fas fa-image"></i></button>
+  </div>
+  <div class="active-filters" id="activeFilters"></div>
+  <div class="video-count" id="videoCount">0 videos</div>
+  <!-- Actress info cards appear here -->
+  <div id="actressInfoContainer"></div>
+  <div class="videos-grid thumbnail-mode" id="videosGrid"></div>
+  <div class="pagination">
+    <button class="page-nav-btn prev-btn" id="videosPrevBtn" disabled><i class="fas fa-chevron-left"></i></button>
+    <div class="page-number" id="videosPageNumber">1</div>
+    <button class="page-nav-btn next-btn" id="videosNextBtn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
 
-    <!-- Content Tabs -->
-    <div class="content-tabs">
-        <button class="tab active" data-tab="videos">
-            <i class="fas fa-play-circle"></i> Videos
-        </button>
-        <button class="tab" data-tab="albums">
-            <i class="fas fa-book"></i> Albums
-        </button>
-        <button class="tab" data-tab="pictures">
-            <i class="fas fa-image"></i> Pictures
-        </button>
+<!-- ========== ADD DATA TAB ========== -->
+<section id="addTab" class="tab-content">
+  <div class="add-data-nav" id="addDataNav">
+    <button class="add-tab-btn active" data-addtab="videos">Videos</button>
+    <button class="add-tab-btn" data-addtab="actresses">Actresses</button>
+    <button class="add-tab-btn" data-addtab="tags">Tags</button>
+    <button class="add-tab-btn" data-addtab="studios">Studios</button>
+    <button class="add-tab-btn" data-addtab="labels">Labels</button>
+    <button class="add-tab-btn" data-addtab="series">Series</button>
+    <button class="add-tab-btn" data-addtab="versions">Versions</button>
+    <button class="add-tab-btn" data-addtab="groups">Groups</button>
+  </div>
+  <div class="add-data-content" id="addDataContent"></div>
+</section>
+
+<!-- ========== VIDEO MODAL ========== -->
+<div class="modal" id="videoModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title">Video Details</h3>
+      <button class="close-modal" id="closeVideoModal"><i class="fas fa-times"></i></button>
     </div>
-
-    <!-- Videos Content Section -->
-    <section class="content-section active" id="videosSection">
-        <div class="videos-grid" id="videosGrid">
-            <!-- Videos will be loaded dynamically -->
+    <div class="modal-content" id="mainModalContent">
+      <div class="video-thumbnail-container" id="videoThumbnailContainer">
+        <img id="modalThumb" src="" alt="Thumbnail" />
+        <div class="video-player" id="videoPlayer"><iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe></div>
+      </div>
+      <h1 id="modalTitle">Title</h1>
+      <div class="label-block">
+        <div class="label-title">Series</div>
+        <div id="modalSeries" class="label-value">N/A</div>
+      </div>
+      <div class="label-block">
+        <div class="label-title">Actress</div>
+        <div class="actress-row" id="modalActress"></div>
+      </div>
+      <div class="label-block">
+        <div class="label-title">Tags</div>
+        <div class="tags-grid" id="modalTags"></div>
+      </div>
+      <div id="modalDesc" class="description">Description</div>
+      <div id="toggleDesc" class="toggle-desc">Show More</div>
+      <div class="details">
+        <div class="meta">
+          <div class="meta-row"><i class="fa-solid fa-star"></i><strong>Rating</strong><span id="modalRating">0.0</span></div>
+          <div class="meta-row"><i class="fa-solid fa-building"></i><strong>Studio</strong><span id="modalStudio" class="label-value">N/A</span></div>
+          <div class="meta-row"><i class="fa-solid fa-tag"></i><strong>Label</strong><span id="modalLabel" class="label-value">N/A</span></div>
+          <div class="meta-row"><i class="fa-solid fa-calendar"></i><strong>Released</strong><span id="modalRelease">N/A</span></div>
+          <div class="meta-row"><i class="fa-solid fa-clock"></i><strong>Duration</strong><span id="modalDuration">0</span> min</div>
+          <div class="meta-row"><i class="fa-solid fa-layer-group"></i><strong>Versions</strong><span id="modalVersions" class="label-value">N/A</span></div>
+          <div class="meta-row"><i class="fa-solid fa-users"></i><strong>Group</strong><span id="modalGroup" class="label-value">N/A</span></div>
         </div>
-        
-        <!-- Pagination -->
-        <div class="pagination" id="videosPagination">
-            <button class="page-nav-btn prev-btn" id="videosPrevBtn" disabled>
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="page-number" id="videosPageNumber">1</div>
-            <button class="page-nav-btn next-btn" id="videosNextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        <div class="poster">
+          <img id="modalPoster" src="" alt="Poster" />
+          <div id="modalCode" class="code">CODE</div>
         </div>
-    </section>
-
-    <!-- Albums Content Section -->
-    <section class="content-section" id="albumsSection">
-        <div class="albums-grid" id="albumsGrid">
-            <!-- Albums will be loaded dynamically -->
+      </div>
+      <div class="video-controls">
+        <button class="video-btn" id="trailerBtn"><i class="fas fa-play-circle"></i> Trailer</button>
+        <button class="video-btn" id="videoBtn"><i class="fas fa-film"></i> Video</button>
+      </div>
+      <div class="suggestions-container">
+        <div class="suggestion-section">
+          <h3 class="suggestion-title">Also Starred In</h3>
+          <div class="carousel-container">
+            <div class="carousel-nav prev" id="alsoStarredPrev"><i class="fas fa-chevron-left"></i></div>
+            <div class="carousel" id="alsoStarredCarousel"></div>
+            <div class="carousel-nav next" id="alsoStarredNext"><i class="fas fa-chevron-right"></i></div>
+          </div>
         </div>
-        
-        <!-- Pagination -->
-        <div class="pagination" id="albumsPagination">
-            <button class="page-nav-btn prev-btn" id="albumsPrevBtn" disabled>
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="page-number" id="albumsPageNumber">1</div>
-            <button class="page-nav-btn next-btn" id="albumsNextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        <div class="suggestion-section">
+          <h3 class="suggestion-title">You May Also Like</h3>
+          <div class="carousel-container">
+            <div class="carousel-nav prev" id="youMayLikePrev"><i class="fas fa-chevron-left"></i></div>
+            <div class="carousel" id="youMayLikeCarousel"></div>
+            <div class="carousel-nav next" id="youMayLikeNext"><i class="fas fa-chevron-right"></i></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Pictures Content Section -->
-    <section class="content-section" id="picturesSection">
-        <div class="pictures-grid" id="picturesGrid">
-            <!-- Pictures will be loaded dynamically -->
-        </div>
-        
-        <!-- Pagination -->
-        <div class="pagination" id="picturesPagination">
-            <button class="page-nav-btn prev-btn" id="picturesPrevBtn" disabled>
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="page-number" id="picturesPageNumber">1</div>
-            <button class="page-nav-btn next-btn" id="picturesNextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-    </section>
-
-    <!-- Video Modal -->
-    <div class="modal" id="videoModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 class="modal-title">Video Details</h3>
-                <button class="close-modal" id="closeVideoModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="modal-content" id="mainModalContent">
-                <div class="video-thumbnail-container" id="videoThumbnailContainer">
-                    <img id="modalThumb" src="" alt="Video Thumbnail">
-                    <div class="video-player" id="videoPlayer">
-                        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-                
-                <h1 id="modalTitle">Video Title</h1>
-                
-                <div id="modalDesc" class="description">
-                    This is a sample video description. In a real implementation, this would contain details about the video content, storyline, and other relevant information. The description can be quite long, so we're implementing a "Show More/Less" toggle to manage the display.
-                </div>
-                <div id="toggleDesc" class="toggle-desc">Show More</div>
-                
-                <div id="modalTags" class="tags">
-                    <!-- Tags will be added dynamically -->
-                </div>
-                
-                <!-- SERIES -->
-                <div class="label-block">
-                    <div class="label-title">Series</div>
-                    <div id="modalSeries" class="label-value">Sample Series</div>
-                </div>
-                
-                <!-- ACTRESS -->
-                <div class="label-block">
-                    <div class="label-title">Actress</div>
-                    <div id="modalActress" class="actress-row">
-                        <!-- Actress will be added dynamically -->
-                    </div>
-                </div>
-                
-                <div class="details">
-                    <!-- LEFT -->
-                    <div class="meta">
-                        <div class="meta-row">
-                            <i class="fa-solid fa-star"></i>
-                            <strong>Rating:</strong> 
-                            <span id="modalRating">8.5</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-building"></i>
-                            <strong>Studio:</strong> 
-                            <span id="modalStudio" class="label-value">Sample Studio</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-tag"></i>
-                            <strong>Label:</strong> 
-                            <span id="modalLabel" class="label-value">Premium Label</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-calendar"></i>
-                            <strong>Released:</strong> 
-                            <span id="modalRelease">2023-05-15</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-clock"></i>
-                            <strong>Duration:</strong> 
-                            <span id="modalDuration">120</span> min
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-layer-group"></i>
-                            <strong>Versions:</strong>
-                            <span id="modalVersions" class="label-value">HD, 4K</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-users"></i>
-                            <strong>Group:</strong> 
-                            <span id="modalGroup" class="label-value">Duo</span>
-                        </div>
-                        <div class="meta-row">
-                            <i class="fa-solid fa-eye"></i>
-                            <strong>Views:</strong> 
-                            <span id="modalViews" class="label-value">125,000</span>
-                        </div>
-                    </div>
-                    
-                    <!-- RIGHT -->
-                    <div class="poster">
-                        <img id="modalPoster" src="" alt="Video Poster">
-                        <div id="modalCode" class="code">ABC-123</div>
-                    </div>
-                </div>
-                
-                <!-- VIDEO CONTROLS -->
-                <div class="video-controls">
-                    <button class="video-btn" id="previewBtn">
-                        <i class="fas fa-images"></i> Preview
-                    </button>
-                    <button class="video-btn" id="trailerBtn">
-                        <i class="fas fa-play-circle"></i> Trailer
-                    </button>
-                    <button class="video-btn" id="videoBtn">
-                        <i class="fas fa-film"></i> Video
-                    </button>
-                </div>
-                
-                <!-- SUGGESTION CAROUSELS -->
-                <div class="suggestions-container">
-                    <!-- Also Starred In -->
-                    <div class="suggestion-section">
-                        <h3 class="suggestion-title">Also Starred In</h3>
-                        <div class="carousel-container">
-                            <div class="carousel-nav prev" id="alsoStarredPrev">
-                                <i class="fas fa-chevron-left"></i>
-                            </div>
-                            <div class="carousel" id="alsoStarredCarousel">
-                                <!-- Also starred videos will be loaded dynamically -->
-                            </div>
-                            <div class="carousel-nav next" id="alsoStarredNext">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- You May Also Like -->
-                    <div class="suggestion-section">
-                        <h3 class="suggestion-title">You May Also Like</h3>
-                        <div class="carousel-container">
-                            <div class="carousel-nav prev" id="youMayLikePrev">
-                                <i class="fas fa-chevron-left"></i>
-                            </div>
-                            <div class="carousel" id="youMayLikeCarousel">
-                                <!-- Similar videos will be loaded dynamically -->
-                            </div>
-                            <div class="carousel-nav next" id="youMayLikeNext">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PREVIEW PAGE -->
-            <div class="preview-page" id="previewPage" style="display: none;">
-                <div class="preview-header">
-                    <button class="preview-back-btn" id="previewBackBtn">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <h3 class="preview-title">Preview Images</h3>
-                </div>
-                
-                <div class="preview-images-full" id="previewImagesFull">
-                    <!-- Preview images will be added dynamically -->
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Album Modal -->
-    <div class="modal" id="albumModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 class="modal-title">Album Details</h3>
-                <button class="close-modal" id="closeAlbumModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="album-modal-content">
-                <h1 id="albumModalTitle">Album Title</h1>
-                
-                <!-- TAGS -->
-                <div id="albumModalTags" class="tags">
-                    <!-- Tags will be added dynamically -->
-                </div>
-                
-                <!-- ACTRESS -->
-                <div class="label-block">
-                    <div class="label-title">Actress</div>
-                    <div id="albumModalActress" class="actress-row">
-                        <!-- Actress will be added dynamically -->
-                    </div>
-                </div>
-                
-                <!-- IMAGE COUNT -->
-                <div class="label-block">
-                    <div class="label-title">Image Count</div>
-                    <div id="albumModalImageCount" class="label-value">0 images</div>
-                </div>
-                
-                <!-- COVER IMAGE -->
-                <div class="label-block">
-                    <div class="label-title">Cover Image</div>
-                    <div class="album-cover-container">
-                        <img id="albumMainCover" src="" alt="Album Cover">
-                    </div>
-                </div>
-                
-                <!-- ALBUM IMAGES -->
-                <div class="label-block">
-                    <div class="label-title">Album Images</div>
-                    <div class="album-images" id="albumImages">
-                        <!-- Album images will be added dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- ========== FILTER MODAL ========== -->
+<div class="modal filter-modal" id="filterModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title">Filters</h3>
+      <button class="close-modal" id="closeFilterModal"><i class="fas fa-times"></i></button>
     </div>
-
-    <!-- Filter Modal -->
-    <div class="modal filter-modal" id="filterModal">
-        <div class="filter-container">
-            <div class="filter-header">
-                <h3 class="filter-title">Filters</h3>
-                <button class="close-modal" id="closeFilterModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-filter-tab="actress">Actress</button>
-                <button class="filter-tab" data-filter-tab="tags">Tags</button>
-                <button class="filter-tab" data-filter-tab="studios">Studios</button>
-                <button class="filter-tab" data-filter-tab="label">Label</button>
-                <button class="filter-tab" data-filter-tab="series">Series</button>
-                <button class="filter-tab" data-filter-tab="version">Version</button>
-                <button class="filter-tab" data-filter-tab="group">Group</button>
-            </div>
-            
-            <div class="filter-content">
-                <!-- Selected Filters Section -->
-                <div class="selected-filters" id="selectedFilters">
-                    <!-- Selected filters will be added dynamically -->
-                </div>
-                
-                <!-- Actress Filter with Column Controls -->
-                <div class="filter-section active" id="actressFilter">
-                    <div class="column-controls">
-                        <button class="col-btn" data-cols="1">1</button>
-                        <button class="col-btn" data-cols="2">2</button>
-                        <button class="col-btn active" data-cols="3">3</button>
-                    </div>
-                    <div class="filter-search">
-                        <i class="fas fa-search filter-search-icon"></i>
-                        <input type="text" class="filter-search-input" data-filter-type="actress" placeholder="Search actress...">
-                    </div>
-                    <div class="actress-grid" id="actressGrid">
-                        <!-- Actress items will be loaded dynamically -->
-                    </div>
-                </div>
-                
-                <!-- Tags Filter -->
-                <div class="filter-section" id="tagsFilter">
-                    <div class="filter-search">
-                        <i class="fas fa-search filter-search-icon"></i>
-                        <input type="text" class="filter-search-input" data-filter-type="tags" placeholder="Search tags...">
-                    </div>
-                    <div class="tags-grid" id="tagsGrid">
-                        <!-- Tag items will be loaded dynamically -->
-                    </div>
-                </div>
-                
-                <!-- Studios Filter -->
-                <div class="filter-section" id="studiosFilter">
-                    <div class="filter-search">
-                        <i class="fas fa-search filter-search-icon"></i>
-                        <input type="text" class="filter-search-input" data-filter-type="studios" placeholder="Search studios...">
-                    </div>
-                    <div class="studios-grid" id="studiosGrid">
-                        <!-- Studio items will be loaded dynamically -->
-                    </div>
-                </div>
-                
-                <!-- Label Filter (replaces tokens) -->
-                <div class="filter-section" id="labelFilter">
-                    <div class="filter-search">
-                        <i class="fas fa-search filter-search-icon"></i>
-                        <input type="text" class="filter-search-input" data-filter-type="label" placeholder="Search labels...">
-                    </div>
-                    <div class="label-grid" id="labelGrid">
-                        <!-- Label items will be loaded dynamically -->
-                    </div>
-                </div>
-                
-                <!-- Series Filter -->
-                <div class="filter-section" id="seriesFilter">
-                    <div class="filter-search">
-                        <i class="fas fa-search filter-search-icon"></i>
-                        <input type="text" class="filter-search-input" data-filter-type="series" placeholder="Search series...">
-                    </div>
-                    <div class="series-grid" id="seriesGrid">
-                        <!-- Series items will be loaded dynamically -->
-                    </div>
-                </div>
-                
-                <!-- Version Filter -->
-                <div class="filter-section" id="versionFilter">
-                    <div class="options-grid">
-                        <button class="option-item" data-filter-type="version" data-value="censored">Censored</button>
-                        <button class="option-item" data-filter-type="version" data-value="decensored">Decensored</button>
-                        <button class="option-item" data-filter-type="version" data-value="uncensored">Uncensored</button>
-                        <button class="option-item" data-filter-type="version" data-value="subtitled">Subtitled</button>
-
-                    </div>
-                </div>
-                
-                <!-- Group Filter -->
-                <div class="filter-section" id="groupFilter">
-                    <div class="options-grid">
-                        <button class="option-item" data-filter-type="group" data-value="solo">Solo</button>
-                        <button class="option-item" data-filter-type="group" data-value="duo">Duo</button>
-                        <button class="option-item" data-filter-type="group" data-value="trio">Trio</button>
-                        <button class="option-item" data-filter-type="group" data-value="multi">Multi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-filter-tab="actress">Actress</button>
+      <button class="filter-tab" data-filter-tab="tags">Tags</button>
+      <button class="filter-tab" data-filter-tab="studios">Studios &amp; Labels</button>
+      <button class="filter-tab" data-filter-tab="series">Series</button>
+      <button class="filter-tab" data-filter-tab="version">Version</button>
+      <button class="filter-tab" data-filter-tab="group">Group</button>
     </div>
+    <div class="filter-content" id="filterContent"></div>
+  </div>
+</div>
 
-    <!-- Fullscreen Image Viewer with Swipe -->
-    <div class="modal image-modal" id="imageModal">
-        <div class="modal-container" style="background: transparent; box-shadow: none; max-width: 90vw;">
-            <div style="position: absolute; top: 1rem; right: 1rem; z-index: 1001;">
-                <button class="close-modal" id="closeImageModal" style="background-color: rgba(0,0,0,0.5); color: white;">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div style="position: absolute; top: 50%; left: 1rem; transform: translateY(-50%); z-index: 1001;">
-                <button class="nav-image-btn" id="prevImageBtn" style="background-color: rgba(0,0,0,0.5); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-            </div>
-            <div style="position: absolute; top: 50%; right: 1rem; transform: translateY(-50%); z-index: 1001;">
-                <button class="nav-image-btn" id="nextImageBtn" style="background-color: rgba(0,0,0,0.5); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <img src="" alt="Fullscreen" class="fullscreen-image" id="fullscreenImage">
-            </div>
+<!-- ========== FIREBASE ========== -->
+<script type="importmap">
+{
+  "imports": {
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+    "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js",
+    "firebase/analytics": "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"
+  }
+}
+</script>
+<script type="module">
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, get, set, push, update, remove } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyD-I-BMgdqvsml2PMYjLQVS_FLFeXeHPNA",
+  authDomain: "jav-gallery.firebaseapp.com",
+  databaseURL: "https://jav-gallery-default-rtdb.firebaseio.com",
+  projectId: "jav-gallery",
+  storageBucket: "jav-gallery.firebasestorage.app",
+  messagingSenderId: "511938656611",
+  appId: "1:511938656611:web:dc264c9231799ffc4a3b56",
+  measurementId: "G-PTJWD3VWCJ"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const analytics = getAnalytics(app);
+
+// ===== STATE =====
+let allVideos = {};
+let allActresses = {};
+let allTags = {};
+let allStudios = {};
+let allLabels = {};
+let allSeries = {};
+let allVersions = {};
+let allGroups = {};
+
+let activeFilters = { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
+let currentSort = 'top-rated';
+let searchTerm = '';
+let currentPage = 1;
+const PAGE_SIZE = 25;
+let currentVideoForModal = null;
+let currentFilterTab = 'actress';
+let viewMode = 'thumbnail';
+let expandedStudio = null;
+
+// ===== DOM REFS =====
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+// Tabs
+const tabBtns = $$('.tab-btn');
+const tabContents = { videos: $('#videosTab'), add: $('#addTab') };
+const videosGrid = $('#videosGrid');
+const searchInput = $('#searchInput');
+const filtersBtn = $('#filtersBtn');
+const sortBtn = $('#sortBtn');
+const sortMenu = $('#sortMenu');
+const activeFiltersContainer = $('#activeFilters');
+const videoCountEl = $('#videoCount');
+const prevBtn = $('#videosPrevBtn');
+const nextBtn = $('#videosNextBtn');
+const pageNumberEl = $('#videosPageNumber');
+const videoModal = $('#videoModal');
+const filterModal = $('#filterModal');
+const closeVideoModal = $('#closeVideoModal');
+const closeFilterModal = $('#closeFilterModal');
+const filterTabs = $('#filterTabs');
+const filterContent = $('#filterContent');
+const addDataNav = $('#addDataNav');
+const addDataContent = $('#addDataContent');
+const actressInfoContainer = $('#actressInfoContainer');
+const viewToggleBtn = $('#viewToggleBtn');
+
+// Video modal elements
+const modalThumb = $('#modalThumb');
+const videoPlayer = $('#videoPlayer');
+const videoFrame = $('#videoFrame');
+const modalTitle = $('#modalTitle');
+const modalSeries = $('#modalSeries');
+const modalActress = $('#modalActress');
+const modalTags = $('#modalTags');
+const modalDesc = $('#modalDesc');
+const toggleDesc = $('#toggleDesc');
+const modalRating = $('#modalRating');
+const modalStudio = $('#modalStudio');
+const modalLabel = $('#modalLabel');
+const modalRelease = $('#modalRelease');
+const modalDuration = $('#modalDuration');
+const modalVersions = $('#modalVersions');
+const modalGroup = $('#modalGroup');
+const modalPoster = $('#modalPoster');
+const modalCode = $('#modalCode');
+const trailerBtn = $('#trailerBtn');
+const videoBtn = $('#videoBtn');
+const alsoStarredCarousel = $('#alsoStarredCarousel');
+const youMayLikeCarousel = $('#youMayLikeCarousel');
+const alsoStarredPrev = $('#alsoStarredPrev');
+const alsoStarredNext = $('#alsoStarredNext');
+const youMayLikePrev = $('#youMayLikePrev');
+const youMayLikeNext = $('#youMayLikeNext');
+
+// ===== HELPER FUNCTIONS =====
+function getAllItems(coll) { return Object.values(coll); }
+
+function getActressByName(name) {
+  return getAllItems(allActresses).find(a => a.name === name);
+}
+
+function getTagByName(name) {
+  return getAllItems(allTags).find(t => t.name === name);
+}
+
+function getLabelByName(name) {
+  return getAllItems(allLabels).find(l => l.name === name);
+}
+
+// ===== DATA LOADING =====
+async function loadAllData() {
+  try {
+    const snap = await get(ref(db));
+    const data = snap.val() || {};
+    allVideos = data.videos || {};
+    allActresses = data.actresses || {};
+    allTags = data.tags || {};
+    allStudios = data.studios || {};
+    allLabels = data.labels || {};
+    allSeries = data.series || {};
+    allVersions = data.versions || {};
+    allGroups = data.groups || {};
+  } catch (e) {
+    console.error('Load error:', e);
+  }
+}
+
+// ===== FILTERING & SORTING =====
+function getFilteredVideos() {
+  let list = getAllItems(allVideos);
+  if (searchTerm) {
+    const s = searchTerm.toLowerCase();
+    list = list.filter(v =>
+      (v.title && v.title.toLowerCase().includes(s)) ||
+      (v.code && v.code.toLowerCase().includes(s)) ||
+      (v.actress && v.actress.toLowerCase().includes(s))
+    );
+  }
+  Object.keys(activeFilters).forEach(key => {
+    const selected = activeFilters[key];
+    if (!selected.length) return;
+    list = list.filter(v => {
+      if (key === 'actress') {
+        if (!v.actress) return false;
+        const actresses = v.actress.split(',').map(a => a.trim());
+        return selected.some(s => actresses.includes(s));
+      }
+      if (key === 'tags') {
+        if (!v.tags || !Array.isArray(v.tags)) return false;
+        return selected.some(s => v.tags.includes(s));
+      }
+      if (key === 'studios') return selected.includes(v.studio);
+      if (key === 'label') return selected.includes(v.label);
+      if (key === 'series') return selected.includes(v.series);
+      if (key === 'version') return selected.includes(v.version);
+      if (key === 'group') return selected.includes(v.group);
+      return true;
+    });
+  });
+  return list;
+}
+
+function sortVideos(list) {
+  const sorted = [...list];
+  switch (currentSort) {
+    case 'shuffle':
+      for (let i = sorted.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
+      }
+      break;
+    case 'latest':
+      sorted.sort((a,b) => new Date(b.release) - new Date(a.release));
+      break;
+    case 'oldest':
+      sorted.sort((a,b) => new Date(a.release) - new Date(b.release));
+      break;
+    case 'top-rated':
+    default:
+      sorted.sort((a,b) => (b.rating || 0) - (a.rating || 0));
+      break;
+  }
+  return sorted;
+}
+
+function getPaginated(list) {
+  const start = (currentPage - 1) * PAGE_SIZE;
+  return list.slice(start, start + PAGE_SIZE);
+}
+
+// ===== RENDER ACTRESS INFO =====
+function renderActressInfo() {
+  const selectedActresses = activeFilters.actress || [];
+  if (!selectedActresses.length) {
+    actressInfoContainer.innerHTML = '';
+    return;
+  }
+  let html = '<div class="actress-info-container">';
+  selectedActresses.forEach(name => {
+    const data = getActressByName(name);
+    if (!data) return;
+    const img = data.images && data.images.length ? data.images[0] : '';
+    const dob = data.dob || '';
+    const debut = data.debut || '';
+    const today = new Date();
+    let age = 'N/A';
+    if (dob) {
+      const birth = new Date(dob);
+      if (!isNaN(birth)) {
+        let ageNum = today.getFullYear() - birth.getFullYear();
+        const m = today.getMonth() - birth.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) ageNum--;
+        age = ageNum;
+      }
+    }
+    let career = 'N/A';
+    if (debut) {
+      const start = new Date(debut);
+      if (!isNaN(start)) {
+        let years = today.getFullYear() - start.getFullYear();
+        const m = today.getMonth() - start.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < start.getDate())) years--;
+        career = years;
+      }
+    }
+    const javguru = data.javguru || '';
+    html += `
+      <div class="actress-info-card">
+        ${img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'" />` : ''}
+        <div class="info-name">${name}</div>
+        ${javguru ? `<button class="javguru-btn" onclick="window.open('${javguru}', '_blank')"><i class="fas fa-external-link-alt"></i> JAVguru</button>` : ''}
+        <div class="info-detail"><strong>DOB:</strong> ${dob || 'N/A'}</div>
+        <div class="info-detail"><strong>Age:</strong> ${age}</div>
+        <div class="info-detail"><strong>Debut:</strong> ${debut || 'N/A'}</div>
+        <div class="info-detail"><strong>Career:</strong> ${career !== 'N/A' ? career + ' years' : 'N/A'}</div>
+        <div class="info-detail"><strong>Measurements:</strong> ${data.measurements || 'N/A'}</div>
+        <div class="info-detail"><strong>Cup:</strong> ${data.cup || 'N/A'}</div>
+        <div class="info-detail"><strong>Height:</strong> ${data.height || 'N/A'} cm</div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  actressInfoContainer.innerHTML = html;
+}
+
+// ===== RENDER VIDEOS =====
+function renderVideos() {
+  const filtered = getFilteredVideos();
+  const sorted = sortVideos(filtered);
+  const total = sorted.length;
+  const totalPages = Math.ceil(total / PAGE_SIZE) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+  const pageItems = getPaginated(sorted);
+
+  videoCountEl.textContent = `${total} video${total !== 1 ? 's' : ''}`;
+  videosGrid.innerHTML = '';
+  videosGrid.className = `videos-grid ${viewMode === 'poster' ? 'poster-mode' : 'thumbnail-mode'}`;
+
+  if (!pageItems.length) {
+    videosGrid.innerHTML = `<div class="empty-state"><i class="fas fa-video-slash"></i>No videos match.<br><small>Add some in "Add Data".</small></div>`;
+  } else {
+    pageItems.forEach(v => {
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      const imgSrc = viewMode === 'poster' ? (v.poster || v.thumbnail || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Image') : (v.thumbnail || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image');
+      card.innerHTML = `
+        <img src="${imgSrc}" class="video-thumbnail" alt="${v.title}">
+        <div class="video-info">
+          <div class="video-title">${v.title || 'Untitled'}</div>
+          <div class="video-meta">
+            <div class="video-meta-item"><i class="fas fa-hashtag"></i> ${v.code || 'N/A'}</div>
+            <div class="video-meta-item"><i class="fas fa-layer-group"></i> ${v.version || 'Standard'}</div>
+            <div class="video-meta-item"><i class="fas fa-star"></i> ${(v.rating || 0).toFixed(1)}</div>
+          </div>
         </div>
+      `;
+      card.addEventListener('click', () => openVideoModal(v));
+      videosGrid.appendChild(card);
+    });
+  }
+  pageNumberEl.textContent = currentPage;
+  prevBtn.disabled = currentPage <= 1;
+  nextBtn.disabled = currentPage >= totalPages;
+
+  renderActressInfo();
+  viewToggleBtn.classList.toggle('active', viewMode === 'poster');
+  viewToggleBtn.innerHTML = viewMode === 'poster' ? '<i class="fas fa-th-large"></i>' : '<i class="fas fa-image"></i>';
+}
+
+// ===== FILTER MODAL =====
+function renderFilterModal() {
+  // Filter tabs: actress, tags, studios, series, version, group
+  const types = ['actress','tags','studios','series','version','group'];
+  const dataMap = { actress:allActresses, tags:allTags, studios:allStudios, series:allSeries, version:allVersions, group:allGroups };
+  const aspectMap = { actress:'2-3', tags:'1-1', studios:'1-1', series:'3-2', version:'none', group:'none' };
+  const colsMap = { actress:3, tags:3, studios:2, series:1, version:1, group:1 };
+
+  // Build studio->labels map from video data (for nested view)
+  const studioLabelsMap = {};
+  getAllItems(allVideos).forEach(v => {
+    if (v.studio && v.label) {
+      if (!studioLabelsMap[v.studio]) studioLabelsMap[v.studio] = new Set();
+      studioLabelsMap[v.studio].add(v.label);
+    }
+  });
+  // Also use explicit studio association from label data
+  getAllItems(allLabels).forEach(label => {
+    if (label.studio) {
+      if (!studioLabelsMap[label.studio]) studioLabelsMap[label.studio] = new Set();
+      studioLabelsMap[label.studio].add(label.name);
+    }
+  });
+
+  let html = '';
+  types.forEach(type => {
+    let items = getAllItems(dataMap[type] || {});
+    // For studios, we handle differently
+    if (type === 'studios') {
+      // We'll render studio list with nested labels
+      // Shuffle studios for variety
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      const selectedStudios = activeFilters.studios || [];
+      const selectedLabels = activeFilters.label || [];
+      const filtered = getFilteredVideos();
+
+      html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
+        <div class="filter-section-search">
+          <input type="text" placeholder="Search studios & labels..." class="filter-search-input" data-section="${type}" />
+        </div>
+        <div class="studio-list">`;
+
+      if (!items.length) {
+        html += `<span style="color:var(--text-secondary);font-size:0.85rem;">No studios available.</span>`;
+      } else {
+        items.forEach(studio => {
+          const name = studio.name;
+          const count = filtered.filter(v => v.studio === name).length;
+          const isStudioSelected = selectedStudios.includes(name);
+          const labels = studioLabelsMap[name] ? Array.from(studioLabelsMap[name]) : [];
+          const isExpanded = expandedStudio === name;
+          const imgSrc = studio.image || '';
+          html += `<div class="studio-item" data-studio="${name}">
+            <div class="studio-header" style="${isStudioSelected ? 'background:var(--primary-soft);border-color:var(--primary);' : ''}">
+              <span class="studio-name" data-type="studios" data-value="${name}">
+                ${imgSrc ? `<img src="${imgSrc}" onerror="this.style.display='none'" />` : ''}
+                <span>${name}</span>
+                <span class="studio-count">(${count})</span>
+              </span>
+              ${labels.length ? `<span class="studio-toggle ${isExpanded ? 'open' : ''}"><i class="fas fa-chevron-right"></i></span>` : ''}
+            </div>
+            <div class="studio-labels ${isExpanded ? 'open' : ''}">
+              ${labels.length ? labels.map(label => {
+                const labelData = getLabelByName(label);
+                const labelImg = labelData && labelData.image ? labelData.image : '';
+                const labelSelected = selectedLabels.includes(label);
+                const labelCount = filtered.filter(v => v.label === label).length;
+                return `<div class="label-option ${labelSelected ? 'selected' : ''}" data-label="${label}">
+                  ${labelImg ? `<img src="${labelImg}" onerror="this.style.display='none'" />` : ''}
+                  ${label} (${labelCount})
+                </div>`;
+              }).join('') : '<span style="grid-column:1/-1;font-size:0.75rem;color:var(--text-secondary);">No labels for this studio</span>'}
+            </div>
+          </div>`;
+        });
+      }
+      html += `</div></div>`;
+      return; // skip regular rendering for studios
+    }
+
+    // Regular rendering for other types (actress, tags, series, version, group)
+    // Separate selected and unselected
+    const selectedVals = activeFilters[type] || [];
+    const selectedItems = items.filter(item => selectedVals.includes(item.name));
+    const unselectedItems = items.filter(item => !selectedVals.includes(item.name));
+    const sortedItems = [...selectedItems, ...unselectedItems];
+
+    const filtered = getFilteredVideos();
+    const aspect = aspectMap[type] || 'none';
+    const cols = colsMap[type] || 1;
+
+    html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
+      <div class="filter-section-search">
+        <input type="text" placeholder="Search ${type}..." class="filter-search-input" data-section="${type}" />
+      </div>
+      <div class="filter-options cols-${cols}">`;
+
+    if (!sortedItems.length) {
+      html += `<span style="color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1;">No items available.</span>`;
+    } else {
+      sortedItems.forEach(item => {
+        const name = item.name;
+        let count = 0;
+        if (type === 'actress') count = filtered.filter(v => v.actress && v.actress.split(',').map(a=>a.trim()).includes(name)).length;
+        else if (type === 'tags') count = filtered.filter(v => v.tags && v.tags.includes(name)).length;
+        else if (type === 'series') count = filtered.filter(v => v.series === name).length;
+        else if (type === 'version') count = filtered.filter(v => v.version === name).length;
+        else if (type === 'group') count = filtered.filter(v => v.group === name).length;
+        const selected = selectedVals.includes(name);
+        let imgSrc = '';
+        if (type === 'actress' && item.images && item.images.length) imgSrc = item.images[0];
+        else if (['tags','series'].includes(type) && item.image) imgSrc = item.image;
+        const hasImage = imgSrc && imgSrc.length > 0;
+        const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
+        html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
+        if (hasImage) {
+          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
+        }
+        html += `<span class="filter-name">${name}</span>`;
+        html += `<span class="count">(${count})</span>`;
+        if (type === 'actress' && item.javguru) {
+          html += `<button class="javguru-btn" data-url="${item.javguru}" onclick="event.stopPropagation(); window.open(this.dataset.url, '_blank');"><i class="fas fa-external-link-alt"></i></button>`;
+        }
+        html += `</div>`;
+      });
+    }
+    html += `</div></div>`;
+  });
+
+  filterContent.innerHTML = html;
+
+  // Set active tab and sections
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filterTab === currentFilterTab);
+  });
+  filterContent.querySelectorAll('.filter-section').forEach(section => {
+    section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
+  });
+
+  // Event listeners for flat filter options (actress, tags, series, version, group)
+  filterContent.querySelectorAll('.filter-option').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.javguru-btn')) return;
+      const type = el.dataset.filterType, val = el.dataset.value;
+      toggleFilter(type, val);
+      renderFilterModal();
+      renderVideos();
+      updateActiveFiltersUI();
+    });
+  });
+
+  // Event listeners for studio name (click to toggle studio filter)
+  filterContent.querySelectorAll('.studio-name').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const type = el.dataset.type || 'studios';
+      const val = el.dataset.value;
+      if (type && val) {
+        toggleFilter(type, val);
+        renderFilterModal();
+        renderVideos();
+        updateActiveFiltersUI();
+      }
+    });
+  });
+
+  // Event listeners for studio headers (toggle expand/collapse)
+  filterContent.querySelectorAll('.studio-header').forEach(header => {
+    header.addEventListener('click', (e) => {
+      // Only toggle if click is on the header itself or the toggle icon, not on the studio-name span (which has its own handler)
+      if (e.target.closest('.studio-name')) return;
+      const studioItem = header.closest('.studio-item');
+      if (!studioItem) return;
+      const studioName = studioItem.dataset.studio;
+      if (expandedStudio === studioName) {
+        expandedStudio = null;
+      } else {
+        expandedStudio = studioName;
+      }
+      renderFilterModal();
+    });
+  });
+
+  // Event listeners for label options inside studio (toggle label filter)
+  filterContent.querySelectorAll('.label-option').forEach(labelEl => {
+    labelEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const labelName = labelEl.dataset.label;
+      toggleFilter('label', labelName);
+      renderFilterModal();
+      renderVideos();
+      updateActiveFiltersUI();
+    });
+  });
+
+  // Search functionality per section
+  filterContent.querySelectorAll('.filter-search-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const section = e.target.dataset.section;
+      const query = e.target.value.toLowerCase();
+      if (section === 'studios') {
+        const studioItems = filterContent.querySelectorAll(`#filterSection_${section} .studio-item`);
+        studioItems.forEach(item => {
+          const header = item.querySelector('.studio-header');
+          const name = header?.querySelector('.studio-name span')?.textContent?.toLowerCase() || '';
+          const labels = item.querySelectorAll('.label-option');
+          let match = name.includes(query);
+          if (!match) {
+            labels.forEach(lb => {
+              if (lb.textContent.toLowerCase().includes(query)) match = true;
+            });
+          }
+          item.style.display = match ? '' : 'none';
+        });
+      } else {
+        const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
+        if (!options) return;
+        const items = options.querySelectorAll('.filter-option');
+        items.forEach(item => {
+          const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
+          item.style.display = name.includes(query) ? '' : 'none';
+        });
+      }
+    });
+  });
+
+  // Filter tab click handlers (this is crucial for tab switching)
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.onclick = (e) => {
+      const tab = btn.dataset.filterTab;
+      if (tab) {
+        currentFilterTab = tab;
+        renderFilterModal();
+      }
+    };
+  });
+}
+
+function toggleFilter(type, val) {
+  if (!activeFilters[type]) activeFilters[type] = [];
+  const idx = activeFilters[type].indexOf(val);
+  if (idx > -1) activeFilters[type].splice(idx, 1);
+  else activeFilters[type].push(val);
+  currentPage = 1;
+}
+
+function updateActiveFiltersUI() {
+  activeFiltersContainer.innerHTML = '';
+  let hasFilters = false;
+  Object.keys(activeFilters).forEach(type => {
+    activeFilters[type].forEach(val => {
+      hasFilters = true;
+      const tag = document.createElement('span');
+      tag.className = 'filter-tag';
+      tag.innerHTML = `${type}: ${val} <span class="remove" data-type="${type}" data-value="${val}"><i class="fas fa-times"></i></span>`;
+      activeFiltersContainer.appendChild(tag);
+    });
+  });
+  activeFiltersContainer.querySelectorAll('.remove').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const type = el.dataset.type, val = el.dataset.value;
+      toggleFilter(type, val);
+      renderFilterModal();
+      renderVideos();
+      updateActiveFiltersUI();
+    });
+  });
+  if (!hasFilters) {
+    const placeholder = document.createElement('span');
+    placeholder.style.color = 'var(--text-secondary)';
+    placeholder.style.fontSize = '0.85rem';
+    placeholder.textContent = 'No filters applied';
+    activeFiltersContainer.appendChild(placeholder);
+  }
+}
+
+// ===== VIDEO MODAL =====
+function openVideoModal(video) {
+  currentVideoForModal = video;
+  videoPlayer.style.display = 'none';
+  modalThumb.style.display = 'block';
+  modalThumb.src = video.thumbnail || 'https://via.placeholder.com/600x400/7c3aed/ffffff?text=No+Image';
+  videoFrame.src = '';
+  modalTitle.textContent = video.title || 'Untitled';
+  modalSeries.textContent = video.series || 'N/A';
+  modalSeries.onclick = () => { if (video.series) { toggleFilter('series', video.series); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); } };
+  modalRating.textContent = (video.rating || 0).toFixed(1);
+  modalStudio.textContent = video.studio || 'N/A';
+  modalStudio.onclick = () => { if (video.studio) { toggleFilter('studios', video.studio); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); } };
+  modalLabel.textContent = video.label || 'N/A';
+  modalLabel.onclick = () => { if (video.label) { toggleFilter('label', video.label); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); } };
+  modalRelease.textContent = video.release || 'N/A';
+  modalDuration.textContent = video.duration || 0;
+  modalVersions.textContent = video.version || 'N/A';
+  modalVersions.onclick = () => { if (video.version) { toggleFilter('version', video.version); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); } };
+  modalGroup.textContent = video.group || 'N/A';
+  modalGroup.onclick = () => { if (video.group) { toggleFilter('group', video.group); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); } };
+  modalPoster.src = video.poster || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Image';
+  modalCode.textContent = video.code || 'N/A';
+  modalCode.onclick = () => { if (video.code) { searchInput.value = video.code; searchTerm = video.code; currentPage=1; renderVideos(); closeModal(videoModal); } };
+
+  modalDesc.textContent = video.description || '';
+  modalDesc.classList.remove('expanded');
+  toggleDesc.textContent = 'Show More';
+  toggleDesc.onclick = () => { modalDesc.classList.toggle('expanded'); toggleDesc.textContent = modalDesc.classList.contains('expanded') ? 'Show Less' : 'Show More'; };
+
+  modalActress.innerHTML = '';
+  if (video.actress) {
+    video.actress.split(',').map(a=>a.trim()).forEach(name => {
+      const data = getActressByName(name);
+      const img = data && data.images && data.images.length ? data.images[0] : '';
+      const div = document.createElement('div'); div.className = 'actress';
+      div.innerHTML = `<img src="${img}" alt="${name}" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
+      div.onclick = () => { toggleFilter('actress', name); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); };
+      modalActress.appendChild(div);
+    });
+  }
+
+  modalTags.innerHTML = '';
+  if (video.tags && video.tags.length) {
+    video.tags.forEach(tag => {
+      const data = getTagByName(tag);
+      const img = data && data.image ? data.image : '';
+      const div = document.createElement('div'); div.className = 'tag-item';
+      div.innerHTML = `<img src="${img}" alt="${tag}" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
+      div.onclick = () => { toggleFilter('tags', tag); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); };
+      modalTags.appendChild(div);
+    });
+  }
+
+  loadSuggestions(video);
+  openModal(videoModal);
+}
+
+function loadSuggestions(video) {
+  const also = getAlsoStarred(video);
+  renderCarousel(alsoStarredCarousel, also, 'poster');
+  const like = getYouMayLike(video);
+  renderCarousel(youMayLikeCarousel, like, 'thumbnail');
+}
+
+function getAlsoStarred(video) {
+  if (!video.actress) return [];
+  const actresses = video.actress.split(',').map(a=>a.trim());
+  return getAllItems(allVideos).filter(v => v.id !== video.id && v.actress && actresses.some(a => v.actress.includes(a))).slice(0,10);
+}
+
+function getYouMayLike(video) {
+  if (!video.tags || !video.tags.length) return [];
+  return getAllItems(allVideos).filter(v => v.id !== video.id && v.tags && v.tags.some(t => video.tags.includes(t))).slice(0,10);
+}
+
+function renderCarousel(container, items, type) {
+  container.innerHTML = '';
+  if (!items.length) { container.innerHTML = '<div class="empty-state" style="padding:0.5rem 0;font-size:0.8rem;">No suggestions</div>'; return; }
+  items.forEach(v => {
+    const div = document.createElement('div'); div.className = 'carousel-item';
+    const img = type === 'poster' ? (v.poster || v.thumbnail) : v.thumbnail;
+    div.innerHTML = `<img src="${img || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image'}" alt="${v.title}"><div class="carousel-code">${v.code || ''}</div>`;
+    div.onclick = () => { closeModal(videoModal); setTimeout(()=>openVideoModal(v), 200); };
+    container.appendChild(div);
+  });
+}
+
+function setupCarouselScroll() {
+  [alsoStarredPrev, alsoStarredNext].forEach((btn, i) => {
+    btn.onclick = () => { const car = i===0 ? alsoStarredCarousel : alsoStarredCarousel; const dir = i===0 ? -1 : 1; car.scrollBy({ left: dir * 200, behavior: 'smooth' }); };
+  });
+  [youMayLikePrev, youMayLikeNext].forEach((btn, i) => {
+    btn.onclick = () => { const car = i===0 ? youMayLikeCarousel : youMayLikeCarousel; const dir = i===0 ? -1 : 1; car.scrollBy({ left: dir * 200, behavior: 'smooth' }); };
+  });
+}
+
+// ===== VIDEO PLAYER =====
+function playVideo(type) {
+  const video = currentVideoForModal;
+  if (!video) return;
+  const url = type === 'trailer' ? video.trailerUrl : video.videoUrl;
+  if (!url) { alert('No video URL'); return; }
+  let embedUrl = url;
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    const m = url.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/);
+    if (m) embedUrl = `https://www.youtube.com/embed/${m[1]}?autoplay=1`;
+  } else if (url.includes('drive.google.com')) {
+    const m = url.match(/\/d\/([^/]+)/);
+    if (m) embedUrl = `https://drive.google.com/file/d/${m[1]}/preview`;
+  } else {
+    embedUrl = url + (url.includes('?') ? '&autoplay=1' : '?autoplay=1');
+  }
+  videoFrame.src = embedUrl;
+  modalThumb.style.display = 'none';
+  videoPlayer.style.display = 'block';
+  const modalContainer = document.querySelector('#videoModal .modal-container');
+  if (modalContainer) {
+    modalContainer.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// ===== MODAL HELPERS =====
+function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal(modal) {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  if (modal === videoModal) { videoPlayer.style.display = 'none'; modalThumb.style.display = 'block'; videoFrame.src = ''; }
+}
+
+// ===== EVENT LISTENERS =====
+function setupEventListeners() {
+  $('#themeToggle').onclick = () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = $('#themeToggle i');
+    icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+  };
+
+  document.querySelector('.logo').addEventListener('click', function() {
+    activeFilters = { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
+    searchTerm = '';
+    searchInput.value = '';
+    currentSort = 'top-rated';
+    currentPage = 1;
+    sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+    sortMenu.querySelector('.sort-option[data-sort="top-rated"]').classList.add('active');
+    viewMode = 'thumbnail';
+    renderVideos();
+    renderFilterModal();
+    updateActiveFiltersUI();
+    closeModal(videoModal);
+    closeModal(filterModal);
+  });
+
+  viewToggleBtn.addEventListener('click', () => {
+    viewMode = viewMode === 'thumbnail' ? 'poster' : 'thumbnail';
+    renderVideos();
+  });
+
+  tabBtns.forEach(btn => {
+    btn.onclick = () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      Object.keys(tabContents).forEach(k => tabContents[k].classList.toggle('active', k === tab));
+      if (tab === 'videos') renderVideos();
+    };
+  });
+
+  searchInput.oninput = () => { searchTerm = searchInput.value.trim(); currentPage = 1; renderVideos(); renderFilterModal(); };
+  searchInput.onkeydown = (e) => { if (e.key === 'Enter') renderVideos(); };
+
+  sortBtn.onclick = (e) => { e.stopPropagation(); sortMenu.classList.toggle('active'); };
+  document.addEventListener('click', (e) => { if (!sortBtn.contains(e.target) && !sortMenu.contains(e.target)) sortMenu.classList.remove('active'); });
+  sortMenu.querySelectorAll('.sort-option').forEach(opt => {
+    opt.onclick = () => {
+      sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      currentSort = opt.dataset.sort;
+      currentPage = 1;
+      renderVideos();
+      sortMenu.classList.remove('active');
+    };
+  });
+
+  filtersBtn.onclick = () => { renderFilterModal(); openModal(filterModal); };
+  closeFilterModal.onclick = () => closeModal(filterModal);
+  filterModal.onclick = (e) => { if (e.target === filterModal) closeModal(filterModal); };
+  closeVideoModal.onclick = () => closeModal(videoModal);
+  videoModal.onclick = (e) => { if (e.target === videoModal) closeModal(videoModal); };
+  trailerBtn.onclick = () => playVideo('trailer');
+  videoBtn.onclick = () => playVideo('video');
+
+  prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderVideos(); } };
+  nextBtn.onclick = () => { const total = Math.ceil(getFilteredVideos().length / PAGE_SIZE); if (currentPage < total) { currentPage++; renderVideos(); } };
+  setupCarouselScroll();
+
+  activeFiltersContainer.addEventListener('click', (e) => {
+    const remove = e.target.closest('.remove');
+    if (remove) {
+      const type = remove.dataset.type, val = remove.dataset.value;
+      toggleFilter(type, val);
+      renderFilterModal(); renderVideos(); updateActiveFiltersUI();
+    }
+  });
+}
+
+// =====================================================
+// ========== ADD DATA – CUSTOM SELECT COMPONENT ==========
+// =====================================================
+function createCustomSelect({
+  container,
+  options = [],
+  multiple = false,
+  placeholder = 'Select...',
+  imageKey = 'image',
+  nameKey = 'name',
+  onSelect = () => {}
+}) {
+  container.innerHTML = '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'custom-select';
+
+  const inputDiv = document.createElement('div');
+  inputDiv.className = 'custom-select-input';
+  inputDiv.innerHTML = `<span class="selected-text">${placeholder}</span><i class="fas fa-chevron-down" style="margin-left:auto;"></i>`;
+  wrapper.appendChild(inputDiv);
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'custom-select-dropdown';
+  const searchDiv = document.createElement('div');
+  searchDiv.className = 'custom-select-search';
+  searchDiv.innerHTML = `<input type="text" placeholder="Search..." />`;
+  dropdown.appendChild(searchDiv);
+
+  const optionsContainer = document.createElement('div');
+  optionsContainer.className = 'custom-select-options';
+  dropdown.appendChild(optionsContainer);
+  wrapper.appendChild(dropdown);
+
+  container.appendChild(wrapper);
+
+  let selectedValues = [];
+
+  function renderOptions(filter = '') {
+    optionsContainer.innerHTML = '';
+    const filtered = options.filter(o => o[nameKey].toLowerCase().includes(filter.toLowerCase()));
+    filtered.forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'custom-select-option';
+      const checked = selectedValues.includes(opt[nameKey]);
+      if (checked) div.classList.add('selected');
+      const img = opt[imageKey] ? `<img src="${opt[imageKey]}" onerror="this.style.display='none'" style="width:40px;height:60px;object-fit:cover;border-radius:4px;" />` : '';
+      div.innerHTML = `${img}<span class="opt-name">${opt[nameKey]}</span>${checked ? '<span class="opt-check"><i class="fas fa-check"></i></span>' : ''}`;
+      div.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt[nameKey];
+        if (multiple) {
+          const idx = selectedValues.indexOf(val);
+          if (idx > -1) selectedValues.splice(idx, 1);
+          else selectedValues.push(val);
+        } else {
+          selectedValues = [val];
+          dropdown.classList.remove('show');
+        }
+        updateUI();
+        container.dataset.value = selectedValues.join(', ');
+        onSelect(selectedValues);
+      });
+      optionsContainer.appendChild(div);
+    });
+  }
+
+  function updateUI() {
+    const text = selectedValues.length ? selectedValues.join(', ') : placeholder;
+    inputDiv.querySelector('.selected-text').textContent = text;
+    optionsContainer.querySelectorAll('.custom-select-option').forEach(el => {
+      const name = el.querySelector('.opt-name').textContent;
+      const checked = selectedValues.includes(name);
+      el.classList.toggle('selected', checked);
+      const checkSpan = el.querySelector('.opt-check');
+      if (checked) {
+        if (!checkSpan) el.insertAdjacentHTML('beforeend', '<span class="opt-check"><i class="fas fa-check"></i></span>');
+      } else {
+        if (checkSpan) checkSpan.remove();
+      }
+    });
+  }
+
+  searchDiv.querySelector('input').addEventListener('input', (e) => {
+    renderOptions(e.target.value);
+  });
+
+  inputDiv.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+    if (dropdown.classList.contains('show')) renderOptions();
+  });
+  document.addEventListener('click', () => { dropdown.classList.remove('show'); });
+
+  function setValue(values) {
+    selectedValues = Array.isArray(values) ? values : [values];
+    updateUI();
+    container.dataset.value = selectedValues.join(', ');
+  }
+
+  return { wrapper, setValue, getValue: () => selectedValues };
+}
+
+// =====================================================
+// ========== ADD DATA – MAIN LOGIC ====================
+// =====================================================
+
+function setupAddData() {
+  const addTabs = addDataNav.querySelectorAll('.add-tab-btn');
+  addTabs.forEach(btn => {
+    btn.onclick = () => {
+      addTabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderAddDataPanel(btn.dataset.addtab);
+    };
+  });
+  renderAddDataPanel('videos');
+}
+
+function renderAddDataPanel(type) {
+  addDataContent.innerHTML = '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'add-data-wrapper';
+
+  const formPanel = document.createElement('div');
+  formPanel.className = 'add-data-panel active';
+  formPanel.id = 'addFormPanel';
+  formPanel.innerHTML = buildForm(type);
+  wrapper.appendChild(formPanel);
+
+  const listPanel = document.createElement('div');
+  listPanel.className = 'add-data-panel active';
+  listPanel.innerHTML = `
+    <div class="add-data-list">
+      <div class="add-data-list-header">
+        <h3>${type.charAt(0).toUpperCase()+type.slice(1)}</h3>
+        <div class="add-data-list-search">
+          <i class="fas fa-search"></i>
+          <input type="text" id="addListSearch" placeholder="Search..." />
+        </div>
+      </div>
+      <div class="add-data-items" id="addListItems"></div>
     </div>
-    
-    <script src="videodata.js"></script>
-    <script src="albumdata.js"></script>
-    <script src="picturedata.js"></script>
-    <script src="filterdata.js"></script>
-    <script src="script.js"></script>
+  `;
+  wrapper.appendChild(listPanel);
+
+  addDataContent.appendChild(wrapper);
+
+  loadAddList(type);
+  setupAddForm(type);
+
+  const searchInput = listPanel.querySelector('#addListSearch');
+  searchInput.addEventListener('input', () => {
+    loadAddList(type, searchInput.value);
+  });
+}
+
+function buildForm(type) {
+  let fields = '';
+  if (type === 'videos') {
+    const codeOptions = getAllItems(allVideos).map(v => v.code).filter(Boolean);
+    const datalistId = 'codeSuggestions';
+    const datalistHtml = `<datalist id="${datalistId}">${codeOptions.map(c => `<option value="${c}">`).join('')}</datalist>`;
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>ID (unique)</label><input id="f_id" placeholder="e.g. START-591" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Code</label><input id="f_code" list="${datalistId}" placeholder="Type to search..." />${datalistHtml}</div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Title</label><input id="f_title" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Actress (multiple)</label><div id="f_actress_container"></div></div></div>
+        <div class="form-col"><div class="form-group"><label>Studio</label><div id="f_studio_container"></div></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Label</label><div id="f_label_container"></div></div></div>
+        <div class="form-col"><div class="form-group"><label>Series</label><div id="f_series_container"></div></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Tags (multiple)</label><div id="f_tags_container"></div></div></div>
+        <div class="form-col"><div class="form-group"><label>Version</label><div id="f_version_container"></div></div></div>
+        <div class="form-col"><div class="form-group"><label>Group</label><div id="f_group_container"></div></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Rating</label><input id="f_rating" type="number" step="0.1" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Release (YYYY-MM-DD)</label><input id="f_release" type="date" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Duration (min)</label><input id="f_duration" type="number" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Trailer URL</label><input id="f_trailer" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Video URL</label><input id="f_video" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Thumbnail URL</label><input id="f_thumbnail" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Poster URL</label><input id="f_poster" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Description</label><textarea id="f_description" rows="4"></textarea></div></div>
+      </div>
+    `;
+  } else if (type === 'actresses') {
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
+        <div class="form-col"><div class="form-group"><label>JAVguru URL</label><input id="f_javguru" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>DOB (YYYY-MM-DD)</label><input id="f_dob" type="date" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Debut (YYYY-MM-DD)</label><input id="f_debut" type="date" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Measurements</label><input id="f_measurements" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Cup</label><input id="f_cup" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Height (cm)</label><input id="f_height" type="number" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Images (up to 10 URLs)</label>
+          <div class="image-urls">
+            ${Array.from({length:10}, (_,i) => `<input type="text" id="f_image_${i}" placeholder="Image URL ${i+1}" />`).join('')}
+          </div>
+        </div></div>
+      </div>
+    `;
+  } else if (type === 'labels') {
+    // Label form with studio selector
+    const studioOptions = getAllItems(allStudios).map(s => s.name);
+    const studioDatalistId = 'studioSuggestions';
+    const studioDatalistHtml = `<datalist id="${studioDatalistId}">${studioOptions.map(s => `<option value="${s}">`).join('')}</datalist>`;
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Label Name</label><input id="f_name" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Studio</label><input id="f_studio" list="${studioDatalistId}" placeholder="Type to search..." />${studioDatalistHtml}</div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Image URL</label><input id="f_image" /></div></div>
+      </div>
+    `;
+  } else if (['tags','studios','series'].includes(type)) {
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Image URL</label><input id="f_image" /></div></div>
+      </div>
+    `;
+  } else if (['versions','groups'].includes(type)) {
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
+      </div>
+    `;
+  }
+  return `<div class="add-data-form"><h4>${type === 'videos' ? 'Add Video' : 'Add '+type.slice(0,-1)}</h4>${fields}<button class="submit-btn" id="addSubmit">Save</button></div>`;
+}
+
+async function loadAddList(type, search = '') {
+  const container = document.getElementById('addListItems');
+  if (!container) return;
+  let data = {};
+  if (type === 'videos') data = allVideos;
+  else if (type === 'actresses') data = allActresses;
+  else if (type === 'tags') data = allTags;
+  else if (type === 'studios') data = allStudios;
+  else if (type === 'labels') data = allLabels;
+  else if (type === 'series') data = allSeries;
+  else if (type === 'versions') data = allVersions;
+  else if (type === 'groups') data = allGroups;
+
+  const entries = Object.entries(data);
+  const filtered = search ? entries.filter(([k, item]) => (item.name || item.title || '').toLowerCase().includes(search.toLowerCase())) : entries;
+
+  container.innerHTML = '';
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state" style="padding:1rem;">No items found.</div>';
+    return;
+  }
+  filtered.forEach(([key, item]) => {
+    const div = document.createElement('div');
+    div.className = 'add-data-item';
+    let displayName = type === 'videos' ? (item.id || key) : (item.name || item.title || 'Untitled');
+    // For labels, show studio association
+    if (type === 'labels' && item.studio) {
+      displayName = `${item.name} (${item.studio})`;
+    }
+    div.innerHTML = `
+      <span class="name">${displayName}</span>
+      <div class="actions">
+        <button class="edit-btn" data-id="${key}"><i class="fas fa-edit"></i></button>
+        <button class="delete-btn" data-id="${key}"><i class="fas fa-trash"></i></button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+  container.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.dataset.id;
+      if (confirm('Delete?')) {
+        await remove(ref(db, `${type}/${id}`));
+        await loadAllData();
+        loadAddList(type);
+        renderVideos(); renderFilterModal();
+      }
+    };
+  });
+  container.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.id;
+      const item = data[id];
+      if (!item) return;
+      populateForm(type, item, id);
+    };
+  });
+}
+
+function populateForm(type, item, id) {
+  const form = document.getElementById('addFormPanel');
+  if (!form) return;
+  form.querySelectorAll('.custom-select').forEach(el => el.remove());
+  const newForm = buildForm(type);
+  form.innerHTML = newForm;
+  if (type === 'videos') {
+    form.querySelector('#f_id').value = id;
+    form.querySelector('#f_code').value = item.code || '';
+    form.querySelector('#f_title').value = item.title || '';
+    form.querySelector('#f_rating').value = item.rating || '';
+    form.querySelector('#f_release').value = item.release || '';
+    form.querySelector('#f_duration').value = item.duration || '';
+    form.querySelector('#f_trailer').value = item.trailerUrl || '';
+    form.querySelector('#f_video').value = item.videoUrl || '';
+    form.querySelector('#f_description').value = item.description || '';
+    form.querySelector('#f_thumbnail').value = item.thumbnail || '';
+    form.querySelector('#f_poster').value = item.poster || '';
+    const actressVal = item.actress ? item.actress.split(',').map(a=>a.trim()) : [];
+    const tagsVal = item.tags || [];
+    const studioVal = item.studio || '';
+    const labelVal = item.label || '';
+    const seriesVal = item.series || '';
+    const versionVal = item.version || '';
+    const groupVal = item.group || '';
+    buildCustomSelects(type, form, { actress: actressVal, tags: tagsVal, studio: studioVal, label: labelVal, series: seriesVal, version: versionVal, group: groupVal });
+  } else {
+    form.querySelector('#f_name').value = item.name || '';
+    if (type === 'actresses') {
+      form.querySelector('#f_javguru').value = item.javguru || '';
+      form.querySelector('#f_dob').value = item.dob || '';
+      form.querySelector('#f_debut').value = item.debut || '';
+      form.querySelector('#f_measurements').value = item.measurements || '';
+      form.querySelector('#f_cup').value = item.cup || '';
+      form.querySelector('#f_height').value = item.height || '';
+      if (item.images) {
+        item.images.forEach((url, i) => {
+          const inp = form.querySelector(`#f_image_${i}`);
+          if (inp) inp.value = url;
+        });
+      }
+    } else if (type === 'labels') {
+      form.querySelector('#f_studio').value = item.studio || '';
+      form.querySelector('#f_image').value = item.image || '';
+    } else if (['tags','studios','series'].includes(type)) {
+      form.querySelector('#f_image').value = item.image || '';
+    }
+  }
+  form.dataset.editId = id;
+  const submitBtn = form.querySelector('#addSubmit');
+  submitBtn.textContent = 'Update';
+  setupAddForm(type);
+  setupCodeAutocomplete(form);
+}
+
+function setupCodeAutocomplete(form) {
+  const codeInput = form.querySelector('#f_code');
+  if (!codeInput) return;
+  codeInput.addEventListener('change', function() {
+    const selectedCode = this.value.trim();
+    if (!selectedCode) return;
+    const video = getAllItems(allVideos).find(v => v.code === selectedCode);
+    if (video) {
+      const editId = form.dataset.editId || null;
+      if (editId && !confirm('Loading this code will overwrite current form data. Continue?')) return;
+      const titleInput = form.querySelector('#f_title');
+      const ratingInput = form.querySelector('#f_rating');
+      const releaseInput = form.querySelector('#f_release');
+      const durationInput = form.querySelector('#f_duration');
+      const trailerInput = form.querySelector('#f_trailer');
+      const videoInput = form.querySelector('#f_video');
+      const descInput = form.querySelector('#f_description');
+      const thumbInput = form.querySelector('#f_thumbnail');
+      const posterInput = form.querySelector('#f_poster');
+      if (titleInput) titleInput.value = video.title || '';
+      if (ratingInput) ratingInput.value = video.rating || '';
+      if (releaseInput) releaseInput.value = video.release || '';
+      if (durationInput) durationInput.value = video.duration || '';
+      if (trailerInput) trailerInput.value = video.trailerUrl || '';
+      if (videoInput) videoInput.value = video.videoUrl || '';
+      if (descInput) descInput.value = video.description || '';
+      if (thumbInput) thumbInput.value = video.thumbnail || '';
+      if (posterInput) posterInput.value = video.poster || '';
+      const actressVal = video.actress ? video.actress.split(',').map(a=>a.trim()) : [];
+      const tagsVal = video.tags || [];
+      const studioVal = video.studio || '';
+      const labelVal = video.label || '';
+      const seriesVal = video.series || '';
+      const versionVal = video.version || '';
+      const groupVal = video.group || '';
+      form.querySelectorAll('.custom-select').forEach(el => el.remove());
+      buildCustomSelects('videos', form, { actress: actressVal, tags: tagsVal, studio: studioVal, label: labelVal, series: seriesVal, version: versionVal, group: groupVal });
+      const idInput = form.querySelector('#f_id');
+      if (idInput && !editId) {
+        idInput.value = video.id || '';
+      }
+      form.dataset.editId = video.id || '';
+      const submitBtn = form.querySelector('#addSubmit');
+      if (submitBtn) submitBtn.textContent = 'Update';
+    }
+  });
+}
+
+function buildCustomSelects(type, form, preset = {}) {
+  if (type !== 'videos') return;
+  const containers = {
+    actress: form.querySelector('#f_actress_container'),
+    tags: form.querySelector('#f_tags_container'),
+    studio: form.querySelector('#f_studio_container'),
+    label: form.querySelector('#f_label_container'),
+    series: form.querySelector('#f_series_container'),
+    version: form.querySelector('#f_version_container'),
+    group: form.querySelector('#f_group_container')
+  };
+  const optionsMap = {
+    actress: { data: allActresses, multiple: true, imageKey: 'images' },
+    tags: { data: allTags, multiple: true, imageKey: 'image' },
+    studio: { data: allStudios, multiple: false, imageKey: 'image' },
+    label: { data: allLabels, multiple: false, imageKey: 'image' },
+    series: { data: allSeries, multiple: false, imageKey: 'image' },
+    version: { data: allVersions, multiple: false, imageKey: null },
+    group: { data: allGroups, multiple: false, imageKey: null }
+  };
+  Object.keys(containers).forEach(key => {
+    const container = containers[key];
+    if (!container) return;
+    const opts = optionsMap[key];
+    const items = getAllItems(opts.data || {});
+    const options = items.map(item => ({
+      name: item.name,
+      image: opts.imageKey ? (item[opts.imageKey] && Array.isArray(item[opts.imageKey]) ? item[opts.imageKey][0] : item[opts.imageKey]) : ''
+    }));
+    const presetVal = preset[key] || [];
+    const sel = createCustomSelect({
+      container,
+      options,
+      multiple: opts.multiple,
+      placeholder: `Select ${key}...`,
+      imageKey: 'image',
+      nameKey: 'name',
+      onSelect: (vals) => {
+        container.dataset.value = vals.join(', ');
+      }
+    });
+    if (presetVal.length) {
+      sel.setValue(presetVal);
+    } else {
+      container.dataset.value = '';
+    }
+  });
+}
+
+function setupAddForm(type) {
+  const form = document.getElementById('addFormPanel');
+  if (!form) return;
+
+  if (!form.dataset.editId && type === 'videos') {
+    buildCustomSelects(type, form);
+  }
+
+  setupCodeAutocomplete(form);
+
+  const submitBtn = form.querySelector('#addSubmit');
+  submitBtn.replaceWith(submitBtn.cloneNode(true));
+  const newSubmit = form.querySelector('#addSubmit');
+  newSubmit.onclick = async () => {
+    const editId = form.dataset.editId || null;
+    const data = collectFormData(type, form);
+    if (!data) return;
+
+    if (type === 'videos') {
+      const id = data.id;
+      if (!id) { alert('ID is required'); return; }
+      if (!editId && allVideos[id]) { alert('Video ID already exists. Use a unique ID.'); return; }
+      if (editId && editId !== id && allVideos[id]) { alert('Another video with this ID exists.'); return; }
+      const { id: _, ...videoData } = data;
+      if (editId) {
+        await update(ref(db, `videos/${editId}`), videoData);
+        if (editId !== id) {
+          await remove(ref(db, `videos/${editId}`));
+          await set(ref(db, `videos/${id}`), videoData);
+        }
+      } else {
+        await set(ref(db, `videos/${id}`), videoData);
+      }
+    } else {
+      const name = data.name;
+      if (!name) { alert('Name is required'); return; }
+      let existingEntries = [];
+      if (type === 'actresses') existingEntries = Object.entries(allActresses);
+      else if (type === 'tags') existingEntries = Object.entries(allTags);
+      else if (type === 'studios') existingEntries = Object.entries(allStudios);
+      else if (type === 'labels') existingEntries = Object.entries(allLabels);
+      else if (type === 'series') existingEntries = Object.entries(allSeries);
+      else if (type === 'versions') existingEntries = Object.entries(allVersions);
+      else if (type === 'groups') existingEntries = Object.entries(allGroups);
+      const dup = existingEntries.find(([key, item]) =>
+        item.name.toLowerCase() === name.toLowerCase() &&
+        key !== editId
+      );
+      if (dup) { alert(`"${name}" already exists. Use a unique name.`); return; }
+      if (editId) {
+        await update(ref(db, `${type}/${editId}`), data);
+      } else {
+        await push(ref(db, type), data);
+      }
+    }
+
+    await loadAllData();
+    renderVideos();
+    renderFilterModal();
+    const currentTab = addDataNav.querySelector('.add-tab-btn.active');
+    if (currentTab) renderAddDataPanel(currentTab.dataset.addtab);
+    else renderAddDataPanel('videos');
+  };
+}
+
+function collectFormData(type, form) {
+  if (type === 'videos') {
+    const getSelectVal = (key) => {
+      const container = form.querySelector(`#f_${key}_container`);
+      return container ? container.dataset.value || '' : '';
+    };
+    const actress = getSelectVal('actress');
+    const tags = getSelectVal('tags');
+    const studio = getSelectVal('studio');
+    const label = getSelectVal('label');
+    const series = getSelectVal('series');
+    const version = getSelectVal('version');
+    const group = getSelectVal('group');
+    return {
+      id: form.querySelector('#f_id').value.trim(),
+      code: form.querySelector('#f_code').value.trim(),
+      title: form.querySelector('#f_title').value,
+      actress: actress,
+      studio: studio,
+      label: label,
+      series: series,
+      version: version,
+      group: group,
+      tags: tags ? tags.split(',').map(s=>s.trim()).filter(Boolean) : [],
+      rating: parseFloat(form.querySelector('#f_rating').value) || 0,
+      release: form.querySelector('#f_release').value,
+      duration: parseInt(form.querySelector('#f_duration').value) || 0,
+      trailerUrl: form.querySelector('#f_trailer').value,
+      videoUrl: form.querySelector('#f_video').value,
+      description: form.querySelector('#f_description').value,
+      thumbnail: form.querySelector('#f_thumbnail').value,
+      poster: form.querySelector('#f_poster').value
+    };
+  } else if (type === 'actresses') {
+    const images = [];
+    for (let i=0; i<10; i++) {
+      const val = form.querySelector(`#f_image_${i}`).value.trim();
+      if (val) images.push(val);
+    }
+    return {
+      name: form.querySelector('#f_name').value,
+      javguru: form.querySelector('#f_javguru').value,
+      dob: form.querySelector('#f_dob').value,
+      debut: form.querySelector('#f_debut').value,
+      measurements: form.querySelector('#f_measurements').value,
+      cup: form.querySelector('#f_cup').value,
+      height: parseInt(form.querySelector('#f_height').value) || 0,
+      images
+    };
+  } else if (type === 'labels') {
+    return {
+      name: form.querySelector('#f_name').value,
+      studio: form.querySelector('#f_studio').value.trim(),
+      image: form.querySelector('#f_image').value
+    };
+  } else if (['tags','studios','series'].includes(type)) {
+    return {
+      name: form.querySelector('#f_name').value,
+      image: form.querySelector('#f_image').value
+    };
+  } else if (['versions','groups'].includes(type)) {
+    return {
+      name: form.querySelector('#f_name').value
+    };
+  }
+  return null;
+}
+
+// =====================================================
+// ========== INIT ======================================
+// =====================================================
+async function init() {
+  try {
+    await loadAllData();
+    renderVideos();
+    renderFilterModal();
+    setupEventListeners();
+    setupAddData();
+    updateActiveFiltersUI();
+  } catch (e) {
+    console.error(e);
+    renderVideos();
+    renderFilterModal();
+    setupEventListeners();
+    setupAddData();
+  }
+}
+
+init();
+</script>
 </body>
 </html>

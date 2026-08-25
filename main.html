@@ -24,6 +24,8 @@
       --shadow: 0 10px 40px rgba(0,0,0,0.06);
       --radius: 20px;
       --radius-sm: 12px;
+      --header-bg: var(--card);
+      --modal-bg: var(--card);
     }
     .dark-mode {
       --bg: #0f172a;
@@ -33,6 +35,8 @@
       --border: #334155;
       --shadow: 0 10px 40px rgba(0,0,0,0.3);
       --primary-soft: #4c1d95;
+      --header-bg: #1e293b;
+      --modal-bg: #1e293b;
     }
     body {
       font-family: 'DM Sans', sans-serif;
@@ -54,7 +58,7 @@
       position: sticky;
       top:0;
       z-index:100;
-      background: var(--card);
+      background: var(--header-bg);
       padding: 0.8rem 1.5rem;
       display: flex;
       justify-content: space-between;
@@ -75,7 +79,12 @@
       transition: opacity 0.2s;
     }
     .logo:hover { opacity: 0.8; }
-    .theme-toggle {
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .theme-toggle, .add-data-btn {
       background: var(--bg);
       border: none;
       font-size: 1.2rem;
@@ -90,7 +99,9 @@
       cursor:pointer;
       transition: background 0.2s;
     }
-    .theme-toggle:hover { background: var(--border); }
+    .theme-toggle:hover, .add-data-btn:hover { background: var(--border); }
+    .add-data-btn { background: var(--primary); color: #fff; }
+    .add-data-btn:hover { background: var(--primary-dark); }
 
     /* ===== TAB NAV ===== */
     .tab-nav {
@@ -102,10 +113,11 @@
       z-index:90;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
+      overflow-x: auto;
     }
     .tab-btn {
-      flex:1;
-      padding: 1rem 0;
+      flex: 1;
+      padding: 1rem 1.2rem;
       font-family: 'Rubik', sans-serif;
       font-weight:600;
       background:none;
@@ -119,6 +131,7 @@
       align-items:center;
       justify-content:center;
       gap:0.5rem;
+      white-space: nowrap;
     }
     .tab-btn i { font-size:1.2rem; }
     .tab-btn.active {
@@ -138,7 +151,7 @@
       padding: 1rem 0;
       flex-wrap: wrap;
     }
-    .filters-btn, .sort-btn, .view-toggle-btn {
+    .filters-btn, .sort-btn, .view-toggle-btn, .shuffle-btn {
       background: var(--card);
       border:1px solid var(--border);
       border-radius: 50%;
@@ -153,7 +166,7 @@
       flex-shrink:0;
       transition: 0.2s;
     }
-    .filters-btn:hover, .sort-btn:hover, .view-toggle-btn:hover { background: var(--primary-soft); border-color:var(--primary); color:var(--primary); }
+    .filters-btn:hover, .sort-btn:hover, .view-toggle-btn:hover, .shuffle-btn:hover { background: var(--primary-soft); border-color:var(--primary); color:var(--primary); }
     .view-toggle-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .search-container {
       flex:1;
@@ -244,7 +257,7 @@
       font-weight:500;
     }
 
-    /* Actress info cards */
+    /* Actress info cards - horizontal layout */
     .actress-info-container {
       display: flex;
       flex-wrap: wrap;
@@ -256,23 +269,29 @@
       border-radius: var(--radius-sm);
       box-shadow: var(--shadow);
       padding: 1rem;
-      flex: 1 1 220px;
-      min-width: 200px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
+      gap: 1.2rem;
       border: 1px solid var(--border);
       transition: transform 0.2s;
+      flex: 1 1 300px;
+      min-width: 280px;
+      max-width: 100%;
     }
     .actress-info-card:hover { transform: translateY(-3px); }
     .actress-info-card img {
-      width: 100px;
-      height: 150px;
+      width: 80px;
+      height: 120px;
       object-fit: cover;
       border-radius: 8px;
       background: var(--border);
-      margin-bottom: 0.5rem;
+      flex-shrink: 0;
+    }
+    .actress-info-card .info-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
     }
     .actress-info-card .info-name {
       font-weight: 700;
@@ -282,25 +301,25 @@
     .actress-info-card .info-detail {
       font-size: 0.85rem;
       color: var(--text-secondary);
-      margin: 0.1rem 0;
     }
     .actress-info-card .info-detail strong {
       color: var(--text);
       font-weight: 600;
     }
     .actress-info-card .javguru-btn {
-      margin-top: 0.5rem;
-      padding: 0.3rem 0.8rem;
+      margin-top: 0.3rem;
+      padding: 0.2rem 0.6rem;
       border: none;
       border-radius: 20px;
       background: var(--primary);
       color: #fff;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
       transition: background 0.2s;
+      align-self: flex-start;
     }
     .actress-info-card .javguru-btn:hover { background: var(--primary-dark); }
 
@@ -309,27 +328,16 @@
       display: grid;
       gap: 1rem;
     }
-    /* Default: thumbnail mode (3:2) – responsive columns */
-    .videos-grid.thumbnail-mode {
-      grid-template-columns: repeat(2, 1fr);
+    /* Desktop: 5 columns, Mobile: 1 column for thumbnail, 2 for poster */
+    .videos-grid {
+      grid-template-columns: repeat(5, 1fr);
     }
-    @media (min-width: 640px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(3,1fr); } }
-    @media (min-width: 1024px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(4,1fr); } }
-    @media (min-width: 1280px) { .videos-grid.thumbnail-mode { grid-template-columns: repeat(5,1fr); } }
-
-    /* Poster mode (2:3) – more columns on desktop, 2 columns on mobile */
-    .videos-grid.poster-mode {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (min-width: 640px) { .videos-grid.poster-mode { grid-template-columns: repeat(3,1fr); } }
-    @media (min-width: 1024px) { .videos-grid.poster-mode { grid-template-columns: repeat(4,1fr); } }
-    @media (min-width: 1280px) { .videos-grid.poster-mode { grid-template-columns: repeat(5,1fr); } }
-
-    /* For mobile: thumbnail mode → 1 column, poster mode → 2 columns */
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .videos-grid.thumbnail-mode { grid-template-columns: 1fr; }
       .videos-grid.poster-mode { grid-template-columns: repeat(2, 1fr); }
     }
+    .videos-grid.thumbnail-mode .video-thumbnail { aspect-ratio: 3/2; }
+    .videos-grid.poster-mode .video-thumbnail { aspect-ratio: 2/3; }
 
     .video-card {
       background: var(--card);
@@ -342,12 +350,8 @@
     .video-card:hover { transform: translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
     .video-thumbnail {
       width:100%;
-      aspect-ratio: 3/2;
       object-fit:cover;
       background: var(--border);
-    }
-    .videos-grid.poster-mode .video-thumbnail {
-      aspect-ratio: 2/3;
     }
     .video-info { padding:0.6rem 0.8rem 0.8rem; }
     .video-title {
@@ -419,9 +423,9 @@
     }
     .modal.active { display:flex; }
     .modal-container {
-      background:var(--card);
+      background:var(--modal-bg);
       border-radius:var(--radius);
-      max-width:600px;
+      max-width:700px;
       width:100%;
       max-height:90vh;
       overflow-y:auto;
@@ -436,7 +440,7 @@
       border-bottom:1px solid var(--border);
       position:sticky;
       top:0;
-      background:var(--card);
+      background:var(--modal-bg);
       z-index:10;
       border-radius:var(--radius) var(--radius) 0 0;
     }
@@ -706,99 +710,10 @@
       display:grid;
       gap:0.8rem;
     }
-    /* Column counts per type */
     .filter-options.cols-3 { grid-template-columns: repeat(3,1fr); }
     .filter-options.cols-2 { grid-template-columns: repeat(2,1fr); }
     .filter-options.cols-1 { grid-template-columns: 1fr; }
-    @media (max-width: 480px) {
-      .filter-options.cols-3 { grid-template-columns: repeat(2,1fr); }
-      .filter-options.cols-2 { grid-template-columns: 1fr; }
-      .filter-options.cols-1 { grid-template-columns: 1fr; }
-    }
 
-    /* Nested studio styles */
-    .studio-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .studio-item {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      background: var(--card);
-    }
-    .studio-header {
-      padding: 0.6rem 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-weight: 500;
-      gap: 0.5rem;
-    }
-    .studio-header:hover { background: var(--primary-soft); }
-    .studio-header .studio-name {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex: 1;
-    }
-    .studio-header .studio-name img {
-      width: 40px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 4px;
-      background: var(--border);
-    }
-    .studio-header .studio-toggle {
-      margin-left: auto;
-      transition: transform 0.3s;
-    }
-    .studio-header .studio-toggle.open { transform: rotate(90deg); }
-    .studio-header .studio-count {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-left: 0.3rem;
-    }
-    .studio-labels {
-      display: none;
-      padding: 0.4rem 0.8rem 0.8rem;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.4rem;
-      border-top: 1px solid var(--border);
-    }
-    .studio-labels.open { display: grid; }
-    .label-option {
-      padding: 0.3rem 0.5rem;
-      border-radius: 6px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: 0.2s;
-      text-align: center;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-    }
-    .label-option:hover { border-color: var(--primary); }
-    .label-option.selected {
-      background: var(--primary-soft);
-      border-color: var(--primary);
-      font-weight: 500;
-    }
-    .label-option img {
-      width: 30px;
-      height: 45px;
-      object-fit: cover;
-      border-radius: 4px;
-      background: var(--border);
-    }
-
-    /* Regular filter option (non-studio) */
     .filter-option {
       background:var(--card);
       border:1px solid var(--border);
@@ -837,13 +752,11 @@
       font-size:0.7rem;
       color:var(--text-secondary);
     }
-    /* Aspect ratios for filter images */
     .filter-option.aspect-2-3 img { aspect-ratio: 2/3; object-fit: cover; }
     .filter-option.aspect-1-1 img { aspect-ratio: 1/1; object-fit: cover; }
     .filter-option.aspect-3-2 img { aspect-ratio: 3/2; object-fit: cover; }
     .filter-option.no-image .filter-name { font-size:0.9rem; }
 
-    /* JAVguru button inside filter option */
     .filter-option .javguru-btn {
       position: absolute;
       top: 4px;
@@ -864,7 +777,7 @@
     }
     .filter-option .javguru-btn:hover { background: var(--primary-dark); }
 
-    /* ===== ADD DATA – redesigned ===== */
+    /* ===== ADD DATA ===== */
     .add-data-wrapper {
       display: flex;
       flex-direction: column;
@@ -905,7 +818,6 @@
     .add-data-panel { display:none; }
     .add-data-panel.active { display:block; animation:fadeIn 0.3s ease; }
 
-    /* List */
     .add-data-list {
       background:var(--card);
       border-radius:var(--radius);
@@ -979,7 +891,6 @@
     .add-data-item .actions .edit-btn:hover { color:var(--primary); background:var(--primary-soft); }
     .add-data-item .actions .delete-btn:hover { color:#ef4444; background:#fee2e2; }
 
-    /* Form – redesigned with rows and columns */
     .add-data-form {
       background:var(--card);
       padding:1.8rem;
@@ -1048,7 +959,6 @@
     }
     .add-data-form .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,58,237,0.3); }
 
-    /* Custom select */
     .custom-select {
       position:relative;
       display:inline-block;
@@ -1116,13 +1026,244 @@
       font-size:0.85rem;
     }
 
-    /* Code autocomplete datalist */
     .add-data-form input[list]::-webkit-calendar-picker-indicator {
       opacity:0.6;
     }
 
+    /* Dynamic volume fields */
+    .volume-entry {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      background: var(--bg);
+    }
+    .volume-entry .form-row { margin-bottom: 0.5rem; }
+    .volume-entry .remove-volume {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+    }
+    .volume-entry .remove-volume:hover { background: #fee2e2; border-radius: 4px; }
+    .add-volume-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .add-volume-btn:hover { background: var(--primary-dark); }
+
+    /* ===== ALBUMS & PICTURES TAB ===== */
+    .album-grid, .pictures-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .album-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .pictures-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    @media (max-width: 768px) {
+      .album-grid { grid-template-columns: repeat(2, 1fr); }
+      .pictures-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .album-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .album-card:hover { transform: translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,0.08); }
+    .album-card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      background: var(--border);
+    }
+    .album-card .album-title {
+      padding: 0.6rem 0.8rem;
+      font-weight: 500;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .pictures-grid .picture-item {
+      aspect-ratio: 2/3;
+      background: var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s;
+    }
+    .pictures-grid .picture-item:hover { transform: scale(1.02); }
+    .pictures-grid .picture-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Layout controls */
+    .layout-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .layout-btn {
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .layout-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .layout-btn:hover:not(.active) { background: var(--primary-soft); }
+
+    /* Album modal - volumes */
+    .volumes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .volume-item {
+      flex: 0 0 120px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .volume-item:hover { transform: scale(1.05); }
+    .volume-item img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border-radius: 8px;
+      background: var(--border);
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .volume-item.active img { border-color: var(--primary); }
+    .volume-item .volume-title {
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+      color: var(--text-secondary);
+    }
+
+    /* Volume images */
+    .volume-images {
+      margin-top: 1.5rem;
+    }
+    .volume-images .image-grid {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .volume-images .image-grid .image-item {
+      aspect-ratio: 2/3;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .volume-images .image-grid .image-item:hover { transform: scale(1.02); }
+    .volume-images .image-grid .image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ===== FULLSCREEN IMAGE VIEWER ===== */
+    .image-viewer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .image-viewer.active { display: flex; }
+    .image-viewer .viewer-content {
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .image-viewer .viewer-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .image-viewer .viewer-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .image-viewer .viewer-nav:hover { background: rgba(255,255,255,0.3); }
+    .image-viewer .viewer-nav.prev { left: 10px; }
+    .image-viewer .viewer-nav.next { right: 10px; }
+    .image-viewer .viewer-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+    }
+    .image-viewer .viewer-close:hover { opacity: 0.7; }
+    .image-viewer .viewer-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+    }
+
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .video-title { font-size:0.8rem; }
       .video-meta { font-size:0.6rem; grid-template-columns: repeat(2,1fr); }
       .tag-item { flex:0 0 30%; }
@@ -1134,22 +1275,23 @@
       .filter-options.cols-2 { grid-template-columns: 1fr; }
       .filter-options.cols-1 { grid-template-columns: 1fr; }
       .form-row .form-col { flex: 1 1 100%; min-width: auto; }
+      .volume-item { flex: 0 0 80px; }
+      .actress-info-card { flex-direction: column; align-items: center; text-align: center; }
+      .actress-info-card .javguru-btn { align-self: center; }
     }
-    @media (min-width: 768px) {
-      .videos-grid.thumbnail-mode { grid-template-columns: repeat(3,1fr); }
-      .videos-grid.poster-mode { grid-template-columns: repeat(3,1fr); }
-    }
-    @media (min-width: 1024px) {
-      .videos-grid.thumbnail-mode { grid-template-columns: repeat(4,1fr); }
-      .videos-grid.poster-mode { grid-template-columns: repeat(4,1fr); }
-    }
+    /* Desktop default already set above */
 
-    /* Dark mode overrides */
+    /* Dark mode overrides for new elements */
     .dark-mode .add-data-item:hover { background:var(--border); }
     .dark-mode .add-data-form input, .dark-mode .add-data-form textarea { background:var(--bg); }
     .dark-mode .custom-select-dropdown { background:var(--card); }
     .dark-mode .custom-select-option:hover { background:var(--primary-soft); }
     .dark-mode .add-tab-btn.active { box-shadow:0 4px 16px rgba(124,58,237,0.4); }
+    .dark-mode .album-card .album-title { color: var(--text); }
+    .dark-mode .volume-item .volume-title { color: var(--text-secondary); }
+    .dark-mode .layout-btn { background: var(--card); color: var(--text); }
+    .dark-mode .layout-btn.active { background: var(--primary); color: #fff; }
+    .dark-mode .volume-entry { background: var(--bg); }
   </style>
 </head>
 <body>
@@ -1157,13 +1299,17 @@
 <!-- ========== HEADER ========== -->
 <header>
   <div class="logo">Jav Gallery</div>
-  <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+  <div class="header-actions">
+    <button class="add-data-btn" id="addDataBtn" title="Add Data"><i class="fas fa-plus"></i></button>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+  </div>
 </header>
 
 <!-- ========== TAB NAV ========== -->
 <nav class="tab-nav">
   <button class="tab-btn active" data-tab="videos"><i class="fas fa-play-circle"></i> Videos</button>
-  <button class="tab-btn" data-tab="add"><i class="fas fa-plus-circle"></i> Add Data</button>
+  <button class="tab-btn" data-tab="albums"><i class="fas fa-images"></i> Albums</button>
+  <button class="tab-btn" data-tab="pictures"><i class="fas fa-camera"></i> Pictures</button>
 </nav>
 
 <!-- ========== VIDEOS TAB ========== -->
@@ -1187,7 +1333,6 @@
   </div>
   <div class="active-filters" id="activeFilters"></div>
   <div class="video-count" id="videoCount">0 videos</div>
-  <!-- Actress info cards appear here -->
   <div id="actressInfoContainer"></div>
   <div class="videos-grid thumbnail-mode" id="videosGrid"></div>
   <div class="pagination">
@@ -1197,7 +1342,50 @@
   </div>
 </section>
 
-<!-- ========== ADD DATA TAB ========== -->
+<!-- ========== ALBUMS TAB ========== -->
+<section id="albumsTab" class="tab-content">
+  <div class="action-bar">
+    <button class="filters-btn" id="albumFiltersBtn"><i class="fas fa-filter"></i></button>
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="albumSearchInput" placeholder="Search albums..." />
+    </div>
+    <button class="shuffle-btn" id="albumShuffleBtn" title="Shuffle"><i class="fas fa-random"></i></button>
+  </div>
+  <div class="active-filters" id="albumActiveFilters"></div>
+  <div class="video-count" id="albumCount">0 albums</div>
+  <div class="album-grid" id="albumGrid"></div>
+  <div class="pagination">
+    <button class="page-nav-btn prev-btn" id="albumPrevBtn" disabled><i class="fas fa-chevron-left"></i></button>
+    <div class="page-number" id="albumPageNumber">1</div>
+    <button class="page-nav-btn next-btn" id="albumNextBtn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- ========== PICTURES TAB ========== -->
+<section id="picturesTab" class="tab-content">
+  <div class="action-bar">
+    <button class="shuffle-btn" id="picturesShuffleBtn" title="Shuffle"><i class="fas fa-random"></i></button>
+    <div class="search-container" style="flex:2;">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="picturesSearchInput" placeholder="Search pictures..." />
+    </div>
+    <div class="layout-controls" style="flex:0 0 auto; margin:0;">
+      <button class="layout-btn" data-cols="1">1</button>
+      <button class="layout-btn active" data-cols="2">2</button>
+      <button class="layout-btn" data-cols="3">3</button>
+    </div>
+  </div>
+  <div class="video-count" id="picturesCount">0 pictures</div>
+  <div class="pictures-grid" id="picturesGrid"></div>
+  <div class="pagination">
+    <button class="page-nav-btn prev-btn" id="picturesPrevBtn" disabled><i class="fas fa-chevron-left"></i></button>
+    <div class="page-number" id="picturesPageNumber">1</div>
+    <button class="page-nav-btn next-btn" id="picturesNextBtn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- ========== ADD DATA (hidden tab, accessed via button) ========== -->
 <section id="addTab" class="tab-content">
   <div class="add-data-nav" id="addDataNav">
     <button class="add-tab-btn active" data-addtab="videos">Videos</button>
@@ -1208,6 +1396,7 @@
     <button class="add-tab-btn" data-addtab="series">Series</button>
     <button class="add-tab-btn" data-addtab="versions">Versions</button>
     <button class="add-tab-btn" data-addtab="groups">Groups</button>
+    <button class="add-tab-btn" data-addtab="albums">Albums</button>
   </div>
   <div class="add-data-content" id="addDataContent"></div>
 </section>
@@ -1280,6 +1469,43 @@
   </div>
 </div>
 
+<!-- ========== ALBUM MODAL ========== -->
+<div class="modal" id="albumModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3 class="modal-title">Album Details</h3>
+      <button class="close-modal" id="closeAlbumModal"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-content" id="albumModalContent">
+      <div style="text-align:center; margin-bottom:1rem;">
+        <img id="albumModalCover" src="" alt="Album cover" style="width:100%; max-width:300px; aspect-ratio:2/3; object-fit:cover; border-radius:8px; background:var(--border);" />
+        <h2 id="albumModalTitle" style="margin-top:0.5rem;">Album Title</h2>
+      </div>
+      <div class="label-block">
+        <div class="label-title">Actress</div>
+        <div class="actress-row" id="albumModalActress"></div>
+      </div>
+      <div class="label-block">
+        <div class="label-title">Tags</div>
+        <div class="tags-grid" id="albumModalTags"></div>
+      </div>
+      <div class="label-block">
+        <div class="label-title">Volumes</div>
+        <div class="volumes-grid" id="albumModalVolumes"></div>
+      </div>
+      <div class="volume-images" id="albumModalVolumeImages" style="display:none;">
+        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-bottom:0.5rem;">
+          <span style="font-weight:500;">Layout:</span>
+          <button class="layout-btn active" data-cols="2" data-volume-layout="2">2</button>
+          <button class="layout-btn" data-cols="1" data-volume-layout="1">1</button>
+          <button class="layout-btn" data-cols="3" data-volume-layout="3">3</button>
+        </div>
+        <div class="image-grid" style="grid-template-columns: repeat(2,1fr);"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ========== FILTER MODAL ========== -->
 <div class="modal filter-modal" id="filterModal">
   <div class="modal-container">
@@ -1290,13 +1516,20 @@
     <div class="filter-tabs" id="filterTabs">
       <button class="filter-tab active" data-filter-tab="actress">Actress</button>
       <button class="filter-tab" data-filter-tab="tags">Tags</button>
-      <button class="filter-tab" data-filter-tab="studios">Studios &amp; Labels</button>
-      <button class="filter-tab" data-filter-tab="series">Series</button>
-      <button class="filter-tab" data-filter-tab="version">Version</button>
-      <button class="filter-tab" data-filter-tab="group">Group</button>
     </div>
     <div class="filter-content" id="filterContent"></div>
   </div>
+</div>
+
+<!-- ========== FULLSCREEN IMAGE VIEWER ========== -->
+<div class="image-viewer" id="imageViewer">
+  <button class="viewer-close" id="viewerClose"><i class="fas fa-times"></i></button>
+  <button class="viewer-nav prev" id="viewerPrev"><i class="fas fa-chevron-left"></i></button>
+  <button class="viewer-nav next" id="viewerNext"><i class="fas fa-chevron-right"></i></button>
+  <div class="viewer-content">
+    <img id="viewerImage" src="" alt="Full image" />
+  </div>
+  <div class="viewer-counter" id="viewerCounter">1 / 1</div>
 </div>
 
 <!-- ========== FIREBASE ========== -->
@@ -1338,6 +1571,8 @@ let allLabels = {};
 let allSeries = {};
 let allVersions = {};
 let allGroups = {};
+let allAlbums = {};
+let allPictures = [];
 
 let activeFilters = { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
 let currentSort = 'top-rated';
@@ -1345,8 +1580,35 @@ let searchTerm = '';
 let currentPage = 1;
 const PAGE_SIZE = 25;
 let currentVideoForModal = null;
-let currentFilterTab = 'actress';
 let viewMode = 'thumbnail';
+
+// Album state
+let albumSearchTerm = '';
+let albumActiveFilters = { actress:[], tags:[] };
+let albumCurrentPage = 1;
+const ALBUM_PAGE_SIZE = 25;
+let albumSortOrder = 'shuffle';
+let currentAlbumForModal = null;
+let currentVolumeIndex = 0;
+let volumeImagesShuffled = [];
+let volumeLayout = 2;
+
+// Pictures state
+let picturesSearchTerm = '';
+let picturesCurrentPage = 1;
+const PICTURES_PAGE_SIZE = 60;
+let picturesLayout = 2;
+let picturesShuffled = [];
+let pictureViewerIndex = 0;
+let pictureViewerList = [];
+
+// Tab state preservation
+let tabStates = {
+  videos: { page: 1, search: '', sort: 'top-rated', filters: {} },
+  albums: { page: 1, search: '', filters: {}, order: 'shuffle' },
+  pictures: { page: 1, search: '', layout: 2 }
+};
+let currentFilterTab = 'actress';
 let expandedStudio = null;
 
 // ===== DOM REFS =====
@@ -1355,7 +1617,12 @@ const $$ = s => document.querySelectorAll(s);
 
 // Tabs
 const tabBtns = $$('.tab-btn');
-const tabContents = { videos: $('#videosTab'), add: $('#addTab') };
+const tabContents = {
+  videos: $('#videosTab'),
+  albums: $('#albumsTab'),
+  pictures: $('#picturesTab'),
+  add: $('#addTab')
+};
 const videosGrid = $('#videosGrid');
 const searchInput = $('#searchInput');
 const filtersBtn = $('#filtersBtn');
@@ -1376,6 +1643,45 @@ const addDataNav = $('#addDataNav');
 const addDataContent = $('#addDataContent');
 const actressInfoContainer = $('#actressInfoContainer');
 const viewToggleBtn = $('#viewToggleBtn');
+
+// Album DOM
+const albumGrid = $('#albumGrid');
+const albumSearchInput = $('#albumSearchInput');
+const albumFiltersBtn = $('#albumFiltersBtn');
+const albumShuffleBtn = $('#albumShuffleBtn');
+const albumActiveFiltersContainer = $('#albumActiveFilters');
+const albumCountEl = $('#albumCount');
+const albumPrevBtn = $('#albumPrevBtn');
+const albumNextBtn = $('#albumNextBtn');
+const albumPageNumberEl = $('#albumPageNumber');
+const albumModal = $('#albumModal');
+const closeAlbumModal = $('#closeAlbumModal');
+const albumModalCover = $('#albumModalCover');
+const albumModalTitle = $('#albumModalTitle');
+const albumModalActress = $('#albumModalActress');
+const albumModalTags = $('#albumModalTags');
+const albumModalVolumes = $('#albumModalVolumes');
+const albumModalVolumeImages = $('#albumModalVolumeImages');
+const volumeImageGrid = albumModalVolumeImages.querySelector('.image-grid');
+const volumeLayoutBtns = albumModalVolumeImages.querySelectorAll('.layout-btn');
+
+// Pictures DOM
+const picturesGrid = $('#picturesGrid');
+const picturesSearchInput = $('#picturesSearchInput');
+const picturesShuffleBtn = $('#picturesShuffleBtn');
+const picturesCountEl = $('#picturesCount');
+const picturesPrevBtn = $('#picturesPrevBtn');
+const picturesNextBtn = $('#picturesNextBtn');
+const picturesPageNumberEl = $('#picturesPageNumber');
+const picturesLayoutBtns = document.querySelectorAll('#picturesTab .layout-btn');
+
+// Viewer
+const imageViewer = $('#imageViewer');
+const viewerImage = $('#viewerImage');
+const viewerClose = $('#viewerClose');
+const viewerPrev = $('#viewerPrev');
+const viewerNext = $('#viewerNext');
+const viewerCounter = $('#viewerCounter');
 
 // Video modal elements
 const modalThumb = $('#modalThumb');
@@ -1416,8 +1722,28 @@ function getTagByName(name) {
   return getAllItems(allTags).find(t => t.name === name);
 }
 
-function getLabelByName(name) {
-  return getAllItems(allLabels).find(l => l.name === name);
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function smoothScrollToTop(container) {
+  if (container) {
+    container.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal(modal) {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  if (modal === videoModal) { videoPlayer.style.display = 'none'; modalThumb.style.display = 'block'; videoFrame.src = ''; }
 }
 
 // ===== DATA LOADING =====
@@ -1433,12 +1759,32 @@ async function loadAllData() {
     allSeries = data.series || {};
     allVersions = data.versions || {};
     allGroups = data.groups || {};
+    allAlbums = data.albums || {};
+    // Flatten pictures with proper guard
+    allPictures = [];
+    Object.values(allAlbums).forEach(album => {
+      if (album.volumes) {
+        Object.values(album.volumes).forEach(volume => {
+          if (volume.images && Array.isArray(volume.images)) {
+            volume.images.forEach(img => {
+              if (img && typeof img === 'string') {
+                allPictures.push({
+                  url: img,
+                  albumTitle: album.title || 'Untitled',
+                  volumeTitle: volume.title || 'Volume'
+                });
+              }
+            });
+          }
+        });
+      }
+    });
   } catch (e) {
     console.error('Load error:', e);
   }
 }
 
-// ===== FILTERING & SORTING =====
+// ===== VIDEO FUNCTIONS =====
 function getFilteredVideos() {
   let list = getAllItems(allVideos);
   if (searchTerm) {
@@ -1477,11 +1823,7 @@ function sortVideos(list) {
   const sorted = [...list];
   switch (currentSort) {
     case 'shuffle':
-      for (let i = sorted.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
-      }
-      break;
+      return shuffleArray(sorted);
     case 'latest':
       sorted.sort((a,b) => new Date(b.release) - new Date(a.release));
       break;
@@ -1501,7 +1843,6 @@ function getPaginated(list) {
   return list.slice(start, start + PAGE_SIZE);
 }
 
-// ===== RENDER ACTRESS INFO =====
 function renderActressInfo() {
   const selectedActresses = activeFilters.actress || [];
   if (!selectedActresses.length) {
@@ -1540,15 +1881,17 @@ function renderActressInfo() {
     html += `
       <div class="actress-info-card">
         ${img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'" />` : ''}
-        <div class="info-name">${name}</div>
-        ${javguru ? `<button class="javguru-btn" onclick="window.open('${javguru}', '_blank')"><i class="fas fa-external-link-alt"></i> JAVguru</button>` : ''}
-        <div class="info-detail"><strong>DOB:</strong> ${dob || 'N/A'}</div>
-        <div class="info-detail"><strong>Age:</strong> ${age}</div>
-        <div class="info-detail"><strong>Debut:</strong> ${debut || 'N/A'}</div>
-        <div class="info-detail"><strong>Career:</strong> ${career !== 'N/A' ? career + ' years' : 'N/A'}</div>
-        <div class="info-detail"><strong>Measurements:</strong> ${data.measurements || 'N/A'}</div>
-        <div class="info-detail"><strong>Cup:</strong> ${data.cup || 'N/A'}</div>
-        <div class="info-detail"><strong>Height:</strong> ${data.height || 'N/A'} cm</div>
+        <div class="info-details">
+          <div class="info-name">${name}</div>
+          ${javguru ? `<button class="javguru-btn" onclick="window.open('${javguru}', '_blank')"><i class="fas fa-external-link-alt"></i> JAVguru</button>` : ''}
+          <div class="info-detail"><strong>DOB:</strong> ${dob || 'N/A'}</div>
+          <div class="info-detail"><strong>Age:</strong> ${age}</div>
+          <div class="info-detail"><strong>Debut:</strong> ${debut || 'N/A'}</div>
+          <div class="info-detail"><strong>Career:</strong> ${career !== 'N/A' ? career + ' years' : 'N/A'}</div>
+          <div class="info-detail"><strong>Measurements:</strong> ${data.measurements || 'N/A'}</div>
+          <div class="info-detail"><strong>Cup:</strong> ${data.cup || 'N/A'}</div>
+          <div class="info-detail"><strong>Height:</strong> ${data.height || 'N/A'} cm</div>
+        </div>
       </div>
     `;
   });
@@ -1556,7 +1899,6 @@ function renderActressInfo() {
   actressInfoContainer.innerHTML = html;
 }
 
-// ===== RENDER VIDEOS =====
 function renderVideos() {
   const filtered = getFilteredVideos();
   const sorted = sortVideos(filtered);
@@ -1600,255 +1942,6 @@ function renderVideos() {
   viewToggleBtn.innerHTML = viewMode === 'poster' ? '<i class="fas fa-th-large"></i>' : '<i class="fas fa-image"></i>';
 }
 
-// ===== FILTER MODAL =====
-function renderFilterModal() {
-  // Filter tabs: actress, tags, studios, series, version, group
-  const types = ['actress','tags','studios','series','version','group'];
-  const dataMap = { actress:allActresses, tags:allTags, studios:allStudios, series:allSeries, version:allVersions, group:allGroups };
-  const aspectMap = { actress:'2-3', tags:'1-1', studios:'1-1', series:'3-2', version:'none', group:'none' };
-  const colsMap = { actress:3, tags:3, studios:2, series:1, version:1, group:1 };
-
-  // Build studio->labels map from video data (for nested view)
-  const studioLabelsMap = {};
-  getAllItems(allVideos).forEach(v => {
-    if (v.studio && v.label) {
-      if (!studioLabelsMap[v.studio]) studioLabelsMap[v.studio] = new Set();
-      studioLabelsMap[v.studio].add(v.label);
-    }
-  });
-  // Also use explicit studio association from label data
-  getAllItems(allLabels).forEach(label => {
-    if (label.studio) {
-      if (!studioLabelsMap[label.studio]) studioLabelsMap[label.studio] = new Set();
-      studioLabelsMap[label.studio].add(label.name);
-    }
-  });
-
-  let html = '';
-  types.forEach(type => {
-    let items = getAllItems(dataMap[type] || {});
-    // For studios, we handle differently
-    if (type === 'studios') {
-      // We'll render studio list with nested labels
-      // Shuffle studios for variety
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
-      const selectedStudios = activeFilters.studios || [];
-      const selectedLabels = activeFilters.label || [];
-      const filtered = getFilteredVideos();
-
-      html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
-        <div class="filter-section-search">
-          <input type="text" placeholder="Search studios & labels..." class="filter-search-input" data-section="${type}" />
-        </div>
-        <div class="studio-list">`;
-
-      if (!items.length) {
-        html += `<span style="color:var(--text-secondary);font-size:0.85rem;">No studios available.</span>`;
-      } else {
-        items.forEach(studio => {
-          const name = studio.name;
-          const count = filtered.filter(v => v.studio === name).length;
-          const isStudioSelected = selectedStudios.includes(name);
-          const labels = studioLabelsMap[name] ? Array.from(studioLabelsMap[name]) : [];
-          const isExpanded = expandedStudio === name;
-          const imgSrc = studio.image || '';
-          html += `<div class="studio-item" data-studio="${name}">
-            <div class="studio-header" style="${isStudioSelected ? 'background:var(--primary-soft);border-color:var(--primary);' : ''}">
-              <span class="studio-name" data-type="studios" data-value="${name}">
-                ${imgSrc ? `<img src="${imgSrc}" onerror="this.style.display='none'" />` : ''}
-                <span>${name}</span>
-                <span class="studio-count">(${count})</span>
-              </span>
-              ${labels.length ? `<span class="studio-toggle ${isExpanded ? 'open' : ''}"><i class="fas fa-chevron-right"></i></span>` : ''}
-            </div>
-            <div class="studio-labels ${isExpanded ? 'open' : ''}">
-              ${labels.length ? labels.map(label => {
-                const labelData = getLabelByName(label);
-                const labelImg = labelData && labelData.image ? labelData.image : '';
-                const labelSelected = selectedLabels.includes(label);
-                const labelCount = filtered.filter(v => v.label === label).length;
-                return `<div class="label-option ${labelSelected ? 'selected' : ''}" data-label="${label}">
-                  ${labelImg ? `<img src="${labelImg}" onerror="this.style.display='none'" />` : ''}
-                  ${label} (${labelCount})
-                </div>`;
-              }).join('') : '<span style="grid-column:1/-1;font-size:0.75rem;color:var(--text-secondary);">No labels for this studio</span>'}
-            </div>
-          </div>`;
-        });
-      }
-      html += `</div></div>`;
-      return; // skip regular rendering for studios
-    }
-
-    // Regular rendering for other types (actress, tags, series, version, group)
-    // Separate selected and unselected
-    const selectedVals = activeFilters[type] || [];
-    const selectedItems = items.filter(item => selectedVals.includes(item.name));
-    const unselectedItems = items.filter(item => !selectedVals.includes(item.name));
-    const sortedItems = [...selectedItems, ...unselectedItems];
-
-    const filtered = getFilteredVideos();
-    const aspect = aspectMap[type] || 'none';
-    const cols = colsMap[type] || 1;
-
-    html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
-      <div class="filter-section-search">
-        <input type="text" placeholder="Search ${type}..." class="filter-search-input" data-section="${type}" />
-      </div>
-      <div class="filter-options cols-${cols}">`;
-
-    if (!sortedItems.length) {
-      html += `<span style="color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1;">No items available.</span>`;
-    } else {
-      sortedItems.forEach(item => {
-        const name = item.name;
-        let count = 0;
-        if (type === 'actress') count = filtered.filter(v => v.actress && v.actress.split(',').map(a=>a.trim()).includes(name)).length;
-        else if (type === 'tags') count = filtered.filter(v => v.tags && v.tags.includes(name)).length;
-        else if (type === 'series') count = filtered.filter(v => v.series === name).length;
-        else if (type === 'version') count = filtered.filter(v => v.version === name).length;
-        else if (type === 'group') count = filtered.filter(v => v.group === name).length;
-        const selected = selectedVals.includes(name);
-        let imgSrc = '';
-        if (type === 'actress' && item.images && item.images.length) imgSrc = item.images[0];
-        else if (['tags','series'].includes(type) && item.image) imgSrc = item.image;
-        const hasImage = imgSrc && imgSrc.length > 0;
-        const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
-        html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
-        if (hasImage) {
-          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
-        }
-        html += `<span class="filter-name">${name}</span>`;
-        html += `<span class="count">(${count})</span>`;
-        if (type === 'actress' && item.javguru) {
-          html += `<button class="javguru-btn" data-url="${item.javguru}" onclick="event.stopPropagation(); window.open(this.dataset.url, '_blank');"><i class="fas fa-external-link-alt"></i></button>`;
-        }
-        html += `</div>`;
-      });
-    }
-    html += `</div></div>`;
-  });
-
-  filterContent.innerHTML = html;
-
-  // Set active tab and sections
-  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.filterTab === currentFilterTab);
-  });
-  filterContent.querySelectorAll('.filter-section').forEach(section => {
-    section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
-  });
-
-  // Event listeners for flat filter options (actress, tags, series, version, group)
-  filterContent.querySelectorAll('.filter-option').forEach(el => {
-    el.addEventListener('click', (e) => {
-      if (e.target.closest('.javguru-btn')) return;
-      const type = el.dataset.filterType, val = el.dataset.value;
-      toggleFilter(type, val);
-      renderFilterModal();
-      renderVideos();
-      updateActiveFiltersUI();
-    });
-  });
-
-  // Event listeners for studio name (click to toggle studio filter)
-  filterContent.querySelectorAll('.studio-name').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const type = el.dataset.type || 'studios';
-      const val = el.dataset.value;
-      if (type && val) {
-        toggleFilter(type, val);
-        renderFilterModal();
-        renderVideos();
-        updateActiveFiltersUI();
-      }
-    });
-  });
-
-  // Event listeners for studio headers (toggle expand/collapse)
-  filterContent.querySelectorAll('.studio-header').forEach(header => {
-    header.addEventListener('click', (e) => {
-      // Only toggle if click is on the header itself or the toggle icon, not on the studio-name span (which has its own handler)
-      if (e.target.closest('.studio-name')) return;
-      const studioItem = header.closest('.studio-item');
-      if (!studioItem) return;
-      const studioName = studioItem.dataset.studio;
-      if (expandedStudio === studioName) {
-        expandedStudio = null;
-      } else {
-        expandedStudio = studioName;
-      }
-      renderFilterModal();
-    });
-  });
-
-  // Event listeners for label options inside studio (toggle label filter)
-  filterContent.querySelectorAll('.label-option').forEach(labelEl => {
-    labelEl.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const labelName = labelEl.dataset.label;
-      toggleFilter('label', labelName);
-      renderFilterModal();
-      renderVideos();
-      updateActiveFiltersUI();
-    });
-  });
-
-  // Search functionality per section
-  filterContent.querySelectorAll('.filter-search-input').forEach(input => {
-    input.addEventListener('input', (e) => {
-      const section = e.target.dataset.section;
-      const query = e.target.value.toLowerCase();
-      if (section === 'studios') {
-        const studioItems = filterContent.querySelectorAll(`#filterSection_${section} .studio-item`);
-        studioItems.forEach(item => {
-          const header = item.querySelector('.studio-header');
-          const name = header?.querySelector('.studio-name span')?.textContent?.toLowerCase() || '';
-          const labels = item.querySelectorAll('.label-option');
-          let match = name.includes(query);
-          if (!match) {
-            labels.forEach(lb => {
-              if (lb.textContent.toLowerCase().includes(query)) match = true;
-            });
-          }
-          item.style.display = match ? '' : 'none';
-        });
-      } else {
-        const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
-        if (!options) return;
-        const items = options.querySelectorAll('.filter-option');
-        items.forEach(item => {
-          const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
-          item.style.display = name.includes(query) ? '' : 'none';
-        });
-      }
-    });
-  });
-
-  // Filter tab click handlers (this is crucial for tab switching)
-  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
-    btn.onclick = (e) => {
-      const tab = btn.dataset.filterTab;
-      if (tab) {
-        currentFilterTab = tab;
-        renderFilterModal();
-      }
-    };
-  });
-}
-
-function toggleFilter(type, val) {
-  if (!activeFilters[type]) activeFilters[type] = [];
-  const idx = activeFilters[type].indexOf(val);
-  if (idx > -1) activeFilters[type].splice(idx, 1);
-  else activeFilters[type].push(val);
-  currentPage = 1;
-}
-
 function updateActiveFiltersUI() {
   activeFiltersContainer.innerHTML = '';
   let hasFilters = false;
@@ -1880,7 +1973,113 @@ function updateActiveFiltersUI() {
   }
 }
 
-// ===== VIDEO MODAL =====
+function toggleFilter(type, val) {
+  if (!activeFilters[type]) activeFilters[type] = [];
+  const idx = activeFilters[type].indexOf(val);
+  if (idx > -1) activeFilters[type].splice(idx, 1);
+  else activeFilters[type].push(val);
+  currentPage = 1;
+}
+
+function renderFilterModal() {
+  const types = ['actress','tags'];
+  const dataMap = { actress:allActresses, tags:allTags };
+  const aspectMap = { actress:'2-3', tags:'1-1' };
+  const colsMap = { actress:3, tags:3 };
+  let html = '';
+  types.forEach(type => {
+    let items = getAllItems(dataMap[type] || {});
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    const selectedVals = activeFilters[type] || [];
+    const selectedItems = items.filter(item => selectedVals.includes(item.name));
+    const unselectedItems = items.filter(item => !selectedVals.includes(item.name));
+    const sortedItems = [...selectedItems, ...unselectedItems];
+
+    const aspect = aspectMap[type] || 'none';
+    const cols = colsMap[type] || 3;
+    html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
+      <div class="filter-section-search">
+        <input type="text" placeholder="Search ${type}..." class="filter-search-input" data-section="${type}" />
+      </div>
+      <div class="filter-options cols-${cols}">`;
+    if (!sortedItems.length) {
+      html += `<span style="color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1;">No items available.</span>`;
+    } else {
+      sortedItems.forEach(item => {
+        const name = item.name;
+        const selected = selectedVals.includes(name);
+        let imgSrc = '';
+        if (type === 'actress' && item.images && item.images.length) imgSrc = item.images[0];
+        else if (type === 'tags' && item.image) imgSrc = item.image;
+        const hasImage = imgSrc && imgSrc.length > 0;
+        const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
+        html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
+        if (hasImage) {
+          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
+        }
+        html += `<span class="filter-name">${name}</span>`;
+        if (type === 'actress') {
+          const count = getFilteredVideos().filter(v => v.actress && v.actress.split(',').map(a=>a.trim()).includes(name)).length;
+          html += `<span class="count">(${count})</span>`;
+        } else {
+          const count = getFilteredVideos().filter(v => v.tags && v.tags.includes(name)).length;
+          html += `<span class="count">(${count})</span>`;
+        }
+        if (type === 'actress' && item.javguru) {
+          html += `<button class="javguru-btn" data-url="${item.javguru}" onclick="event.stopPropagation(); window.open(this.dataset.url, '_blank');"><i class="fas fa-external-link-alt"></i></button>`;
+        }
+        html += `</div>`;
+      });
+    }
+    html += `</div></div>`;
+  });
+  filterContent.innerHTML = html;
+
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filterTab === currentFilterTab);
+  });
+  filterContent.querySelectorAll('.filter-section').forEach(section => {
+    section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
+  });
+
+  filterContent.querySelectorAll('.filter-option').forEach(el => {
+    el.addEventListener('click', () => {
+      const type = el.dataset.filterType, val = el.dataset.value;
+      toggleFilter(type, val);
+      renderFilterModal();
+      renderVideos();
+      updateActiveFiltersUI();
+    });
+  });
+
+  filterContent.querySelectorAll('.filter-search-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const section = e.target.dataset.section;
+      const query = e.target.value.toLowerCase();
+      const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
+      if (!options) return;
+      const items = options.querySelectorAll('.filter-option');
+      items.forEach(item => {
+        const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
+        item.style.display = name.includes(query) ? '' : 'none';
+      });
+    });
+  });
+
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.onclick = (e) => {
+      const tab = btn.dataset.filterTab;
+      if (tab) {
+        currentFilterTab = tab;
+        renderFilterModal();
+      }
+    };
+  });
+}
+
 function openVideoModal(video) {
   currentVideoForModal = video;
   videoPlayer.style.display = 'none';
@@ -1977,7 +2176,6 @@ function setupCarouselScroll() {
   });
 }
 
-// ===== VIDEO PLAYER =====
 function playVideo(type) {
   const video = currentVideoForModal;
   if (!video) return;
@@ -2002,197 +2200,453 @@ function playVideo(type) {
   }
 }
 
-// ===== MODAL HELPERS =====
-function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-function closeModal(modal) {
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-  if (modal === videoModal) { videoPlayer.style.display = 'none'; modalThumb.style.display = 'block'; videoFrame.src = ''; }
+// ===== ALBUMS SECTION =====
+function getFilteredAlbums() {
+  let list = getAllItems(allAlbums);
+  if (albumSearchTerm) {
+    const s = albumSearchTerm.toLowerCase();
+    list = list.filter(a =>
+      (a.title && a.title.toLowerCase().includes(s)) ||
+      (a.actress && a.actress.toLowerCase().includes(s)) ||
+      (a.tags && a.tags.some(t => t.toLowerCase().includes(s)))
+    );
+  }
+  if (albumActiveFilters.actress.length) {
+    list = list.filter(a => a.actress && albumActiveFilters.actress.some(act => a.actress.split(',').map(x=>x.trim()).includes(act)));
+  }
+  if (albumActiveFilters.tags.length) {
+    list = list.filter(a => a.tags && a.tags.some(t => albumActiveFilters.tags.includes(t)));
+  }
+  if (albumSortOrder === 'shuffle') {
+    list = shuffleArray(list);
+  } else {
+    list.sort((a,b) => (a.title || '').localeCompare(b.title || ''));
+  }
+  return list;
 }
 
-// ===== EVENT LISTENERS =====
-function setupEventListeners() {
-  $('#themeToggle').onclick = () => {
-    document.body.classList.toggle('dark-mode');
-    const icon = $('#themeToggle i');
-    icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
-  };
+function renderAlbums() {
+  const filtered = getFilteredAlbums();
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE) || 1;
+  if (albumCurrentPage > totalPages) albumCurrentPage = totalPages;
+  const start = (albumCurrentPage - 1) * ALBUM_PAGE_SIZE;
+  const pageItems = filtered.slice(start, start + ALBUM_PAGE_SIZE);
 
-  document.querySelector('.logo').addEventListener('click', function() {
-    activeFilters = { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
-    searchTerm = '';
-    searchInput.value = '';
-    currentSort = 'top-rated';
-    currentPage = 1;
-    sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
-    sortMenu.querySelector('.sort-option[data-sort="top-rated"]').classList.add('active');
-    viewMode = 'thumbnail';
+  albumCountEl.textContent = `${total} album${total !== 1 ? 's' : ''}`;
+  albumGrid.innerHTML = '';
+  if (!pageItems.length) {
+    albumGrid.innerHTML = `<div class="empty-state"><i class="fas fa-images"></i>No albums found.</div>`;
+  } else {
+    pageItems.forEach(album => {
+      const card = document.createElement('div');
+      card.className = 'album-card';
+      const cover = album.cover || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Cover';
+      card.innerHTML = `
+        <img src="${cover}" alt="${album.title || 'Untitled'}" />
+        <div class="album-title">${album.title || 'Untitled'}</div>
+      `;
+      card.addEventListener('click', () => openAlbumModal(album));
+      albumGrid.appendChild(card);
+    });
+  }
+  albumPageNumberEl.textContent = albumCurrentPage;
+  albumPrevBtn.disabled = albumCurrentPage <= 1;
+  albumNextBtn.disabled = albumCurrentPage >= totalPages;
+}
+
+function openAlbumModal(album) {
+  currentAlbumForModal = album;
+  albumModalCover.src = album.cover || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Cover';
+  albumModalTitle.textContent = album.title || 'Untitled';
+
+  // Actress
+  albumModalActress.innerHTML = '';
+  if (album.actress) {
+    album.actress.split(',').map(a=>a.trim()).forEach(name => {
+      const data = getActressByName(name);
+      const img = data && data.images && data.images.length ? data.images[0] : '';
+      const div = document.createElement('div'); div.className = 'actress';
+      div.innerHTML = `<img src="${img}" alt="${name}" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
+      div.onclick = (e) => {
+        e.stopPropagation();
+        toggleAlbumFilter('actress', name);
+        renderAlbums();
+        renderAlbumFiltersUI();
+        openAlbumModal(album);
+      };
+      albumModalActress.appendChild(div);
+    });
+  }
+
+  // Tags
+  albumModalTags.innerHTML = '';
+  if (album.tags && album.tags.length) {
+    album.tags.forEach(tag => {
+      const data = getTagByName(tag);
+      const img = data && data.image ? data.image : '';
+      const div = document.createElement('div'); div.className = 'tag-item';
+      div.innerHTML = `<img src="${img}" alt="${tag}" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
+      div.onclick = (e) => {
+        e.stopPropagation();
+        toggleAlbumFilter('tags', tag);
+        renderAlbums();
+        renderAlbumFiltersUI();
+        openAlbumModal(album);
+      };
+      albumModalTags.appendChild(div);
+    });
+  }
+
+  // Volumes
+  albumModalVolumes.innerHTML = '';
+  if (album.volumes) {
+    const volumeKeys = Object.keys(album.volumes);
+    if (volumeKeys.length) {
+      volumeKeys.forEach((key, idx) => {
+        const vol = album.volumes[key];
+        if (!vol) return;
+        const cover = vol.cover || (vol.images && vol.images.length ? vol.images[0] : '');
+        const div = document.createElement('div');
+        div.className = 'volume-item' + (idx === currentVolumeIndex ? ' active' : '');
+        div.innerHTML = `
+          <img src="${cover || 'https://via.placeholder.com/120x180/7c3aed/ffffff?text=No+Image'}" alt="${vol.title || 'Volume'}" />
+          <div class="volume-title">${vol.title || 'Volume '+(idx+1)}</div>
+        `;
+        div.addEventListener('click', () => {
+          currentVolumeIndex = idx;
+          openVolumeImages(album, idx);
+        });
+        albumModalVolumes.appendChild(div);
+      });
+    } else {
+      albumModalVolumes.innerHTML = '<span style="color:var(--text-secondary);">No volumes</span>';
+    }
+  }
+
+  if (album.volumes && Object.keys(album.volumes).length) {
+    openVolumeImages(album, currentVolumeIndex);
+  } else {
+    albumModalVolumeImages.style.display = 'none';
+  }
+
+  openModal(albumModal);
+}
+
+function openVolumeImages(album, volIndex) {
+  const volumeKeys = Object.keys(album.volumes);
+  if (!volumeKeys.length) return;
+  const vol = album.volumes[volumeKeys[volIndex]];
+  // Guard against undefined or invalid images
+  if (!vol || !vol.images || !Array.isArray(vol.images) || !vol.images.length) {
+    albumModalVolumeImages.style.display = 'none';
+    return;
+  }
+  const validImages = vol.images.filter(img => img && typeof img === 'string');
+  if (!validImages.length) {
+    albumModalVolumeImages.style.display = 'none';
+    return;
+  }
+  volumeImagesShuffled = shuffleArray(validImages);
+  albumModalVolumeImages.style.display = 'block';
+  renderVolumeImages();
+  albumModalVolumes.querySelectorAll('.volume-item').forEach((el, idx) => {
+    el.classList.toggle('active', idx === volIndex);
+  });
+}
+
+function renderVolumeImages() {
+  const cols = volumeLayout;
+  volumeImageGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  volumeImageGrid.innerHTML = '';
+  volumeImagesShuffled.forEach((url, idx) => {
+    const item = document.createElement('div');
+    item.className = 'image-item';
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = `Image ${idx+1}`;
+    img.loading = 'lazy';
+    item.appendChild(img);
+    item.addEventListener('click', () => {
+      pictureViewerList = volumeImagesShuffled;
+      pictureViewerIndex = idx;
+      openImageViewer();
+    });
+    volumeImageGrid.appendChild(item);
+  });
+}
+
+function toggleAlbumFilter(type, val) {
+  if (!albumActiveFilters[type]) albumActiveFilters[type] = [];
+  const idx = albumActiveFilters[type].indexOf(val);
+  if (idx > -1) albumActiveFilters[type].splice(idx, 1);
+  else albumActiveFilters[type].push(val);
+  albumCurrentPage = 1;
+}
+
+function renderAlbumFiltersUI() {
+  albumActiveFiltersContainer.innerHTML = '';
+  let hasFilters = false;
+  Object.keys(albumActiveFilters).forEach(type => {
+    albumActiveFilters[type].forEach(val => {
+      hasFilters = true;
+      const tag = document.createElement('span');
+      tag.className = 'filter-tag';
+      tag.innerHTML = `${type}: ${val} <span class="remove" data-type="${type}" data-value="${val}"><i class="fas fa-times"></i></span>`;
+      albumActiveFiltersContainer.appendChild(tag);
+    });
+  });
+  albumActiveFiltersContainer.querySelectorAll('.remove').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const type = el.dataset.type, val = el.dataset.value;
+      toggleAlbumFilter(type, val);
+      renderAlbums();
+      renderAlbumFiltersUI();
+    });
+  });
+  if (!hasFilters) {
+    const placeholder = document.createElement('span');
+    placeholder.style.color = 'var(--text-secondary)';
+    placeholder.style.fontSize = '0.85rem';
+    placeholder.textContent = 'No filters applied';
+    albumActiveFiltersContainer.appendChild(placeholder);
+  }
+}
+
+function renderAlbumFilterModal() {
+  const types = ['actress','tags'];
+  const dataMap = { actress:allActresses, tags:allTags };
+  const aspectMap = { actress:'2-3', tags:'1-1' };
+  const colsMap = { actress:3, tags:3 };
+  let html = '';
+  types.forEach(type => {
+    let items = getAllItems(dataMap[type] || {});
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    const selectedVals = albumActiveFilters[type] || [];
+    const selectedItems = items.filter(item => selectedVals.includes(item.name));
+    const unselectedItems = items.filter(item => !selectedVals.includes(item.name));
+    const sortedItems = [...selectedItems, ...unselectedItems];
+
+    const aspect = aspectMap[type] || 'none';
+    const cols = colsMap[type] || 3;
+    html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
+      <div class="filter-section-search">
+        <input type="text" placeholder="Search ${type}..." class="filter-search-input" data-section="${type}" />
+      </div>
+      <div class="filter-options cols-${cols}">`;
+    if (!sortedItems.length) {
+      html += `<span style="color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1;">No items available.</span>`;
+    } else {
+      sortedItems.forEach(item => {
+        const name = item.name;
+        const selected = selectedVals.includes(name);
+        let imgSrc = '';
+        if (type === 'actress' && item.images && item.images.length) imgSrc = item.images[0];
+        else if (type === 'tags' && item.image) imgSrc = item.image;
+        const hasImage = imgSrc && imgSrc.length > 0;
+        const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
+        html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
+        if (hasImage) {
+          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
+        }
+        html += `<span class="filter-name">${name}</span>`;
+        html += `</div>`;
+      });
+    }
+    html += `</div></div>`;
+  });
+  filterContent.innerHTML = html;
+
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filterTab === currentFilterTab);
+  });
+  filterContent.querySelectorAll('.filter-section').forEach(section => {
+    section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
+  });
+
+  filterContent.querySelectorAll('.filter-option').forEach(el => {
+    el.addEventListener('click', () => {
+      const type = el.dataset.filterType, val = el.dataset.value;
+      toggleAlbumFilter(type, val);
+      renderAlbumFilterModal();
+      renderAlbums();
+      renderAlbumFiltersUI();
+    });
+  });
+
+  filterContent.querySelectorAll('.filter-search-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const section = e.target.dataset.section;
+      const query = e.target.value.toLowerCase();
+      const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
+      if (!options) return;
+      const items = options.querySelectorAll('.filter-option');
+      items.forEach(item => {
+        const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
+        item.style.display = name.includes(query) ? '' : 'none';
+      });
+    });
+  });
+
+  filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.onclick = (e) => {
+      const tab = btn.dataset.filterTab;
+      if (tab) {
+        currentFilterTab = tab;
+        renderAlbumFilterModal();
+      }
+    };
+  });
+}
+
+// ===== PICTURES SECTION =====
+function renderPictures() {
+  let list = allPictures.slice();
+  if (picturesSearchTerm) {
+    const s = picturesSearchTerm.toLowerCase();
+    list = list.filter(p => p.albumTitle.toLowerCase().includes(s) || p.volumeTitle.toLowerCase().includes(s));
+  }
+  if (!picturesShuffled.length || picturesShuffled.length !== list.length) {
+    picturesShuffled = shuffleArray(list);
+  } else {
+    if (picturesShuffled.length !== list.length) {
+      picturesShuffled = shuffleArray(list);
+    }
+  }
+  picturesShuffled = picturesShuffled.filter(p => p && p.url && typeof p.url === 'string');
+
+  const total = picturesShuffled.length;
+  const totalPages = Math.ceil(total / PICTURES_PAGE_SIZE) || 1;
+  if (picturesCurrentPage > totalPages) picturesCurrentPage = totalPages;
+  const start = (picturesCurrentPage - 1) * PICTURES_PAGE_SIZE;
+  const pageItems = picturesShuffled.slice(start, start + PICTURES_PAGE_SIZE);
+
+  picturesCountEl.textContent = `${total} picture${total !== 1 ? 's' : ''}`;
+  picturesGrid.innerHTML = '';
+  if (!pageItems.length) {
+    picturesGrid.innerHTML = `<div class="empty-state"><i class="fas fa-camera"></i>No pictures found.</div>`;
+  } else {
+    const cols = picturesLayout;
+    picturesGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    pageItems.forEach((item, idx) => {
+      const div = document.createElement('div');
+      div.className = 'picture-item';
+      const img = document.createElement('img');
+      img.src = item.url;
+      img.alt = `${item.albumTitle} - ${item.volumeTitle}`;
+      img.loading = 'lazy';
+      div.appendChild(img);
+      div.addEventListener('click', () => {
+        pictureViewerList = pageItems.map(p => p.url);
+        pictureViewerIndex = idx;
+        openImageViewer();
+      });
+      picturesGrid.appendChild(div);
+    });
+  }
+  picturesPageNumberEl.textContent = picturesCurrentPage;
+  picturesPrevBtn.disabled = picturesCurrentPage <= 1;
+  picturesNextBtn.disabled = picturesCurrentPage >= totalPages;
+}
+
+// ===== IMAGE VIEWER =====
+function openImageViewer() {
+  if (!pictureViewerList || !pictureViewerList.length) return;
+  if (pictureViewerIndex < 0) pictureViewerIndex = 0;
+  if (pictureViewerIndex >= pictureViewerList.length) pictureViewerIndex = pictureViewerList.length - 1;
+  viewerImage.src = pictureViewerList[pictureViewerIndex];
+  viewerCounter.textContent = `${pictureViewerIndex+1} / ${pictureViewerList.length}`;
+  imageViewer.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImageViewer() {
+  imageViewer.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function navigateImageViewer(delta) {
+  const newIdx = pictureViewerIndex + delta;
+  if (newIdx < 0 || newIdx >= pictureViewerList.length) return;
+  pictureViewerIndex = newIdx;
+  viewerImage.src = pictureViewerList[pictureViewerIndex];
+  viewerCounter.textContent = `${pictureViewerIndex+1} / ${pictureViewerList.length}`;
+}
+
+// ===== TAB STATE MANAGEMENT =====
+function switchTab(tabId) {
+  // Save current state
+  if (document.getElementById('videosTab').classList.contains('active')) {
+    tabStates.videos.page = currentPage;
+    tabStates.videos.search = searchTerm;
+    tabStates.videos.sort = currentSort;
+    tabStates.videos.filters = { ...activeFilters };
+  }
+  if (document.getElementById('albumsTab').classList.contains('active')) {
+    tabStates.albums.page = albumCurrentPage;
+    tabStates.albums.search = albumSearchTerm;
+    tabStates.albums.filters = { ...albumActiveFilters };
+    tabStates.albums.order = albumSortOrder;
+  }
+  if (document.getElementById('picturesTab').classList.contains('active')) {
+    tabStates.pictures.page = picturesCurrentPage;
+    tabStates.pictures.search = picturesSearchTerm;
+    tabStates.pictures.layout = picturesLayout;
+  }
+
+  // Show the target tab content
+  tabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+  Object.keys(tabContents).forEach(key => {
+    const shouldShow = (key === tabId) || (key === 'add' && tabId === 'add');
+    tabContents[key].classList.toggle('active', shouldShow);
+  });
+  if (tabId !== 'add') {
+    tabContents.add.classList.remove('active');
+  }
+
+  // Restore state for the new tab
+  if (tabId === 'videos') {
+    currentPage = tabStates.videos.page || 1;
+    searchTerm = tabStates.videos.search || '';
+    searchInput.value = searchTerm;
+    currentSort = tabStates.videos.sort || 'top-rated';
+    activeFilters = tabStates.videos.filters || { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
     renderVideos();
     renderFilterModal();
     updateActiveFiltersUI();
-    closeModal(videoModal);
-    closeModal(filterModal);
-  });
+  } else if (tabId === 'albums') {
+    albumCurrentPage = tabStates.albums.page || 1;
+    albumSearchTerm = tabStates.albums.search || '';
+    albumSearchInput.value = albumSearchTerm;
+    albumActiveFilters = tabStates.albums.filters || { actress:[], tags:[] };
+    albumSortOrder = tabStates.albums.order || 'shuffle';
+    renderAlbums();
+    renderAlbumFiltersUI();
+  } else if (tabId === 'pictures') {
+    picturesCurrentPage = tabStates.pictures.page || 1;
+    picturesSearchTerm = tabStates.pictures.search || '';
+    picturesSearchInput.value = picturesSearchTerm;
+    picturesLayout = tabStates.pictures.layout || 2;
+    document.querySelectorAll('#picturesTab .layout-btn').forEach(btn => {
+      btn.classList.toggle('active', parseInt(btn.dataset.cols) === picturesLayout);
+    });
+    renderPictures();
+  } else if (tabId === 'add') {
+    tabContents.add.classList.add('active');
+    setupAddData();
+  }
 
-  viewToggleBtn.addEventListener('click', () => {
-    viewMode = viewMode === 'thumbnail' ? 'poster' : 'thumbnail';
-    renderVideos();
-  });
-
-  tabBtns.forEach(btn => {
-    btn.onclick = () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      Object.keys(tabContents).forEach(k => tabContents[k].classList.toggle('active', k === tab));
-      if (tab === 'videos') renderVideos();
-    };
-  });
-
-  searchInput.oninput = () => { searchTerm = searchInput.value.trim(); currentPage = 1; renderVideos(); renderFilterModal(); };
-  searchInput.onkeydown = (e) => { if (e.key === 'Enter') renderVideos(); };
-
-  sortBtn.onclick = (e) => { e.stopPropagation(); sortMenu.classList.toggle('active'); };
-  document.addEventListener('click', (e) => { if (!sortBtn.contains(e.target) && !sortMenu.contains(e.target)) sortMenu.classList.remove('active'); });
-  sortMenu.querySelectorAll('.sort-option').forEach(opt => {
-    opt.onclick = () => {
-      sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-      currentSort = opt.dataset.sort;
-      currentPage = 1;
-      renderVideos();
-      sortMenu.classList.remove('active');
-    };
-  });
-
-  filtersBtn.onclick = () => { renderFilterModal(); openModal(filterModal); };
-  closeFilterModal.onclick = () => closeModal(filterModal);
-  filterModal.onclick = (e) => { if (e.target === filterModal) closeModal(filterModal); };
-  closeVideoModal.onclick = () => closeModal(videoModal);
-  videoModal.onclick = (e) => { if (e.target === videoModal) closeModal(videoModal); };
-  trailerBtn.onclick = () => playVideo('trailer');
-  videoBtn.onclick = () => playVideo('video');
-
-  prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderVideos(); } };
-  nextBtn.onclick = () => { const total = Math.ceil(getFilteredVideos().length / PAGE_SIZE); if (currentPage < total) { currentPage++; renderVideos(); } };
-  setupCarouselScroll();
-
-  activeFiltersContainer.addEventListener('click', (e) => {
-    const remove = e.target.closest('.remove');
-    if (remove) {
-      const type = remove.dataset.type, val = remove.dataset.value;
-      toggleFilter(type, val);
-      renderFilterModal(); renderVideos(); updateActiveFiltersUI();
-    }
-  });
+  const container = document.getElementById(tabId + 'Tab') || document.getElementById('addTab');
+  if (container) {
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
-// =====================================================
-// ========== ADD DATA – CUSTOM SELECT COMPONENT ==========
-// =====================================================
-function createCustomSelect({
-  container,
-  options = [],
-  multiple = false,
-  placeholder = 'Select...',
-  imageKey = 'image',
-  nameKey = 'name',
-  onSelect = () => {}
-}) {
-  container.innerHTML = '';
-  const wrapper = document.createElement('div');
-  wrapper.className = 'custom-select';
-
-  const inputDiv = document.createElement('div');
-  inputDiv.className = 'custom-select-input';
-  inputDiv.innerHTML = `<span class="selected-text">${placeholder}</span><i class="fas fa-chevron-down" style="margin-left:auto;"></i>`;
-  wrapper.appendChild(inputDiv);
-
-  const dropdown = document.createElement('div');
-  dropdown.className = 'custom-select-dropdown';
-  const searchDiv = document.createElement('div');
-  searchDiv.className = 'custom-select-search';
-  searchDiv.innerHTML = `<input type="text" placeholder="Search..." />`;
-  dropdown.appendChild(searchDiv);
-
-  const optionsContainer = document.createElement('div');
-  optionsContainer.className = 'custom-select-options';
-  dropdown.appendChild(optionsContainer);
-  wrapper.appendChild(dropdown);
-
-  container.appendChild(wrapper);
-
-  let selectedValues = [];
-
-  function renderOptions(filter = '') {
-    optionsContainer.innerHTML = '';
-    const filtered = options.filter(o => o[nameKey].toLowerCase().includes(filter.toLowerCase()));
-    filtered.forEach(opt => {
-      const div = document.createElement('div');
-      div.className = 'custom-select-option';
-      const checked = selectedValues.includes(opt[nameKey]);
-      if (checked) div.classList.add('selected');
-      const img = opt[imageKey] ? `<img src="${opt[imageKey]}" onerror="this.style.display='none'" style="width:40px;height:60px;object-fit:cover;border-radius:4px;" />` : '';
-      div.innerHTML = `${img}<span class="opt-name">${opt[nameKey]}</span>${checked ? '<span class="opt-check"><i class="fas fa-check"></i></span>' : ''}`;
-      div.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const val = opt[nameKey];
-        if (multiple) {
-          const idx = selectedValues.indexOf(val);
-          if (idx > -1) selectedValues.splice(idx, 1);
-          else selectedValues.push(val);
-        } else {
-          selectedValues = [val];
-          dropdown.classList.remove('show');
-        }
-        updateUI();
-        container.dataset.value = selectedValues.join(', ');
-        onSelect(selectedValues);
-      });
-      optionsContainer.appendChild(div);
-    });
-  }
-
-  function updateUI() {
-    const text = selectedValues.length ? selectedValues.join(', ') : placeholder;
-    inputDiv.querySelector('.selected-text').textContent = text;
-    optionsContainer.querySelectorAll('.custom-select-option').forEach(el => {
-      const name = el.querySelector('.opt-name').textContent;
-      const checked = selectedValues.includes(name);
-      el.classList.toggle('selected', checked);
-      const checkSpan = el.querySelector('.opt-check');
-      if (checked) {
-        if (!checkSpan) el.insertAdjacentHTML('beforeend', '<span class="opt-check"><i class="fas fa-check"></i></span>');
-      } else {
-        if (checkSpan) checkSpan.remove();
-      }
-    });
-  }
-
-  searchDiv.querySelector('input').addEventListener('input', (e) => {
-    renderOptions(e.target.value);
-  });
-
-  inputDiv.addEventListener('click', (e) => {
-    e.stopPropagation();
-    dropdown.classList.toggle('show');
-    if (dropdown.classList.contains('show')) renderOptions();
-  });
-  document.addEventListener('click', () => { dropdown.classList.remove('show'); });
-
-  function setValue(values) {
-    selectedValues = Array.isArray(values) ? values : [values];
-    updateUI();
-    container.dataset.value = selectedValues.join(', ');
-  }
-
-  return { wrapper, setValue, getValue: () => selectedValues };
-}
-
-// =====================================================
-// ========== ADD DATA – MAIN LOGIC ====================
-// =====================================================
-
+// ===== ADD DATA =====
 function setupAddData() {
   const addTabs = addDataNav.querySelectorAll('.add-tab-btn');
   addTabs.forEach(btn => {
@@ -2202,7 +2656,12 @@ function setupAddData() {
       renderAddDataPanel(btn.dataset.addtab);
     };
   });
-  renderAddDataPanel('videos');
+  const activeAddTab = addDataNav.querySelector('.add-tab-btn.active');
+  if (activeAddTab) {
+    renderAddDataPanel(activeAddTab.dataset.addtab);
+  } else {
+    renderAddDataPanel('videos');
+  }
 }
 
 function renderAddDataPanel(type) {
@@ -2311,7 +2770,6 @@ function buildForm(type) {
       </div>
     `;
   } else if (type === 'labels') {
-    // Label form with studio selector
     const studioOptions = getAllItems(allStudios).map(s => s.name);
     const studioDatalistId = 'studioSuggestions';
     const studioDatalistHtml = `<datalist id="${studioDatalistId}">${studioOptions.map(s => `<option value="${s}">`).join('')}</datalist>`;
@@ -2337,8 +2795,130 @@ function buildForm(type) {
         <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
       </div>
     `;
+  } else if (type === 'albums') {
+    // Dynamic volume form
+    fields = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Album Title</label><input id="f_album_title" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Cover URL</label><input id="f_album_cover" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Actress (comma separated)</label><input id="f_album_actress" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Tags (comma separated)</label><input id="f_album_tags" /></div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Volumes</label>
+          <div id="volumeContainer"></div>
+          <button type="button" class="add-volume-btn" id="addVolumeBtn"><i class="fas fa-plus"></i> Add Volume</button>
+        </div></div>
+      </div>
+    `;
   }
   return `<div class="add-data-form"><h4>${type === 'videos' ? 'Add Video' : 'Add '+type.slice(0,-1)}</h4>${fields}<button class="submit-btn" id="addSubmit">Save</button></div>`;
+}
+
+function setupVolumeFields(form, existingVolumes = []) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  if (existingVolumes.length === 0) {
+    // Add one default volume
+    existingVolumes = [{ title: 'Volume 1', cover: '', images: '' }];
+  }
+  existingVolumes.forEach((vol, index) => {
+    const div = document.createElement('div');
+    div.className = 'volume-entry';
+    div.dataset.index = index;
+    div.innerHTML = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="${vol.title || ''}" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" value="${vol.cover || ''}" /></div></div>
+        <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+          <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2">${vol.images || ''}</textarea></div></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  // Remove button handlers
+  container.querySelectorAll('.remove-volume').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const entry = this.closest('.volume-entry');
+      if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+        entry.remove();
+      } else {
+        alert('At least one volume is required.');
+      }
+    });
+  });
+
+  // Add button handler (re-attach each time)
+  const addBtn = form.querySelector('#addVolumeBtn');
+  if (addBtn) {
+    addBtn.onclick = () => {
+      const count = container.querySelectorAll('.volume-entry').length;
+      const div = document.createElement('div');
+      div.className = 'volume-entry';
+      div.dataset.index = count;
+      div.innerHTML = `
+        <div class="form-row">
+          <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="Volume ${count+1}" /></div></div>
+          <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" /></div></div>
+          <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+            <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2"></textarea></div></div>
+        </div>
+      `;
+      container.appendChild(div);
+      // Re-bind remove handlers
+      container.querySelectorAll('.remove-volume').forEach(btn => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          const entry = this.closest('.volume-entry');
+          if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+            entry.remove();
+          } else {
+            alert('At least one volume is required.');
+          }
+        };
+      });
+    };
+  }
+}
+
+function collectAlbumVolumes(form) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return [];
+  const entries = container.querySelectorAll('.volume-entry');
+  const volumes = [];
+  entries.forEach(entry => {
+    const title = entry.querySelector('.volume-title')?.value || '';
+    const cover = entry.querySelector('.volume-cover')?.value || '';
+    const imagesText = entry.querySelector('.volume-images')?.value || '';
+    const images = imagesText.split(',').map(s => s.trim()).filter(Boolean);
+    volumes.push({ title, cover, images });
+  });
+  return volumes;
+}
+
+function populateVolumeFields(form, volumes) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  // Convert volumes array to the expected format
+  const volData = volumes.map(v => ({
+    title: v.title || '',
+    cover: v.cover || '',
+    images: (v.images && Array.isArray(v.images)) ? v.images.join(', ') : ''
+  }));
+  setupVolumeFields(form, volData);
 }
 
 async function loadAddList(type, search = '') {
@@ -2353,6 +2933,7 @@ async function loadAddList(type, search = '') {
   else if (type === 'series') data = allSeries;
   else if (type === 'versions') data = allVersions;
   else if (type === 'groups') data = allGroups;
+  else if (type === 'albums') data = allAlbums;
 
   const entries = Object.entries(data);
   const filtered = search ? entries.filter(([k, item]) => (item.name || item.title || '').toLowerCase().includes(search.toLowerCase())) : entries;
@@ -2366,10 +2947,7 @@ async function loadAddList(type, search = '') {
     const div = document.createElement('div');
     div.className = 'add-data-item';
     let displayName = type === 'videos' ? (item.id || key) : (item.name || item.title || 'Untitled');
-    // For labels, show studio association
-    if (type === 'labels' && item.studio) {
-      displayName = `${item.name} (${item.studio})`;
-    }
+    if (type === 'albums') displayName = item.title || 'Untitled';
     div.innerHTML = `
       <span class="name">${displayName}</span>
       <div class="actions">
@@ -2386,7 +2964,7 @@ async function loadAddList(type, search = '') {
         await remove(ref(db, `${type}/${id}`));
         await loadAllData();
         loadAddList(type);
-        renderVideos(); renderFilterModal();
+        renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
       }
     };
   });
@@ -2426,81 +3004,42 @@ function populateForm(type, item, id) {
     const versionVal = item.version || '';
     const groupVal = item.group || '';
     buildCustomSelects(type, form, { actress: actressVal, tags: tagsVal, studio: studioVal, label: labelVal, series: seriesVal, version: versionVal, group: groupVal });
+  } else if (type === 'actresses') {
+    form.querySelector('#f_name').value = item.name || '';
+    form.querySelector('#f_javguru').value = item.javguru || '';
+    form.querySelector('#f_dob').value = item.dob || '';
+    form.querySelector('#f_debut').value = item.debut || '';
+    form.querySelector('#f_measurements').value = item.measurements || '';
+    form.querySelector('#f_cup').value = item.cup || '';
+    form.querySelector('#f_height').value = item.height || '';
+    if (item.images) {
+      item.images.forEach((url, i) => {
+        const inp = form.querySelector(`#f_image_${i}`);
+        if (inp) inp.value = url;
+      });
+    }
+  } else if (type === 'labels') {
+    form.querySelector('#f_name').value = item.name || '';
+    form.querySelector('#f_studio').value = item.studio || '';
+    form.querySelector('#f_image').value = item.image || '';
+  } else if (['tags','studios','series'].includes(type)) {
+    form.querySelector('#f_name').value = item.name || '';
+    form.querySelector('#f_image').value = item.image || '';
+  } else if (type === 'albums') {
+    form.querySelector('#f_album_title').value = item.title || '';
+    form.querySelector('#f_album_cover').value = item.cover || '';
+    form.querySelector('#f_album_actress').value = item.actress || '';
+    form.querySelector('#f_album_tags').value = item.tags ? item.tags.join(',') : '';
+    // Handle volumes
+    const volumesArray = item.volumes ? Object.values(item.volumes) : [];
+    populateVolumeFields(form, volumesArray);
   } else {
     form.querySelector('#f_name').value = item.name || '';
-    if (type === 'actresses') {
-      form.querySelector('#f_javguru').value = item.javguru || '';
-      form.querySelector('#f_dob').value = item.dob || '';
-      form.querySelector('#f_debut').value = item.debut || '';
-      form.querySelector('#f_measurements').value = item.measurements || '';
-      form.querySelector('#f_cup').value = item.cup || '';
-      form.querySelector('#f_height').value = item.height || '';
-      if (item.images) {
-        item.images.forEach((url, i) => {
-          const inp = form.querySelector(`#f_image_${i}`);
-          if (inp) inp.value = url;
-        });
-      }
-    } else if (type === 'labels') {
-      form.querySelector('#f_studio').value = item.studio || '';
-      form.querySelector('#f_image').value = item.image || '';
-    } else if (['tags','studios','series'].includes(type)) {
-      form.querySelector('#f_image').value = item.image || '';
-    }
   }
   form.dataset.editId = id;
   const submitBtn = form.querySelector('#addSubmit');
   submitBtn.textContent = 'Update';
   setupAddForm(type);
-  setupCodeAutocomplete(form);
-}
-
-function setupCodeAutocomplete(form) {
-  const codeInput = form.querySelector('#f_code');
-  if (!codeInput) return;
-  codeInput.addEventListener('change', function() {
-    const selectedCode = this.value.trim();
-    if (!selectedCode) return;
-    const video = getAllItems(allVideos).find(v => v.code === selectedCode);
-    if (video) {
-      const editId = form.dataset.editId || null;
-      if (editId && !confirm('Loading this code will overwrite current form data. Continue?')) return;
-      const titleInput = form.querySelector('#f_title');
-      const ratingInput = form.querySelector('#f_rating');
-      const releaseInput = form.querySelector('#f_release');
-      const durationInput = form.querySelector('#f_duration');
-      const trailerInput = form.querySelector('#f_trailer');
-      const videoInput = form.querySelector('#f_video');
-      const descInput = form.querySelector('#f_description');
-      const thumbInput = form.querySelector('#f_thumbnail');
-      const posterInput = form.querySelector('#f_poster');
-      if (titleInput) titleInput.value = video.title || '';
-      if (ratingInput) ratingInput.value = video.rating || '';
-      if (releaseInput) releaseInput.value = video.release || '';
-      if (durationInput) durationInput.value = video.duration || '';
-      if (trailerInput) trailerInput.value = video.trailerUrl || '';
-      if (videoInput) videoInput.value = video.videoUrl || '';
-      if (descInput) descInput.value = video.description || '';
-      if (thumbInput) thumbInput.value = video.thumbnail || '';
-      if (posterInput) posterInput.value = video.poster || '';
-      const actressVal = video.actress ? video.actress.split(',').map(a=>a.trim()) : [];
-      const tagsVal = video.tags || [];
-      const studioVal = video.studio || '';
-      const labelVal = video.label || '';
-      const seriesVal = video.series || '';
-      const versionVal = video.version || '';
-      const groupVal = video.group || '';
-      form.querySelectorAll('.custom-select').forEach(el => el.remove());
-      buildCustomSelects('videos', form, { actress: actressVal, tags: tagsVal, studio: studioVal, label: labelVal, series: seriesVal, version: versionVal, group: groupVal });
-      const idInput = form.querySelector('#f_id');
-      if (idInput && !editId) {
-        idInput.value = video.id || '';
-      }
-      form.dataset.editId = video.id || '';
-      const submitBtn = form.querySelector('#addSubmit');
-      if (submitBtn) submitBtn.textContent = 'Update';
-    }
-  });
 }
 
 function buildCustomSelects(type, form, preset = {}) {
@@ -2552,20 +3091,121 @@ function buildCustomSelects(type, form, preset = {}) {
   });
 }
 
+function createCustomSelect({
+  container,
+  options = [],
+  multiple = false,
+  placeholder = 'Select...',
+  imageKey = 'image',
+  nameKey = 'name',
+  onSelect = () => {}
+}) {
+  container.innerHTML = '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'custom-select';
+
+  const inputDiv = document.createElement('div');
+  inputDiv.className = 'custom-select-input';
+  inputDiv.innerHTML = `<span class="selected-text">${placeholder}</span><i class="fas fa-chevron-down" style="margin-left:auto;"></i>`;
+  wrapper.appendChild(inputDiv);
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'custom-select-dropdown';
+  const searchDiv = document.createElement('div');
+  searchDiv.className = 'custom-select-search';
+  searchDiv.innerHTML = `<input type="text" placeholder="Search..." />`;
+  dropdown.appendChild(searchDiv);
+
+  const optionsContainer = document.createElement('div');
+  optionsContainer.className = 'custom-select-options';
+  dropdown.appendChild(optionsContainer);
+  wrapper.appendChild(dropdown);
+
+  container.appendChild(wrapper);
+
+  let selectedValues = [];
+
+  function renderOptions(filter = '') {
+    optionsContainer.innerHTML = '';
+    const filtered = options.filter(o => o[nameKey].toLowerCase().includes(filter.toLowerCase()));
+    filtered.forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'custom-select-option';
+      const checked = selectedValues.includes(opt[nameKey]);
+      if (checked) div.classList.add('selected');
+      const img = opt[imageKey] ? `<img src="${opt[imageKey]}" onerror="this.style.display='none'" style="width:40px;height:60px;object-fit:cover;border-radius:4px;" />` : '';
+      div.innerHTML = `${img}<span class="opt-name">${opt[nameKey]}</span>${checked ? '<span class="opt-check"><i class="fas fa-check"></i></span>' : ''}`;
+      div.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt[nameKey];
+        if (multiple) {
+          const idx = selectedValues.indexOf(val);
+          if (idx > -1) selectedValues.splice(idx, 1);
+          else selectedValues.push(val);
+        } else {
+          selectedValues = [val];
+          dropdown.classList.remove('show');
+        }
+        updateUI();
+        container.dataset.value = selectedValues.join(', ');
+        onSelect(selectedValues);
+      });
+      optionsContainer.appendChild(div);
+    });
+  }
+
+  function updateUI() {
+    const text = selectedValues.length ? selectedValues.join(', ') : placeholder;
+    inputDiv.querySelector('.selected-text').textContent = text;
+    optionsContainer.querySelectorAll('.custom-select-option').forEach(el => {
+      const name = el.querySelector('.opt-name').textContent;
+      const checked = selectedValues.includes(name);
+      el.classList.toggle('selected', checked);
+      const checkSpan = el.querySelector('.opt-check');
+      if (checked) {
+        if (!checkSpan) el.insertAdjacentHTML('beforeend', '<span class="opt-check"><i class="fas fa-check"></i></span>');
+      } else {
+        if (checkSpan) checkSpan.remove();
+      }
+    });
+  }
+
+  searchDiv.querySelector('input').addEventListener('input', (e) => {
+    renderOptions(e.target.value);
+  });
+
+  inputDiv.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+    if (dropdown.classList.contains('show')) renderOptions();
+  });
+  document.addEventListener('click', () => { dropdown.classList.remove('show'); });
+
+  function setValue(values) {
+    selectedValues = Array.isArray(values) ? values : [values];
+    updateUI();
+    container.dataset.value = selectedValues.join(', ');
+  }
+
+  return { wrapper, setValue, getValue: () => selectedValues };
+}
+
 function setupAddForm(type) {
   const form = document.getElementById('addFormPanel');
   if (!form) return;
 
-  if (!form.dataset.editId && type === 'videos') {
-    buildCustomSelects(type, form);
+  // For albums, set up volume fields
+  if (type === 'albums') {
+    // If no volumes exist, add one default
+    const container = form.querySelector('#volumeContainer');
+    if (container && container.querySelectorAll('.volume-entry').length === 0) {
+      setupVolumeFields(form);
+    }
+    // Re-bind add button and remove buttons (they are set in setupVolumeFields)
   }
 
-  setupCodeAutocomplete(form);
-
   const submitBtn = form.querySelector('#addSubmit');
-  submitBtn.replaceWith(submitBtn.cloneNode(true));
-  const newSubmit = form.querySelector('#addSubmit');
-  newSubmit.onclick = async () => {
+  submitBtn.onclick = async () => {
     const editId = form.dataset.editId || null;
     const data = collectFormData(type, form);
     if (!data) return;
@@ -2573,7 +3213,7 @@ function setupAddForm(type) {
     if (type === 'videos') {
       const id = data.id;
       if (!id) { alert('ID is required'); return; }
-      if (!editId && allVideos[id]) { alert('Video ID already exists. Use a unique ID.'); return; }
+      if (!editId && allVideos[id]) { alert('Video ID already exists.'); return; }
       if (editId && editId !== id && allVideos[id]) { alert('Another video with this ID exists.'); return; }
       const { id: _, ...videoData } = data;
       if (editId) {
@@ -2584,6 +3224,13 @@ function setupAddForm(type) {
         }
       } else {
         await set(ref(db, `videos/${id}`), videoData);
+      }
+    } else if (type === 'albums') {
+      if (!data.title) { alert('Album title is required'); return; }
+      if (editId) {
+        await update(ref(db, `albums/${editId}`), data);
+      } else {
+        await push(ref(db, 'albums'), data);
       }
     } else {
       const name = data.name;
@@ -2600,7 +3247,7 @@ function setupAddForm(type) {
         item.name.toLowerCase() === name.toLowerCase() &&
         key !== editId
       );
-      if (dup) { alert(`"${name}" already exists. Use a unique name.`); return; }
+      if (dup) { alert(`"${name}" already exists.`); return; }
       if (editId) {
         await update(ref(db, `${type}/${editId}`), data);
       } else {
@@ -2610,6 +3257,8 @@ function setupAddForm(type) {
 
     await loadAllData();
     renderVideos();
+    renderAlbums();
+    renderPictures();
     renderFilterModal();
     const currentTab = addDataNav.querySelector('.add-tab-btn.active');
     if (currentTab) renderAddDataPanel(currentTab.dataset.addtab);
@@ -2681,27 +3330,212 @@ function collectFormData(type, form) {
     return {
       name: form.querySelector('#f_name').value
     };
+  } else if (type === 'albums') {
+    const volumesArray = collectAlbumVolumes(form);
+    const volumes = {};
+    volumesArray.forEach((v, i) => {
+      volumes[`vol_${i+1}`] = {
+        title: v.title || `Volume ${i+1}`,
+        cover: v.cover || '',
+        images: v.images || []
+      };
+    });
+    return {
+      title: form.querySelector('#f_album_title').value.trim(),
+      cover: form.querySelector('#f_album_cover').value.trim(),
+      actress: form.querySelector('#f_album_actress').value.trim(),
+      tags: form.querySelector('#f_album_tags').value.split(',').map(s=>s.trim()).filter(Boolean),
+      volumes: volumes
+    };
   }
   return null;
 }
 
-// =====================================================
-// ========== INIT ======================================
-// =====================================================
+// ===== EVENT LISTENERS =====
+function setupEventListeners() {
+  $('#themeToggle').onclick = () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = $('#themeToggle i');
+    icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+  };
+
+  document.querySelector('.logo').addEventListener('click', function() {
+    activeFilters = { actress:[], tags:[], studios:[], label:[], series:[], version:[], group:[] };
+    searchTerm = '';
+    searchInput.value = '';
+    currentSort = 'top-rated';
+    currentPage = 1;
+    sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+    sortMenu.querySelector('.sort-option[data-sort="top-rated"]').classList.add('active');
+    viewMode = 'thumbnail';
+    renderVideos();
+    renderFilterModal();
+    updateActiveFiltersUI();
+    albumActiveFilters = { actress:[], tags:[] };
+    albumSearchTerm = '';
+    albumSearchInput.value = '';
+    albumCurrentPage = 1;
+    albumSortOrder = 'shuffle';
+    renderAlbums();
+    renderAlbumFiltersUI();
+    picturesSearchTerm = '';
+    picturesSearchInput.value = '';
+    picturesCurrentPage = 1;
+    picturesShuffled = [];
+    picturesLayout = 2;
+    document.querySelectorAll('#picturesTab .layout-btn').forEach(btn => {
+      btn.classList.toggle('active', parseInt(btn.dataset.cols) === 2);
+    });
+    renderPictures();
+    closeModal(videoModal);
+    closeModal(filterModal);
+    closeModal(albumModal);
+    closeImageViewer();
+    switchTab('videos');
+  });
+
+  document.getElementById('addDataBtn').addEventListener('click', () => {
+    switchTab('add');
+  });
+
+  tabBtns.forEach(btn => {
+    btn.onclick = () => {
+      const tab = btn.dataset.tab;
+      if (tab) switchTab(tab);
+    };
+  });
+
+  searchInput.oninput = () => {
+    searchTerm = searchInput.value.trim();
+    currentPage = 1;
+    renderVideos();
+    renderFilterModal();
+  };
+  searchInput.onkeydown = (e) => { if (e.key === 'Enter') renderVideos(); };
+
+  sortBtn.onclick = (e) => { e.stopPropagation(); sortMenu.classList.toggle('active'); };
+  document.addEventListener('click', (e) => { if (!sortBtn.contains(e.target) && !sortMenu.contains(e.target)) sortMenu.classList.remove('active'); });
+  sortMenu.querySelectorAll('.sort-option').forEach(opt => {
+    opt.onclick = () => {
+      sortMenu.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      currentSort = opt.dataset.sort;
+      currentPage = 1;
+      renderVideos();
+      sortMenu.classList.remove('active');
+    };
+  });
+
+  filtersBtn.onclick = () => {
+    currentFilterTab = 'actress';
+    renderFilterModal();
+    openModal(filterModal);
+  };
+  closeFilterModal.onclick = () => closeModal(filterModal);
+  filterModal.onclick = (e) => { if (e.target === filterModal) closeModal(filterModal); };
+
+  viewToggleBtn.addEventListener('click', () => {
+    viewMode = viewMode === 'thumbnail' ? 'poster' : 'thumbnail';
+    renderVideos();
+  });
+
+  prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderVideos(); smoothScrollToTop(document.getElementById('videosTab')); } };
+  nextBtn.onclick = () => { const total = Math.ceil(getFilteredVideos().length / PAGE_SIZE); if (currentPage < total) { currentPage++; renderVideos(); smoothScrollToTop(document.getElementById('videosTab')); } };
+
+  closeVideoModal.onclick = () => closeModal(videoModal);
+  videoModal.onclick = (e) => { if (e.target === videoModal) closeModal(videoModal); };
+  trailerBtn.onclick = () => playVideo('trailer');
+  videoBtn.onclick = () => playVideo('video');
+
+  // Album events
+  albumSearchInput.oninput = () => {
+    albumSearchTerm = albumSearchInput.value.trim();
+    albumCurrentPage = 1;
+    renderAlbums();
+  };
+  albumShuffleBtn.addEventListener('click', () => {
+    albumSortOrder = (albumSortOrder === 'shuffle' ? 'title' : 'shuffle');
+    albumCurrentPage = 1;
+    renderAlbums();
+  });
+  albumFiltersBtn.onclick = () => {
+    currentFilterTab = 'actress';
+    renderAlbumFilterModal();
+    openModal(filterModal);
+  };
+  albumPrevBtn.onclick = () => { if (albumCurrentPage > 1) { albumCurrentPage--; renderAlbums(); smoothScrollToTop(document.getElementById('albumsTab')); } };
+  albumNextBtn.onclick = () => { const total = Math.ceil(getFilteredAlbums().length / ALBUM_PAGE_SIZE); if (albumCurrentPage < total) { albumCurrentPage++; renderAlbums(); smoothScrollToTop(document.getElementById('albumsTab')); } };
+  closeAlbumModal.onclick = () => closeModal(albumModal);
+  albumModal.onclick = (e) => { if (e.target === albumModal) closeModal(albumModal); };
+
+  // Volume layout
+  volumeLayoutBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      volumeLayoutBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      volumeLayout = parseInt(btn.dataset.cols);
+      renderVolumeImages();
+    });
+  });
+
+  // Pictures events
+  picturesSearchInput.oninput = () => {
+    picturesSearchTerm = picturesSearchInput.value.trim();
+    picturesCurrentPage = 1;
+    picturesShuffled = [];
+    renderPictures();
+  };
+  picturesShuffleBtn.addEventListener('click', () => {
+    picturesShuffled = shuffleArray(allPictures.slice());
+    picturesCurrentPage = 1;
+    renderPictures();
+  });
+  picturesLayoutBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      picturesLayoutBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      picturesLayout = parseInt(btn.dataset.cols);
+      renderPictures();
+    });
+  });
+  picturesPrevBtn.onclick = () => { if (picturesCurrentPage > 1) { picturesCurrentPage--; renderPictures(); smoothScrollToTop(document.getElementById('picturesTab')); } };
+  picturesNextBtn.onclick = () => { const total = Math.ceil(picturesShuffled.length / PICTURES_PAGE_SIZE); if (picturesCurrentPage < total) { picturesCurrentPage++; renderPictures(); smoothScrollToTop(document.getElementById('picturesTab')); } };
+
+  // Image viewer
+  viewerClose.onclick = closeImageViewer;
+  viewerPrev.onclick = () => navigateImageViewer(-1);
+  viewerNext.onclick = () => navigateImageViewer(1);
+  imageViewer.addEventListener('click', (e) => {
+    if (e.target === imageViewer) closeImageViewer();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (imageViewer.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') navigateImageViewer(-1);
+      else if (e.key === 'ArrowRight') navigateImageViewer(1);
+      else if (e.key === 'Escape') closeImageViewer();
+    }
+  });
+
+  setupCarouselScroll();
+}
+
+// ===== INIT =====
 async function init() {
   try {
     await loadAllData();
+    document.body.classList.add('dark-mode');
+    document.querySelector('#themeToggle i').className = 'fas fa-sun';
     renderVideos();
     renderFilterModal();
+    updateActiveFiltersUI();
+    renderAlbums();
+    renderAlbumFiltersUI();
+    renderPictures();
     setupEventListeners();
     setupAddData();
-    updateActiveFiltersUI();
+    switchTab('videos');
   } catch (e) {
     console.error(e);
-    renderVideos();
-    renderFilterModal();
-    setupEventListeners();
-    setupAddData();
   }
 }
 

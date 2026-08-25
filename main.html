@@ -557,6 +557,8 @@
       -webkit-box-orient:vertical;
       overflow:hidden;
       line-height:1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
     .description.expanded { -webkit-line-clamp:unset; }
     .toggle-desc {
@@ -758,6 +760,7 @@
       align-items: center;
       gap: 0.5rem;
       flex: 1;
+      cursor: pointer;
     }
     .studio-header .studio-toggle {
       margin-left: auto;
@@ -801,7 +804,7 @@
       color: var(--text-secondary);
     }
 
-    /* Regular filter option (non-studio) - for actress, tags, series, version, group */
+    /* Regular filter option (for actress, tags, series, version, group) */
     .filter-options {
       display:grid;
       gap:0.8rem;
@@ -1251,7 +1254,8 @@
       background: var(--border);
       border: 2px solid transparent;
       transition: border-color 0.2s;
-      max-height: 180px;
+      min-height: 240px;
+      min-width: 160px;
     }
     .volume-item.active img { border-color: var(--primary); }
     .volume-item .volume-title {
@@ -1382,6 +1386,7 @@
       .filter-options.cols-1 { grid-template-columns: 1fr; }
       .form-row .form-col { flex: 1 1 100%; min-width: auto; }
       .volume-item { flex: 0 0 80px; }
+      .volume-item img { min-height: 160px; min-width: 100px; }
       .actress-info-card { flex-direction: column; align-items: center; text-align: center; }
       .actress-info-card .javguru-btn { align-self: center; }
       .details { 
@@ -1390,29 +1395,31 @@
       }
       .poster { 
         flex: 0 0 70px; 
-        max-width: 70px;
+        min-width: 120px;
+        max-width: 200px;
       }
       .poster img { 
-        max-width: 60px;
+        min-width: 120px;
+        max-width: 200px;
       }
       .meta-row {
-        font-size: 0.6rem;
-        padding: 0.1rem 0;
+        font-size: 0.8rem;
+        padding: 0.4rem 0;
         gap: 0.2rem;
       }
       .meta-row strong { 
         min-width: 40px; 
-        font-size: 0.6rem;
+        font-size: 0.8rem;
       }
       .meta-row i { 
         width: 14px; 
-        font-size: 0.6rem;
+        font-size: 0.8rem;
       }
       .meta-row span { 
-        font-size: 0.6rem;
+        font-size: 0.8rem;
       }
       .code {
-        font-size: 0.7rem;
+        font-size: 1rem;
         padding: 0.1rem 0.4rem;
       }
       .image-viewer .viewer-nav { font-size: 1.5rem; padding: 0.3rem 0.6rem; }
@@ -1889,7 +1896,7 @@ function closeModal(modal) {
   if (modal === videoModal) { videoPlayer.style.display = 'none'; modalThumb.style.display = 'block'; videoFrame.src = ''; }
 }
 
-// Show success message and clear form
+// Show success message
 function showSuccessMessage(message = 'Saved successfully!') {
   const toast = document.createElement('div');
   toast.style.cssText = `
@@ -2042,7 +2049,7 @@ function renderActressInfo() {
     const javguru = data.javguru || '';
     html += `
       <div class="actress-info-card">
-        ${img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'" />` : ''}
+        ${img ? `<img src="${img}" alt="${name}" loading="lazy" onerror="this.style.display='none'" />` : ''}
         <div class="info-details">
           <div class="info-name">${name}</div>
           ${javguru ? `<button class="javguru-btn" onclick="window.open('${javguru}', '_blank')"><i class="fas fa-external-link-alt"></i> JAVguru</button>` : ''}
@@ -2081,7 +2088,7 @@ function renderVideos() {
       card.className = 'video-card';
       const imgSrc = viewMode === 'poster' ? (v.poster || v.thumbnail || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Image') : (v.thumbnail || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image');
       card.innerHTML = `
-        <img src="${imgSrc}" class="video-thumbnail" alt="${v.title}">
+        <img src="${imgSrc}" class="video-thumbnail" alt="${v.title}" loading="lazy" />
         <div class="video-info">
           <div class="video-title">${v.title || 'Untitled'}</div>
           <div class="video-meta">
@@ -2155,7 +2162,7 @@ function renderFilterModal() {
     version: allVersions,
     group: allGroups
   };
-  const aspectMap = { actress:'2-3', tags:'1-1' }; // only for actress and tags
+  const aspectMap = { actress:'2-3', tags:'1-1' };
   const colsMap = { actress:3, tags:3, series:1, version:1, group:1 };
 
   let html = '';
@@ -2182,7 +2189,7 @@ function renderFilterModal() {
           const studioName = studio.name;
           const studioCount = filtered.filter(v => v.studio === studioName).length;
           const isStudioSelected = selectedStudios.includes(studioName);
-          // Get labels for this studio from allLabels that have this studio as their studio field
+          // Get labels for this studio
           const studioLabels = labels.filter(l => l.studio === studioName);
           const isExpanded = expandedStudio === studioName;
           html += `<div class="studio-item" data-studio="${studioName}">
@@ -2254,7 +2261,7 @@ function renderFilterModal() {
         const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
         html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
         if (hasImage) {
-          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
+          html += `<img src="${imgSrc}" alt="${name}" loading="lazy" onerror="this.style.display='none'" />`;
         }
         html += `<span class="filter-name">${name}</span>`;
         html += `<span class="count">(${count})</span>`;
@@ -2277,7 +2284,7 @@ function renderFilterModal() {
     section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
   });
 
-  // Event listeners for regular filter options (actress, tags, series, version, group)
+  // Event listeners for regular filter options
   filterContent.querySelectorAll('.filter-option').forEach(el => {
     el.addEventListener('click', () => {
       const type = el.dataset.filterType, val = el.dataset.value;
@@ -2400,6 +2407,7 @@ function openVideoModal(video) {
   modalCode.textContent = video.code || 'N/A';
   modalCode.onclick = () => { if (video.code) { searchInput.value = video.code; searchTerm = video.code; currentPage=1; renderVideos(); closeModal(videoModal); } };
 
+  // Description with preserved paragraphs
   modalDesc.textContent = video.description || '';
   modalDesc.classList.remove('expanded');
   toggleDesc.textContent = 'Show More';
@@ -2411,7 +2419,7 @@ function openVideoModal(video) {
       const data = getActressByName(name);
       const img = data && data.images && data.images.length ? data.images[0] : '';
       const div = document.createElement('div'); div.className = 'actress';
-      div.innerHTML = `<img src="${img}" alt="${name}" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
+      div.innerHTML = `<img src="${img}" alt="${name}" loading="lazy" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
       div.onclick = () => { toggleFilter('actress', name); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); };
       modalActress.appendChild(div);
     });
@@ -2423,7 +2431,7 @@ function openVideoModal(video) {
       const data = getTagByName(tag);
       const img = data && data.image ? data.image : '';
       const div = document.createElement('div'); div.className = 'tag-item';
-      div.innerHTML = `<img src="${img}" alt="${tag}" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
+      div.innerHTML = `<img src="${img}" alt="${tag}" loading="lazy" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
       div.onclick = () => { toggleFilter('tags', tag); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); closeModal(videoModal); };
       modalTags.appendChild(div);
     });
@@ -2457,7 +2465,7 @@ function renderCarousel(container, items, type) {
   items.forEach(v => {
     const div = document.createElement('div'); div.className = 'carousel-item';
     const img = type === 'poster' ? (v.poster || v.thumbnail) : v.thumbnail;
-    div.innerHTML = `<img src="${img || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image'}" alt="${v.title}"><div class="carousel-code">${v.code || ''}</div>`;
+    div.innerHTML = `<img src="${img || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image'}" alt="${v.title}" loading="lazy"><div class="carousel-code">${v.code || ''}</div>`;
     div.onclick = () => { closeModal(videoModal); setTimeout(()=>openVideoModal(v), 200); };
     container.appendChild(div);
   });
@@ -2569,7 +2577,7 @@ function renderAlbums() {
       card.className = 'album-card';
       const cover = album.cover || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Cover';
       card.innerHTML = `
-        <img src="${cover}" alt="${album.title || 'Untitled'}" />
+        <img src="${cover}" alt="${album.title || 'Untitled'}" loading="lazy" />
         <div class="album-title">${album.title || 'Untitled'}</div>
       `;
       card.addEventListener('click', () => openAlbumModal(album));
@@ -2592,7 +2600,7 @@ function openAlbumModal(album) {
       const data = getActressByName(name);
       const img = data && data.images && data.images.length ? data.images[0] : '';
       const div = document.createElement('div'); div.className = 'actress';
-      div.innerHTML = `<img src="${img}" alt="${name}" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
+      div.innerHTML = `<img src="${img}" alt="${name}" loading="lazy" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=${encodeURIComponent(name)}'"><span>${name}</span>`;
       div.onclick = (e) => {
         e.stopPropagation();
         toggleAlbumFilter('actress', name);
@@ -2610,7 +2618,7 @@ function openAlbumModal(album) {
       const data = getTagByName(tag);
       const img = data && data.image ? data.image : '';
       const div = document.createElement('div'); div.className = 'tag-item';
-      div.innerHTML = `<img src="${img}" alt="${tag}" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
+      div.innerHTML = `<img src="${img}" alt="${tag}" loading="lazy" onerror="this.src='https://via.placeholder.com/100x100/7c3aed/ffffff?text=${encodeURIComponent(tag)}'"><span>${tag}</span>`;
       div.onclick = (e) => {
         e.stopPropagation();
         toggleAlbumFilter('tags', tag);
@@ -2633,7 +2641,7 @@ function openAlbumModal(album) {
         const div = document.createElement('div');
         div.className = 'volume-item' + (idx === currentVolumeIndex ? ' active' : '');
         div.innerHTML = `
-          <img src="${cover || 'https://via.placeholder.com/120x180/7c3aed/ffffff?text=No+Image'}" alt="${vol.title || 'Volume'}" />
+          <img src="${cover || 'https://via.placeholder.com/120x180/7c3aed/ffffff?text=No+Image'}" alt="${vol.title || 'Volume'}" loading="lazy" />
           <div class="volume-title">${vol.title || 'Volume '+(idx+1)}</div>
         `;
         div.addEventListener('click', () => {
@@ -2748,7 +2756,7 @@ function renderAlbumFilterModal() {
         const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
         html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
         if (hasImage) {
-          html += `<img src="${imgSrc}" onerror="this.style.display='none'" alt="${name}" />`;
+          html += `<img src="${imgSrc}" alt="${name}" loading="lazy" onerror="this.style.display='none'" />`;
         }
         html += `<span class="filter-name">${name}</span>`;
         html += `</div>`;
@@ -2967,7 +2975,6 @@ function switchTab(tabId) {
 }
 
 // ===== ADD DATA with preserved form state =====
-// We'll keep a cache of panels and only build them once
 let addPanels = {};
 
 function setupAddData() {
@@ -2977,11 +2984,9 @@ function setupAddData() {
       addTabs.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const type = btn.dataset.addtab;
-      // Show the panel for this type, create if not exists
       showAddPanel(type);
     };
   });
-  // Show initial active tab
   const activeTab = addDataNav.querySelector('.add-tab-btn.active');
   if (activeTab) {
     showAddPanel(activeTab.dataset.addtab);
@@ -2991,31 +2996,25 @@ function setupAddData() {
 }
 
 function showAddPanel(type) {
-  // If panel already exists, just show it
   const existingPanel = document.getElementById(`addPanel_${type}`);
   if (existingPanel) {
-    // Hide all other panels
     document.querySelectorAll('.add-data-panel-container').forEach(p => p.style.display = 'none');
     existingPanel.style.display = 'block';
-    // Also refresh list data (in case data changed)
     loadAddList(type);
     return;
   }
 
-  // Create new panel
   const wrapper = document.createElement('div');
   wrapper.className = 'add-data-panel-container';
   wrapper.id = `addPanel_${type}`;
   wrapper.style.display = 'block';
 
-  // Form panel
   const formPanel = document.createElement('div');
   formPanel.className = 'add-data-panel active';
   formPanel.id = `addFormPanel_${type}`;
   formPanel.innerHTML = buildForm(type);
   wrapper.appendChild(formPanel);
 
-  // List panel
   const listPanel = document.createElement('div');
   listPanel.className = 'add-data-panel active';
   listPanel.innerHTML = `
@@ -3034,16 +3033,13 @@ function showAddPanel(type) {
 
   addDataContent.appendChild(wrapper);
 
-  // Hide other panels
   document.querySelectorAll('.add-data-panel-container').forEach(p => {
     if (p.id !== `addPanel_${type}`) p.style.display = 'none';
   });
 
-  // Setup form and list
   setupAddForm(type);
   loadAddList(type);
 
-  // Search listener
   const searchInput = listPanel.querySelector(`#addListSearch_${type}`);
   if (searchInput) {
     searchInput.addEventListener('input', () => {
@@ -3165,7 +3161,105 @@ function buildForm(type) {
   return `<div class="add-data-form"><h4>${type === 'videos' ? 'Add Video' : 'Add '+type.slice(0,-1)}</h4>${fields}<button class="submit-btn" id="addSubmit">Save</button></div>`;
 }
 
-// Volume functions remain unchanged from previous
+// Volume helpers
+function setupVolumeFields(form, existingVolumes = []) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  if (existingVolumes.length === 0) {
+    existingVolumes = [{ title: 'Volume 1', cover: '', images: '' }];
+  }
+  existingVolumes.forEach((vol, index) => {
+    const div = document.createElement('div');
+    div.className = 'volume-entry';
+    div.dataset.index = index;
+    div.innerHTML = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="${vol.title || ''}" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" value="${vol.cover || ''}" /></div></div>
+        <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+          <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2">${vol.images || ''}</textarea></div></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  container.querySelectorAll('.remove-volume').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const entry = this.closest('.volume-entry');
+      if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+        entry.remove();
+      } else {
+        alert('At least one volume is required.');
+      }
+    });
+  });
+
+  const addBtn = form.querySelector('#addVolumeBtn');
+  if (addBtn) {
+    addBtn.onclick = () => {
+      const count = container.querySelectorAll('.volume-entry').length;
+      const div = document.createElement('div');
+      div.className = 'volume-entry';
+      div.dataset.index = count;
+      div.innerHTML = `
+        <div class="form-row">
+          <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="Volume ${count+1}" /></div></div>
+          <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" /></div></div>
+          <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+            <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2"></textarea></div></div>
+        </div>
+      `;
+      container.appendChild(div);
+      container.querySelectorAll('.remove-volume').forEach(btn => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          const entry = this.closest('.volume-entry');
+          if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+            entry.remove();
+          } else {
+            alert('At least one volume is required.');
+          }
+        };
+      });
+    };
+  }
+}
+
+function collectAlbumVolumes(form) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return [];
+  const entries = container.querySelectorAll('.volume-entry');
+  const volumes = [];
+  entries.forEach(entry => {
+    const title = entry.querySelector('.volume-title')?.value || '';
+    const cover = entry.querySelector('.volume-cover')?.value || '';
+    const imagesText = entry.querySelector('.volume-images')?.value || '';
+    const images = imagesText.split(',').map(s => s.trim()).filter(Boolean);
+    volumes.push({ title, cover, images });
+  });
+  return volumes;
+}
+
+function populateVolumeFields(form, volumes) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  const volData = volumes.map(v => ({
+    title: v.title || '',
+    cover: v.cover || '',
+    images: (v.images && Array.isArray(v.images)) ? v.images.join(', ') : ''
+  }));
+  setupVolumeFields(form, volData);
+}
 
 async function loadAddList(type, search = '') {
   const container = document.getElementById(`addListItems_${type}`);
@@ -3291,7 +3385,7 @@ function buildLabelStudioSelect(form, presetVal) {
   const items = getAllItems(allStudios);
   const options = items.map(item => ({
     name: item.name,
-    image: '' // no image for studios in add data
+    image: ''
   }));
   const sel = createCustomSelect({
     container,
@@ -3440,7 +3534,7 @@ function createCustomSelect({
       div.className = 'custom-select-option';
       const checked = selectedValues.includes(opt[nameKey]);
       if (checked) div.classList.add('selected');
-      const img = opt[imageKey] ? `<img src="${opt[imageKey]}" onerror="this.style.display='none'" style="width:40px;height:60px;object-fit:cover;border-radius:4px;" />` : '';
+      const img = opt[imageKey] ? `<img src="${opt[imageKey]}" loading="lazy" onerror="this.style.display='none'" style="width:40px;height:60px;object-fit:cover;border-radius:4px;" />` : '';
       div.innerHTML = `${img}<span class="opt-name">${opt[nameKey]}</span>${checked ? '<span class="opt-check"><i class="fas fa-check"></i></span>' : ''}`;
       div.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -3501,11 +3595,9 @@ function setupAddForm(type) {
   const form = document.getElementById(`addFormPanel_${type}`);
   if (!form) return;
 
-  // For videos, build custom selects (new)
   if (type === 'videos' && !form.dataset.editId) {
     buildCustomSelects(type, form);
   }
-  // For labels, build studio select (new)
   if (type === 'labels' && !form.dataset.editId) {
     buildLabelStudioSelect(form, '');
   }
@@ -3539,28 +3631,6 @@ function setupAddForm(type) {
         await set(ref(db, `videos/${id}`), videoData);
       }
       showSuccessMessage('Video saved successfully!');
-      // Reset form
-      form.reset();
-      form.querySelectorAll('.custom-select').forEach(el => {
-        const inputDiv = el.querySelector('.custom-select-input');
-        if (inputDiv) {
-          const textSpan = inputDiv.querySelector('.selected-text');
-          if (textSpan) textSpan.textContent = 'Select...';
-          el.dataset.value = '';
-        }
-        const options = el.querySelectorAll('.custom-select-option');
-        options.forEach(opt => {
-          opt.classList.remove('selected');
-          const check = opt.querySelector('.opt-check');
-          if (check) check.remove();
-        });
-      });
-      delete form.dataset.editId;
-      const submitBtn = form.querySelector('#addSubmit');
-      if (submitBtn) submitBtn.textContent = 'Save';
-      await loadAllData();
-      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
-      loadAddList(type);
     } else if (type === 'albums') {
       if (!data.title) { alert('Album title is required'); return; }
       if (editId) {
@@ -3570,32 +3640,6 @@ function setupAddForm(type) {
         await push(ref(db, 'albums'), data);
         showSuccessMessage('Album added successfully!');
       }
-      form.reset();
-      form.querySelectorAll('.custom-select').forEach(el => {
-        const inputDiv = el.querySelector('.custom-select-input');
-        if (inputDiv) {
-          const textSpan = inputDiv.querySelector('.selected-text');
-          if (textSpan) textSpan.textContent = 'Select...';
-          el.dataset.value = '';
-        }
-        const options = el.querySelectorAll('.custom-select-option');
-        options.forEach(opt => {
-          opt.classList.remove('selected');
-          const check = opt.querySelector('.opt-check');
-          if (check) check.remove();
-        });
-      });
-      const volContainer = form.querySelector('#volumeContainer');
-      if (volContainer) {
-        volContainer.innerHTML = '';
-        setupVolumeFields(form);
-      }
-      delete form.dataset.editId;
-      const submitBtn = form.querySelector('#addSubmit');
-      if (submitBtn) submitBtn.textContent = 'Save';
-      await loadAllData();
-      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
-      loadAddList(type);
     } else if (type === 'labels') {
       const name = data.name;
       if (!name) { alert('Name is required'); return; }
@@ -3613,30 +3657,7 @@ function setupAddForm(type) {
         await push(ref(db, 'labels'), { name, studio });
         showSuccessMessage('Label added successfully!');
       }
-      form.reset();
-      const studioContainer = form.querySelector('#f_label_studio_container');
-      if (studioContainer) {
-        studioContainer.dataset.value = '';
-        const inputDiv = studioContainer.querySelector('.custom-select-input');
-        if (inputDiv) {
-          const textSpan = inputDiv.querySelector('.selected-text');
-          if (textSpan) textSpan.textContent = 'Select Studio...';
-        }
-        const options = studioContainer.querySelectorAll('.custom-select-option');
-        options.forEach(opt => {
-          opt.classList.remove('selected');
-          const check = opt.querySelector('.opt-check');
-          if (check) check.remove();
-        });
-      }
-      delete form.dataset.editId;
-      const submitBtn = form.querySelector('#addSubmit');
-      if (submitBtn) submitBtn.textContent = 'Save';
-      await loadAllData();
-      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
-      loadAddList(type);
     } else {
-      // actresses, tags, studios, series, versions, groups
       const name = data.name;
       if (!name) { alert('Name is required'); return; }
       let existingEntries = [];
@@ -3658,14 +3679,43 @@ function setupAddForm(type) {
         await push(ref(db, type), data);
         showSuccessMessage(`${type.slice(0,-1)} added successfully!`);
       }
-      form.reset();
-      delete form.dataset.editId;
-      const submitBtn = form.querySelector('#addSubmit');
-      if (submitBtn) submitBtn.textContent = 'Save';
-      await loadAllData();
-      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
-      loadAddList(type);
     }
+
+    // After successful save, reload data, clear form, and update list
+    await loadAllData();
+    renderVideos();
+    renderAlbums();
+    renderPictures();
+    renderFilterModal();
+    // Reset form
+    form.reset();
+    form.querySelectorAll('.custom-select').forEach(el => {
+      const inputDiv = el.querySelector('.custom-select-input');
+      if (inputDiv) {
+        const textSpan = inputDiv.querySelector('.selected-text');
+        if (textSpan) textSpan.textContent = 'Select...';
+        el.dataset.value = '';
+      }
+      const options = el.querySelectorAll('.custom-select-option');
+      options.forEach(opt => {
+        opt.classList.remove('selected');
+        const check = opt.querySelector('.opt-check');
+        if (check) check.remove();
+      });
+    });
+    // Clear volume container for albums
+    if (type === 'albums') {
+      const volContainer = form.querySelector('#volumeContainer');
+      if (volContainer) {
+        volContainer.innerHTML = '';
+        setupVolumeFields(form);
+      }
+    }
+    delete form.dataset.editId;
+    const submitBtn = form.querySelector('#addSubmit');
+    if (submitBtn) submitBtn.textContent = 'Save';
+    // Refresh list for current type
+    loadAddList(type);
   };
 }
 
@@ -3749,106 +3799,6 @@ function collectFormData(type, form) {
     };
   }
   return null;
-}
-
-// Volume helpers (unchanged)
-function setupVolumeFields(form, existingVolumes = []) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return;
-  container.innerHTML = '';
-  if (existingVolumes.length === 0) {
-    existingVolumes = [{ title: 'Volume 1', cover: '', images: '' }];
-  }
-  existingVolumes.forEach((vol, index) => {
-    const div = document.createElement('div');
-    div.className = 'volume-entry';
-    div.dataset.index = index;
-    div.innerHTML = `
-      <div class="form-row">
-        <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="${vol.title || ''}" /></div></div>
-        <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" value="${vol.cover || ''}" /></div></div>
-        <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
-          <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2">${vol.images || ''}</textarea></div></div>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-
-  container.querySelectorAll('.remove-volume').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const entry = this.closest('.volume-entry');
-      if (entry && container.querySelectorAll('.volume-entry').length > 1) {
-        entry.remove();
-      } else {
-        alert('At least one volume is required.');
-      }
-    });
-  });
-
-  const addBtn = form.querySelector('#addVolumeBtn');
-  if (addBtn) {
-    addBtn.onclick = () => {
-      const count = container.querySelectorAll('.volume-entry').length;
-      const div = document.createElement('div');
-      div.className = 'volume-entry';
-      div.dataset.index = count;
-      div.innerHTML = `
-        <div class="form-row">
-          <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="Volume ${count+1}" /></div></div>
-          <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" /></div></div>
-          <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
-            <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2"></textarea></div></div>
-        </div>
-      `;
-      container.appendChild(div);
-      container.querySelectorAll('.remove-volume').forEach(btn => {
-        btn.onclick = function(e) {
-          e.stopPropagation();
-          const entry = this.closest('.volume-entry');
-          if (entry && container.querySelectorAll('.volume-entry').length > 1) {
-            entry.remove();
-          } else {
-            alert('At least one volume is required.');
-          }
-        };
-      });
-    };
-  }
-}
-
-function collectAlbumVolumes(form) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return [];
-  const entries = container.querySelectorAll('.volume-entry');
-  const volumes = [];
-  entries.forEach(entry => {
-    const title = entry.querySelector('.volume-title')?.value || '';
-    const cover = entry.querySelector('.volume-cover')?.value || '';
-    const imagesText = entry.querySelector('.volume-images')?.value || '';
-    const images = imagesText.split(',').map(s => s.trim()).filter(Boolean);
-    volumes.push({ title, cover, images });
-  });
-  return volumes;
-}
-
-function populateVolumeFields(form, volumes) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return;
-  const volData = volumes.map(v => ({
-    title: v.title || '',
-    cover: v.cover || '',
-    images: (v.images && Array.isArray(v.images)) ? v.images.join(', ') : ''
-  }));
-  setupVolumeFields(form, volData);
 }
 
 // ===== EVENT LISTENERS =====

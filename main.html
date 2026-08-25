@@ -578,30 +578,29 @@
     }
     .meta {
       flex: 2;
-      min-width: 75px;
+      min-width: 0;
     }
     .meta-row {
       display:flex;
       gap:0.3rem;
       align-items:center;
       font-size:0.8rem;
-      padding:0.1rem 0;
+      padding:0.2rem 0;
       border-bottom:1px solid var(--border);
     }
     .meta-row:last-child { border-bottom:none; }
-    .meta-row i { color:var(--primary); width:18px; text-align:center; font-size:1rem; }
-    .meta-row strong { min-width:60px; font-weight:500; color:var(--text-secondary); font-size:1rem; }
-    .meta-row span { font-size:1rem; }
+    .meta-row i { color:var(--primary); width:18px; text-align:center; font-size:0.8rem; }
+    .meta-row strong { min-width:60px; font-weight:500; color:var(--text-secondary); font-size:0.8rem; }
+    .meta-row span { font-size:0.8rem; }
     .poster {
       flex: 1;
       text-align:center;
-      min-width: 120px;
-      max-width: 200px;
+      min-width: 0;
+      max-width: 160px;
     }
     .poster img {
       width: 100%;
-      min-width: 120px;
-      max-width: 150px;
+      max-width: 140px;
       aspect-ratio:2/3;
       object-fit:cover;
       border-radius:var(--radius-sm);
@@ -730,6 +729,79 @@
       outline:none;
     }
     .filter-section-search input:focus { border-color:var(--primary); }
+
+    /* Studio & Label nested list styles */
+    .studio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .studio-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--card);
+    }
+    .studio-header {
+      padding: 0.6rem 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 500;
+      gap: 0.5rem;
+    }
+    .studio-header:hover { background: var(--primary-soft); }
+    .studio-header .studio-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .studio-header .studio-toggle {
+      margin-left: auto;
+      transition: transform 0.3s;
+    }
+    .studio-header .studio-toggle.open { transform: rotate(90deg); }
+    .studio-header .studio-count {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: 0.3rem;
+    }
+    .studio-labels {
+      display: none;
+      padding: 0.4rem 0.8rem 0.8rem;
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+      border-top: 1px solid var(--border);
+    }
+    .studio-labels.open { display: grid; }
+    .label-option {
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: left;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .label-option:hover { border-color: var(--primary); }
+    .label-option.selected {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      font-weight: 500;
+    }
+    .label-option .label-count {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* Regular filter option (non-studio) - for actress, tags, series, version, group */
     .filter-options {
       display:grid;
       gap:0.8rem;
@@ -761,12 +833,6 @@
       font-weight:500;
       box-shadow:0 0 0 2px var(--primary-light);
     }
-    .filter-option img {
-      width:100%;
-      object-fit:cover;
-      border-radius:6px;
-      background:var(--border);
-    }
     .filter-option .filter-name {
       font-size:0.8rem;
       line-height:1.1;
@@ -776,9 +842,9 @@
       font-size:0.7rem;
       color:var(--text-secondary);
     }
+    /* Aspect ratios only for actress and tags (with images) */
     .filter-option.aspect-2-3 img { aspect-ratio: 2/3; object-fit: cover; }
     .filter-option.aspect-1-1 img { aspect-ratio: 1/1; object-fit: cover; }
-    .filter-option.aspect-3-2 img { aspect-ratio: 3/2; object-fit: cover; }
     .filter-option.no-image .filter-name { font-size:0.9rem; }
 
     .filter-option .javguru-btn {
@@ -1251,7 +1317,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.3);
       border: none;
       color: #fff;
       font-size: 2rem;
@@ -1259,8 +1325,9 @@
       cursor: pointer;
       border-radius: 4px;
       transition: background 0.2s;
+      z-index: 10;
     }
-    .image-viewer .viewer-nav:hover { background: rgba(255,255,255,0.3); }
+    .image-viewer .viewer-nav:hover { background: rgba(255,255,255,0.5); }
     .image-viewer .viewer-nav.prev { left: 10px; }
     .image-viewer .viewer-nav.next { right: 10px; }
     .image-viewer .viewer-close {
@@ -1273,6 +1340,7 @@
       transition: opacity 0.2s;
       background: none;
       border: none;
+      z-index: 10;
     }
     .image-viewer .viewer-close:hover { opacity: 0.7; }
     .image-viewer .viewer-counter {
@@ -1288,6 +1356,7 @@
       text-align: center;
       line-height: 1.4;
       max-width: 80%;
+      z-index: 10;
     }
     .image-viewer .viewer-counter .viewer-album-title {
       font-weight: 600;
@@ -1299,10 +1368,10 @@
       font-size: 0.8rem;
     }
 
-    /* ===== RESPONSIVE - FIXED: metadata and poster side by side on all screens ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .video-title { font-size:0.8rem; }
-      .video-meta { font-size:0.8rem; grid-template-columns: repeat(2,1fr); }
+      .video-meta { font-size:0.6rem; grid-template-columns: repeat(2,1fr); }
       .tag-item { flex:0 0 30%; }
       .actress { flex:0 0 40%; }
       .add-data-form { padding:1.2rem; }
@@ -1315,8 +1384,6 @@
       .volume-item { flex: 0 0 80px; }
       .actress-info-card { flex-direction: column; align-items: center; text-align: center; }
       .actress-info-card .javguru-btn { align-self: center; }
-      
-      /* Fix: Keep details side by side on mobile */
       .details { 
         flex-wrap: nowrap;
         gap: 0.5rem;
@@ -1329,25 +1396,26 @@
         max-width: 60px;
       }
       .meta-row {
-        font-size: 0.8rem;
-        padding: 0.4rem 0;
+        font-size: 0.6rem;
+        padding: 0.1rem 0;
         gap: 0.2rem;
       }
       .meta-row strong { 
         min-width: 40px; 
-        font-size: 0.8rem;
+        font-size: 0.6rem;
       }
       .meta-row i { 
         width: 14px; 
-        font-size: 0.8rem;
+        font-size: 0.6rem;
       }
       .meta-row span { 
-        font-size: 0.8rem;
+        font-size: 0.6rem;
       }
       .code {
-        font-size: 1rem;
+        font-size: 0.7rem;
         padding: 0.1rem 0.4rem;
       }
+      .image-viewer .viewer-nav { font-size: 1.5rem; padding: 0.3rem 0.6rem; }
     }
 
     /* Dark mode overrides for new elements */
@@ -1571,7 +1639,7 @@
   </div>
 </div>
 
-<!-- ========== FILTER MODAL (full) ========== -->
+<!-- ========== FILTER MODAL ========== -->
 <div class="modal filter-modal" id="filterModal">
   <div class="modal-container">
     <div class="modal-header">
@@ -1581,8 +1649,7 @@
     <div class="filter-tabs" id="filterTabs">
       <button class="filter-tab active" data-filter-tab="actress">Actress</button>
       <button class="filter-tab" data-filter-tab="tags">Tags</button>
-      <button class="filter-tab" data-filter-tab="studios">Studios</button>
-      <button class="filter-tab" data-filter-tab="label">Label</button>
+      <button class="filter-tab" data-filter-tab="studios_labels">Studios &amp; Labels</button>
       <button class="filter-tab" data-filter-tab="series">Series</button>
       <button class="filter-tab" data-filter-tab="version">Version</button>
       <button class="filter-tab" data-filter-tab="group">Group</button>
@@ -1854,7 +1921,6 @@ async function loadAllData() {
     allVersions = data.versions || {};
     allGroups = data.groups || {};
     allAlbums = data.albums || {};
-    // Flatten pictures with robust guards
     allPictures = [];
     if (allAlbums) {
       Object.values(allAlbums).forEach(album => {
@@ -2077,17 +2143,78 @@ function toggleFilter(type, val) {
   currentPage = 1;
 }
 
-// ===== FULL FILTER MODAL =====
+// ===== FILTER MODAL (full) with combined Studios & Labels =====
 function renderFilterModal() {
-  const types = ['actress','tags','studios','label','series','version','group'];
-  const dataMap = { actress:allActresses, tags:allTags, studios:allStudios, label:allLabels, series:allSeries, version:allVersions, group:allGroups };
-  const aspectMap = { actress:'2-3', tags:'1-1', studios:'1-1', label:'3-2', series:'3-2', version:'none', group:'none' };
-  const colsMap = { actress:3, tags:3, studios:2, label:2, series:1, version:1, group:1 };
+  // Types: actress, tags, studios_labels (combined), series, version, group
+  const types = ['actress','tags','studios_labels','series','version','group'];
+  const dataMap = {
+    actress: allActresses,
+    tags: allTags,
+    studios_labels: { studios: allStudios, labels: allLabels },
+    series: allSeries,
+    version: allVersions,
+    group: allGroups
+  };
+  const aspectMap = { actress:'2-3', tags:'1-1' }; // only for actress and tags
+  const colsMap = { actress:3, tags:3, series:1, version:1, group:1 };
 
   let html = '';
   types.forEach(type => {
+    if (type === 'studios_labels') {
+      // Nested list for studios and labels
+      const studios = getAllItems(allStudios);
+      const labels = getAllItems(allLabels);
+      const selectedStudios = activeFilters.studios || [];
+      const selectedLabels = activeFilters.label || [];
+      const filtered = getFilteredVideos();
+
+      html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
+        <div class="filter-section-search">
+          <input type="text" placeholder="Search studios & labels..." class="filter-search-input" data-section="${type}" />
+        </div>
+        <div class="studio-list">`;
+      if (!studios.length) {
+        html += `<span style="color:var(--text-secondary);font-size:0.85rem;">No studios available.</span>`;
+      } else {
+        // Sort studios alphabetically
+        studios.sort((a,b) => a.name.localeCompare(b.name));
+        studios.forEach(studio => {
+          const studioName = studio.name;
+          const studioCount = filtered.filter(v => v.studio === studioName).length;
+          const isStudioSelected = selectedStudios.includes(studioName);
+          // Get labels for this studio from allLabels that have this studio as their studio field
+          const studioLabels = labels.filter(l => l.studio === studioName);
+          const isExpanded = expandedStudio === studioName;
+          html += `<div class="studio-item" data-studio="${studioName}">
+            <div class="studio-header" style="${isStudioSelected ? 'background:var(--primary-soft);border-color:var(--primary);' : ''}">
+              <span class="studio-name" data-filter-type="studios" data-value="${studioName}">
+                <span>${studioName}</span>
+                <span class="studio-count">(${studioCount})</span>
+              </span>
+              ${studioLabels.length ? `<span class="studio-toggle ${isExpanded ? 'open' : ''}"><i class="fas fa-chevron-right"></i></span>` : ''}
+            </div>
+            <div class="studio-labels ${isExpanded ? 'open' : ''}">
+              ${studioLabels.length ? studioLabels.map(label => {
+                const labelName = label.name;
+                const labelCount = filtered.filter(v => v.label === labelName).length;
+                const labelSelected = selectedLabels.includes(labelName);
+                return `<div class="label-option ${labelSelected ? 'selected' : ''}" data-filter-type="label" data-value="${labelName}">
+                  <span>${labelName}</span>
+                  <span class="label-count">(${labelCount})</span>
+                </div>`;
+              }).join('') : '<span style="grid-column:1/-1;font-size:0.75rem;color:var(--text-secondary);">No labels for this studio</span>'}
+            </div>
+          </div>`;
+        });
+      }
+      html += `</div></div>`;
+      return;
+    }
+
+    // Regular types (actress, tags, series, version, group)
     let items = getAllItems(dataMap[type] || {});
     if (type !== 'version' && type !== 'group') {
+      // Shuffle for visual variety
       for (let i = items.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [items[i], items[j]] = [items[j], items[i]];
@@ -2099,8 +2226,10 @@ function renderFilterModal() {
     const sortedItems = [...selectedItems, ...unselectedItems];
 
     const filtered = getFilteredVideos();
-    const aspect = aspectMap[type] || 'none';
     const cols = colsMap[type] || 1;
+    const isImageType = (type === 'actress' || type === 'tags');
+    const aspect = aspectMap[type] || 'none';
+
     html += `<div class="filter-section ${type === currentFilterTab ? 'active' : ''}" id="filterSection_${type}">
       <div class="filter-section-search">
         <input type="text" placeholder="Search ${type}..." class="filter-search-input" data-section="${type}" />
@@ -2114,16 +2243,14 @@ function renderFilterModal() {
         let count = 0;
         if (type === 'actress') count = filtered.filter(v => v.actress && v.actress.split(',').map(a=>a.trim()).includes(name)).length;
         else if (type === 'tags') count = filtered.filter(v => v.tags && v.tags.includes(name)).length;
-        else if (type === 'studios') count = filtered.filter(v => v.studio === name).length;
-        else if (type === 'label') count = filtered.filter(v => v.label === name).length;
         else if (type === 'series') count = filtered.filter(v => v.series === name).length;
         else if (type === 'version') count = filtered.filter(v => v.version === name).length;
         else if (type === 'group') count = filtered.filter(v => v.group === name).length;
         const selected = selectedVals.includes(name);
         let imgSrc = '';
         if (type === 'actress' && item.images && item.images.length) imgSrc = item.images[0];
-        else if (['tags','studios','labels','series'].includes(type) && item.image) imgSrc = item.image;
-        const hasImage = imgSrc && imgSrc.length > 0;
+        else if (type === 'tags' && item.image) imgSrc = item.image;
+        const hasImage = isImageType && imgSrc && imgSrc.length > 0;
         const cls = `filter-option ${selected?'selected':''} ${hasImage ? 'aspect-'+aspect : 'no-image'}`;
         html += `<div class="${cls}" data-filter-type="${type}" data-value="${name}">`;
         if (hasImage) {
@@ -2139,8 +2266,10 @@ function renderFilterModal() {
     }
     html += `</div></div>`;
   });
+
   filterContent.innerHTML = html;
 
+  // Set active tab
   filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filterTab === currentFilterTab);
   });
@@ -2148,6 +2277,7 @@ function renderFilterModal() {
     section.classList.toggle('active', section.id === `filterSection_${currentFilterTab}`);
   });
 
+  // Event listeners for regular filter options (actress, tags, series, version, group)
   filterContent.querySelectorAll('.filter-option').forEach(el => {
     el.addEventListener('click', () => {
       const type = el.dataset.filterType, val = el.dataset.value;
@@ -2158,20 +2288,83 @@ function renderFilterModal() {
     });
   });
 
+  // Event listeners for studio name (toggle studio filter)
+  filterContent.querySelectorAll('.studio-name').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const type = el.dataset.filterType || 'studios';
+      const val = el.dataset.value;
+      if (type && val) {
+        toggleFilter(type, val);
+        renderFilterModal();
+        renderVideos();
+        updateActiveFiltersUI();
+      }
+    });
+  });
+
+  // Event listeners for studio headers (expand/collapse)
+  filterContent.querySelectorAll('.studio-header').forEach(header => {
+    header.addEventListener('click', (e) => {
+      if (e.target.closest('.studio-name')) return;
+      const studioItem = header.closest('.studio-item');
+      if (!studioItem) return;
+      const studioName = studioItem.dataset.studio;
+      if (expandedStudio === studioName) {
+        expandedStudio = null;
+      } else {
+        expandedStudio = studioName;
+      }
+      renderFilterModal();
+    });
+  });
+
+  // Event listeners for labels inside studio
+  filterContent.querySelectorAll('.label-option').forEach(el => {
+    el.addEventListener('click', () => {
+      const type = el.dataset.filterType || 'label';
+      const val = el.dataset.value;
+      if (type && val) {
+        toggleFilter(type, val);
+        renderFilterModal();
+        renderVideos();
+        updateActiveFiltersUI();
+      }
+    });
+  });
+
+  // Search functionality
   filterContent.querySelectorAll('.filter-search-input').forEach(input => {
     input.addEventListener('input', (e) => {
       const section = e.target.dataset.section;
       const query = e.target.value.toLowerCase();
-      const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
-      if (!options) return;
-      const items = options.querySelectorAll('.filter-option');
-      items.forEach(item => {
-        const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
-        item.style.display = name.includes(query) ? '' : 'none';
-      });
+      if (section === 'studios_labels') {
+        const studioItems = filterContent.querySelectorAll(`#filterSection_${section} .studio-item`);
+        studioItems.forEach(item => {
+          const header = item.querySelector('.studio-header');
+          const name = header?.querySelector('.studio-name span')?.textContent?.toLowerCase() || '';
+          const labels = item.querySelectorAll('.label-option');
+          let match = name.includes(query);
+          if (!match) {
+            labels.forEach(lb => {
+              if (lb.textContent.toLowerCase().includes(query)) match = true;
+            });
+          }
+          item.style.display = match ? '' : 'none';
+        });
+      } else {
+        const options = filterContent.querySelector(`#filterSection_${section} .filter-options`);
+        if (!options) return;
+        const items = options.querySelectorAll('.filter-option');
+        items.forEach(item => {
+          const name = item.querySelector('.filter-name')?.textContent?.toLowerCase() || '';
+          item.style.display = name.includes(query) ? '' : 'none';
+        });
+      }
     });
   });
 
+  // Filter tab click handlers
   filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
     btn.onclick = (e) => {
       const tab = btn.dataset.filterTab;
@@ -2655,6 +2848,9 @@ function renderPictures() {
 }
 
 // ===== IMAGE VIEWER =====
+let touchStartX = 0;
+let touchEndX = 0;
+
 function openImageViewer() {
   if (!pictureViewerList || !pictureViewerList.length) return;
   if (pictureViewerIndex < 0) pictureViewerIndex = 0;
@@ -2666,6 +2862,8 @@ function openImageViewer() {
   viewerIndexInfo.textContent = `${pictureViewerIndex+1} / ${pictureViewerList.length}`;
   imageViewer.classList.add('active');
   document.body.style.overflow = 'hidden';
+  touchStartX = 0;
+  touchEndX = 0;
 }
 
 function closeImageViewer() {
@@ -2683,6 +2881,24 @@ function navigateImageViewer(delta) {
   viewerVolumeTitle.textContent = item.volumeTitle || 'Volume';
   viewerIndexInfo.textContent = `${pictureViewerIndex+1} / ${pictureViewerList.length}`;
 }
+
+// Swipe listener
+function setupSwipeListener() {
+  const viewerContent = document.querySelector('.image-viewer .viewer-content');
+  if (!viewerContent) return;
+  viewerContent.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  viewerContent.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) navigateImageViewer(1);
+      else navigateImageViewer(-1);
+    }
+  }, { passive: true });
+}
+setupSwipeListener();
 
 // ===== TAB STATE MANAGEMENT =====
 function switchTab(tabId) {
@@ -2750,35 +2966,56 @@ function switchTab(tabId) {
   }
 }
 
-// ===== ADD DATA =====
+// ===== ADD DATA with preserved form state =====
+// We'll keep a cache of panels and only build them once
+let addPanels = {};
+
 function setupAddData() {
   const addTabs = addDataNav.querySelectorAll('.add-tab-btn');
   addTabs.forEach(btn => {
     btn.onclick = () => {
       addTabs.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderAddDataPanel(btn.dataset.addtab);
+      const type = btn.dataset.addtab;
+      // Show the panel for this type, create if not exists
+      showAddPanel(type);
     };
   });
-  const activeAddTab = addDataNav.querySelector('.add-tab-btn.active');
-  if (activeAddTab) {
-    renderAddDataPanel(activeAddTab.dataset.addtab);
+  // Show initial active tab
+  const activeTab = addDataNav.querySelector('.add-tab-btn.active');
+  if (activeTab) {
+    showAddPanel(activeTab.dataset.addtab);
   } else {
-    renderAddDataPanel('videos');
+    showAddPanel('videos');
   }
 }
 
-function renderAddDataPanel(type) {
-  addDataContent.innerHTML = '';
-  const wrapper = document.createElement('div');
-  wrapper.className = 'add-data-wrapper';
+function showAddPanel(type) {
+  // If panel already exists, just show it
+  const existingPanel = document.getElementById(`addPanel_${type}`);
+  if (existingPanel) {
+    // Hide all other panels
+    document.querySelectorAll('.add-data-panel-container').forEach(p => p.style.display = 'none');
+    existingPanel.style.display = 'block';
+    // Also refresh list data (in case data changed)
+    loadAddList(type);
+    return;
+  }
 
+  // Create new panel
+  const wrapper = document.createElement('div');
+  wrapper.className = 'add-data-panel-container';
+  wrapper.id = `addPanel_${type}`;
+  wrapper.style.display = 'block';
+
+  // Form panel
   const formPanel = document.createElement('div');
   formPanel.className = 'add-data-panel active';
-  formPanel.id = 'addFormPanel';
+  formPanel.id = `addFormPanel_${type}`;
   formPanel.innerHTML = buildForm(type);
   wrapper.appendChild(formPanel);
 
+  // List panel
   const listPanel = document.createElement('div');
   listPanel.className = 'add-data-panel active';
   listPanel.innerHTML = `
@@ -2787,23 +3024,32 @@ function renderAddDataPanel(type) {
         <h3>${type.charAt(0).toUpperCase()+type.slice(1)}</h3>
         <div class="add-data-list-search">
           <i class="fas fa-search"></i>
-          <input type="text" id="addListSearch" placeholder="Search..." />
+          <input type="text" id="addListSearch_${type}" placeholder="Search..." />
         </div>
       </div>
-      <div class="add-data-items" id="addListItems"></div>
+      <div class="add-data-items" id="addListItems_${type}"></div>
     </div>
   `;
   wrapper.appendChild(listPanel);
 
   addDataContent.appendChild(wrapper);
 
-  loadAddList(type);
-  setupAddForm(type);
-
-  const searchInput = listPanel.querySelector('#addListSearch');
-  searchInput.addEventListener('input', () => {
-    loadAddList(type, searchInput.value);
+  // Hide other panels
+  document.querySelectorAll('.add-data-panel-container').forEach(p => {
+    if (p.id !== `addPanel_${type}`) p.style.display = 'none';
   });
+
+  // Setup form and list
+  setupAddForm(type);
+  loadAddList(type);
+
+  // Search listener
+  const searchInput = listPanel.querySelector(`#addListSearch_${type}`);
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      loadAddList(type, searchInput.value);
+    });
+  }
 }
 
 function buildForm(type) {
@@ -2874,29 +3120,28 @@ function buildForm(type) {
       </div>
     `;
   } else if (type === 'labels') {
-    const studioOptions = getAllItems(allStudios).map(s => s.name);
-    const studioDatalistId = 'studioSuggestions';
-    const studioDatalistHtml = `<datalist id="${studioDatalistId}">${studioOptions.map(s => `<option value="${s}">`).join('')}</datalist>`;
     fields = `
       <div class="form-row">
         <div class="form-col"><div class="form-group"><label>Label Name</label><input id="f_name" /></div></div>
-        <div class="form-col"><div class="form-group"><label>Studio</label><input id="f_studio" list="${studioDatalistId}" placeholder="Type to search..." />${studioDatalistHtml}</div></div>
-      </div>
-      <div class="form-row">
-        <div class="form-col-full"><div class="form-group"><label>Image URL</label><input id="f_image" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Studio</label><div id="f_label_studio_container"></div></div></div>
       </div>
     `;
-  } else if (['tags','studios','series'].includes(type)) {
+  } else if (type === 'studios') {
     fields = `
       <div class="form-row">
-        <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
-        <div class="form-col"><div class="form-group"><label>Image URL</label><input id="f_image" /></div></div>
+        <div class="form-col-full"><div class="form-group"><label>Studio Name</label><input id="f_name" /></div></div>
       </div>
     `;
-  } else if (['versions','groups'].includes(type)) {
+  } else if (type === 'series') {
     fields = `
       <div class="form-row">
-        <div class="form-col"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
+        <div class="form-col-full"><div class="form-group"><label>Series Name</label><input id="f_name" /></div></div>
+      </div>
+    `;
+  } else if (['tags','versions','groups'].includes(type)) {
+    fields = `
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Name</label><input id="f_name" /></div></div>
       </div>
     `;
   } else if (type === 'albums') {
@@ -2920,107 +3165,10 @@ function buildForm(type) {
   return `<div class="add-data-form"><h4>${type === 'videos' ? 'Add Video' : 'Add '+type.slice(0,-1)}</h4>${fields}<button class="submit-btn" id="addSubmit">Save</button></div>`;
 }
 
-function setupVolumeFields(form, existingVolumes = []) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return;
-  container.innerHTML = '';
-  if (existingVolumes.length === 0) {
-    existingVolumes = [{ title: 'Volume 1', cover: '', images: '' }];
-  }
-  existingVolumes.forEach((vol, index) => {
-    const div = document.createElement('div');
-    div.className = 'volume-entry';
-    div.dataset.index = index;
-    div.innerHTML = `
-      <div class="form-row">
-        <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="${vol.title || ''}" /></div></div>
-        <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" value="${vol.cover || ''}" /></div></div>
-        <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
-          <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2">${vol.images || ''}</textarea></div></div>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-
-  container.querySelectorAll('.remove-volume').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const entry = this.closest('.volume-entry');
-      if (entry && container.querySelectorAll('.volume-entry').length > 1) {
-        entry.remove();
-      } else {
-        alert('At least one volume is required.');
-      }
-    });
-  });
-
-  const addBtn = form.querySelector('#addVolumeBtn');
-  if (addBtn) {
-    addBtn.onclick = () => {
-      const count = container.querySelectorAll('.volume-entry').length;
-      const div = document.createElement('div');
-      div.className = 'volume-entry';
-      div.dataset.index = count;
-      div.innerHTML = `
-        <div class="form-row">
-          <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="Volume ${count+1}" /></div></div>
-          <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" /></div></div>
-          <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
-            <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2"></textarea></div></div>
-        </div>
-      `;
-      container.appendChild(div);
-      container.querySelectorAll('.remove-volume').forEach(btn => {
-        btn.onclick = function(e) {
-          e.stopPropagation();
-          const entry = this.closest('.volume-entry');
-          if (entry && container.querySelectorAll('.volume-entry').length > 1) {
-            entry.remove();
-          } else {
-            alert('At least one volume is required.');
-          }
-        };
-      });
-    };
-  }
-}
-
-function collectAlbumVolumes(form) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return [];
-  const entries = container.querySelectorAll('.volume-entry');
-  const volumes = [];
-  entries.forEach(entry => {
-    const title = entry.querySelector('.volume-title')?.value || '';
-    const cover = entry.querySelector('.volume-cover')?.value || '';
-    const imagesText = entry.querySelector('.volume-images')?.value || '';
-    const images = imagesText.split(',').map(s => s.trim()).filter(Boolean);
-    volumes.push({ title, cover, images });
-  });
-  return volumes;
-}
-
-function populateVolumeFields(form, volumes) {
-  const container = form.querySelector('#volumeContainer');
-  if (!container) return;
-  const volData = volumes.map(v => ({
-    title: v.title || '',
-    cover: v.cover || '',
-    images: (v.images && Array.isArray(v.images)) ? v.images.join(', ') : ''
-  }));
-  setupVolumeFields(form, volData);
-}
+// Volume functions remain unchanged from previous
 
 async function loadAddList(type, search = '') {
-  const container = document.getElementById('addListItems');
+  const container = document.getElementById(`addListItems_${type}`);
   if (!container) return;
   let data = {};
   if (type === 'videos') data = allVideos;
@@ -3077,7 +3225,7 @@ async function loadAddList(type, search = '') {
 }
 
 function populateForm(type, item, id) {
-  const form = document.getElementById('addFormPanel');
+  const form = document.getElementById(`addFormPanel_${type}`);
   if (!form) return;
   form.querySelectorAll('.custom-select').forEach(el => el.remove());
   const newForm = buildForm(type);
@@ -3118,11 +3266,10 @@ function populateForm(type, item, id) {
     }
   } else if (type === 'labels') {
     form.querySelector('#f_name').value = item.name || '';
-    form.querySelector('#f_studio').value = item.studio || '';
-    form.querySelector('#f_image').value = item.image || '';
-  } else if (['tags','studios','series'].includes(type)) {
+    const studioVal = item.studio || '';
+    buildLabelStudioSelect(form, studioVal);
+  } else if (type === 'studios' || type === 'series' || type === 'tags' || type === 'versions' || type === 'groups') {
     form.querySelector('#f_name').value = item.name || '';
-    form.querySelector('#f_image').value = item.image || '';
   } else if (type === 'albums') {
     form.querySelector('#f_album_title').value = item.title || '';
     form.querySelector('#f_album_cover').value = item.cover || '';
@@ -3131,13 +3278,37 @@ function populateForm(type, item, id) {
     buildAlbumCustomSelects(form, { actress: actressVal, tags: tagsVal });
     const volumesArray = item.volumes ? Object.values(item.volumes) : [];
     populateVolumeFields(form, volumesArray);
-  } else {
-    form.querySelector('#f_name').value = item.name || '';
   }
   form.dataset.editId = id;
   const submitBtn = form.querySelector('#addSubmit');
   submitBtn.textContent = 'Update';
   setupAddForm(type);
+}
+
+function buildLabelStudioSelect(form, presetVal) {
+  const container = form.querySelector('#f_label_studio_container');
+  if (!container) return;
+  const items = getAllItems(allStudios);
+  const options = items.map(item => ({
+    name: item.name,
+    image: '' // no image for studios in add data
+  }));
+  const sel = createCustomSelect({
+    container,
+    options,
+    multiple: false,
+    placeholder: 'Select Studio...',
+    imageKey: 'image',
+    nameKey: 'name',
+    onSelect: (vals) => {
+      container.dataset.value = vals.join(', ');
+    }
+  });
+  if (presetVal) {
+    sel.setValue([presetVal]);
+  } else {
+    container.dataset.value = '';
+  }
 }
 
 function buildAlbumCustomSelects(form, preset = {}) {
@@ -3327,9 +3498,17 @@ function createCustomSelect({
 }
 
 function setupAddForm(type) {
-  const form = document.getElementById('addFormPanel');
+  const form = document.getElementById(`addFormPanel_${type}`);
   if (!form) return;
 
+  // For videos, build custom selects (new)
+  if (type === 'videos' && !form.dataset.editId) {
+    buildCustomSelects(type, form);
+  }
+  // For labels, build studio select (new)
+  if (type === 'labels' && !form.dataset.editId) {
+    buildLabelStudioSelect(form, '');
+  }
   if (type === 'albums') {
     buildAlbumCustomSelects(form);
     const container = form.querySelector('#volumeContainer');
@@ -3360,6 +3539,7 @@ function setupAddForm(type) {
         await set(ref(db, `videos/${id}`), videoData);
       }
       showSuccessMessage('Video saved successfully!');
+      // Reset form
       form.reset();
       form.querySelectorAll('.custom-select').forEach(el => {
         const inputDiv = el.querySelector('.custom-select-input');
@@ -3379,13 +3559,8 @@ function setupAddForm(type) {
       const submitBtn = form.querySelector('#addSubmit');
       if (submitBtn) submitBtn.textContent = 'Save';
       await loadAllData();
-      renderVideos();
-      renderAlbums();
-      renderPictures();
-      renderFilterModal();
-      const currentTab = addDataNav.querySelector('.add-tab-btn.active');
-      if (currentTab) renderAddDataPanel(currentTab.dataset.addtab);
-      else renderAddDataPanel('videos');
+      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
+      loadAddList(type);
     } else if (type === 'albums') {
       if (!data.title) { alert('Album title is required'); return; }
       if (editId) {
@@ -3419,21 +3594,55 @@ function setupAddForm(type) {
       const submitBtn = form.querySelector('#addSubmit');
       if (submitBtn) submitBtn.textContent = 'Save';
       await loadAllData();
-      renderVideos();
-      renderAlbums();
-      renderPictures();
-      renderFilterModal();
-      const currentTab = addDataNav.querySelector('.add-tab-btn.active');
-      if (currentTab) renderAddDataPanel(currentTab.dataset.addtab);
-      else renderAddDataPanel('videos');
+      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
+      loadAddList(type);
+    } else if (type === 'labels') {
+      const name = data.name;
+      if (!name) { alert('Name is required'); return; }
+      const studio = data.studio || '';
+      let existingEntries = Object.entries(allLabels);
+      const dup = existingEntries.find(([key, item]) =>
+        item.name.toLowerCase() === name.toLowerCase() &&
+        key !== editId
+      );
+      if (dup) { alert(`"${name}" already exists.`); return; }
+      if (editId) {
+        await update(ref(db, `labels/${editId}`), { name, studio });
+        showSuccessMessage('Label updated successfully!');
+      } else {
+        await push(ref(db, 'labels'), { name, studio });
+        showSuccessMessage('Label added successfully!');
+      }
+      form.reset();
+      const studioContainer = form.querySelector('#f_label_studio_container');
+      if (studioContainer) {
+        studioContainer.dataset.value = '';
+        const inputDiv = studioContainer.querySelector('.custom-select-input');
+        if (inputDiv) {
+          const textSpan = inputDiv.querySelector('.selected-text');
+          if (textSpan) textSpan.textContent = 'Select Studio...';
+        }
+        const options = studioContainer.querySelectorAll('.custom-select-option');
+        options.forEach(opt => {
+          opt.classList.remove('selected');
+          const check = opt.querySelector('.opt-check');
+          if (check) check.remove();
+        });
+      }
+      delete form.dataset.editId;
+      const submitBtn = form.querySelector('#addSubmit');
+      if (submitBtn) submitBtn.textContent = 'Save';
+      await loadAllData();
+      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
+      loadAddList(type);
     } else {
+      // actresses, tags, studios, series, versions, groups
       const name = data.name;
       if (!name) { alert('Name is required'); return; }
       let existingEntries = [];
       if (type === 'actresses') existingEntries = Object.entries(allActresses);
       else if (type === 'tags') existingEntries = Object.entries(allTags);
       else if (type === 'studios') existingEntries = Object.entries(allStudios);
-      else if (type === 'labels') existingEntries = Object.entries(allLabels);
       else if (type === 'series') existingEntries = Object.entries(allSeries);
       else if (type === 'versions') existingEntries = Object.entries(allVersions);
       else if (type === 'groups') existingEntries = Object.entries(allGroups);
@@ -3454,13 +3663,8 @@ function setupAddForm(type) {
       const submitBtn = form.querySelector('#addSubmit');
       if (submitBtn) submitBtn.textContent = 'Save';
       await loadAllData();
-      renderVideos();
-      renderAlbums();
-      renderPictures();
-      renderFilterModal();
-      const currentTab = addDataNav.querySelector('.add-tab-btn.active');
-      if (currentTab) renderAddDataPanel(currentTab.dataset.addtab);
-      else renderAddDataPanel('videos');
+      renderVideos(); renderAlbums(); renderPictures(); renderFilterModal();
+      loadAddList(type);
     }
   };
 }
@@ -3515,20 +3719,11 @@ function collectFormData(type, form) {
       images
     };
   } else if (type === 'labels') {
-    return {
-      name: form.querySelector('#f_name').value,
-      studio: form.querySelector('#f_studio').value.trim(),
-      image: form.querySelector('#f_image').value
-    };
-  } else if (['tags','studios','series'].includes(type)) {
-    return {
-      name: form.querySelector('#f_name').value,
-      image: form.querySelector('#f_image').value
-    };
-  } else if (['versions','groups'].includes(type)) {
-    return {
-      name: form.querySelector('#f_name').value
-    };
+    const studioContainer = form.querySelector('#f_label_studio_container');
+    const studio = studioContainer ? studioContainer.dataset.value || '' : '';
+    return { name: form.querySelector('#f_name').value, studio };
+  } else if (['tags','studios','series','versions','groups'].includes(type)) {
+    return { name: form.querySelector('#f_name').value };
   } else if (type === 'albums') {
     const getSelectVal = (key) => {
       const container = form.querySelector(`#f_album_${key}_container`);
@@ -3554,6 +3749,106 @@ function collectFormData(type, form) {
     };
   }
   return null;
+}
+
+// Volume helpers (unchanged)
+function setupVolumeFields(form, existingVolumes = []) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  if (existingVolumes.length === 0) {
+    existingVolumes = [{ title: 'Volume 1', cover: '', images: '' }];
+  }
+  existingVolumes.forEach((vol, index) => {
+    const div = document.createElement('div');
+    div.className = 'volume-entry';
+    div.dataset.index = index;
+    div.innerHTML = `
+      <div class="form-row">
+        <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="${vol.title || ''}" /></div></div>
+        <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" value="${vol.cover || ''}" /></div></div>
+        <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+          <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2">${vol.images || ''}</textarea></div></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  container.querySelectorAll('.remove-volume').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const entry = this.closest('.volume-entry');
+      if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+        entry.remove();
+      } else {
+        alert('At least one volume is required.');
+      }
+    });
+  });
+
+  const addBtn = form.querySelector('#addVolumeBtn');
+  if (addBtn) {
+    addBtn.onclick = () => {
+      const count = container.querySelectorAll('.volume-entry').length;
+      const div = document.createElement('div');
+      div.className = 'volume-entry';
+      div.dataset.index = count;
+      div.innerHTML = `
+        <div class="form-row">
+          <div class="form-col"><div class="form-group"><label>Volume Title</label><input type="text" class="volume-title" value="Volume ${count+1}" /></div></div>
+          <div class="form-col"><div class="form-group"><label>Cover URL</label><input type="text" class="volume-cover" /></div></div>
+          <div class="form-col" style="flex:0 0 auto; display:flex; align-items:flex-end;">
+            <button type="button" class="remove-volume" title="Remove volume"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col-full"><div class="form-group"><label>Images (comma separated URLs)</label><textarea class="volume-images" rows="2"></textarea></div></div>
+        </div>
+      `;
+      container.appendChild(div);
+      container.querySelectorAll('.remove-volume').forEach(btn => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          const entry = this.closest('.volume-entry');
+          if (entry && container.querySelectorAll('.volume-entry').length > 1) {
+            entry.remove();
+          } else {
+            alert('At least one volume is required.');
+          }
+        };
+      });
+    };
+  }
+}
+
+function collectAlbumVolumes(form) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return [];
+  const entries = container.querySelectorAll('.volume-entry');
+  const volumes = [];
+  entries.forEach(entry => {
+    const title = entry.querySelector('.volume-title')?.value || '';
+    const cover = entry.querySelector('.volume-cover')?.value || '';
+    const imagesText = entry.querySelector('.volume-images')?.value || '';
+    const images = imagesText.split(',').map(s => s.trim()).filter(Boolean);
+    volumes.push({ title, cover, images });
+  });
+  return volumes;
+}
+
+function populateVolumeFields(form, volumes) {
+  const container = form.querySelector('#volumeContainer');
+  if (!container) return;
+  const volData = volumes.map(v => ({
+    title: v.title || '',
+    cover: v.cover || '',
+    images: (v.images && Array.isArray(v.images)) ? v.images.join(', ') : ''
+  }));
+  setupVolumeFields(form, volData);
 }
 
 // ===== EVENT LISTENERS =====

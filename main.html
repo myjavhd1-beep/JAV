@@ -1381,7 +1381,7 @@
       .add-data-form { padding:1.2rem; }
       .add-data-list-header { flex-direction:column; align-items:stretch; }
       .add-data-list-search { max-width:100%; }
-      .filter-options.cols-3 { grid-template-columns: repeat(2,1fr); }
+      .filter-options.cols-3 { grid-template-columns: repeat(3,1fr); }
       .filter-options.cols-2 { grid-template-columns: 1fr; }
       .filter-options.cols-1 { grid-template-columns: 1fr; }
       .form-row .form-col { flex: 1 1 100%; min-width: auto; }
@@ -1423,6 +1423,12 @@
         padding: 0.1rem 0.4rem;
       }
       .image-viewer .viewer-nav { font-size: 1.5rem; padding: 0.3rem 0.6rem; }
+      
+      /* Smaller filter images on mobile */
+      .filter-option img {
+        max-width: 80px;
+        max-height: 120px;
+      }
     }
 
     /* Dark mode overrides for new elements */
@@ -2506,6 +2512,10 @@ function playVideo(type) {
 
 // ===== ALBUMS SECTION =====
 function getFilteredAlbums() {
+  // Safeguard: ensure albumActiveFilters has arrays
+  if (!albumActiveFilters.actress) albumActiveFilters.actress = [];
+  if (!albumActiveFilters.tags) albumActiveFilters.tags = [];
+  
   let list = getAllItems(allAlbums);
   if (albumSearchTerm) {
     const s = albumSearchTerm.toLowerCase();

@@ -8,304 +8,330 @@ The final artwork MUST be a vertical portrait cover with a 2:3 aspect ratio.
 
 Required aspect ratio: 2:3 portrait
 
-Design the entire composition specifically for this vertical 2:3 format, including:
+The composition, typography, margins, subject placement, negative space, and graphic elements must all be designed specifically for this 2:3 vertical format.
 
-subject placement
-cropping
-typography
-margins
-negative space
-visual hierarchy
-graphic elements
+Do not produce:
 
-The final result must be a 2:3 vertical front-cover artwork, not square, landscape, panoramic, or phone-screen format.
+1:1 square artwork
+
+16:9 landscape artwork
+
+4:5 artwork
+
+9:16 phone-screen artwork
+
+panoramic artwork
+
+The result should look like a professional physical photo book / art-book front cover in a 2:3 portrait proportion.
 
 PHOTOGRAPHIC REFERENCE
 
-Use the supplied photograph as the primary photographic reference.
+Use the attached photograph as the main visual foundation of the cover.
 
-Preserve the photograph's overall visual character and natural photographic appearance.
+Preserve the subject's natural appearance and recognizable visual characteristics as shown in the reference photograph. Keep the facial appearance, hairstyle, skin tone, clothing, body proportions, age appearance, pose, and overall photographic character consistent with the source image.
 
-Keep the subject recognizable and visually consistent with the supplied reference, including the natural facial appearance, hairstyle, general pose, lighting, and photographic character.
+Do not unnecessarily alter, reconstruct, stylize, or redesign the subject.
 
-Treat the supplied wardrobe simply as part of the original photograph. Do not redesign or emphasize the clothing.
+Maintain realistic skin texture, natural facial detail, realistic lighting, and authentic photographic proportions.
 
-The purpose of the image is editorial photo-book and art-book presentation, not glamour, erotic, or suggestive presentation.
+The photograph should remain the hero visual of the cover.
 
-Keep the photographic treatment tasteful, sophisticated, natural, and publication-oriented.
-
-Do not introduce unnecessary changes to the photographed subject.
-
-Avoid exaggerated retouching, artificial beauty effects, body reshaping, or synthetic-looking photographic alterations.
-
-IMPORTANT — EDITORIAL PRESENTATION
-
-The final artwork should be presented as a tasteful professional photography publication.
-
-If the supplied photograph contains swimwear, a short dress, sleeveless clothing, evening wear, or other fashion-oriented clothing, treat it neutrally as the wardrobe present in the source photograph.
-
-Do not make the clothing more revealing.
-
-Do not enlarge, isolate, highlight, or otherwise draw unnecessary attention to exposed areas.
-
-Do not introduce nudity or sexually suggestive elements.
-
-Keep the emphasis on:
-
-photography + emotion + fashion/editorial aesthetics + typography + art direction.
-
-The result should resemble a premium fashion photography book, portrait album, contemporary art book, or literary photography publication.
+Do not apply exaggerated beauty retouching, artificial facial changes, body reshaping, or an obviously synthetic appearance.
 
 DESIGN THE COVER AROUND THE PHOTOGRAPH
 
-First study the supplied photograph and allow it to determine the visual direction.
+First study the attached photograph and allow it to determine the visual direction of the cover.
 
 Consider:
 
 composition
+
 lighting
-color palette
+
+dominant colors
+
 atmosphere
+
 emotional tone
+
 contrast
+
+clothing
+
 environment
+
 photographic style
+
 negative space
-visual rhythm
+
+visual balance
+
 overall mood
 
-Create a fresh professional cover composition inspired by the photograph.
+Create a new professional cover composition inspired by the photograph.
 
-Do not simply place a title over the original image using a generic template.
+Do not simply reproduce the original photograph's layout as a book cover.
 
-The entire cover should feel individually art-directed for the particular photograph.
+The cover should feel individually art-directed for this particular photograph.
 
-If the photograph has strong negative space, use it for typography.
+If there is generous negative space, use it intelligently for typography.
 
-If the subject is positioned toward one side, balance the composition using the opposite area.
+If the subject is positioned toward one side, balance the opposite side with typography or restrained graphic elements.
 
 If the subject is centered, consider an elegant centered composition.
 
-If the photograph is visually dense, use restrained typography and minimal graphics.
+If the photograph is visually complex, keep the graphic treatment minimal.
 
-Let the photograph determine the composition.
+Allow the photograph itself to determine the most appropriate composition.
 
 TITLE
 
 The exact title is:
 
-Fruit of Love Volume-3
+You Can't Forgot Volume-6
 
 The title must be clearly readable and spelled exactly as written.
 
 Do not replace, translate, abbreviate, or modify the title.
 
-Treat it as an important element of the publication design.
+Treat the title as an important element of the publication design while keeping it visually harmonious with the photograph.
 
-Select typography according to the photograph.
+Choose typography based on the photograph rather than following a fixed formula.
 
-Possible approaches include:
+Possible directions include:
 
 refined editorial serif
-contemporary luxury typography
+
+sophisticated contemporary typography
+
+minimalist luxury typography
+
 cinematic literary typography
-sophisticated fashion-editorial typography
-minimalist typography
-delicate artistic typography
+
+elegant fashion-editorial typography
+
+delicate high-fashion typography
+
 modern Japanese publishing typography
-premium photography-book typography
 
-The title may be:
+artistic photography-book typography
 
-centered
-left aligned
-right aligned
-vertically arranged
-divided across multiple lines
-integrated into negative space
-subtly overlapping the photographic composition
+Typography may be centered, left aligned, right aligned, vertically arranged, divided into multiple lines, integrated into negative space, or subtly overlapping the photographic composition.
 
-Choose whichever approach best complements the photograph.
-
-Do not force the same typography treatment on every generation.
+Choose whichever arrangement produces the strongest professional result for the specific photograph.
 
 SUBTLE JAPANESE EDITORIAL INFLUENCE
 
-Give the cover a tasteful contemporary Japanese photography-book sensibility.
+Give the cover a tasteful contemporary Japanese photography-book / fashion-editorial sensibility.
 
-Use Japanese-inspired design principles such as:
+The influence should come primarily from:
 
 refined minimalism
+
+sophisticated spacing
+
 generous negative space
-sophisticated typography
+
 subtle asymmetry
-careful spacing
+
+restrained typography
+
 elegant text relationships
-restrained graphic elements
-delicate lines
-understated geometry
-premium publishing aesthetics
 
-The Japanese influence should be subtle, contemporary, and sophisticated.
+delicate line work when appropriate
 
-Do not add random Japanese words, kanji, anime imagery, manga styling, neon Tokyo imagery, or stereotypical Japanese graphics.
+understated geometric elements
+
+premium editorial composition
+
+sophisticated photographic-book aesthetics
+
+Keep the Japanese influence subtle and contemporary.
+
+Do not add random Japanese text, kanji, anime imagery, manga styling, neon city imagery, or stereotypical decorative symbols.
 
 The primary title remains:
 
-Fruit of Love Volume-3
+You Can't Forgot Volume-6
 
 VARIABLE ART DIRECTION
 
-Do not use a predetermined template.
+Do not use a predetermined cover template.
 
-Every supplied photograph should receive a fresh art-direction decision.
+Every photograph should receive a fresh design decision.
 
-Possible visual directions include:
+Depending on the photograph, the cover may feel like:
 
-minimalist Japanese photobook
-luxury fashion editorial
-cinematic romance publication
-contemporary photography book
-sophisticated art book
-poetic literary cover
-high-end portrait album
-understated Japanese publishing design
-cinematic photographic publication
+a minimalist Japanese photobook
 
-Choose the direction that best complements the particular photograph.
+a luxury fashion editorial
 
-The result should look like a new publication designed specifically around the supplied image, rather than the same template with a different photograph.
+a cinematic romance publication
+
+a contemporary art photography book
+
+a sophisticated magazine-style publication
+
+a poetic literary cover
+
+a high-end portrait album
+
+an understated Japanese publishing design
+
+a dramatic cinematic photography cover
+
+Select the approach that best complements the specific photograph.
+
+The final cover should look like a new publication designed specifically around this photograph rather than a repeated template.
 
 COLOR AND IMAGE TREATMENT
 
-Build the visual palette from the supplied photograph.
+Build the visual palette from the photograph itself.
 
-Use its natural:
+Use the photograph's existing:
 
-colors
+dominant colors
+
 lighting
+
 shadows
+
 highlights
+
 atmosphere
+
 tonal relationships
 
-Enhance the photograph's existing mood through sophisticated editorial color grading.
+Enhance the existing photographic mood without substantially changing the subject's natural appearance.
 
-Maintain:
+Use refined color grading, natural contrast, realistic tonal depth, subtle photographic dimension, and a premium print-oriented finish.
 
-realistic photographic detail
-natural tonal balance
-realistic lighting
-subtle depth
-refined contrast
-premium print aesthetics
-
-Do not impose a generic color scheme.
-
-Do not use excessive filters or artificial effects.
+Avoid excessive filters or artificial effects.
 
 2:3 COVER COMPOSITION
 
-Design the complete artwork specifically for a 2:3 vertical portrait format.
+Design the entire image specifically as a 2:3 vertical front cover.
 
-Create a deliberate hierarchy:
+Create a clear visual hierarchy:
 
-Photograph / primary visual
+Photograph / subject
+
 Main title
-Supporting typography or restrained graphic details
+
+Supporting typography or graphic details where appropriate
+
 Balanced margins and negative space
 
-Keep all important elements comfortably within the 2:3 composition.
+All elements must remain comfortably inside the 2:3 portrait composition.
 
-Crop intelligently so that important photographic details remain naturally presented.
+Do not crop important facial or photographic details merely to force the composition.
 
-Do not distort the original photographic proportions.
+The title placement should be determined by the photograph.
 
-The title placement should vary according to the photograph.
+Do not repeatedly use the same layout, title position, font style, font size, border, alignment, or graphic treatment.
 
-Do not always use the same:
-
-layout
-title position
-font
-font size
-alignment
-border
-spacing
-decorative treatment
 VISUAL QUALITY
 
-Create a premium, cinematic, professionally art-directed photography cover.
+Create a premium cinematic photographic cover with:
 
-Prioritize:
+realistic photographic rendering
 
-realistic photography
-natural detail
-refined color grading
-sophisticated composition
-elegant typography
-realistic lighting
+natural skin detail
+
 professional tonal balance
-subtle depth
-high-end editorial finishing
-premium printed-publication appearance
 
-Avoid the appearance of a generic AI poster.
+refined color grading
+
+realistic lighting
+
+crisp photographic detail
+
+sophisticated composition
+
+elegant negative space
+
+subtle depth
+
+high-end editorial finishing
+
+premium print aesthetics
+
+Keep the design restrained and sophisticated.
+
+The result should resemble a professionally art-directed publication rather than a generic AI-generated poster.
 
 AVOID
 
 Avoid:
 
 generic album-cover templates
+
 repeated layouts
+
 repetitive typography
-excessive decoration
+
+excessive decorative elements
+
 excessive gradients
+
 excessive visual effects
-artificial skin
+
+artificial-looking skin
+
 exaggerated retouching
-unnecessary changes to the photographed subject
-body reshaping
+
+unnecessary changes to the subject
+
 distorted anatomy
+
 distorted facial features
+
 duplicated subjects
-blurry details
-clutter
+
+blurry photographic details
+
+cluttered composition
+
 unreadable typography
+
 incorrect title spelling
+
 random Japanese characters
-anime aesthetics
-manga aesthetics
+
+anime or manga aesthetics
+
 neon Tokyo aesthetics
+
 cheap poster aesthetics
+
 unnecessary logos
+
 watermarks
+
 stock-photo appearance
-nudity
-sexually suggestive presentation
-unnecessary emphasis on exposed skin or clothing
-changing or making the supplied clothing more revealing
+
 incorrect aspect ratio
+
 FINAL CREATIVE DIRECTION
 
-Study the supplied photograph first, then design the publication around it.
+Study the attached photograph first.
 
-The photograph determines:
+Let the photograph determine:
 
-composition + color direction + mood + typography placement + visual hierarchy + art direction.
+the composition, color direction, typography placement, visual hierarchy, atmosphere, and overall mood.
 
-The artwork must be created specifically as a:
+Create the artwork specifically in a:
 
-2:3 vertical portrait photo-book cover.
+2:3 vertical portrait aspect ratio.
 
-Present the supplied photograph in a tasteful, non-sexual, professional editorial context, regardless of the wardrobe shown in the source photograph.
+Do not begin from a fixed album-cover template.
 
-Do not start from a predetermined template.
+Create a unique, elegant, emotionally evocative, sophisticated, cinematic front cover that feels like a real premium photography publication.
 
-Create a unique, elegant, emotionally evocative, sophisticated, cinematic front cover that feels like a real premium photography publication from a high-end contemporary publisher.
+The subject should remain visually consistent with the supplied photograph, while the surrounding art direction should be creatively designed around it.
 
 Most importantly:
 
-Every photograph should receive its own individual art direction. Do not make every generation look like the same album cover.
+Do not make every generation look like the same album cover. Make every cover feel individually designed for the supplied photograph.
 
-FINAL OUTPUT: ONLY THE FINISHED 2:3 VERTICAL FRONT-COVER ARTWORK.
+FINAL OUTPUT: 2:3 VERTICAL FRONT-COVER ARTWORK ONLY.

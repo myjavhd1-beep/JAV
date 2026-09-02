@@ -88,7 +88,7 @@ TITLE
 
 The exact title is:
 
-You Can't Forgot Volume-6
+Fruits of Love Volume-4
 
 The title must be clearly readable and spelled exactly as written.
 
@@ -152,7 +152,7 @@ Do not add random Japanese text, kanji, anime imagery, manga styling, neon city 
 
 The primary title remains:
 
-You Can't Forgot Volume-6
+Fruits of Love Volume-4
 
 VARIABLE ART DIRECTION
 

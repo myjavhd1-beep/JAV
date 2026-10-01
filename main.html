@@ -611,56 +611,285 @@
         .quest-section h2 { font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; color: var(--text); }
         .quest-section h2 i { color: var(--primary); }
 
-        /* Timely Chests */
-        .chest-timeline { display: flex; align-items: center; justify-content: space-between; margin: 1rem 0; position: relative; padding: 0 0.5rem; }
-        .chest-timeline .point { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
-        .chest-timeline .point .dot { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: 2px solid var(--text-secondary); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); transition: 0.3s; cursor: default; }
-        .chest-timeline .point .dot.available { background: var(--primary); border-color: var(--primary); color: #fff; animation: pulse 1.5s infinite; }
-        .chest-timeline .point .dot.collected { background: #22c55e; border-color: #22c55e; color: #fff; }
-        .chest-timeline .point .dot.missed { background: #ef4444; border-color: #ef4444; color: #fff; }
-        .chest-timeline .point .dot.upcoming { background: var(--border); border-color: var(--text-secondary); color: var(--text-secondary); }
-        .chest-timeline .point .label { font-size: 0.7rem; margin-top: 0.3rem; color: var(--text-secondary); text-align: center; }
-        .chest-timeline .line { flex: 1; height: 2px; background: var(--border); margin: 0 0.2rem; }
-        .chest-timeline .line.collected { background: #22c55e; }
-        .chest-timeline .line.missed { background: #ef4444; }
-        .chest-timeline .line.upcoming { background: var(--border); }
+        /* ===== TIMELY CHESTS (REDESIGNED) ===== */
+        .chest-timeline {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 1.5rem 0 0.5rem;
+            position: relative;
+            padding: 0 0.5rem;
+            gap: 0.2rem;
+        }
+        .chest-timeline::before {
+            content: '';
+            position: absolute;
+            top: 26px;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--border), var(--border));
+            z-index: 0;
+            border-radius: 2px;
+        }
+        .chest-timeline .point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            min-width: 0;
+        }
+        .chest-timeline .point .chest-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            background: var(--bg);
+            border: 3px solid var(--border);
+            color: var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .chest-timeline .point .chest-icon.available {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-color: #f59e0b;
+            color: #fff;
+            animation: chestPulse 1.6s infinite;
+            box-shadow: 0 0 0 0 rgba(251,191,36,0.7), 0 4px 12px rgba(251,191,36,0.4);
+            cursor: pointer;
+        }
+        .chest-timeline .point .chest-icon.collected {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: #16a34a;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+        }
+        .chest-timeline .point .chest-icon.missed {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border-color: #dc2626;
+            color: #fff;
+            opacity: 0.75;
+        }
+        .chest-timeline .point .chest-icon.upcoming {
+            background: var(--bg);
+            border-color: var(--border);
+            color: var(--text-secondary);
+            opacity: 0.65;
+        }
+        .chest-timeline .point .chest-time {
+            font-size: 0.7rem;
+            margin-top: 0.4rem;
+            color: var(--text-secondary);
+            text-align: center;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .chest-timeline .point .chest-status {
+            font-size: 0.6rem;
+            margin-top: 0.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .chest-timeline .point .chest-status.available { color: #f59e0b; }
+        .chest-timeline .point .chest-status.collected { color: #22c55e; }
+        .chest-timeline .point .chest-status.missed { color: #ef4444; }
+        .chest-timeline .point .chest-status.upcoming { color: var(--text-secondary); }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        @keyframes chestPulse {
+            0% { box-shadow: 0 0 0 0 rgba(251,191,36,0.7), 0 4px 12px rgba(251,191,36,0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 0 12px rgba(251,191,36,0), 0 6px 18px rgba(251,191,36,0.5); transform: scale(1.08); }
+            100% { box-shadow: 0 0 0 0 rgba(251,191,36,0), 0 4px 12px rgba(251,191,36,0.4); transform: scale(1); }
         }
 
-        .chest-collect-btn { margin: 0.5rem 0 0; }
-        .chest-collect-btn button { padding: 0.6rem 2rem; border: none; border-radius: 30px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 1rem; }
-        .chest-collect-btn button:hover:not(:disabled) { background: var(--primary-dark); transform: scale(1.03); }
-        .chest-collect-btn button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .chest-collect-btn { margin: 1.2rem 0 0; display: flex; justify-content: center; }
+        .chest-collect-btn button {
+            padding: 0.75rem 2.2rem;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            box-shadow: 0 4px 16px rgba(251,191,36,0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .chest-collect-btn button:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(251,191,36,0.5);
+        }
+        .chest-collect-btn button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            background: var(--border);
+            color: var(--text-secondary);
+            box-shadow: none;
+            transform: none;
+        }
 
-        /* Lucky Wheel */
-        .wheel-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-        .wheel-canvas-container { position: relative; width: 250px; height: 250px; margin: 0 auto; }
-        .wheel-canvas-container canvas { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
-        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 2rem; color: var(--primary); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-        .wheel-info { text-align: center; }
-        .wheel-info .spin-status { font-size: 0.9rem; color: var(--text-secondary); }
-        .wheel-info .spin-result { font-size: 1.2rem; font-weight: 600; margin-top: 0.3rem; color: var(--primary); }
-        .wheel-spin-btn { padding: 0.6rem 2rem; border: none; border-radius: 30px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 1rem; }
-        .wheel-spin-btn:hover:not(:disabled) { background: var(--primary-dark); transform: scale(1.03); }
-        .wheel-spin-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        /* ===== LUCKY WHEEL (REDESIGNED) ===== */
+        .wheel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0.5rem 0;
+        }
+        .wheel-canvas-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+            filter: drop-shadow(0 12px 32px rgba(124,58,237,0.25));
+        }
+        .wheel-canvas-container::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #fbbf24, #f59e0b, #7c3aed, #a78bfa, #60a5fa, #22c55e, #fbbf24);
+            z-index: -1;
+            animation: wheelGlow 6s linear infinite;
+        }
+        @keyframes wheelGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .wheel-canvas-container canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15), inset 0 0 0 6px #fff;
+            position: relative;
+            z-index: 1;
+        }
+        .dark-mode .wheel-canvas-container canvas {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 0 0 6px #334155;
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.4rem;
+            color: #ef4444;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+            z-index: 5;
+            animation: pointerBounce 1.4s infinite ease-in-out;
+        }
+        @keyframes pointerBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(4px); }
+        }
+        .wheel-info {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .wheel-info .spin-status {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .wheel-info .spin-result {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-height: 1.5rem;
+            background: var(--primary-soft);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .wheel-info .spin-result:empty { display: none; }
+        .wheel-spin-btn {
+            padding: 0.75rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            box-shadow: 0 6px 20px rgba(124,58,237,0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .wheel-spin-btn:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 28px rgba(124,58,237,0.5);
+        }
+        .wheel-spin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
-        /* Daily Challenges */
+        /* ===== DAILY CHALLENGES (IMPROVED) ===== */
         .challenge-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
-        .challenge-item { background: var(--bg); border-radius: var(--radius-sm); padding: 0.8rem 1rem; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .challenge-item .info { flex: 1; }
-        .challenge-item .info .title { font-weight: 600; font-size: 1rem; }
-        .challenge-item .info .desc { font-size: 0.9rem; color: var(--text-secondary); }
-        .challenge-item .actions button { padding: 0.4rem 1.2rem; border: none; border-radius: 20px; font-weight: 500; cursor: pointer; transition: 0.2s; }
-        .challenge-item .actions .start-btn { background: var(--primary); color: #fff; }
-        .challenge-item .actions .start-btn:hover:not(:disabled) { background: var(--primary-dark); }
+        .challenge-item {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .challenge-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .challenge-item .info { flex: 1; min-width: 200px; }
+        .challenge-item .info .title { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .challenge-item .info .title .challenge-reward {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(251,191,36,0.35);
+        }
+        .challenge-item .info .desc { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem; }
+        .challenge-item .actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .challenge-item .actions .start-btn {
+            padding: 0.45rem 1.3rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .challenge-item .actions .start-btn:hover:not(:disabled) { background: var(--primary-dark); transform: scale(1.03); }
         .challenge-item .actions .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .challenge-item .actions .completed-badge { background: #22c55e; color: #fff; padding: 0.2rem 1rem; border-radius: 20px; font-weight: 500; }
-        .challenge-item .actions .active-badge { background: #fbbf24; color: #000; padding: 0.2rem 1rem; border-radius: 20px; font-weight: 500; }
-        .challenge-item .progress-timer { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem; }
+        .challenge-item .actions .completed-badge { background: #22c55e; color: #fff; padding: 0.3rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .challenge-item .actions .active-badge { background: #fbbf24; color: #000; padding: 0.3rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .challenge-item .progress-timer { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.3rem; font-weight: 500; }
 
         /* Chest Inventory */
         .inventory-display { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
@@ -713,18 +942,280 @@
         .card-detail-content .stats-grid .stat .value { font-weight: 600; }
         .card-detail-content .detail-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
 
+        /* ===== CARD UPGRADE (collection + detail) ===== */
+        .collection-card .card-upgrade-progress {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            margin-top: 0.15rem;
+            line-height: 1.2;
+        }
+        .collection-card .card-upgrade-progress.ready {
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .card-detail-content .card-upgrade-info {
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 0.8rem;
+        }
+        .card-detail-content .card-upgrade-info strong { color: var(--primary); }
+        .card-detail-content .card-detail-upgrade {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .card-detail-content .card-detail-upgrade:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(124,58,237,0.3); }
+        .card-detail-content .card-detail-upgrade:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* ===== TRADER SHOP ===== */
+        .trader-shop {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: stretch;
+            margin-top: 0.8rem;
+        }
+        .trader-side {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .trader-side-title {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--primary);
+        }
+        .trader-field { display: flex; flex-direction: column; gap: 0.25rem; }
+        .trader-field label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+        .trader-select,
+        .trader-input {
+            width: 100%;
+            padding: 0.55rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+        .trader-select:focus,
+        .trader-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-light); }
+        .trader-owned {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+        }
+        .trader-owned strong { color: var(--primary); font-weight: 700; }
+        .trader-middle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        .trader-rate {
+            margin-top: 1rem;
+            padding: 0.8rem 1rem;
+            background: var(--primary-soft);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+        .trader-summary {
+            margin-top: 0.6rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .trader-summary strong { color: var(--text); font-weight: 700; }
+        .trader-summary .bad { color: #ef4444; font-weight: 600; }
+        .trader-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .trader-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
+        .trader-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* Trader Card Selector (with search + image previews) */
+        .trader-card-selector {
+            position: relative;
+            width: 100%;
+        }
+        .trader-card-display {
+            width: 100%;
+            min-height: 56px;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+            text-align: left;
+        }
+        .trader-card-display:hover { border-color: var(--primary); }
+        .trader-card-display img {
+            width: 36px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 5px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+        .trader-card-display .trader-card-display-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .trader-card-display .trader-card-id { font-weight: 600; font-size: 0.85rem; }
+        .trader-card-display .trader-card-sub { font-size: 0.7rem; color: var(--text-secondary); }
+        .trader-card-display .trader-card-placeholder { color: var(--text-secondary); font-size: 0.85rem; }
+        .trader-card-display .trader-card-chevron { color: var(--text-secondary); font-size: 0.8rem; }
+
+        .trader-card-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            max-height: 260px;
+            overflow-y: auto;
+            z-index: 60;
+            padding: 0.4rem;
+        }
+        .trader-card-dropdown.show { display: block; }
+        .trader-card-search {
+            padding: 0.2rem 0.2rem 0.4rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0.4rem;
+            position: sticky;
+            top: 0;
+            background: var(--card);
+            z-index: 1;
+        }
+        .trader-card-search input {
+            width: 100%;
+            padding: 0.45rem 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .trader-card-search input:focus { border-color: var(--primary); }
+        .trader-card-option {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.4rem 0.55rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .trader-card-option:hover { background: var(--primary-soft); }
+        .trader-card-option.selected { background: var(--primary-soft); }
+        .trader-card-option img {
+            width: 34px;
+            height: 51px;
+            object-fit: cover;
+            border-radius: 5px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+        .trader-card-option .trader-card-option-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .trader-card-option .trader-card-option-id { font-weight: 600; font-size: 0.85rem; }
+        .trader-card-option .trader-card-option-meta { font-size: 0.7rem; color: var(--text-secondary); }
+        .trader-card-option .trader-card-option-copies { font-size: 0.7rem; color: var(--primary); font-weight: 600; }
+        .trader-card-option .trader-card-option-check { color: var(--primary); }
+        .trader-card-option-empty { padding: 0.6rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem; }
+
+        .dark-mode .trader-side { background: var(--card); }
+        .dark-mode .trader-rate { color: #fff; }
+
         @media (max-width: 768px) {
             .collection-grid { grid-template-columns: repeat(2, 1fr); }
-            .chest-timeline .point .dot { width: 24px; height: 24px; font-size: 0.6rem; }
-            .chest-timeline .point .label { font-size: 0.6rem; }
-            .wheel-canvas-container { width: 200px; height: 200px; }
+            .wheel-canvas-container { width: 220px; height: 220px; }
             .quest-section { padding: 1rem; }
+            .chest-timeline .point .chest-icon { width: 42px; height: 42px; font-size: 1.05rem; }
+            .chest-timeline .point .chest-time { font-size: 0.62rem; }
+            .chest-timeline .point .chest-status { font-size: 0.55rem; }
+        }
+        @media (max-width: 640px) {
+            .trader-shop { grid-template-columns: 1fr; }
+            .trader-middle { transform: rotate(90deg); }
         }
         @media (max-width: 480px) {
             .collection-grid { grid-template-columns: repeat(2, 1fr); }
-            .chest-timeline .point .dot { width: 20px; height: 20px; font-size: 0.5rem; }
-            .chest-timeline .point .label { font-size: 0.5rem; }
-            .wheel-canvas-container { width: 160px; height: 160px; }
+            .wheel-canvas-container { width: 180px; height: 180px; }
+            .chest-timeline .point .chest-icon { width: 34px; height: 34px; font-size: 0.85rem; }
+            .chest-timeline .point .chest-time { font-size: 0.55rem; }
+            .chest-timeline .point .chest-status { font-size: 0.5rem; }
+            .chest-timeline::before { top: 17px; }
         }
 
         .dark-mode .quest-section { background: var(--card); border-color: var(--border); }
@@ -735,13 +1226,11 @@
         .dark-mode .collection-tabs .tab-btn { background: var(--bg); color: var(--text-secondary); }
         .dark-mode .collection-tabs .tab-btn.active { background: var(--primary); color: #fff; }
         .dark-mode .collection-tabs .tab-btn:hover:not(.active) { background: var(--primary-soft); }
-        .dark-mode .chest-timeline .point .dot { background: var(--bg); border-color: var(--text-secondary); }
-        .dark-mode .chest-timeline .point .dot.available { background: var(--primary); border-color: var(--primary); }
-        .dark-mode .chest-timeline .point .dot.collected { background: #22c55e; border-color: #22c55e; }
-        .dark-mode .chest-timeline .point .dot.missed { background: #ef4444; border-color: #ef4444; }
-        .dark-mode .chest-timeline .line { background: var(--border); }
-        .dark-mode .chest-timeline .line.collected { background: #22c55e; }
-        .dark-mode .chest-timeline .line.missed { background: #ef4444; }
+        .dark-mode .chest-timeline .point .chest-icon { background: var(--bg); }
+        .dark-mode .chest-timeline .point .chest-icon.available { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .dark-mode .chest-timeline .point .chest-icon.collected { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .dark-mode .chest-timeline .point .chest-icon.missed { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .dark-mode .chest-timeline::before { background: linear-gradient(90deg, var(--border), var(--border)); }
     </style>
 </head>
 <body>
@@ -862,7 +1351,7 @@
                 <h2><i class="fas fa-clock"></i> Timely Chests</h2>
                 <div class="chest-timeline" id="chestTimeline"></div>
                 <div class="chest-collect-btn">
-                    <button id="collectChestBtn" disabled>Collect Chest</button>
+                    <button id="collectChestBtn" disabled><i class="fas fa-gift"></i> Collect Chest</button>
                 </div>
             </div>
 
@@ -872,12 +1361,12 @@
                 <div class="wheel-wrapper">
                     <div class="wheel-canvas-container">
                         <canvas id="wheelCanvas" width="400" height="400"></canvas>
-                        <div class="wheel-pointer"><i class="fas fa-chevron-down"></i></div>
+                        <div class="wheel-pointer"><i class="fas fa-location-arrow"></i></div>
                     </div>
                     <div class="wheel-info">
                         <div class="spin-status" id="wheelStatus">Spins remaining: 2</div>
                         <div class="spin-result" id="wheelResult"></div>
-                        <button class="wheel-spin-btn" id="spinWheelBtn">Spin</button>
+                        <button class="wheel-spin-btn" id="spinWheelBtn"><i class="fas fa-dharmachakra"></i> Spin the Wheel</button>
                     </div>
                 </div>
             </div>
@@ -907,6 +1396,74 @@
                     <button class="tab-btn" data-rarity="blue">Blue</button>
                 </div>
                 <div class="collection-grid" id="collectionGrid"></div>
+            </div>
+
+            <!-- Trader Shop -->
+            <div class="quest-section" id="questTraderShop">
+                <h2><i class="fas fa-exchange-alt"></i> Trader Shop</h2>
+                <div class="trader-shop">
+                    <div class="trader-side">
+                        <div class="trader-side-title"><i class="fas fa-arrow-up"></i> I Give</div>
+                        <div class="trader-field">
+                            <label>Card Type</label>
+                            <select class="trader-select" id="traderGiveType">
+                                <option value="Gold">Gold Card</option>
+                                <option value="Silver" selected>Silver Card</option>
+                                <option value="Blue">Blue Card</option>
+                            </select>
+                        </div>
+                        <div class="trader-field">
+                            <label>Specific Card</label>
+                            <div class="trader-card-selector" id="traderGiveCardSelector">
+                                <button type="button" class="trader-card-display" id="traderGiveCardDisplay">
+                                    <span class="trader-card-placeholder">Any (auto-select)</span>
+                                    <i class="fas fa-chevron-down trader-card-chevron"></i>
+                                </button>
+                                <div class="trader-card-dropdown" id="traderGiveCardDropdown">
+                                    <div class="trader-card-search">
+                                        <input type="text" id="traderGiveCardSearch" placeholder="Search by card ID..." />
+                                    </div>
+                                    <div id="traderGiveCardOptions"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trader-field">
+                            <label>Quantity</label>
+                            <input type="number" class="trader-input" id="traderGiveQty" min="1" step="1" value="10" />
+                        </div>
+                        <div class="trader-owned" id="traderGiveOwned"></div>
+                    </div>
+                    <div class="trader-middle"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="trader-side">
+                        <div class="trader-side-title"><i class="fas fa-arrow-down"></i> I Receive</div>
+                        <div class="trader-field">
+                            <label>Card Type</label>
+                            <select class="trader-select" id="traderReceiveType">
+                                <option value="Gold" selected>Gold Card</option>
+                                <option value="Silver">Silver Card</option>
+                                <option value="Blue">Blue Card</option>
+                            </select>
+                        </div>
+                        <div class="trader-field">
+                            <label>Specific Card</label>
+                            <div class="trader-card-selector" id="traderReceiveCardSelector">
+                                <button type="button" class="trader-card-display" id="traderReceiveCardDisplay">
+                                    <span class="trader-card-placeholder">Random</span>
+                                    <i class="fas fa-chevron-down trader-card-chevron"></i>
+                                </button>
+                                <div class="trader-card-dropdown" id="traderReceiveCardDropdown">
+                                    <div class="trader-card-search">
+                                        <input type="text" id="traderReceiveCardSearch" placeholder="Search by card ID..." />
+                                    </div>
+                                    <div id="traderReceiveCardOptions"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trader-rate" id="traderRate"></div>
+                <div class="trader-summary" id="traderSummary"></div>
+                <button class="trader-btn" id="traderExchangeBtn"><i class="fas fa-exchange-alt"></i> TRADE / EXCHANGE</button>
             </div>
         </div>
     </section>
@@ -1204,12 +1761,12 @@
         // ===== QUEST STATE =====
         const QUEST_PREFIX = 'quest_';
         let questData = {
-            chests: {}, // daily chests: { '2024-01-01': { 0: 'collected', 1: 'missed', ... } }
-            wheel: { lastSpinDate: '', spinsUsed: 0, totalSpins: 0, lastSpinWindow: null },
-            challenges: {}, // daily challenges: { '2024-01-01': { 0: { active: false, completed: false, progress: 0 }, 1: {...}, 2: {...} } }
-            inventory: 0, // chest count
-            cards: {}, // card collection: { cardId: { level: 1, copies: 1 } }
-            activeChallenge: null, // { index: 0, type: 'watch', startedAt: timestamp }
+            chests: {},
+            wheel: { lastSpinDate: '', spinsUsed: 0, totalSpins: 0, lastSpinWindow: null, lastResult: null },
+            challenges: {},
+            inventory: 0,
+            cards: {},
+            activeChallenge: null,
             videoTimerStart: null,
             videoTimerInterval: null,
             videoTimerSeconds: 0,
@@ -1217,6 +1774,18 @@
         let currentQuestUserId = null;
         let allQuestCards = {};
         let currentRarityTab = 'gold';
+        let traderState = { giveType: 'Silver', giveCard: 'any', giveQty: 10, receiveType: 'Gold', receiveCard: 'random' };
+        const TRADE_RATES = {
+            'Gold>Gold':     { give: 2,  receive: 1 },
+            'Silver>Gold':   { give: 10, receive: 1 },
+            'Blue>Gold':     { give: 25, receive: 1 },
+            'Gold>Silver':   { give: 1,  receive: 5 },
+            'Silver>Silver': { give: 2,  receive: 1 },
+            'Blue>Silver':   { give: 10, receive: 1 },
+            'Gold>Blue':     { give: 1,  receive: 10 },
+            'Silver>Blue':   { give: 1,  receive: 4 },
+            'Blue>Blue':     { give: 2,  receive: 1 }
+        };
 
         // ===== DOM REFS =====
         const $ = s => document.querySelector(s);
@@ -1928,19 +2497,16 @@
             loadSuggestions(video);
             openModal(videoModal);
 
-            // If there's an active challenge for 'watch', start timer when modal opens
             if (questData.activeChallenge && questData.activeChallenge.type === 'watch') {
                 startVideoTimer();
             }
         }
 
-        // Override close video modal to stop timer
         const originalCloseVideoModal = closeVideoModal.onclick;
         closeVideoModal.onclick = () => {
             closeModal(videoModal);
             stopVideoTimer();
         };
-        // Also on modal background click
         videoModal.onclick = (e) => { if (e.target === videoModal) { closeModal(videoModal); stopVideoTimer(); } };
 
         function loadSuggestions(video) {
@@ -2393,32 +2959,41 @@
 
         // ===== FEATURED TAB (existing) =====
         function renderFeatured() {
-            featuredCleanup.forEach(cleanup => cleanup());
+            if (featuredCleanup && Array.isArray(featuredCleanup)) {
+                featuredCleanup.forEach(cleanup => { if (typeof cleanup === 'function') cleanup(); });
+            }
             featuredCleanup = [];
 
             const recs = getDailyRecommendations();
-            featuredCleanup.push(renderFeaturedCarousel(featuredVideoTrack, featuredVideoDots, recs.videos,
+            const c1 = renderFeaturedCarousel(featuredVideoTrack, featuredVideoDots, recs.videos,
                 (video) => `<div class="video-card" style="height:100%;"><img src="${video.thumbnail || 'https://via.placeholder.com/300x200/7c3aed/ffffff?text=No+Image'}" class="video-thumbnail" alt="${video.title}" loading="lazy" /><div class="video-info"><div class="video-title">${video.title || 'Untitled'}</div><div class="video-meta"><div class="video-meta-item"><i class="fas fa-hashtag"></i> ${video.code || 'N/A'}</div><div class="video-meta-item"><i class="fas fa-star"></i> ${(video.rating || 0).toFixed(1)}</div></div></div></div>`,
                 1, 7000, 1, (video) => () => openVideoModal(video)
-            ));
-            featuredCleanup.push(renderFeaturedCarousel(featuredAlbumTrack, featuredAlbumDots, recs.albums,
+            );
+            if (typeof c1 === 'function') featuredCleanup.push(c1);
+
+            const c2 = renderFeaturedCarousel(featuredAlbumTrack, featuredAlbumDots, recs.albums,
                 (album) => `<div class="album-card" style="height:100%;"><img src="${album.cover || 'https://via.placeholder.com/300x450/7c3aed/ffffff?text=No+Cover'}" alt="${album.title || 'Untitled'}" loading="lazy" /><div class="album-title">${album.title || 'Untitled'}</div></div>`,
                 2, 5000, 1, (album) => () => openAlbumModal(album)
-            ));
-            featuredCleanup.push(renderFeaturedCarousel(featuredActressTrack, featuredActressDots, recs.actresses,
+            );
+            if (typeof c2 === 'function') featuredCleanup.push(c2);
+
+            const c3 = renderFeaturedCarousel(featuredActressTrack, featuredActressDots, recs.actresses,
                 (actress) => `<div class="actress-card" style="height:100%;"><img src="${getRandomActressImage(actress) || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image'}" alt="${actress.name}" loading="lazy" /><div class="name">${actress.name}</div></div>`,
                 3, 4000, 1, (actress) => () => { toggleFilter('actress', actress.name); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); switchTab('videos'); }
-            ));
-            featuredCleanup.push(renderFeaturedCarousel(featuredTagTrack, featuredTagDots, recs.tags,
+            );
+            if (typeof c3 === 'function') featuredCleanup.push(c3);
+
+            const c4 = renderFeaturedCarousel(featuredTagTrack, featuredTagDots, recs.tags,
                 (tag) => `<div class="tag-card" style="height:100%;"><img src="${tag.image || 'https://via.placeholder.com/100x100/7c3aed/ffffff?text=No+Image'}" alt="${tag.name}" loading="lazy" /><div class="name">${tag.name}</div></div>`,
                 3, 3000, 1, (tag) => () => { toggleFilter('tags', tag.name); renderFilterModal(); renderVideos(); updateActiveFiltersUI(); switchTab('videos'); }
-            ));
+            );
+            if (typeof c4 === 'function') featuredCleanup.push(c4);
         }
 
         function renderFeaturedCarousel(track, dots, items, renderItem, visibleCount, interval, step, clickHandler) {
             track.innerHTML = '';
             dots.innerHTML = '';
-            if (!items || items.length === 0) { track.innerHTML = '<div class="empty-state" style="padding:1rem;">No items available</div>'; return; }
+            if (!items || items.length === 0) { track.innerHTML = '<div class="empty-state" style="padding:1rem;">No items available</div>'; return null; }
             const total = items.length;
             const cloned = [...items, ...items, ...items];
             const itemWidth = 100 / visibleCount;
@@ -2546,7 +3121,6 @@
 
         // ===== QUESTS SYSTEM =====
 
-        // Generate or retrieve user ID
         function getQuestUserId() {
             let uid = localStorage.getItem('quest_user_id');
             if (!uid) {
@@ -2556,21 +3130,18 @@
             return uid;
         }
 
-        // Load quest data from Firebase
         async function loadQuestData() {
             const uid = getQuestUserId();
             currentQuestUserId = uid;
             try {
                 const snap = await get(ref(db, `quests/${uid}`));
                 const data = snap.val() || {};
-                // Merge with defaults
                 questData.chests = data.chests || {};
-                questData.wheel = { lastSpinDate: '', spinsUsed: 0, totalSpins: 0, lastSpinWindow: null, ...(data.wheel || {}) };
+                questData.wheel = { lastSpinDate: '', spinsUsed: 0, totalSpins: 0, lastSpinWindow: null, lastResult: null, ...(data.wheel || {}) };
                 questData.challenges = data.challenges || {};
                 questData.inventory = data.inventory || 0;
                 questData.cards = data.cards || {};
                 questData.activeChallenge = data.activeChallenge || null;
-                // Ensure active challenge is valid
                 if (questData.activeChallenge) {
                     const today = getTodayStr();
                     const dayChallenges = questData.challenges[today] || [];
@@ -2578,26 +3149,19 @@
                         questData.activeChallenge = null;
                     }
                 }
-                // Trim inventory to max 15
                 if (questData.inventory > 15) questData.inventory = 15;
-                // Clean up daily chests for today
                 const todayStr = getTodayStr();
                 if (!questData.chests[todayStr]) {
                     questData.chests[todayStr] = {};
                 }
-                // Ensure all 6 chest entries exist
                 for (let i = 0; i < 6; i++) {
                     if (!(i in questData.chests[todayStr])) {
                         questData.chests[todayStr][i] = 'upcoming';
                     }
                 }
-                // Update chest states based on current time
                 updateChestStates();
-                // Update wheel availability
                 updateWheelState();
-                // Initialize challenges for today
                 initDailyChallenges();
-                // Save to Firebase after any modifications
                 await saveQuestData();
                 renderQuests();
             } catch (e) {
@@ -2616,7 +3180,6 @@
         }
 
         function getChestTimes() {
-            // Return Date objects for today at each chest time
             const now = new Date();
             const times = [
                 { hour: 2, minute: 0 },
@@ -2676,7 +3239,6 @@
                 wheel.lastSpinWindow = null;
             }
 
-            // One spin is allowed in each 12-hour window: 00:00-11:59 and 12:00-23:59.
             const windowIndex = now.getHours() < 12 ? 0 : 1;
             const used = Number(wheel.spinsUsed) || 0;
             return used < 2 && wheel.lastSpinWindow !== windowIndex;
@@ -2685,7 +3247,6 @@
         function initDailyChallenges() {
             const todayStr = getTodayStr();
             if (!questData.challenges[todayStr]) {
-                // Generate 3 challenges
                 const actresses = getAllItems(allActresses);
                 let selectedActress = '';
                 if (actresses.length > 0) {
@@ -2693,12 +3254,16 @@
                     selectedActress = actresses[rand].name;
                 }
                 questData.challenges[todayStr] = [
-                    { active: false, completed: false, progress: 0, type: 'watch', actress: selectedActress },
-                    { active: false, completed: false, progress: 0, type: 'addVideo' },
-                    { active: false, completed: false, progress: 0, type: 'addAlbum' }
+                    { active: false, completed: false, progress: 0, type: 'watch', actress: selectedActress, reward: 1 },
+                    { active: false, completed: false, progress: 0, type: 'addVideo', reward: 1 },
+                    { active: false, completed: false, progress: 0, type: 'addAlbum', reward: 1 }
                 ];
+            } else {
+                // Ensure reward field exists on existing challenges
+                questData.challenges[todayStr].forEach(ch => {
+                    if (typeof ch.reward === 'undefined') ch.reward = 1;
+                });
             }
-            // If activeChallenge exists but not in today's challenges, reset
             if (questData.activeChallenge) {
                 const dayChallenges = questData.challenges[todayStr] || [];
                 const idx = questData.activeChallenge.index;
@@ -2732,6 +3297,7 @@
             renderChallenges();
             renderInventory();
             renderCollection();
+            renderTraderShop();
         }
 
         function renderTimelyChests() {
@@ -2740,37 +3306,42 @@
             const todayStr = getTodayStr();
             const chests = questData.chests[todayStr] || {};
             const times = getChestSchedule();
-            const now = new Date();
             let availableIndex = -1;
             let html = '';
             for (let i = 0; i < 6; i++) {
                 const state = chests[i] || 'upcoming';
                 const timeLabel = times[i];
-                const dotClass = state === 'collected' ? 'collected' : state === 'available' ? 'available' : state === 'missed' ? 'missed' : 'upcoming';
-                const icon = state === 'collected' ? '<i class="fas fa-check"></i>' : state === 'available' ? '<i class="fas fa-gift"></i>' : state === 'missed' ? '<i class="fas fa-times"></i>' : '<i class="fas fa-clock"></i>';
-                if (state === 'available') availableIndex = i;
-                // Line between
-                if (i > 0) {
-                    const prevState = chests[i-1] || 'upcoming';
-                    const lineClass = prevState === 'collected' ? 'collected' : prevState === 'missed' ? 'missed' : 'upcoming';
-                    html += `<div class="line ${lineClass}"></div>`;
+                let iconSvg = '';
+                let stateLabel = '';
+                if (state === 'collected') {
+                    iconSvg = '<i class="fas fa-check"></i>';
+                    stateLabel = 'Collected';
+                } else if (state === 'available') {
+                    iconSvg = '<i class="fas fa-gift"></i>';
+                    stateLabel = 'Available!';
+                    availableIndex = i;
+                } else if (state === 'missed') {
+                    iconSvg = '<i class="fas fa-times"></i>';
+                    stateLabel = 'Missed';
+                } else {
+                    iconSvg = '<i class="fas fa-hourglass-half"></i>';
+                    stateLabel = 'Upcoming';
                 }
                 html += `<div class="point">
-                    <div class="dot ${dotClass}">${icon}</div>
-                    <div class="label">${timeLabel}</div>
+                    <div class="chest-icon ${state}" title="${stateLabel}">${iconSvg}</div>
+                    <div class="chest-time">${timeLabel}</div>
+                    <div class="chest-status ${state}">${stateLabel}</div>
                 </div>`;
             }
             timeline.innerHTML = html;
 
-            // Collect button
             if (availableIndex !== -1) {
                 collectBtn.disabled = false;
-                collectBtn.textContent = `Collect Chest (${times[availableIndex]})`;
+                collectBtn.innerHTML = `<i class="fas fa-gift"></i> Collect Chest (${times[availableIndex]})`;
                 collectBtn.onclick = async () => {
                     const todayStr = getTodayStr();
                     const chests = questData.chests[todayStr] || {};
                     if (chests[availableIndex] === 'available') {
-                        // Add chest to inventory if not full
                         if (questData.inventory >= 15) {
                             showToast('Inventory is full!', true);
                             return;
@@ -2780,106 +3351,163 @@
                         questData.inventory++;
                         await saveQuestData();
                         renderQuests();
-                        showToast('Chest collected!');
+                        showToast('🎁 Chest collected!');
                     }
                 };
             } else {
                 collectBtn.disabled = true;
-                collectBtn.textContent = 'No chest available';
+                collectBtn.innerHTML = '<i class="fas fa-hourglass-half"></i> No chest available';
                 collectBtn.onclick = null;
             }
         }
 
+        // Global wheel animation state so the spin function can persist across re-renders
+        let wheelAnimationState = { currentRotation: 0, isSpinning: false };
+        let wheelDrawFn = null;
+
         function renderWheel() {
             const canvas = $('#wheelCanvas');
             const ctx = canvas.getContext('2d');
-            const segments = ['0', '1', '2', '3', '4', '5'];
+            // Segment rewards - one per segment. These are the chest amounts awarded.
+            const segments = ['1', '2', '3', '4', '5', '3'];
             const colors = ['#fbbf24', '#9ca3af', '#60a5fa', '#fbbf24', '#9ca3af', '#60a5fa'];
             const segmentAngle = (2 * Math.PI) / segments.length;
 
             function drawWheel(rotate) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                const cx = canvas.width/2, cy = canvas.height/2, radius = Math.min(canvas.width, canvas.height)/2 - 10;
+                const cx = canvas.width / 2, cy = canvas.height / 2, radius = Math.min(canvas.width, canvas.height) / 2 - 12;
+                // Outer ring
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius + 6, 0, 2 * Math.PI);
+                ctx.fillStyle = '#1e293b';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius + 2, 0, 2 * Math.PI);
+                ctx.fillStyle = '#fbbf24';
+                ctx.fill();
+                // Hub base
                 ctx.save();
                 ctx.translate(cx, cy);
                 ctx.rotate(rotate);
                 for (let i = 0; i < segments.length; i++) {
                     ctx.beginPath();
                     ctx.moveTo(0, 0);
-                    ctx.arc(0, 0, radius, i * segmentAngle, (i+1) * segmentAngle);
+                    ctx.arc(0, 0, radius, i * segmentAngle, (i + 1) * segmentAngle);
                     ctx.closePath();
-                    ctx.fillStyle = colors[i % colors.length];
+                    const grad = ctx.createRadialGradient(0, 0, 20, 0, 0, radius);
+                    grad.addColorStop(0, colors[i % colors.length]);
+                    grad.addColorStop(1, shadeColor(colors[i % colors.length], -20));
+                    ctx.fillStyle = grad;
                     ctx.fill();
-                    ctx.strokeStyle = '#fff';
-                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+                    ctx.lineWidth = 3;
                     ctx.stroke();
+                    // Text
                     ctx.save();
-                    ctx.rotate(i * segmentAngle + segmentAngle/2);
-                    ctx.fillStyle = '#000';
-                    ctx.font = 'bold 24px sans-serif';
-                    ctx.textAlign = 'center';
+                    ctx.rotate(i * segmentAngle + segmentAngle / 2);
+                    ctx.fillStyle = '#fff';
+                    ctx.font = 'bold 44px Rubik, sans-serif';
+                    ctx.textAlign = 'right';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(segments[i], radius * 0.65, 0);
+                    ctx.shadowColor = 'rgba(0,0,0,0.35)';
+                    ctx.shadowBlur = 6;
+                    ctx.fillText(segments[i], radius * 0.78, 0);
                     ctx.restore();
                 }
                 ctx.restore();
+                // Hub center
+                ctx.beginPath();
+                ctx.arc(cx, cy, 32, 0, 2 * Math.PI);
+                ctx.fillStyle = '#1e293b';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx, cy, 26, 0, 2 * Math.PI);
+                ctx.fillStyle = '#fbbf24';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+                ctx.font = 'bold 22px sans-serif';
+                ctx.fillStyle = '#1e293b';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('★', cx, cy);
             }
 
-            // Set initial rotation
-            let currentRotation = 0;
-            let isSpinning = false;
-            drawWheel(currentRotation);
+            function shadeColor(color, percent) {
+                const num = parseInt(color.replace('#', ''), 16);
+                const amt = Math.round(2.55 * percent);
+                const R = Math.max(0, Math.min(255, (num >> 16) + amt));
+                const G = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amt));
+                const B = Math.max(0, Math.min(255, (num & 0x0000FF) + amt));
+                return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+            }
 
-            // Spin button
+            wheelDrawFn = drawWheel;
+            drawWheel(wheelAnimationState.currentRotation);
+
             const spinBtn = $('#spinWheelBtn');
             const statusEl = $('#wheelStatus');
             const resultEl = $('#wheelResult');
 
             function updateWheelUI() {
                 const canSpin = updateWheelState();
-                spinBtn.disabled = !canSpin || isSpinning;
-                const todayStr = getTodayStr();
+                spinBtn.disabled = !canSpin || wheelAnimationState.isSpinning;
                 const wheel = questData.wheel;
                 const used = wheel.spinsUsed || 0;
                 statusEl.textContent = `Spins used: ${used} / 2`;
-                if (!canSpin) {
-                    if (used >= 2) statusEl.textContent += ' (No spins left today)';
-                    else if (new Date().getHours() < 12) statusEl.textContent += ' (Next spin after 12 PM)';
+                if (!canSpin && !wheelAnimationState.isSpinning) {
+                    if (used >= 2) statusEl.textContent += ' — No spins left today';
+                    else if (new Date().getHours() < 12) statusEl.textContent += ' — Next spin after 12 PM';
                 }
-                resultEl.textContent = wheel.lastResult ? `Last spin: ${wheel.lastResult} chests` : '';
+                resultEl.textContent = wheel.lastResult ? `🎉 Last spin: +${wheel.lastResult} chest${wheel.lastResult > 1 ? 's' : ''}` : '';
             }
 
             spinBtn.onclick = () => {
-                if (isSpinning) return;
+                if (wheelAnimationState.isSpinning) return;
                 const canSpin = updateWheelState();
                 if (!canSpin) { showToast('No spins available', true); return; }
-                isSpinning = true;
+                wheelAnimationState.isSpinning = true;
                 spinBtn.disabled = true;
-                // Random spin: 5-10 full rotations + random stop
+                resultEl.textContent = '';
+
                 const extraRotations = 5 + Math.random() * 5;
                 const stopAngle = Math.random() * 2 * Math.PI;
-                const totalRotation = currentRotation + extraRotations * 2 * Math.PI + stopAngle;
-                const duration = 3000 + Math.random() * 2000;
+                const totalRotation = wheelAnimationState.currentRotation + extraRotations * 2 * Math.PI + stopAngle;
+                const duration = 3500 + Math.random() * 1500;
                 const startTime = performance.now();
-                const startRotation = currentRotation;
+                const startRotation = wheelAnimationState.currentRotation;
 
                 function animate(now) {
                     const elapsed = now - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    // ease-out cubic
                     const eased = 1 - Math.pow(1 - progress, 3);
                     const currentRot = startRotation + (totalRotation - startRotation) * eased;
                     drawWheel(currentRot);
                     if (progress < 1) {
                         requestAnimationFrame(animate);
                     } else {
-                        currentRotation = totalRotation;
-                        // Determine result
-                        const normalized = totalRotation % (2 * Math.PI);
-                        let idx = Math.floor((normalized + 2*Math.PI) % (2*Math.PI) / segmentAngle);
-                        if (idx >= segments.length) idx = segments.length - 1;
-                        const result = parseInt(segments[idx]);
-                        // Update quest data
+                        wheelAnimationState.currentRotation = totalRotation % (2 * Math.PI);
+                        // Determine which segment is under the pointer (pointer at top = angle 3π/2 i.e. -π/2)
+                        // The pointer is at the top; segment under pointer:
+                        const normalized = ((wheelAnimationState.currentRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                        // Pointer is at top (-π/2). Segment index whose center is closest to that angle:
+                        // Segment i spans [i*segmentAngle, (i+1)*segmentAngle) starting from angle 0 (right).
+                        // After rotation by r, segment i covers [i*segmentAngle + r, (i+1)*segmentAngle + r).
+                        // Pointer angle = -π/2 (or equivalently 3π/2).
+                        const pointerAngle = (3 * Math.PI / 2); // in [0,2π)
+                        let bestIdx = 0;
+                        let bestDiff = Infinity;
+                        for (let i = 0; i < segments.length; i++) {
+                            const centerAngle = (i * segmentAngle + segmentAngle / 2 + normalized) % (2 * Math.PI);
+                            // Distance to pointer
+                            let diff = Math.abs(centerAngle - pointerAngle);
+                            if (diff > Math.PI) diff = 2 * Math.PI - diff;
+                            if (diff < bestDiff) { bestDiff = diff; bestIdx = i; }
+                        }
+                        const result = parseInt(segments[bestIdx]) || 0;
+
                         const todayStr = getTodayStr();
                         const wheel = questData.wheel;
                         wheel.spinsUsed = (wheel.spinsUsed || 0) + 1;
@@ -2887,14 +3515,14 @@
                         wheel.lastSpinWindow = new Date().getHours() < 12 ? 0 : 1;
                         wheel.totalSpins = (wheel.totalSpins || 0) + 1;
                         wheel.lastResult = result;
-                        // Add chests to inventory if possible
+
                         if (result > 0) {
                             const space = 15 - questData.inventory;
                             const add = Math.min(result, space);
                             if (add > 0) {
                                 questData.inventory += add;
-                                resultEl.textContent = `🎉 You won ${add} chest${add>1?'s':''}!`;
-                                showToast(`+${add} chest${add>1?'s':''} added!`);
+                                resultEl.textContent = `🎉 You won ${add} chest${add > 1 ? 's' : ''}!`;
+                                showToast(`+${add} chest${add > 1 ? 's' : ''} added!`);
                             } else {
                                 resultEl.textContent = `🎉 You won ${result} chests but inventory is full!`;
                                 showToast('Inventory full! Cannot add chests.', true);
@@ -2903,7 +3531,7 @@
                             resultEl.textContent = '😐 0 chests won. Try again!';
                         }
                         saveQuestData().then(() => {
-                            isSpinning = false;
+                            wheelAnimationState.isSpinning = false;
                             spinBtn.disabled = false;
                             renderQuests();
                             updateWheelUI();
@@ -2938,6 +3566,7 @@
                 const isDisabled = !isActive && activeIdx !== null && !isCompleted;
                 const title = challengeTitles[idx] || 'Challenge';
                 const desc = challengeDescs[idx](ch) || '';
+                const reward = ch.reward || 1;
                 let actionHtml = '';
                 if (isCompleted) {
                     actionHtml = `<span class="completed-badge"><i class="fas fa-check"></i> Completed</span>`;
@@ -2955,7 +3584,10 @@
                 html += `
                     <div class="challenge-item">
                         <div class="info">
-                            <div class="title">${title}</div>
+                            <div class="title">
+                                ${title}
+                                <span class="challenge-reward"><i class="fas fa-gift"></i> +${reward} Chest${reward > 1 ? 's' : ''}</span>
+                            </div>
                             <div class="desc">${desc}</div>
                             ${ch.type === 'watch' && isActive ? `<div class="progress-timer">Watching...</div>` : ''}
                         </div>
@@ -2965,7 +3597,6 @@
             });
             container.innerHTML = html;
 
-            // Event listeners for start buttons
             container.querySelectorAll('.start-btn').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     const idx = parseInt(btn.dataset.challengeIndex);
@@ -2978,30 +3609,23 @@
             const todayStr = getTodayStr();
             const challenges = questData.challenges[todayStr] || [];
             if (index >= challenges.length) return;
-            // Check if any challenge is active
             if (questData.activeChallenge) {
                 showToast('Only one challenge can be active at a time.', true);
                 return;
             }
             const ch = challenges[index];
             if (ch.completed) { showToast('Challenge already completed.', true); return; }
-            // Set active
             questData.activeChallenge = { index, type: ch.type, startedAt: Date.now() };
-            // If watch, start timer
             if (ch.type === 'watch') {
                 ch.progress = 0;
-                // We'll start timer when video modal opens
             }
             await saveQuestData();
             renderQuests();
             showToast('Challenge started!');
             if (ch.type === 'watch') {
-                // Prompt user to open a video
                 showToast('Open a video from the Videos tab to start watching.');
-                // Switch to videos tab
                 switchTab('videos');
             } else if (ch.type === 'addVideo' || ch.type === 'addAlbum') {
-                // Switch to add data
                 if (!passwordUnlocked) {
                     showPasswordModal();
                 } else {
@@ -3010,7 +3634,6 @@
             }
         }
 
-        // Video timer functions
         let videoTimerInterval = null;
         let videoTimerSeconds = 0;
 
@@ -3022,26 +3645,21 @@
             const ch = challenges[questData.activeChallenge.index];
             if (!ch || ch.completed) return;
 
-            // Only start the timer when the opened video matches the challenge actress.
             if (ch.actress && (!currentVideoForModal || !currentVideoForModal.actress ||
                 !currentVideoForModal.actress.split(',').map(a => a.trim()).includes(ch.actress))) {
                 showToast(`Open a video featuring ${ch.actress} to progress this challenge.`, true);
                 return;
             }
 
-            // Resume from saved progress
             videoTimerSeconds = ch.progress || 0;
             videoTimerInterval = setInterval(() => {
                 videoTimerSeconds++;
                 ch.progress = videoTimerSeconds;
-                if (videoTimerSeconds >= 300) { // 5 minutes
-                    // Complete challenge
+                if (videoTimerSeconds >= 300) {
                     completeWatchChallenge(questData.activeChallenge.index);
                 } else {
-                    // Update UI periodically
                     renderChallenges();
                 }
-                // Save progress every 5 seconds
                 if (videoTimerSeconds % 5 === 0) {
                     saveQuestData();
                 }
@@ -3052,7 +3670,6 @@
             if (videoTimerInterval) {
                 clearInterval(videoTimerInterval);
                 videoTimerInterval = null;
-                // Save progress
                 saveQuestData();
             }
         }
@@ -3066,12 +3683,15 @@
             ch.completed = true;
             ch.progress = 300;
             questData.activeChallenge = null;
-            // Add chest
-            if (questData.inventory < 15) {
-                questData.inventory++;
-                showToast('🎉 Challenge completed! +1 chest');
+            const reward = ch.reward || 1;
+            if (questData.inventory + reward <= 15) {
+                questData.inventory += reward;
+                showToast(`🎉 Challenge completed! +${reward} chest${reward > 1 ? 's' : ''}`);
             } else {
-                showToast('🎉 Challenge completed! Inventory full, chest not added.', true);
+                const added = 15 - questData.inventory;
+                questData.inventory = 15;
+                if (added > 0) showToast(`🎉 Challenge completed! +${added} chest (inventory full)`, true);
+                else showToast('🎉 Challenge completed! Inventory full, chest not added.', true);
             }
             await saveQuestData();
             renderQuests();
@@ -3090,7 +3710,6 @@
 
         function openChest() {
             if (questData.inventory <= 0) { showToast('No chests to open.', true); return; }
-            // Generate 9 random cards with weighted probability
             const allCards = getAllItems(allQuestCards);
             if (allCards.length === 0) { showToast('No quest cards available. Add some in Add Data.', true); return; }
             const weights = allCards.map(c => {
@@ -3110,9 +3729,7 @@
                 }
                 rewards.push(chosen);
             }
-            // Deduct chest
             questData.inventory--;
-            // Add cards to collection
             rewards.forEach(card => {
                 const id = card.id;
                 if (!questData.cards[id]) {
@@ -3121,7 +3738,6 @@
                 questData.cards[id].copies = (questData.cards[id].copies || 0) + 1;
             });
             saveQuestData().then(() => {
-                // Show modal with rewards
                 showChestRewards(rewards);
                 renderQuests();
             });
@@ -3147,17 +3763,64 @@
         }
 
         // ===== CARD COLLECTION =====
+        function getMaxLevel(type) {
+            const t = (type || '').toLowerCase();
+            if (t === 'gold') return 5;
+            if (t === 'silver') return 7;
+            if (t === 'blue') return 10;
+            return 5;
+        }
+
+        function getUpgradeRequirement(type, level) {
+            const t = (type || '').toLowerCase();
+            const lvl = Math.max(1, level || 1);
+            if (t === 'gold') return 4 + lvl;
+            if (t === 'silver') return 3 + (2 * lvl);
+            if (t === 'blue') return 2 + (3 * lvl);
+            return 5;
+        }
+
+        function getCardStats(card, level) {
+            const lvl = Math.max(1, level || 1);
+            const bonus = lvl - 1;
+            const clamp = v => Math.max(0, Math.min(100, v));
+            return {
+                popularity: clamp((card.popularity || 0) + bonus),
+                beauty: clamp((card.beauty || 0) + bonus),
+                figure: clamp((card.figure || 0) + bonus),
+                performance: clamp((card.performance || 0) + bonus)
+            };
+        }
+
+        function getOwnedCardsByRarity(rarity) {
+            const target = (rarity || '').toLowerCase();
+            return getAllItems(allQuestCards).filter(c => {
+                if ((c.type || '').toLowerCase() !== target) return false;
+                const d = questData.cards[c.id];
+                return d && (d.copies || 0) > 0;
+            });
+        }
+
+        function getOwnedCopiesByRarity(rarity) {
+            const target = (rarity || '').toLowerCase();
+            let total = 0;
+            Object.keys(questData.cards).forEach(id => {
+                const card = allQuestCards[id];
+                if (!card) return;
+                if ((card.type || '').toLowerCase() !== target) return;
+                total += (questData.cards[id].copies || 0);
+            });
+            return total;
+        }
+
         function renderCollection() {
             const tabs = $('#collectionTabs');
             const grid = $('#collectionGrid');
-            // Set active tab
             tabs.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.rarity === currentRarityTab);
             });
-            // Filter cards by rarity
             const allCards = getAllItems(allQuestCards);
             const filtered = allCards.filter(c => c.type && c.type.toLowerCase() === currentRarityTab);
-            // Sort: obtained first, then by ID
             filtered.sort((a, b) => {
                 const aHas = !!questData.cards[a.id];
                 const bHas = !!questData.cards[b.id];
@@ -3174,31 +3837,53 @@
                 const div = document.createElement('div');
                 const data = questData.cards[card.id];
                 const obtained = !!data;
-                const level = obtained ? data.level : 1;
-                const copies = obtained ? data.copies : 0;
-                const maxLevel = card.type === 'Gold' ? 5 : card.type === 'Silver' ? 7 : 10;
-                const canUpgrade = obtained && copies >= 5 && level < maxLevel;
+                const level = obtained ? (data.level || 1) : 1;
+                const copies = obtained ? (data.copies || 0) : 0;
+                const maxLevel = getMaxLevel(card.type);
+                const isMax = level >= maxLevel;
+                const req = getUpgradeRequirement(card.type, level);
+                const canUpgrade = obtained && !isMax && copies >= req;
                 div.className = `collection-card ${obtained ? '' : 'unobtained'}`;
                 const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
+
+                let upgradeHtml = '';
+                if (obtained) {
+                    if (isMax) {
+                        upgradeHtml = `
+                            <div class="card-upgrade-progress">MAX LEVEL</div>
+                            <button class="upgrade-btn" disabled>Max Level</button>
+                        `;
+                    } else {
+                        upgradeHtml = `
+                            <div class="card-upgrade-progress ${canUpgrade ? 'ready' : ''}">${Math.min(copies, req)} / ${req} to next level</div>
+                            <button class="upgrade-btn" ${canUpgrade ? '' : 'disabled'}>Upgrade (${req} copies)</button>
+                        `;
+                    }
+                }
+
                 div.innerHTML = `
                     <img src="${img}" alt="${card.id}" loading="lazy" />
                     <div class="card-type ${card.type.toLowerCase()}">${card.type}</div>
                     ${!obtained ? '<div class="lock-icon"><i class="fas fa-lock"></i></div>' : ''}
                     <div class="card-name">${card.id}</div>
-                    <div class="card-level">Level ${level}</div>
+                    <div class="card-level">${obtained ? `Level ${level} / ${maxLevel}` : 'Level 1'}</div>
                     <div class="card-copies">Copies: ${copies}</div>
-                    ${obtained ? `<button class="upgrade-btn" ${canUpgrade ? '' : 'disabled'}>Upgrade (5 copies)</button>` : ''}
+                    ${upgradeHtml}
                 `;
+
                 div.addEventListener('click', (e) => {
                     if (e.target.closest('.upgrade-btn')) return;
                     showCardDetail(card);
                 });
-                // Upgrade button
+
                 const upgradeBtn = div.querySelector('.upgrade-btn');
-                if (upgradeBtn) {
+                if (upgradeBtn && obtained && !isMax) {
                     upgradeBtn.addEventListener('click', async (e) => {
                         e.stopPropagation();
-                        if (!canUpgrade) { showToast('Not enough copies or max level reached.', true); return; }
+                        if (!canUpgrade) {
+                            showToast(`Not enough copies. Need ${req}, you have ${copies}.`, true);
+                            return;
+                        }
                         await upgradeCard(card.id);
                     });
                 }
@@ -3208,34 +3893,27 @@
 
         async function upgradeCard(cardId) {
             const data = questData.cards[cardId];
-            if (!data) return;
-            const card = getAllItems(allQuestCards).find(c => c.id === cardId);
-            if (!card) return;
-            const maxLevel = card.type === 'Gold' ? 5 : card.type === 'Silver' ? 7 : 10;
-            if (data.level >= maxLevel) { showToast('Max level reached.', true); return; }
-            if (data.copies < 5) { showToast('Need 5 copies to upgrade.', true); return; }
-            // Consume copies
-            data.copies -= 5;
-            data.level++;
-            // Increase stats
-            const stats = ['popularity', 'beauty', 'figure', 'performance'];
-            stats.forEach(stat => {
-                if (card[stat] !== undefined) {
-                    card[stat] = Math.min(100, (card[stat] || 0) + 1);
-                }
-            });
-            // Save card stat update to Firebase (update questCards)
-            await update(ref(db, `questCards/${cardId}`), {
-                popularity: card.popularity,
-                beauty: card.beauty,
-                figure: card.figure,
-                performance: card.performance
-            });
-            // Update local allQuestCards
-            allQuestCards[cardId] = card;
+            if (!data) { showToast('Card is not unlocked yet.', true); return false; }
+            const card = allQuestCards[cardId] || getAllItems(allQuestCards).find(c => c.id === cardId);
+            if (!card) { showToast('Card not found.', true); return false; }
+
+            const maxLevel = getMaxLevel(card.type);
+            const level = data.level || 1;
+            if (level >= maxLevel) { showToast('Max level reached.', true); return false; }
+
+            const req = getUpgradeRequirement(card.type, level);
+            if ((data.copies || 0) < req) {
+                showToast(`Need ${req} copies to upgrade (you have ${data.copies || 0}).`, true);
+                return false;
+            }
+
+            data.copies = (data.copies || 0) - req;
+            data.level = level + 1;
+
             await saveQuestData();
-            renderCollection();
-            showToast(`Card upgraded to Level ${data.level}!`);
+            renderQuests();
+            showToast(`⬆️ ${card.id} upgraded to Level ${data.level}! All stats +1`);
+            return true;
         }
 
         function showCardDetail(card) {
@@ -3243,29 +3921,398 @@
             const content = $('#cardDetailContent');
             const data = questData.cards[card.id];
             const obtained = !!data;
-            const level = obtained ? data.level : 1;
-            const copies = obtained ? data.copies : 0;
+            const level = obtained ? (data.level || 1) : 1;
+            const copies = obtained ? (data.copies || 0) : 0;
+            const maxLevel = getMaxLevel(card.type);
+            const isMax = level >= maxLevel;
+            const req = getUpgradeRequirement(card.type, level);
+            const canUpgrade = obtained && !isMax && copies >= req;
+            const stats = getCardStats(card, level);
             const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
-            let html = `
+
+            let upgradeBlock = '';
+            if (obtained && !isMax) {
+                upgradeBlock = `
+                    <div class="card-upgrade-info">
+                        Next upgrade: <strong>${req}</strong> copies &nbsp;•&nbsp; you have <strong>${copies}</strong>
+                    </div>
+                    <button class="card-detail-upgrade" id="cardDetailUpgradeBtn" ${canUpgrade ? '' : 'disabled'}>
+                        <i class="fas fa-arrow-up"></i> Upgrade to Level ${level + 1}
+                    </button>
+                `;
+            } else if (obtained && isMax) {
+                upgradeBlock = `<div class="card-upgrade-info">⭐ Max level reached</div>`;
+            }
+
+            content.innerHTML = `
                 <img src="${img}" alt="${card.id}" />
                 <div class="detail-row">
                     <span><strong>ID:</strong> ${card.id}</span>
                     <span><strong>Type:</strong> ${card.type}</span>
-                    <span><strong>Level:</strong> ${obtained ? level : '?'}</span>
+                    <span><strong>Level:</strong> ${obtained ? `${level} / ${maxLevel}` : '?'}</span>
                     <span><strong>Copies:</strong> ${copies}</span>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat"><span class="label">Popularity</span><span class="value">${obtained ? card.popularity || 0 : '?'}</span></div>
-                    <div class="stat"><span class="label">Beauty</span><span class="value">${obtained ? card.beauty || 0 : '?'}</span></div>
-                    <div class="stat"><span class="label">Figure</span><span class="value">${obtained ? card.figure || 0 : '?'}</span></div>
-                    <div class="stat"><span class="label">Performance</span><span class="value">${obtained ? card.performance || 0 : '?'}</span></div>
+                    <div class="stat"><span class="label">Popularity</span><span class="value">${obtained ? stats.popularity : '?'}</span></div>
+                    <div class="stat"><span class="label">Beauty</span><span class="value">${obtained ? stats.beauty : '?'}</span></div>
+                    <div class="stat"><span class="label">Figure</span><span class="value">${obtained ? stats.figure : '?'}</span></div>
+                    <div class="stat"><span class="label">Performance</span><span class="value">${obtained ? stats.performance : '?'}</span></div>
                 </div>
+                ${upgradeBlock}
                 ${!obtained ? '<p style="color:var(--text-secondary);margin-top:0.5rem;">🔒 Not yet obtained</p>' : ''}
             `;
-            content.innerHTML = html;
+
+            const upgradeBtn = content.querySelector('#cardDetailUpgradeBtn');
+            if (upgradeBtn) {
+                upgradeBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const ok = await upgradeCard(card.id);
+                    if (ok) showCardDetail(card);
+                });
+            }
+
             openModal(modal);
             $('#closeCardDetailModal').onclick = () => closeModal(modal);
             modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
+        }
+
+        // ===== TRADER SHOP =====
+        function renderTraderShop() {
+            const giveTypeEl = $('#traderGiveType');
+            if (!giveTypeEl) return;
+
+            if (!TRADE_RATES[`${traderState.giveType}>${traderState.receiveType}`]) {
+                traderState.receiveType = 'Gold';
+            }
+
+            giveTypeEl.value = traderState.giveType;
+            $('#traderReceiveType').value = traderState.receiveType;
+
+            // ---- I Give : cards the player owns copies of ----
+            const ownedGive = getOwnedCardsByRarity(traderState.giveType)
+                .sort((a, b) => a.id.localeCompare(b.id));
+            if (traderState.giveCard !== 'any' && !ownedGive.some(c => c.id === traderState.giveCard)) {
+                traderState.giveCard = 'any';
+            }
+            renderTraderCardDisplay('give');
+            renderTraderCardOptions('give');
+
+            // ---- I Receive : any card of the chosen rarity ----
+            const recvCards = getAllItems(allQuestCards)
+                .filter(c => (c.type || '').toLowerCase() === traderState.receiveType.toLowerCase())
+                .sort((a, b) => a.id.localeCompare(b.id));
+            if (traderState.receiveCard !== 'random' && !recvCards.some(c => c.id === traderState.receiveCard)) {
+                traderState.receiveCard = 'random';
+            }
+            renderTraderCardDisplay('receive');
+            renderTraderCardOptions('receive');
+
+            $('#traderGiveQty').value = traderState.giveQty;
+
+            updateTraderSummary();
+        }
+
+        function renderTraderCardDisplay(side) {
+            const displayEl = side === 'give' ? $('#traderGiveCardDisplay') : $('#traderReceiveCardDisplay');
+            if (!displayEl) return;
+
+            const cardId = side === 'give' ? traderState.giveCard : traderState.receiveCard;
+            const isAny = side === 'give' ? (cardId === 'any') : (cardId === 'random');
+
+            if (isAny) {
+                displayEl.innerHTML = `
+                    <span class="trader-card-placeholder">${side === 'give' ? 'Any (auto-select)' : 'Random'}</span>
+                    <i class="fas fa-chevron-down trader-card-chevron"></i>
+                `;
+                return;
+            }
+
+            const card = allQuestCards[cardId];
+            const img = (card && card.image) || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
+            const copies = (questData.cards[cardId] && questData.cards[cardId].copies) || 0;
+            displayEl.innerHTML = `
+                <img src="${img}" alt="${cardId}" onerror="this.style.visibility='hidden'" />
+                <div class="trader-card-display-info">
+                    <div class="trader-card-id">${cardId}</div>
+                    <div class="trader-card-sub">${side === 'give' ? `${copies} copies owned` : (questData.cards[cardId] ? 'Owned' : 'Not owned')}</div>
+                </div>
+                <i class="fas fa-chevron-down trader-card-chevron"></i>
+            `;
+        }
+
+        function renderTraderCardOptions(side) {
+            const optionsEl = side === 'give' ? $('#traderGiveCardOptions') : $('#traderReceiveCardOptions');
+            const searchEl = side === 'give' ? $('#traderGiveCardSearch') : $('#traderReceiveCardSearch');
+            if (!optionsEl) return;
+
+            const query = (searchEl && searchEl.value || '').toLowerCase().trim();
+            const currentCard = side === 'give' ? traderState.giveCard : traderState.receiveCard;
+            const isAny = side === 'give' ? (currentCard === 'any') : (currentCard === 'random');
+
+            let html = '';
+
+            // "Any" / "Random" option
+            const anyLabel = side === 'give' ? 'Any (auto-select)' : 'Random';
+            if (!query || anyLabel.toLowerCase().includes(query)) {
+                html += `
+                    <div class="trader-card-option ${isAny ? 'selected' : ''}" data-card-id="${side === 'give' ? 'any' : 'random'}">
+                        <div style="width:34px;height:51px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:5px;color:var(--text-secondary);"><i class="fas fa-random"></i></div>
+                        <div class="trader-card-option-info">
+                            <div class="trader-card-option-id">${anyLabel}</div>
+                            <div class="trader-card-option-meta">${side === 'give' ? 'Auto-select from your copies' : 'Pick a random card of this rarity'}</div>
+                        </div>
+                        ${isAny ? '<i class="fas fa-check trader-card-option-check"></i>' : ''}
+                    </div>
+                `;
+            }
+
+            // Build the list of cards
+            let cards;
+            if (side === 'give') {
+                cards = getOwnedCardsByRarity(traderState.giveType).sort((a, b) => a.id.localeCompare(b.id));
+            } else {
+                cards = getAllItems(allQuestCards)
+                    .filter(c => (c.type || '').toLowerCase() === traderState.receiveType.toLowerCase())
+                    .sort((a, b) => a.id.localeCompare(b.id));
+            }
+
+            const filtered = query ? cards.filter(c => c.id.toLowerCase().includes(query)) : cards;
+
+            if (!filtered.length) {
+                html += `<div class="trader-card-option-empty">${cards.length ? 'No cards match your search.' : 'No cards available for this type.'}</div>`;
+            } else {
+                filtered.forEach(card => {
+                    const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
+                    const copies = (questData.cards[card.id] && questData.cards[card.id].copies) || 0;
+                    const owned = !!questData.cards[card.id];
+                    const selected = currentCard === card.id;
+                    const sub = side === 'give' ? `${copies} copies owned` : (owned ? `Owned (${copies})` : 'Not owned');
+                    html += `
+                        <div class="trader-card-option ${selected ? 'selected' : ''}" data-card-id="${card.id}">
+                            <img src="${img}" alt="${card.id}" loading="lazy" onerror="this.style.visibility='hidden'" />
+                            <div class="trader-card-option-info">
+                                <div class="trader-card-option-id">${card.id}</div>
+                                <div class="trader-card-option-meta">${card.type} • ${sub}</div>
+                            </div>
+                            ${selected ? '<i class="fas fa-check trader-card-option-check"></i>' : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            optionsEl.innerHTML = html;
+            optionsEl.querySelectorAll('.trader-card-option').forEach(el => {
+                el.addEventListener('click', () => {
+                    const cardId = el.dataset.cardId;
+                    if (side === 'give') traderState.giveCard = cardId;
+                    else traderState.receiveCard = cardId;
+                    const dropdown = side === 'give' ? $('#traderGiveCardDropdown') : $('#traderReceiveCardDropdown');
+                    if (dropdown) dropdown.classList.remove('show');
+                    renderTraderShop();
+                });
+            });
+        }
+
+        function updateTraderSummary() {
+            const rateEl = $('#traderRate');
+            const summaryEl = $('#traderSummary');
+            const ownedEl = $('#traderGiveOwned');
+            const exchangeBtn = $('#traderExchangeBtn');
+            if (!rateEl) return;
+
+            const rate = TRADE_RATES[`${traderState.giveType}>${traderState.receiveType}`];
+            if (!rate) {
+                rateEl.textContent = 'Exchange not available for this combination.';
+                summaryEl.textContent = '';
+                exchangeBtn.disabled = true;
+                return;
+            }
+
+            const rawQty = parseInt($('#traderGiveQty').value) || 0;
+            const units = Math.floor(rawQty / rate.give);
+            const giveAmount = units * rate.give;
+            const receiveAmount = units * rate.receive;
+
+            rateEl.innerHTML = `<i class="fas fa-exchange-alt"></i> ${rate.give} ${traderState.giveType} Card${rate.give > 1 ? 's' : ''} &nbsp;→&nbsp; ${rate.receive} ${traderState.receiveType} Card${rate.receive > 1 ? 's' : ''}`;
+
+            let available = 0;
+            if (traderState.giveCard === 'any') {
+                available = getOwnedCopiesByRarity(traderState.giveType);
+            } else {
+                const d = questData.cards[traderState.giveCard];
+                available = d ? (d.copies || 0) : 0;
+            }
+            if (ownedEl) ownedEl.innerHTML = `Available to trade: <strong>${available}</strong>`;
+
+            if (units < 1) {
+                summaryEl.innerHTML = `You need at least <span class="bad">${rate.give}</span> ${traderState.giveType} Card${rate.give > 1 ? 's' : ''} to trade.`;
+                exchangeBtn.disabled = true;
+                return;
+            }
+
+            const enough = available >= giveAmount;
+            const giveLabel = traderState.giveCard === 'any'
+                ? `${giveAmount} ${traderState.giveType} Card${giveAmount > 1 ? 's' : ''}`
+                : `${giveAmount} × ${traderState.giveCard}`;
+            const receiveLabel = traderState.receiveCard === 'random'
+                ? `${receiveAmount} ${traderState.receiveType} Card${receiveAmount > 1 ? 's' : ''}`
+                : `${receiveAmount} × ${traderState.receiveCard}`;
+
+            summaryEl.innerHTML = `You will give <strong>${giveLabel}</strong> and receive <strong>${receiveLabel}</strong>.`
+                + (enough ? '' : ` <span class="bad">Not enough copies (have ${available}).</span>`);
+
+            exchangeBtn.disabled = !enough;
+        }
+
+        async function executeTrade() {
+            const rate = TRADE_RATES[`${traderState.giveType}>${traderState.receiveType}`];
+            if (!rate) { showToast('Invalid exchange.', true); return; }
+
+            const rawQty = parseInt($('#traderGiveQty').value) || 0;
+            const units = Math.floor(rawQty / rate.give);
+            if (units < 1) {
+                showToast(`You need at least ${rate.give} ${traderState.giveType} Cards.`, true);
+                return;
+            }
+            const giveAmount = units * rate.give;
+            const receiveAmount = units * rate.receive;
+
+            let available = 0;
+            if (traderState.giveCard === 'any') {
+                available = getOwnedCopiesByRarity(traderState.giveType);
+            } else {
+                const d = questData.cards[traderState.giveCard];
+                available = d ? (d.copies || 0) : 0;
+            }
+            if (available < giveAmount) {
+                showToast(`Not enough copies (${available}/${giveAmount}).`, true);
+                return;
+            }
+
+            let receivePool = [];
+            if (traderState.receiveCard === 'random') {
+                receivePool = getAllItems(allQuestCards)
+                    .filter(c => (c.type || '').toLowerCase() === traderState.receiveType.toLowerCase());
+                if (!receivePool.length) { showToast('No cards available to receive.', true); return; }
+            } else {
+                const card = allQuestCards[traderState.receiveCard];
+                if (!card) { showToast('Selected card not found.', true); return; }
+                receivePool = [card];
+            }
+
+            const giveLabel = traderState.giveCard === 'any'
+                ? `${giveAmount} ${traderState.giveType} Card${giveAmount > 1 ? 's' : ''}`
+                : `${giveAmount} × ${traderState.giveCard}`;
+            const receiveLabel = traderState.receiveCard === 'random'
+                ? `${receiveAmount} ${traderState.receiveType} Card${receiveAmount > 1 ? 's' : ''}`
+                : `${receiveAmount} × ${traderState.receiveCard}`;
+            if (!confirm(`Confirm Trade?\n\nYou will give ${giveLabel} and receive ${receiveLabel}.`)) return;
+
+            if (traderState.giveCard === 'any') {
+                const cards = getAllItems(allQuestCards)
+                    .filter(c => (c.type || '').toLowerCase() === traderState.giveType.toLowerCase())
+                    .filter(c => questData.cards[c.id] && (questData.cards[c.id].copies || 0) > 0)
+                    .sort((a, b) => (questData.cards[b.id].copies || 0) - (questData.cards[a.id].copies || 0));
+                let remaining = giveAmount;
+                for (const c of cards) {
+                    if (remaining <= 0) break;
+                    const d = questData.cards[c.id];
+                    const take = Math.min(d.copies || 0, remaining);
+                    d.copies = (d.copies || 0) - take;
+                    remaining -= take;
+                }
+                if (remaining > 0) { showToast('Trade failed: not enough copies.', true); return; }
+            } else {
+                const d = questData.cards[traderState.giveCard];
+                d.copies = (d.copies || 0) - giveAmount;
+            }
+
+            for (let i = 0; i < receiveAmount; i++) {
+                const card = receivePool[Math.floor(Math.random() * receivePool.length)];
+                if (!card) continue;
+                if (!questData.cards[card.id]) questData.cards[card.id] = { level: 1, copies: 0 };
+                questData.cards[card.id].copies = (questData.cards[card.id].copies || 0) + 1;
+            }
+
+            await saveQuestData();
+            renderQuests();
+            showToast(`🔄 Traded ${giveAmount} ${traderState.giveType} → ${receiveAmount} ${traderState.receiveType}!`);
+        }
+
+        function setupTraderShop() {
+            const giveTypeEl = $('#traderGiveType');
+            if (!giveTypeEl) return;
+            const qtyEl = $('#traderGiveQty');
+            const recvTypeEl = $('#traderReceiveType');
+            const exchangeBtn = $('#traderExchangeBtn');
+
+            giveTypeEl.addEventListener('change', () => {
+                traderState.giveType = giveTypeEl.value;
+                traderState.giveCard = 'any';
+                const r = TRADE_RATES[`${traderState.giveType}>${traderState.receiveType}`];
+                traderState.giveQty = r ? r.give : 1;
+                renderTraderShop();
+            });
+
+            recvTypeEl.addEventListener('change', () => {
+                traderState.receiveType = recvTypeEl.value;
+                traderState.receiveCard = 'random';
+                const r = TRADE_RATES[`${traderState.giveType}>${traderState.receiveType}`];
+                traderState.giveQty = r ? r.give : 1;
+                renderTraderShop();
+            });
+
+            // Give-side dropdown toggle
+            const giveDisplay = $('#traderGiveCardDisplay');
+            const giveDropdown = $('#traderGiveCardDropdown');
+            const giveSearch = $('#traderGiveCardSearch');
+            giveDisplay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = giveDropdown.classList.contains('show');
+                document.querySelectorAll('.trader-card-dropdown').forEach(d => d.classList.remove('show'));
+                if (!isOpen) {
+                    giveDropdown.classList.add('show');
+                    if (giveSearch) { giveSearch.value = ''; giveSearch.focus(); }
+                    renderTraderCardOptions('give');
+                }
+            });
+            if (giveSearch) {
+                giveSearch.addEventListener('input', () => { renderTraderCardOptions('give'); });
+                giveSearch.addEventListener('click', (e) => e.stopPropagation());
+            }
+
+            // Receive-side dropdown toggle
+            const recvDisplay = $('#traderReceiveCardDisplay');
+            const recvDropdown = $('#traderReceiveCardDropdown');
+            const recvSearch = $('#traderReceiveCardSearch');
+            recvDisplay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = recvDropdown.classList.contains('show');
+                document.querySelectorAll('.trader-card-dropdown').forEach(d => d.classList.remove('show'));
+                if (!isOpen) {
+                    recvDropdown.classList.add('show');
+                    if (recvSearch) { recvSearch.value = ''; recvSearch.focus(); }
+                    renderTraderCardOptions('receive');
+                }
+            });
+            if (recvSearch) {
+                recvSearch.addEventListener('input', () => { renderTraderCardOptions('receive'); });
+                recvSearch.addEventListener('click', (e) => e.stopPropagation());
+            }
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.trader-card-selector')) {
+                    document.querySelectorAll('.trader-card-dropdown').forEach(d => d.classList.remove('show'));
+                }
+            });
+
+            qtyEl.addEventListener('input', () => {
+                traderState.giveQty = parseInt(qtyEl.value) || 0;
+                updateTraderSummary();
+            });
+
+            exchangeBtn.addEventListener('click', executeTrade);
         }
 
         // ===== TAB SWITCH =====
@@ -3541,7 +4588,6 @@
             return `<div class="add-data-form"><h4>${type === 'videos' ? 'Add Video' : type === 'questcards' ? 'Add Quest Card' : 'Add '+type.slice(0,-1)}</h4>${fields}<button class="submit-btn" id="addSubmit">Save</button></div>`;
         }
 
-        // Override volume fields (same as before)
         function setupVolumeFields(form, existingVolumes = []) {
             const container = form.querySelector('#volumeContainer');
             if (!container) return;
@@ -3633,7 +4679,6 @@
             setupVolumeFields(form, volData);
         }
 
-        // Custom Select functions (same as before)
         function createCustomSelect({ container, options = [], multiple = false, placeholder = 'Select...', imageKey = 'image', nameKey = 'name', onSelect = () => {} }) {
             container.innerHTML = '';
             const wrapper = document.createElement('div');
@@ -3997,7 +5042,6 @@
                             allVideos[id] = { ...videoData, id };
                             showToast('Video added successfully!');
                         }
-                        // Check if challenge 'addVideo' is active
                         await checkChallengeCompletion('addVideo');
                         allPictures = [];
                         if (allAlbums) { Object.values(allAlbums).forEach(album => { if (album && album.volumes) { Object.values(album.volumes).forEach(volume => { if (volume && volume.images && Array.isArray(volume.images)) { volume.images.forEach(img => { if (img && typeof img === 'string') { allPictures.push({ url: img, albumTitle: album.title || 'Untitled', volumeTitle: volume.title || 'Volume' }); } }); } }); } }); }
@@ -4008,7 +5052,6 @@
                             showToast('Album updated successfully!'); } else { const newRef = push(ref(db, 'albums')); await set(newRef, data); const key = newRef.key;
                             allAlbums[key] = { ...data };
                             showToast('Album added successfully!'); }
-                        // Check challenge 'addAlbum'
                         await checkChallengeCompletion('addAlbum');
                         allPictures = [];
                         if (allAlbums) { Object.values(allAlbums).forEach(album => { if (album && album.volumes) { Object.values(album.volumes).forEach(volume => { if (volume && volume.images && Array.isArray(volume.images)) { volume.images.forEach(img => { if (img && typeof img === 'string') { allPictures.push({ url: img, albumTitle: album.title || 'Untitled', volumeTitle: volume.title || 'Volume' }); } }); } }); } }); }
@@ -4068,9 +5111,7 @@
                     }
 
                     refreshAllViews();
-
                     resetAddForm(type, form);
-
                     const searchVal = document.getElementById(`addListSearch_${type}`)?.value || '';
                     await loadAddList(type, searchVal);
 
@@ -4174,7 +5215,6 @@
             return null;
         }
 
-        // Challenge completion check
         async function checkChallengeCompletion(type) {
             if (!questData.activeChallenge) return;
             const todayStr = getTodayStr();
@@ -4183,17 +5223,22 @@
             const ch = challenges[idx];
             if (!ch || ch.completed) return;
             if (ch.type === type) {
-                // The watch challenge is tied to the randomly selected actress.
                 if (type === 'watch' && ch.actress && (!currentVideoForModal || !currentVideoForModal.actress ||
                     !currentVideoForModal.actress.split(',').map(a => a.trim()).includes(ch.actress))) {
                     return;
                 }
-                // Mark completed
                 ch.completed = true;
                 questData.activeChallenge = null;
-                // Add chest
-                if (questData.inventory < 15) { questData.inventory++;
-                    showToast(`🎉 Challenge completed! +1 chest`); } else { showToast('🎉 Challenge completed! Inventory full, chest not added.', true); }
+                const reward = ch.reward || 1;
+                if (questData.inventory + reward <= 15) {
+                    questData.inventory += reward;
+                    showToast(`🎉 Challenge completed! +${reward} chest${reward > 1 ? 's' : ''}`);
+                } else {
+                    const added = 15 - questData.inventory;
+                    questData.inventory = 15;
+                    if (added > 0) showToast(`🎉 Challenge completed! +${added} chest (inventory full)`, true);
+                    else showToast('🎉 Challenge completed! Inventory full, chest not added.', true);
+                }
                 await saveQuestData();
                 renderQuests();
             }
@@ -4370,7 +5415,6 @@
 
             setupCarouselScroll();
 
-            // Collection tabs
             $('#collectionTabs').addEventListener('click', (e) => {
                 const btn = e.target.closest('.tab-btn');
                 if (btn && btn.dataset.rarity) {
@@ -4378,15 +5422,15 @@
                     renderCollection();
                 }
             });
+
+            setupTraderShop();
         }
 
         // ===== INIT =====
         async function init() {
             try {
                 await loadAllData();
-                // Load quest data after user ID
                 await loadQuestData();
-                // Restore the user's theme; keep dark mode as the default for first-time visitors.
                 const savedTheme = localStorage.getItem('jav_gallery_theme');
                 const isDark = savedTheme !== 'light';
                 document.body.classList.toggle('dark-mode', isDark);
@@ -4400,9 +5444,6 @@
                 setupEventListeners();
                 setupAddData();
                 switchTab('videos');
-                // Start checking for challenges related to add actions - we hook into save events already
-                // Also, for watch challenge, we need to listen to video modal open
-                // We already added timer start in openVideoModal
             } catch (e) {
                 console.error(e);
             }

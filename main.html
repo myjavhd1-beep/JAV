@@ -194,7 +194,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== VIDEOS TAB (existing styles, keep unchanged) ===== */
+        /* ===== VIDEOS TAB ===== */
         .action-bar { display: flex; gap: 0.8rem; align-items: center; padding: 1rem 0; flex-wrap: wrap; }
         .filters-btn, .sort-btn, .view-toggle-btn, .shuffle-btn {
             background: var(--card); border: 1px solid var(--border); border-radius: 50%; width: 50px; height: 50px;
@@ -611,7 +611,7 @@
         .quest-section h2 { font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; color: var(--text); }
         .quest-section h2 i { color: var(--primary); }
 
-        /* ===== TIMELY CHESTS (REDESIGNED) ===== */
+        /* ===== TIMELY CHESTS ===== */
         .chest-timeline {
             display: flex;
             align-items: flex-start;
@@ -739,7 +739,7 @@
             transform: none;
         }
 
-        /* ===== LUCKY WHEEL (REDESIGNED) ===== */
+        /* ===== LUCKY WHEEL ===== */
         .wheel-wrapper {
             display: flex;
             flex-direction: column;
@@ -759,7 +759,7 @@
             position: absolute;
             inset: -8px;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, #fbbf24, #f59e0b, #7c3aed, #a78bfa, #60a5fa, #22c55e, #fbbf24);
+            background: conic-gradient(from 0deg, #fbbf24, #f59e0b, #7c3aed, #a78bfa, #60a5fa, #ec4899, #fbbf24);
             z-index: -1;
             animation: wheelGlow 6s linear infinite;
         }
@@ -782,7 +782,7 @@
             position: absolute;
             top: -22px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) rotate(180deg);
             font-size: 2.4rem;
             color: #ef4444;
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
@@ -790,8 +790,8 @@
             animation: pointerBounce 1.4s infinite ease-in-out;
         }
         @keyframes pointerBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(4px); }
+            0%, 100% { transform: translateX(-50%) rotate(180deg) translateY(0); }
+            50% { transform: translateX(-50%) rotate(180deg) translateY(4px); }
         }
         .wheel-info {
             text-align: center;
@@ -843,7 +843,7 @@
             box-shadow: none;
         }
 
-        /* ===== DAILY CHALLENGES (IMPROVED) ===== */
+        /* ===== DAILY CHALLENGES ===== */
         .challenge-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
         .challenge-item {
             background: var(--bg);
@@ -899,17 +899,613 @@
         .inventory-display .open-chest-btn:hover:not(:disabled) { background: var(--primary-dark); transform: scale(1.03); }
         .inventory-display .open-chest-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* Chest Opening Modal */
-        .chest-rewards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1rem 0; }
-        .chest-reward-card { background: var(--bg); border-radius: var(--radius-sm); padding: 0.5rem; text-align: center; border: 1px solid var(--border); }
-        .chest-reward-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 6px; background: var(--border); }
-        .chest-reward-card .card-name { font-size: 0.7rem; margin-top: 0.2rem; font-weight: 500; color: var(--text-secondary); }
-        .chest-reward-card .card-type { font-size: 0.6rem; padding: 0.1rem 0.4rem; border-radius: 10px; display: inline-block; margin-top: 0.1rem; }
-        .chest-reward-card .card-type.gold { background: var(--gold); color: #000; }
-        .chest-reward-card .card-type.silver { background: var(--silver); color: #000; }
-        .chest-reward-card .card-type.blue { background: var(--blue); color: #000; }
+        /* ===== CHEST OPENING MODAL (ONE-BY-ONE REVEAL) ===== */
+        #chestModal .modal-container {
+            max-width: 460px;
+            background: transparent;
+            box-shadow: none;
+            overflow: visible;
+        }
+        #chestModal .modal-header {
+            background: var(--modal-bg);
+            border-radius: var(--radius) var(--radius) 0 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        #chestModal .modal-content {
+            background: var(--modal-bg);
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
 
-        /* Card Collection */
+        .chest-reveal-stage {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.5rem 0.25rem 1rem;
+            cursor: pointer;
+            min-height: 480px;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            perspective: 1200px;
+        }
+        .chest-reveal-stage:focus { outline: none; }
+
+        .chest-reveal-counter {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .chest-card-slot {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 2/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Card flip */
+        .reveal-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: rotateY(180deg);
+            border-radius: var(--radius-sm);
+            animation: cardFloatIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+        @keyframes cardFloatIn {
+            from { opacity: 0; transform: translateY(30px) rotateY(180deg) scale(0.85); }
+            to { opacity: 1; transform: translateY(0) rotateY(180deg) scale(1); }
+        }
+        .reveal-card.revealed {
+            transform: rotateY(0deg);
+        }
+        .reveal-card .reveal-card-face {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-sm);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.3);
+        }
+        .reveal-card .reveal-card-back {
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%),
+                linear-gradient(135deg, #6d28d9, #4c1d95 45%, #1e1b4b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotateY(180deg);
+            color: rgba(255,255,255,0.85);
+        }
+        .reveal-card .reveal-card-back i {
+            font-size: 4rem;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            animation: backPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes backPulse {
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+        .reveal-card .reveal-card-front {
+            background: var(--card);
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.6rem 0.7rem;
+            gap: 0.35rem;
+        }
+        .reveal-card .reveal-card-front img {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            object-fit: cover;
+            border-radius: 8px;
+            background: var(--border);
+        }
+        .reveal-card .reveal-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .reveal-card .reveal-card-info .card-id-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .reveal-card .reveal-card-info .card-id-row .rarity-tag {
+            font-size: 0.62rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .rarity-tag.gold { background: var(--gold); color: #000; }
+        .rarity-tag.silver { background: var(--silver); color: #000; }
+        .rarity-tag.blue { background: var(--blue); color: #000; }
+        .reveal-card .reveal-card-info .card-mini-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.15rem 0.5rem;
+            margin-top: 0.15rem;
+            font-size: 0.7rem;
+        }
+        .reveal-card .reveal-card-info .card-mini-stats .mini-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.08rem 0.3rem;
+            background: var(--bg);
+            border-radius: 4px;
+        }
+        .reveal-card .reveal-card-info .card-mini-stats .mini-stat .lbl { color: var(--text-secondary); }
+        .reveal-card .reveal-card-info .card-mini-stats .mini-stat .val { font-weight: 700; color: var(--text); }
+
+        .reveal-card.rarity-blue .reveal-card-front { box-shadow: inset 0 0 0 2px #60a5fa, 0 0 24px rgba(96,165,250,0.55); }
+        .reveal-card.rarity-silver .reveal-card-front { box-shadow: inset 0 0 0 2px #cbd5e1, 0 0 32px rgba(203,213,225,0.7); }
+        .reveal-card.rarity-gold .reveal-card-front { box-shadow: inset 0 0 0 3px #fbbf24, 0 0 40px rgba(251,191,36,0.85); }
+
+        .reveal-card.rarity-blue { --rarity-color: #60a5fa; --rarity-soft: rgba(96,165,250,0.45); --rarity-glow: rgba(96,165,250,0.85); }
+        .reveal-card.rarity-silver { --rarity-color: #cbd5e1; --rarity-soft: rgba(203,213,225,0.5); --rarity-glow: rgba(226,232,240,0.9); }
+        .reveal-card.rarity-gold { --rarity-color: #fbbf24; --rarity-soft: rgba(251,191,36,0.55); --rarity-glow: rgba(251,191,36,0.95); }
+
+        .reveal-burst-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 3;
+        }
+        .burst-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 120px;
+            background: linear-gradient(to top, transparent, var(--rarity-color), transparent);
+            transform-origin: center bottom;
+            border-radius: 4px;
+            opacity: 0;
+        }
+        .burst-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 3px solid var(--rarity-color);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        .burst-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--rarity-color);
+            box-shadow: 0 0 12px var(--rarity-glow);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        .burst-fog {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, var(--rarity-soft), transparent 70%);
+            opacity: 0;
+            filter: blur(20px);
+            border-radius: 50%;
+        }
+
+        .reveal-burst-layer.blue .burst-fog { animation: fogFade 1.2s ease-out forwards; }
+        .reveal-burst-layer.blue .burst-ring { animation: ringPulse 0.9s ease-out forwards; }
+        .reveal-burst-layer.blue .burst-ring.delay { animation-delay: 0.15s; }
+        .reveal-burst-layer.blue .burst-particle { animation: particleFlyBlue 0.9s ease-out forwards; }
+        .reveal-burst-layer.blue .burst-ray { animation: rayShootBlue 0.9s ease-out forwards; }
+
+        .reveal-burst-layer.silver .burst-fog { animation: fogFadeSilver 1.6s ease-out forwards; }
+        .reveal-burst-layer.silver .burst-ring { animation: ringPulseSilver 1.1s ease-out forwards; }
+        .reveal-burst-layer.silver .burst-ring.delay { animation-delay: 0.2s; }
+        .reveal-burst-layer.silver .burst-particle { animation: particleFlySilver 1.1s ease-out forwards; }
+        .reveal-burst-layer.silver .burst-ray { animation: rayShootSilver 1.1s ease-out forwards; }
+
+        .reveal-burst-layer.gold .burst-fog { animation: fogFadeGold 2s ease-out forwards; }
+        .reveal-burst-layer.gold .burst-ring { animation: ringPulseGold 1.4s ease-out forwards; }
+        .reveal-burst-layer.gold .burst-ring.delay { animation-delay: 0.25s; }
+        .reveal-burst-layer.gold .burst-particle { animation: particleFlyGold 1.4s ease-out forwards; }
+        .reveal-burst-layer.gold .burst-ray { animation: rayShootGold 1.4s ease-out forwards; }
+
+        @keyframes fogFade { 0% { opacity: 0; transform: scale(0.4); } 40% { opacity: 0.75; } 100% { opacity: 0; transform: scale(1.4); } }
+        @keyframes fogFadeSilver { 0% { opacity: 0; transform: scale(0.3); } 35% { opacity: 0.95; } 100% { opacity: 0; transform: scale(1.7); } }
+        @keyframes fogFadeGold { 0% { opacity: 0; transform: scale(0.2); } 30% { opacity: 1; } 70% { opacity: 0.9; } 100% { opacity: 0; transform: scale(2.1); } }
+
+        @keyframes ringPulse { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); border-width: 3px; } 60% { opacity: 0.9; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.4); border-width: 1px; } }
+        @keyframes ringPulseSilver { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); border-width: 4px; } 55% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(3); border-width: 1px; } }
+        @keyframes ringPulseGold { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); border-width: 6px; } 50% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(3.8); border-width: 1px; } }
+
+        @keyframes particleFlyBlue { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); } 30% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.4); } }
+        @keyframes particleFlySilver { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); } 25% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3); } }
+        @keyframes particleFlyGold { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.6); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2); } }
+
+        @keyframes rayShootBlue { 0% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(0.3); } 40% { opacity: 0.7; } 100% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(1.4); } }
+        @keyframes rayShootSilver { 0% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(0.3); } 35% { opacity: 0.95; } 100% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(2); } }
+        @keyframes rayShootGold { 0% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(0.2); } 30% { opacity: 1; } 70% { opacity: 0.9; } 100% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(2.6); } }
+
+        .reveal-card.rarity-gold.revealed .reveal-card-front::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.85), transparent);
+            transform: skewX(-20deg);
+            animation: goldShine 1.6s 0.4s ease-out;
+            pointer-events: none;
+        }
+        @keyframes goldShine { 0% { left: -60%; opacity: 0; } 40% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+
+        .reveal-card.pop-in { animation: cardPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes cardPop { 0% { transform: rotateY(0deg) scale(0.9); } 60% { transform: rotateY(0deg) scale(1.05); } 100% { transform: rotateY(0deg) scale(1); } }
+
+        .chest-reveal-detail {
+            width: 100%;
+            max-width: 380px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.7rem 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            animation: fadeIn 0.4s ease;
+        }
+        .chest-reveal-detail .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .chest-reveal-detail .detail-header .detail-id {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .chest-reveal-detail .detail-header .detail-type {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .chest-reveal-detail .detail-row2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 0.9rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .chest-reveal-detail .detail-row2 strong { color: var(--text); font-weight: 700; }
+        .chest-reveal-detail .detail-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.25rem 0.8rem;
+            font-size: 0.78rem;
+            margin-top: 0.15rem;
+        }
+        .chest-reveal-detail .detail-stats .stat-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.12rem 0.4rem;
+            background: var(--card);
+            border-radius: 5px;
+        }
+        .chest-reveal-detail .detail-stats .stat-line .lbl { color: var(--text-secondary); }
+        .chest-reveal-detail .detail-stats .stat-line .val { font-weight: 700; color: var(--text); }
+
+        .chest-reveal-tap-hint {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            animation: tapHintPulse 1.6s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        @keyframes tapHintPulse {
+            0%, 100% { opacity: 0.6; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-2px); }
+        }
+
+        /* ===== CHEST SUMMARY GRID (3x3) ===== */
+        .chest-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            animation: fadeIn 0.5s ease;
+        }
+        .chest-summary-title {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--primary);
+        }
+        .chest-summary-title span { color: var(--text); }
+        .chest-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        .chest-summary-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+            background: var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            animation: summaryCardIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+        @keyframes summaryCardIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.85); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .chest-summary-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .chest-summary-item .summary-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .chest-summary-item .summary-badge.gold { background: var(--gold); color: #000; }
+        .chest-summary-item .summary-badge.silver { background: var(--silver); color: #000; }
+        .chest-summary-item .summary-badge.blue { background: var(--blue); color: #000; }
+        .chest-summary-item .summary-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            color: #fff;
+            padding: 0.35rem 0.3rem 0.25rem;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ===== UPGRADE & TRADE FX ===== */
+        .upgrade-fx-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 4500;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .upgrade-fx-overlay .fx-burst-fog {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(124,58,237,0.55), rgba(124,58,237,0.1) 45%, transparent 75%);
+            opacity: 0;
+            animation: upgradeFog 1.8s ease-out forwards;
+        }
+        @keyframes upgradeFog {
+            0% { opacity: 0; transform: scale(0.4); }
+            35% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.6); }
+        }
+        .upgrade-fx-overlay .fx-burst-ring {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #a78bfa;
+            box-shadow: 0 0 40px rgba(167,139,250,0.9), inset 0 0 30px rgba(167,139,250,0.6);
+            opacity: 0;
+            animation: upgradeRing 1.6s ease-out forwards;
+        }
+        .upgrade-fx-overlay .fx-burst-ring.delay { animation-delay: 0.25s; }
+        @keyframes upgradeRing {
+            0% { opacity: 0; transform: scale(0); border-width: 8px; }
+            40% { opacity: 1; }
+            100% { opacity: 0; transform: scale(9); border-width: 1px; }
+        }
+        .upgrade-fx-overlay .fx-burst-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 60vh;
+            background: linear-gradient(to top, transparent, rgba(196,181,253,0.95), transparent);
+            transform-origin: center bottom;
+            transform: translate(-50%, -100%) rotate(var(--rot));
+            opacity: 0;
+            animation: upgradeRay 1.6s ease-out forwards;
+        }
+        @keyframes upgradeRay {
+            0% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(0.2); }
+            35% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -100%) rotate(var(--rot)) scaleY(1.4); }
+        }
+        .upgrade-fx-overlay .fx-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a78bfa;
+            box-shadow: 0 0 16px #a78bfa, 0 0 30px rgba(167,139,250,0.6);
+            opacity: 0;
+            animation: upgradeParticle 1.8s ease-out forwards;
+        }
+        @keyframes upgradeParticle {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            25% { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+            100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3); }
+        }
+        .upgrade-fx-overlay .fx-title {
+            position: relative;
+            z-index: 5;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: #fff;
+            text-align: center;
+            padding: 0.6rem 1.6rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(124,58,237,0.95), rgba(167,139,250,0.95));
+            box-shadow: 0 12px 40px rgba(124,58,237,0.6), 0 0 0 3px rgba(255,255,255,0.2) inset;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            opacity: 0;
+            animation: fxTitlePop 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            letter-spacing: 1px;
+        }
+        .upgrade-fx-overlay .fx-title .fx-title-sub {
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+        @keyframes fxTitlePop {
+            0% { opacity: 0; transform: scale(0.4) translateY(20px); }
+            35% { opacity: 1; transform: scale(1.12) translateY(0); }
+            50% { transform: scale(1) translateY(0); }
+            85% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05) translateY(-10px); }
+        }
+
+        /* ===== TRADE FX ===== */
+        .trade-fx-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 4500;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .trade-fx-overlay .trade-fx-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(251,191,36,0.45), rgba(96,165,250,0.25) 40%, transparent 75%);
+            opacity: 0;
+            animation: tradeFog 2s ease-out forwards;
+        }
+        @keyframes tradeFog {
+            0% { opacity: 0; transform: scale(0.5); }
+            30% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.7); }
+        }
+        .trade-fx-overlay .trade-fx-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 4rem;
+            color: #fff;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.9));
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: tradeArrow 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes tradeArrow {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2) rotate(-180deg); }
+            35% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(0deg); }
+            60% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            85% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1) rotate(0deg); }
+        }
+        .trade-fx-overlay .trade-fx-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fbbf24;
+            box-shadow: 0 0 16px #fbbf24, 0 0 30px rgba(251,191,36,0.6);
+            opacity: 0;
+            animation: tradeParticle 2s ease-out forwards;
+        }
+        @keyframes tradeParticle {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            25% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+            100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3); }
+        }
+        .trade-fx-overlay .trade-fx-particle.blue {
+            background: #60a5fa;
+            box-shadow: 0 0 16px #60a5fa, 0 0 30px rgba(96,165,250,0.6);
+        }
+        .trade-fx-overlay .trade-fx-title {
+            position: relative;
+            z-index: 5;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #fff;
+            text-align: center;
+            padding: 0.7rem 1.6rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(251,191,36,0.95), rgba(96,165,250,0.95));
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 3px rgba(255,255,255,0.25) inset;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            opacity: 0;
+            animation: tradeTitlePop 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            letter-spacing: 0.5px;
+            max-width: 90%;
+        }
+        .trade-fx-overlay .trade-fx-title .trade-fx-line {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.95;
+        }
+        @keyframes tradeTitlePop {
+            0% { opacity: 0; transform: scale(0.4) translateY(20px); }
+            35% { opacity: 1; transform: scale(1.1) translateY(0); }
+            55% { transform: scale(1) translateY(0); }
+            85% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.05) translateY(-10px); }
+        }
+
+        /* ===== CARD COLLECTION ===== */
         .collection-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; overflow-x: auto; }
         .collection-tabs .tab-btn { padding: 0.4rem 1.2rem; border: none; border-radius: 20px; background: var(--bg); color: var(--text-secondary); font-weight: 500; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .collection-tabs .tab-btn.active { background: var(--primary); color: #fff; }
@@ -931,6 +1527,13 @@
         .collection-card .upgrade-btn { margin-top: 0.2rem; padding: 0.1rem 0.6rem; border: none; border-radius: 12px; background: var(--primary); color: #fff; font-size: 0.6rem; cursor: pointer; transition: 0.2s; }
         .collection-card .upgrade-btn:hover:not(:disabled) { background: var(--primary-dark); }
         .collection-card .upgrade-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .collection-card .card-upgrade-progress {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            margin-top: 0.15rem;
+            line-height: 1.2;
+        }
+        .collection-card .card-upgrade-progress.ready { color: #22c55e; font-weight: 600; }
 
         /* Card Detail Modal */
         .card-detail-modal .modal-container { max-width: 500px; }
@@ -941,18 +1544,6 @@
         .card-detail-content .stats-grid .stat .label { color: var(--text-secondary); font-weight: 500; }
         .card-detail-content .stats-grid .stat .value { font-weight: 600; }
         .card-detail-content .detail-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; font-size: 0.9rem; }
-
-        /* ===== CARD UPGRADE (collection + detail) ===== */
-        .collection-card .card-upgrade-progress {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            margin-top: 0.15rem;
-            line-height: 1.2;
-        }
-        .collection-card .card-upgrade-progress.ready {
-            color: #22c55e;
-            font-weight: 600;
-        }
         .card-detail-content .card-upgrade-info {
             width: 100%;
             text-align: center;
@@ -1085,11 +1676,7 @@
         .trader-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
         .trader-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* Trader Card Selector (with search + image previews) */
-        .trader-card-selector {
-            position: relative;
-            width: 100%;
-        }
+        .trader-card-selector { position: relative; width: 100%; }
         .trader-card-display {
             width: 100%;
             min-height: 56px;
@@ -1231,6 +1818,9 @@
         .dark-mode .chest-timeline .point .chest-icon.collected { background: linear-gradient(135deg, #22c55e, #16a34a); }
         .dark-mode .chest-timeline .point .chest-icon.missed { background: linear-gradient(135deg, #ef4444, #dc2626); }
         .dark-mode .chest-timeline::before { background: linear-gradient(90deg, var(--border), var(--border)); }
+        .dark-mode .reveal-card .reveal-card-front { background: var(--card); }
+        .dark-mode .chest-reveal-detail { background: var(--card); }
+        .dark-mode .chest-reveal-detail .detail-stats .stat-line { background: var(--bg); }
     </style>
 </head>
 <body>
@@ -1628,16 +2218,27 @@
         </div>
     </div>
 
-    <!-- ========== CHEST OPENING MODAL ========== -->
+    <!-- ========== CHEST OPENING MODAL (ONE-BY-ONE REVEAL + SUMMARY) ========== -->
     <div class="modal" id="chestModal">
         <div class="modal-container">
             <div class="modal-header">
-                <h3 class="modal-title">Chest Rewards</h3>
+                <h3 class="modal-title"><i class="fas fa-box-open"></i> Chest Rewards</h3>
                 <button class="close-modal" id="closeChestModal"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-content">
-                <div class="chest-rewards-grid" id="chestRewardsGrid"></div>
-                <button class="video-btn" id="chestDoneBtn" style="margin-top:1rem;">Done</button>
+                <div class="chest-reveal-stage" id="chestRevealStage" tabindex="0">
+                    <div class="chest-reveal-counter" id="chestRevealCounter">Card 1 of 9</div>
+                    <div class="chest-card-slot" id="chestCardSlot">
+                        <!-- Card + burst layer injected dynamically -->
+                    </div>
+                    <div class="chest-reveal-detail" id="chestRevealDetail" style="display:none;"></div>
+                    <div class="chest-reveal-tap-hint" id="chestRevealHint"><i class="fas fa-hand-pointer"></i> Tap to reveal next</div>
+                </div>
+                <div class="chest-summary" id="chestSummary" style="display:none;">
+                    <div class="chest-summary-title">🎁 You obtained <span id="chestSummaryCount">9</span> cards!</div>
+                    <div class="chest-summary-grid" id="chestSummaryGrid"></div>
+                </div>
+                <button class="video-btn" id="chestDoneBtn" style="margin-top:1rem; display:none;">Done</button>
             </div>
         </div>
     </div>
@@ -1785,6 +2386,23 @@
             'Gold>Blue':     { give: 1,  receive: 10 },
             'Silver>Blue':   { give: 1,  receive: 4 },
             'Blue>Blue':     { give: 2,  receive: 1 }
+        };
+
+        // ===== CHEST REVEAL STATE =====
+        let chestReveal = {
+            cards: [],
+            index: 0,
+            stage: null,
+            slot: null,
+            counter: null,
+            detail: null,
+            hint: null,
+            doneBtn: null,
+            summary: null,
+            summaryGrid: null,
+            summaryCount: null,
+            tapLocked: false,
+            showingSummary: false
         };
 
         // ===== DOM REFS =====
@@ -2059,11 +2677,7 @@
             }
         }
 
-        function refreshAfterDataChange(type, operation, item) {
-            loadAllData().then(() => { refreshAllViews(); });
-        }
-
-        // ===== VIDEO FUNCTIONS (existing, kept) =====
+        // ===== VIDEO FUNCTIONS =====
         function getFilteredVideos() {
             let list = getAllItems(allVideos);
             if (searchTerm) {
@@ -2232,7 +2846,7 @@
             currentPage = 1;
         }
 
-        // ===== FILTER MODAL (existing) =====
+        // ===== FILTER MODAL =====
         function renderFilterModal() {
             const types = ['actress', 'tags', 'studios_labels', 'series', 'version', 'group'];
             const dataMap = {
@@ -2438,7 +3052,7 @@
             });
         }
 
-        // ===== VIDEO MODAL (existing) =====
+        // ===== VIDEO MODAL =====
         function openVideoModal(video) {
             currentVideoForModal = video;
             videoPlayer.style.display = 'none';
@@ -2571,7 +3185,7 @@
             if (modalContainer) { modalContainer.scrollTo({ top: 0, behavior: 'smooth' }); }
         }
 
-        // ===== ALBUMS (existing) =====
+        // ===== ALBUMS =====
         function getFilteredAlbums() {
             if (!albumActiveFilters.actress) albumActiveFilters.actress = [];
             if (!albumActiveFilters.tags) albumActiveFilters.tags = [];
@@ -2871,7 +3485,7 @@
             });
         }
 
-        // ===== PICTURES (existing) =====
+        // ===== PICTURES =====
         function renderPictures() {
             if (!picturesShuffled) picturesShuffled = [];
             let list = allPictures.slice();
@@ -2957,7 +3571,7 @@
         }
         setupSwipeListener();
 
-        // ===== FEATURED TAB (existing) =====
+        // ===== FEATURED TAB =====
         function renderFeatured() {
             if (featuredCleanup && Array.isArray(featuredCleanup)) {
                 featuredCleanup.forEach(cleanup => { if (typeof cleanup === 'function') cleanup(); });
@@ -3254,14 +3868,13 @@
                     selectedActress = actresses[rand].name;
                 }
                 questData.challenges[todayStr] = [
-                    { active: false, completed: false, progress: 0, type: 'watch', actress: selectedActress, reward: 1 },
-                    { active: false, completed: false, progress: 0, type: 'addVideo', reward: 1 },
-                    { active: false, completed: false, progress: 0, type: 'addAlbum', reward: 1 }
+                    { active: false, completed: false, progress: 0, type: 'watch', actress: selectedActress, reward: 3 },
+                    { active: false, completed: false, progress: 0, type: 'addVideo', reward: 3 },
+                    { active: false, completed: false, progress: 0, type: 'addAlbum', reward: 3 }
                 ];
             } else {
-                // Ensure reward field exists on existing challenges
                 questData.challenges[todayStr].forEach(ch => {
-                    if (typeof ch.reward === 'undefined') ch.reward = 1;
+                    if (typeof ch.reward === 'undefined') ch.reward = 3;
                 });
             }
             if (questData.activeChallenge) {
@@ -3361,16 +3974,16 @@
             }
         }
 
-        // Global wheel animation state so the spin function can persist across re-renders
+        // Global wheel animation state
         let wheelAnimationState = { currentRotation: 0, isSpinning: false };
         let wheelDrawFn = null;
 
         function renderWheel() {
             const canvas = $('#wheelCanvas');
             const ctx = canvas.getContext('2d');
-            // Segment rewards - one per segment. These are the chest amounts awarded.
+            // 6 segments — values that sit under the pointer when stopped
             const segments = ['1', '2', '3', '4', '5', '3'];
-            const colors = ['#fbbf24', '#9ca3af', '#60a5fa', '#fbbf24', '#9ca3af', '#60a5fa'];
+            const colors = ['#fbbf24', '#ec4899', '#60a5fa', '#fbbf24', '#ec4899', '#60a5fa'];
             const segmentAngle = (2 * Math.PI) / segments.length;
 
             function drawWheel(rotate) {
@@ -3402,7 +4015,7 @@
                     ctx.strokeStyle = 'rgba(255,255,255,0.85)';
                     ctx.lineWidth = 3;
                     ctx.stroke();
-                    // Text
+                    // Draw segment number — placed so it's readable when the segment is at the bottom (under pointer)
                     ctx.save();
                     ctx.rotate(i * segmentAngle + segmentAngle / 2);
                     ctx.fillStyle = '#fff';
@@ -3468,45 +4081,54 @@
                 if (wheelAnimationState.isSpinning) return;
                 const canSpin = updateWheelState();
                 if (!canSpin) { showToast('No spins available', true); return; }
+
+                // FIRST: pick the result randomly so we know exactly what value we will give.
+                const resultIndex = Math.floor(Math.random() * segments.length);
+                const resultValue = parseInt(segments[resultIndex]) || 0;
+
                 wheelAnimationState.isSpinning = true;
                 spinBtn.disabled = true;
                 resultEl.textContent = '';
 
-                const extraRotations = 5 + Math.random() * 5;
-                const stopAngle = Math.random() * 2 * Math.PI;
-                const totalRotation = wheelAnimationState.currentRotation + extraRotations * 2 * Math.PI + stopAngle;
-                const duration = 3500 + Math.random() * 1500;
+                // Now figure out the target rotation so that segment `resultIndex` lands
+                // exactly under the pointer. The pointer is at the BOTTOM of the wheel
+                // (angle = +π/2 in canvas coords, i.e. pointing down).
+                //
+                // After we rotate the wheel by R, segment i covers the angular range:
+                //   [i*segmentAngle + R, (i+1)*segmentAngle + R)
+                // Its center is at: i*segmentAngle + segmentAngle/2 + R.
+                // We want that center to align with pointerAngle = π/2 (mod 2π).
+                //
+                // => R_target = π/2 - (i * segmentAngle + segmentAngle/2)  (mod 2π)
+                const pointerAngle = Math.PI / 2; // pointing down
+                const segmentCenterAngle = resultIndex * segmentAngle + segmentAngle / 2;
+                let targetRotation = pointerAngle - segmentCenterAngle;
+                // Normalize into [0, 2π)
+                targetRotation = ((targetRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+
+                // Add a few extra full rotations for the visual spin, and make sure we
+                // start from a rotation with the same base so it ends cleanly.
+                const extraRotations = 6 + Math.floor(Math.random() * 4); // 6–9 full spins
+                const currentBase = ((wheelAnimationState.currentRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                const delta = ((targetRotation - currentBase) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+                const totalRotation = wheelAnimationState.currentRotation + extraRotations * 2 * Math.PI + delta;
+
+                const duration = 4000 + Math.random() * 1500;
                 const startTime = performance.now();
                 const startRotation = wheelAnimationState.currentRotation;
 
                 function animate(now) {
                     const elapsed = now - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
                     const currentRot = startRotation + (totalRotation - startRotation) * eased;
                     drawWheel(currentRot);
                     if (progress < 1) {
                         requestAnimationFrame(animate);
                     } else {
                         wheelAnimationState.currentRotation = totalRotation % (2 * Math.PI);
-                        // Determine which segment is under the pointer (pointer at top = angle 3π/2 i.e. -π/2)
-                        // The pointer is at the top; segment under pointer:
-                        const normalized = ((wheelAnimationState.currentRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-                        // Pointer is at top (-π/2). Segment index whose center is closest to that angle:
-                        // Segment i spans [i*segmentAngle, (i+1)*segmentAngle) starting from angle 0 (right).
-                        // After rotation by r, segment i covers [i*segmentAngle + r, (i+1)*segmentAngle + r).
-                        // Pointer angle = -π/2 (or equivalently 3π/2).
-                        const pointerAngle = (3 * Math.PI / 2); // in [0,2π)
-                        let bestIdx = 0;
-                        let bestDiff = Infinity;
-                        for (let i = 0; i < segments.length; i++) {
-                            const centerAngle = (i * segmentAngle + segmentAngle / 2 + normalized) % (2 * Math.PI);
-                            // Distance to pointer
-                            let diff = Math.abs(centerAngle - pointerAngle);
-                            if (diff > Math.PI) diff = 2 * Math.PI - diff;
-                            if (diff < bestDiff) { bestDiff = diff; bestIdx = i; }
-                        }
-                        const result = parseInt(segments[bestIdx]) || 0;
+                        // We already know the result — no re-computation needed.
+                        const result = resultValue;
 
                         const todayStr = getTodayStr();
                         const wheel = questData.wheel;
@@ -3708,17 +4330,19 @@
             };
         }
 
+        // ===== CHEST OPENING (9 cards, one-by-one reveal, then 3x3 summary) =====
         function openChest() {
             if (questData.inventory <= 0) { showToast('No chests to open.', true); return; }
             const allCards = getAllItems(allQuestCards);
             if (allCards.length === 0) { showToast('No quest cards available. Add some in Add Data.', true); return; }
+
             const weights = allCards.map(c => {
                 if (c.type === 'Gold') return 1;
                 if (c.type === 'Silver') return 3;
                 if (c.type === 'Blue') return 6;
                 return 1;
             });
-            const totalWeight = weights.reduce((a,b) => a+b, 0);
+            const totalWeight = weights.reduce((a, b) => a + b, 0);
             const rewards = [];
             for (let i = 0; i < 9; i++) {
                 let rand = Math.random() * totalWeight;
@@ -3729,6 +4353,7 @@
                 }
                 rewards.push(chosen);
             }
+
             questData.inventory--;
             rewards.forEach(card => {
                 const id = card.id;
@@ -3737,29 +4362,247 @@
                 }
                 questData.cards[id].copies = (questData.cards[id].copies || 0) + 1;
             });
+
             saveQuestData().then(() => {
-                showChestRewards(rewards);
                 renderQuests();
+                startChestReveal(rewards);
             });
         }
 
-        function showChestRewards(cards) {
-            const grid = $('#chestRewardsGrid');
-            grid.innerHTML = '';
-            cards.forEach(card => {
-                const div = document.createElement('div');
-                div.className = 'chest-reward-card';
-                const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
-                div.innerHTML = `
-                    <img src="${img}" alt="${card.id}" loading="lazy" />
-                    <div class="card-name">${card.id}</div>
-                    <span class="card-type ${card.type.toLowerCase()}">${card.type}</span>
-                `;
-                grid.appendChild(div);
-            });
+        function startChestReveal(cards) {
+            chestReveal.cards = cards;
+            chestReveal.index = 0;
+            chestReveal.tapLocked = false;
+            chestReveal.showingSummary = false;
+            chestReveal.stage = $('#chestRevealStage');
+            chestReveal.slot = $('#chestCardSlot');
+            chestReveal.counter = $('#chestRevealCounter');
+            chestReveal.detail = $('#chestRevealDetail');
+            chestReveal.hint = $('#chestRevealHint');
+            chestReveal.doneBtn = $('#chestDoneBtn');
+            chestReveal.summary = $('#chestSummary');
+            chestReveal.summaryGrid = $('#chestSummaryGrid');
+            chestReveal.summaryCount = $('#chestSummaryCount');
+
+            chestReveal.doneBtn.style.display = 'none';
+            chestReveal.hint.style.display = 'flex';
+            chestReveal.detail.style.display = 'none';
+            chestReveal.slot.innerHTML = '';
+            chestReveal.summary.style.display = 'none';
+            chestReveal.summaryGrid.innerHTML = '';
+            chestReveal.counter.style.display = 'block';
+            chestReveal.slot.style.display = 'flex';
+            chestReveal.detail.style.display = 'none';
+            chestReveal.summaryCount.textContent = cards.length;
+
+            const stage = chestReveal.stage;
+            if (!stage.dataset.tapBound) {
+                stage.addEventListener('click', advanceChestReveal);
+                stage.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        advanceChestReveal();
+                    }
+                });
+                stage.dataset.tapBound = '1';
+            }
+
             openModal($('#chestModal'));
-            $('#chestDoneBtn').onclick = () => { closeModal($('#chestModal')); };
-            $('#closeChestModal').onclick = () => { closeModal($('#chestModal')); };
+            renderChestRevealCard();
+        }
+
+        function resetChestRevealState() {
+            chestReveal.cards = [];
+            chestReveal.index = 0;
+            chestReveal.tapLocked = false;
+            chestReveal.showingSummary = false;
+            const slot = $('#chestCardSlot');
+            if (slot) slot.innerHTML = '';
+            const detail = $('#chestRevealDetail');
+            if (detail) { detail.style.display = 'none'; detail.innerHTML = ''; }
+            const doneBtn = $('#chestDoneBtn');
+            if (doneBtn) doneBtn.style.display = 'none';
+            const hint = $('#chestRevealHint');
+            if (hint) hint.style.display = 'flex';
+            const summary = $('#chestSummary');
+            if (summary) summary.style.display = 'none';
+            const grid = $('#chestSummaryGrid');
+            if (grid) grid.innerHTML = '';
+            const counter = $('#chestRevealCounter');
+            if (counter) counter.style.display = 'block';
+            const stage = $('#chestRevealStage');
+            if (stage) stage.style.cursor = 'pointer';
+        }
+
+        function getRarityClass(type) {
+            const t = (type || '').toLowerCase();
+            if (t === 'gold') return 'rarity-gold';
+            if (t === 'silver') return 'rarity-silver';
+            return 'rarity-blue';
+        }
+
+        function getRarityLower(type) {
+            const t = (type || '').toLowerCase();
+            if (t === 'gold') return 'gold';
+            if (t === 'silver') return 'silver';
+            return 'blue';
+        }
+
+        function renderChestRevealCard() {
+            const total = chestReveal.cards.length;
+            const card = chestReveal.cards[chestReveal.index];
+            if (!card) return;
+
+            const rarityLower = getRarityLower(card.type);
+            const rarityClass = getRarityClass(card.type);
+            const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
+            const data = questData.cards[card.id];
+            const level = data ? (data.level || 1) : 1;
+            const copies = data ? (data.copies || 0) : 0;
+            const maxLevel = getMaxLevel(card.type);
+            const stats = getCardStats(card, level);
+
+            chestReveal.counter.textContent = `Card ${chestReveal.index + 1} of ${total}`;
+
+            const slot = chestReveal.slot;
+            slot.innerHTML = '';
+
+            const burst = document.createElement('div');
+            burst.className = `reveal-burst-layer ${rarityLower}`;
+            const fog = document.createElement('div');
+            fog.className = 'burst-fog';
+            burst.appendChild(fog);
+            for (let i = 0; i < 2; i++) {
+                const ring = document.createElement('div');
+                ring.className = 'burst-ring' + (i === 1 ? ' delay' : '');
+                burst.appendChild(ring);
+            }
+            const rayCount = rarityLower === 'gold' ? 12 : rarityLower === 'silver' ? 8 : 6;
+            for (let i = 0; i < rayCount; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'burst-ray';
+                ray.style.setProperty('--rot', `${(360 / rayCount) * i}deg`);
+                burst.appendChild(ray);
+            }
+            const particleCount = rarityLower === 'gold' ? 22 : rarityLower === 'silver' ? 16 : 10;
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'burst-particle';
+                const angle = (Math.random() * Math.PI * 2);
+                const dist = 90 + Math.random() * (rarityLower === 'gold' ? 120 : rarityLower === 'silver' ? 90 : 60);
+                p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+                p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+                p.style.animationDelay = `${0.1 + Math.random() * 0.4}s`;
+                burst.appendChild(p);
+            }
+
+            const cardEl = document.createElement('div');
+            cardEl.className = `reveal-card ${rarityClass}`;
+            cardEl.innerHTML = `
+                <div class="reveal-card-face reveal-card-back"><i class="fas fa-star"></i></div>
+                <div class="reveal-card-face reveal-card-front">
+                    <img src="${img}" alt="${card.id}" loading="lazy" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image'" />
+                    <div class="reveal-card-info">
+                        <div class="card-id-row">
+                            <span>${card.id}</span>
+                            <span class="rarity-tag ${rarityLower}">${card.type}</span>
+                        </div>
+                        <div class="card-mini-stats">
+                            <div class="mini-stat"><span class="lbl">Level</span><span class="val">${level} / ${maxLevel}</span></div>
+                            <div class="mini-stat"><span class="lbl">Copies</span><span class="val">${copies}</span></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            slot.appendChild(cardEl);
+            slot.appendChild(burst);
+
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    cardEl.classList.add('revealed', 'pop-in');
+                }, 80);
+            });
+
+            chestReveal.detail.style.display = 'flex';
+            chestReveal.detail.innerHTML = `
+                <div class="detail-header">
+                    <span class="detail-id">${card.id}</span>
+                    <span class="detail-type rarity-tag ${rarityLower}">${card.type}</span>
+                </div>
+                <div class="detail-row2">
+                    <span>Level: <strong>${level} / ${maxLevel}</strong></span>
+                    <span>Copies: <strong>${copies}</strong></span>
+                </div>
+                <div class="detail-stats">
+                    <div class="stat-line"><span class="lbl">Popularity</span><span class="val">${stats.popularity}</span></div>
+                    <div class="stat-line"><span class="lbl">Beauty</span><span class="val">${stats.beauty}</span></div>
+                    <div class="stat-line"><span class="lbl">Figure</span><span class="val">${stats.figure}</span></div>
+                    <div class="stat-line"><span class="lbl">Performance</span><span class="val">${stats.performance}</span></div>
+                </div>
+            `;
+
+            if (chestReveal.index >= total - 1) {
+                chestReveal.hint.innerHTML = '<i class="fas fa-th"></i> Tap to see all rewards';
+                chestReveal.hint.style.display = 'flex';
+                chestReveal.doneBtn.style.display = 'none';
+            } else {
+                chestReveal.hint.innerHTML = '<i class="fas fa-hand-pointer"></i> Tap to reveal next';
+                chestReveal.hint.style.display = 'flex';
+                chestReveal.doneBtn.style.display = 'none';
+            }
+        }
+
+        function renderChestSummary() {
+            const grid = chestReveal.summaryGrid;
+            const cards = chestReveal.cards;
+            grid.innerHTML = '';
+            cards.forEach((card, idx) => {
+                const rarityLower = getRarityLower(card.type);
+                const img = card.image || 'https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image';
+                const item = document.createElement('div');
+                item.className = 'chest-summary-item';
+                item.style.animationDelay = `${idx * 0.05}s`;
+                item.innerHTML = `
+                    <img src="${img}" alt="${card.id}" loading="lazy" onerror="this.src='https://via.placeholder.com/200x300/7c3aed/ffffff?text=No+Image'" />
+                    <span class="summary-badge ${rarityLower}">${card.type}</span>
+                    <div class="summary-label">${card.id}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function showChestSummary() {
+            chestReveal.showingSummary = true;
+            chestReveal.counter.style.display = 'none';
+            chestReveal.slot.style.display = 'none';
+            chestReveal.detail.style.display = 'none';
+            chestReveal.hint.style.display = 'none';
+            chestReveal.summary.style.display = 'flex';
+            renderChestSummary();
+            chestReveal.doneBtn.style.display = 'flex';
+        }
+
+        function advanceChestReveal() {
+            if (chestReveal.tapLocked) return;
+            if (chestReveal.showingSummary) return;
+            const total = chestReveal.cards.length;
+            chestReveal.tapLocked = true;
+            setTimeout(() => { chestReveal.tapLocked = false; }, 220);
+
+            if (chestReveal.index >= total - 1) {
+                // Last card already shown -> next tap shows the 3x3 summary
+                showChestSummary();
+                return;
+            }
+
+            chestReveal.index++;
+            renderChestRevealCard();
+        }
+
+        function closeChestRevealModal() {
+            closeModal($('#chestModal'));
+            resetChestRevealState();
         }
 
         // ===== CARD COLLECTION =====
@@ -3912,8 +4755,83 @@
 
             await saveQuestData();
             renderQuests();
-            showToast(`⬆️ ${card.id} upgraded to Level ${data.level}! All stats +1`);
+            // Celebration FX
+            playUpgradeFx(card, data.level);
             return true;
+        }
+
+        // ===== UPGRADE FX =====
+        function playUpgradeFx(card, newLevel) {
+            const overlay = document.createElement('div');
+            overlay.className = 'upgrade-fx-overlay';
+            const rarityLower = getRarityLower(card.type);
+            const rarityColor = rarityLower === 'gold' ? '#fbbf24' : rarityLower === 'silver' ? '#cbd5e1' : '#60a5fa';
+
+            // Fog
+            const fog = document.createElement('div');
+            fog.className = 'fx-burst-fog';
+            fog.style.background = `radial-gradient(circle at 50% 50%, ${hexToRgba(rarityColor, 0.55)}, ${hexToRgba(rarityColor, 0.1)} 45%, transparent 75%)`;
+            overlay.appendChild(fog);
+
+            // Rings
+            for (let i = 0; i < 2; i++) {
+                const ring = document.createElement('div');
+                ring.className = 'fx-burst-ring' + (i === 1 ? ' delay' : '');
+                ring.style.borderColor = rarityColor;
+                ring.style.boxShadow = `0 0 40px ${hexToRgba(rarityColor, 0.9)}, inset 0 0 30px ${hexToRgba(rarityColor, 0.6)}`;
+                overlay.appendChild(ring);
+            }
+
+            // Rays
+            const rayCount = 12;
+            for (let i = 0; i < rayCount; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'fx-burst-ray';
+                ray.style.setProperty('--rot', `${(360 / rayCount) * i}deg`);
+                ray.style.background = `linear-gradient(to top, transparent, ${hexToRgba(rarityColor, 0.95)}, transparent)`;
+                overlay.appendChild(ray);
+            }
+
+            // Particles
+            const particleCount = 26;
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'fx-particle';
+                p.style.background = rarityColor;
+                p.style.boxShadow = `0 0 16px ${rarityColor}, 0 0 30px ${hexToRgba(rarityColor, 0.6)}`;
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 160 + Math.random() * 260;
+                p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+                p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+                p.style.animationDelay = `${Math.random() * 0.3}s`;
+                overlay.appendChild(p);
+            }
+
+            // Title
+            const title = document.createElement('div');
+            title.className = 'fx-title';
+            title.style.background = `linear-gradient(135deg, ${hexToRgba(rarityColor, 0.95)}, rgba(255,255,255,0.9))`;
+            title.style.boxShadow = `0 12px 40px ${hexToRgba(rarityColor, 0.6)}, 0 0 0 3px rgba(255,255,255,0.2) inset`;
+            title.innerHTML = `
+                <div>⬆️ UPGRADE!</div>
+                <div class="fx-title-sub">${card.id} → Level ${newLevel}</div>
+            `;
+            overlay.appendChild(title);
+
+            document.body.appendChild(overlay);
+
+            // Auto remove after animation
+            setTimeout(() => {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            }, 2200);
+        }
+
+        function hexToRgba(hex, alpha) {
+            const h = hex.replace('#', '');
+            const r = parseInt(h.substring(0, 2), 16);
+            const g = parseInt(h.substring(2, 4), 16);
+            const b = parseInt(h.substring(4, 6), 16);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
         }
 
         function showCardDetail(card) {
@@ -3988,7 +4906,6 @@
             giveTypeEl.value = traderState.giveType;
             $('#traderReceiveType').value = traderState.receiveType;
 
-            // ---- I Give : cards the player owns copies of ----
             const ownedGive = getOwnedCardsByRarity(traderState.giveType)
                 .sort((a, b) => a.id.localeCompare(b.id));
             if (traderState.giveCard !== 'any' && !ownedGive.some(c => c.id === traderState.giveCard)) {
@@ -3997,7 +4914,6 @@
             renderTraderCardDisplay('give');
             renderTraderCardOptions('give');
 
-            // ---- I Receive : any card of the chosen rarity ----
             const recvCards = getAllItems(allQuestCards)
                 .filter(c => (c.type || '').toLowerCase() === traderState.receiveType.toLowerCase())
                 .sort((a, b) => a.id.localeCompare(b.id));
@@ -4051,7 +4967,6 @@
 
             let html = '';
 
-            // "Any" / "Random" option
             const anyLabel = side === 'give' ? 'Any (auto-select)' : 'Random';
             if (!query || anyLabel.toLowerCase().includes(query)) {
                 html += `
@@ -4066,7 +4981,6 @@
                 `;
             }
 
-            // Build the list of cards
             let cards;
             if (side === 'give') {
                 cards = getOwnedCardsByRarity(traderState.giveType).sort((a, b) => a.id.localeCompare(b.id));
@@ -4236,7 +5150,56 @@
 
             await saveQuestData();
             renderQuests();
-            showToast(`🔄 Traded ${giveAmount} ${traderState.giveType} → ${receiveAmount} ${traderState.receiveType}!`);
+            // Celebration FX for the trade
+            playTradeFx(giveAmount, traderState.giveType, receiveAmount, traderState.receiveType);
+        }
+
+        // ===== TRADE FX =====
+        function playTradeFx(giveAmount, giveType, receiveAmount, receiveType) {
+            const overlay = document.createElement('div');
+            overlay.className = 'trade-fx-overlay';
+
+            const glow = document.createElement('div');
+            glow.className = 'trade-fx-glow';
+            overlay.appendChild(glow);
+
+            // Particles in both colors
+            const p1Color = giveType === 'Gold' ? '#fbbf24' : giveType === 'Silver' ? '#cbd5e1' : '#60a5fa';
+            const p2Color = receiveType === 'Gold' ? '#fbbf24' : receiveType === 'Silver' ? '#cbd5e1' : '#60a5fa';
+            for (let i = 0; i < 32; i++) {
+                const p = document.createElement('div');
+                p.className = 'trade-fx-particle' + (i % 2 === 1 ? ' blue' : '');
+                p.style.background = i % 2 === 0 ? p1Color : p2Color;
+                p.style.boxShadow = `0 0 16px ${i % 2 === 0 ? p1Color : p2Color}, 0 0 30px ${hexToRgba(i % 2 === 0 ? p1Color : p2Color, 0.6)}`;
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 180 + Math.random() * 320;
+                p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+                p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+                p.style.animationDelay = `${Math.random() * 0.4}s`;
+                overlay.appendChild(p);
+            }
+
+            // Arrow
+            const arrow = document.createElement('div');
+            arrow.className = 'trade-fx-arrow';
+            arrow.innerHTML = '<i class="fas fa-exchange-alt"></i>';
+            overlay.appendChild(arrow);
+
+            // Title
+            const title = document.createElement('div');
+            title.className = 'trade-fx-title';
+            title.innerHTML = `
+                <div>🔄 TRADE COMPLETE</div>
+                <div class="trade-fx-line">Gave ${giveAmount} ${giveType}</div>
+                <div class="trade-fx-line">Received ${receiveAmount} ${receiveType}</div>
+            `;
+            overlay.appendChild(title);
+
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            }, 2400);
         }
 
         function setupTraderShop() {
@@ -4262,7 +5225,6 @@
                 renderTraderShop();
             });
 
-            // Give-side dropdown toggle
             const giveDisplay = $('#traderGiveCardDisplay');
             const giveDropdown = $('#traderGiveCardDropdown');
             const giveSearch = $('#traderGiveCardSearch');
@@ -4281,7 +5243,6 @@
                 giveSearch.addEventListener('click', (e) => e.stopPropagation());
             }
 
-            // Receive-side dropdown toggle
             const recvDisplay = $('#traderReceiveCardDisplay');
             const recvDropdown = $('#traderReceiveCardDropdown');
             const recvSearch = $('#traderReceiveCardSearch');
@@ -4300,7 +5261,6 @@
                 recvSearch.addEventListener('click', (e) => e.stopPropagation());
             }
 
-            // Close dropdowns when clicking outside
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.trader-card-selector')) {
                     document.querySelectorAll('.trader-card-dropdown').forEach(d => d.classList.remove('show'));
@@ -4384,7 +5344,7 @@
             if (container) { container.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         }
 
-        // ===== ADD DATA (extended with Quest Cards) =====
+        // ===== ADD DATA =====
         function setupAddData() {
             const addTabs = addDataNav.querySelectorAll('.add-tab-btn');
             addTabs.forEach(btn => {
@@ -5424,6 +6384,13 @@
             });
 
             setupTraderShop();
+
+            const chestModal = $('#chestModal');
+            $('#closeChestModal').onclick = () => closeChestRevealModal();
+            $('#chestDoneBtn').onclick = () => closeChestRevealModal();
+            chestModal.addEventListener('click', (e) => {
+                if (e.target === chestModal) closeChestRevealModal();
+            });
         }
 
         // ===== INIT =====

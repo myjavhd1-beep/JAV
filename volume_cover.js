@@ -88,7 +88,7 @@ TITLE
 
 The exact title is:
 
-Heroine Volume-4
+Secret Time Volume-5
 
 The title must be clearly readable and spelled exactly as written.
 
@@ -152,7 +152,7 @@ Do not add random Japanese text, kanji, anime imagery, manga styling, neon city 
 
 The primary title remains:
 
-Heroine Volume-4
+Secret Time Volume-5
 
 VARIABLE ART DIRECTION
 

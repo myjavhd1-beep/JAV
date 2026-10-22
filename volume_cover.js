@@ -88,7 +88,7 @@ TITLE
 
 The exact title is:
 
-Secret Time Volume-5
+She Loves You Volume-10
 
 The title must be clearly readable and spelled exactly as written.
 
@@ -152,7 +152,7 @@ Do not add random Japanese text, kanji, anime imagery, manga styling, neon city 
 
 The primary title remains:
 
-Secret Time Volume-5
+She Loves You Volume-10
 
 VARIABLE ART DIRECTION
 

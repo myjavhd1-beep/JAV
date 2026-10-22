@@ -88,7 +88,7 @@ TITLE
 
 The exact title is:
 
-Trip To Hokkaido Volume-8
+Heroine Volume-4
 
 The title must be clearly readable and spelled exactly as written.
 
@@ -152,7 +152,7 @@ Do not add random Japanese text, kanji, anime imagery, manga styling, neon city 
 
 The primary title remains:
 
-Trip To Hokkaido Volume-8
+Heroine Volume-4
 
 VARIABLE ART DIRECTION
 

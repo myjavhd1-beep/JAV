@@ -88,7 +88,7 @@ TITLE
 
 The exact title is:
 
-Fruits of Love Volume-4
+Trip To Hokkaido Volume-2
 
 The title must be clearly readable and spelled exactly as written.
 
@@ -152,7 +152,7 @@ Do not add random Japanese text, kanji, anime imagery, manga styling, neon city 
 
 The primary title remains:
 
-Fruits of Love Volume-4
+Trip To Hokkaido Volume-2
 
 VARIABLE ART DIRECTION
 
